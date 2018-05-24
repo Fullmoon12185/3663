@@ -239,6 +239,7 @@
 
 //--------- ZUI, related with Panel resolution ----------------------------------
 #define UI_SKIN_SEL                 UI_SKIN_1366X768X565
+//#define UI_SKIN_SEL                 UI_SKIN_1920X1080X565
 
 #define ENABLE_TCON_MARLON      0
 
@@ -264,31 +265,31 @@
 #define ENABLE_HDMI_AR_CHECK            ENABLE
 
 #ifndef HDCP_KEY_TYPE
-#define HDCP_KEY_TYPE                   HDCP_KEY_IN_EFUSE
+    #define HDCP_KEY_TYPE                   HDCP_KEY_IN_EFUSE
 #endif
 
 #define ENABLE_CEC                      ENABLE //DISABLE
 
 
 #if ENABLE_CEC
-//#define ENABLE_CEC_INT                  ENABLE
-//#define ENABLE_CUST01_CEC               ENABLE
-//#define ENABLE_SW_CEC_WAKEUP            ENABLE
-#define ENABLE_WAIT_CEC_READY           ENABLE
+    //#define ENABLE_CEC_INT                  ENABLE
+    //#define ENABLE_CUST01_CEC               ENABLE
+    //#define ENABLE_SW_CEC_WAKEUP            ENABLE
+    #define ENABLE_WAIT_CEC_READY           ENABLE
 #else
-//#define ENABLE_CEC_INT                  DISABLE
-//#define ENABLE_CUST01_CEC               DISABLE
-//#define ENABLE_SW_CEC_WAKEUP            DISABLE
-#define ENABLE_WAIT_CEC_READY           DISABLE
+    //#define ENABLE_CEC_INT                  DISABLE
+    //#define ENABLE_CUST01_CEC               DISABLE
+    //#define ENABLE_SW_CEC_WAKEUP            DISABLE
+    #define ENABLE_WAIT_CEC_READY           DISABLE
 #endif
 
 #define ENABLE_DDCCI                    ENABLE
 
 //----EUROPEAN HDTV--------------------------------------------------------------
 #if (ENABLE_HDTV == 1)
-#define SUPPORT_EURO_HDTV               ENABLE
+    #define SUPPORT_EURO_HDTV               ENABLE
 #else
-#define SUPPORT_EURO_HDTV               DISABLE
+    #define SUPPORT_EURO_HDTV               DISABLE
 #endif
 
 //----VE-------------------------------------------------------------------------
@@ -302,32 +303,32 @@
 #define S4_AUDIO_PATH_SETTING
 
 #ifdef S4_AUDIO_PATH_SETTING
-#define Prescale_0dB                    0x6F
+    #define Prescale_0dB                    0x6F
 
-#define Prescale_MainSpeaker_DTV        Prescale_0dB-9
-#define Prescale_LineOut_DTV            Prescale_0dB-9
-#define Prescale_SifOut_DTV             Prescale_0dB-9  // Output DTV
-#define Prescale_SpdifOut_DTV           0x00
+    #define Prescale_MainSpeaker_DTV        Prescale_0dB-9
+    #define Prescale_LineOut_DTV            Prescale_0dB-9
+    #define Prescale_SifOut_DTV             Prescale_0dB-9  // Output DTV
+    #define Prescale_SpdifOut_DTV           0x00
 
-#define Prescale_MainSpeaker_ATV        Prescale_0dB-5
-#define Prescale_LineOut_ATV            Prescale_0dB-5
-#define Prescale_SifOut_ATV             Prescale_0dB-5  // Output ATV
-#define Prescale_SpdifOut_ATV           0x00
+    #define Prescale_MainSpeaker_ATV        Prescale_0dB-5
+    #define Prescale_LineOut_ATV            Prescale_0dB-5
+    #define Prescale_SifOut_ATV             Prescale_0dB-5  // Output ATV
+    #define Prescale_SpdifOut_ATV           0x00
 
-#define Prescale_MainSpeaker_AV         Prescale_0dB
-#define Prescale_LineOut_AV             Prescale_0dB
-#define Prescale_SifOut_AV              Prescale_0dB-5  // Output ATV
-#define Prescale_SpdifOut_AV            0x00
+    #define Prescale_MainSpeaker_AV         Prescale_0dB
+    #define Prescale_LineOut_AV             Prescale_0dB
+    #define Prescale_SifOut_AV              Prescale_0dB-5  // Output ATV
+    #define Prescale_SpdifOut_AV            0x00
 
-#define Prescale_MainSpeaker_PC         Prescale_0dB
-#define Prescale_LineOut_PC             Prescale_0dB
-#define Prescale_SifOut_PC              Prescale_0dB-5  // Output ATV
-#define Prescale_SpdifOut_PC            0x00
+    #define Prescale_MainSpeaker_PC         Prescale_0dB
+    #define Prescale_LineOut_PC             Prescale_0dB
+    #define Prescale_SifOut_PC              Prescale_0dB-5  // Output ATV
+    #define Prescale_SpdifOut_PC            0x00
 
-#define Prescale_MainSpeaker_HDMI       Prescale_0dB-9
-#define Prescale_LineOut_HDMI           Prescale_0dB-9
-#define Prescale_SifOut_HDMI            Prescale_0dB-5  // Output ATV
-#define Prescale_SpdifOut_HDMI          0x00
+    #define Prescale_MainSpeaker_HDMI       Prescale_0dB-9
+    #define Prescale_LineOut_HDMI           Prescale_0dB-9
+    #define Prescale_SifOut_HDMI            Prescale_0dB-5  // Output ATV
+    #define Prescale_SpdifOut_HDMI          0x00
 #endif
 
 //------Video Firmware code ---------------------------------
@@ -402,35 +403,36 @@
     #define ENABLE_COPY_PASTE               DISABLE //enable it to allow copy&paste media file
     #define ENABLE_POWERON_MUSIC            ENABLE // after T3 checking ok, turn on it again //enable it to play music when system boot up
 
-  #if(ENABLE_BOOT_SPEED_UP)
-    #define POWERON_MUSIC_MIN_HOLD_ON_TIME  2000   //When ENABLE_POWERON_MUSIC==1, music should play at least xx ms until cancelled
-  #else
-    #define POWERON_MUSIC_MIN_HOLD_ON_TIME  3000   //When ENABLE_POWERON_MUSIC==1, music should play at least xx ms until cancelled
-  #endif
+    #if(ENABLE_BOOT_SPEED_UP)
+        #define POWERON_MUSIC_MIN_HOLD_ON_TIME  2000   //When ENABLE_POWERON_MUSIC==1, music should play at least xx ms until cancelled
+    #else
+        #define POWERON_MUSIC_MIN_HOLD_ON_TIME  3000   //When ENABLE_POWERON_MUSIC==1, music should play at least xx ms until cancelled
+    #endif
 
-    #define DISPLAY_LOGO                    ENABLE // after T3 checking ok, turn on it again //enable it to display LOGO when system boot up
-#if ENABLE_MPLAYER_MOVIE
-    #define ENABLE_SUBTITLE_DMP             ENABLE  //enable it to support MM subtitle
-#else
-    #define ENABLE_SUBTITLE_DMP             DISABLE  //enable it to support MM subtitle
-#endif
-  #if (ENABLE_SUBTITLE_DMP)
-    #define ENABLE_INTERNAL_TS_SUBTITLE     ENABLE  //enable it need enough memory layout for subtitle decoder.(internal bmp subtitle must be enabled for TS subtitle)
-    #define ENABLE_INTERNAL_BMP_SUBTITLE    ENABLE //enable it to support internal bmp subtitle
-    #define ENABLE_INTERNAL_TEXT_SUBTITLE   ENABLE //enable it to support internal text subtitle
-    #define ENABLE_EXTERNAL_BMP_SUBTITLE    ENABLE //enable it to support external bmp subtitle
-  #else
-    #define ENABLE_INTERNAL_TS_SUBTITLE     DISABLE  //enable it need enough memory layout for subtitle decoder.
-    #define ENABLE_INTERNAL_BMP_SUBTITLE    DISABLE //enable it to support internal bmp subtitle
-    #define ENABLE_INTERNAL_TEXT_SUBTITLE   DISABLE //enable it to support internal text subtitle
-    #define ENABLE_EXTERNAL_BMP_SUBTITLE    DISABLE //enable it to support external bmp subtitle
-  #endif
-    #define HVD_BW_TUNING_SETTING      (0x03001446)  //for HVD BW tuning, need to fine-tine it for each project
-    #define ENABLE_DIGITAL_MEDIA_API        DISABLE
+    #define DISPLAY_LOGO                   ENABLE // after T3 checking ok, turn on it again //enable it to display LOGO when system boot up
+    #if ENABLE_MPLAYER_MOVIE
+        #define ENABLE_SUBTITLE_DMP             ENABLE  //enable it to support MM subtitle
+    #else
+        #define ENABLE_SUBTITLE_DMP             DISABLE  //enable it to support MM subtitle
+    #endif
 
-    #define ENABLE_LAST_MEMORY    ENABLE
-    #define ENABLE_LAST_MEMORY_STORAGE_SAVE                 DISABLE // save to flash/eeprom for suddently power off
-    #define LAST_MEMORY_FILENUMBER    1// 8 // number of LastMemory file to be recorded
+    #if (ENABLE_SUBTITLE_DMP)
+        #define ENABLE_INTERNAL_TS_SUBTITLE     ENABLE  //enable it need enough memory layout for subtitle decoder.(internal bmp subtitle must be enabled for TS subtitle)
+        #define ENABLE_INTERNAL_BMP_SUBTITLE    ENABLE //enable it to support internal bmp subtitle
+        #define ENABLE_INTERNAL_TEXT_SUBTITLE   ENABLE //enable it to support internal text subtitle
+        #define ENABLE_EXTERNAL_BMP_SUBTITLE    ENABLE //enable it to support external bmp subtitle
+    #else
+        #define ENABLE_INTERNAL_TS_SUBTITLE     DISABLE  //enable it need enough memory layout for subtitle decoder.
+        #define ENABLE_INTERNAL_BMP_SUBTITLE    DISABLE //enable it to support internal bmp subtitle
+        #define ENABLE_INTERNAL_TEXT_SUBTITLE   DISABLE //enable it to support internal text subtitle
+        #define ENABLE_EXTERNAL_BMP_SUBTITLE    DISABLE //enable it to support external bmp subtitle
+    #endif
+        #define HVD_BW_TUNING_SETTING      (0x03001446)  //for HVD BW tuning, need to fine-tine it for each project
+        #define ENABLE_DIGITAL_MEDIA_API        DISABLE
+
+        #define ENABLE_LAST_MEMORY    ENABLE
+        #define ENABLE_LAST_MEMORY_STORAGE_SAVE                 DISABLE // save to flash/eeprom for suddently power off
+        #define LAST_MEMORY_FILENUMBER          1// 8 // number of LastMemory file to be recorded
 
 #else
     #define ENABLE_MPLAYER_PHOTO            DISABLE
@@ -442,7 +444,7 @@
     #define CHANNEL_ADD_AND_MERGE_FUNC      DISABLE
     #define ENABLE_BGM                      DISABLE //enable it to allow playing background music when photo slide show
     #define ENABLE_POWERON_MUSIC            DISABLE //enable it to play music when system boot up
-    #define DISPLAY_LOGO                    DISABLE //enable it to display LOGO when system boot up
+    #define DISPLAY_LOGO                    ENABLE //enable it to display LOGO when system boot up
     #define ENABLE_SUBTITLE_DMP             DISABLE  //enable it to support MM subtitle
     #define ENABLE_INTERNAL_TS_SUBTITLE     DISABLE  //enable it need enough memory layout for subtitle decoder.
     #define ENABLE_INTERNAL_BMP_SUBTITLE    DISABLE //enable it to support internal bmp subtitle

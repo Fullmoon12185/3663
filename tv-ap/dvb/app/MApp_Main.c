@@ -218,7 +218,7 @@ MS_BOOL MApp_PowerOn_Stage_Debug(void)
 
 /***************************************************************************************/
 
-#define MAIN_FUNC_STATE_DBG(x)  //x
+#define MAIN_FUNC_STATE_DBG(x)  x
 //#define MAIN_FUNC_STATE_DBG(x)  do{ msDebug_ANSI_SetColorText_2(E_FONT_COLOR_BLACK,E_FONT_BACKGROUND_COLOR_PURPLE); x; msDebug_ANSI_AllAttrOffText(); } while(0)
 
 
@@ -276,7 +276,7 @@ void MApp_Bench_PowerOffLED(void)
 }
 #endif
 
-#define DEBUG_INIT_STATE_NAME(x) //x
+#define DEBUG_INIT_STATE_NAME(x) x
 
 MS_BOOL MApp_PreInit_State(void)
 {
@@ -306,16 +306,17 @@ MS_BOOL MApp_PreInit_State(void)
             break;
 
         case EN_PRE_INIT_STAGE_AUTOTEST_INIT:
-            printf("npn- MApp_PreInit_Autotest_Init\n");
+            DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_Autotest_Init() \n"););
             MApp_PreInit_Autotest_Init();
             break;
 
         case EN_PRE_INIT_STAGE_GLOBALVAR_INIT:
-            printf("npn- MApp_PreInit_GlobalVariable_Init\n");
+            DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_GlobalVariable_Init() \n"););
             MApp_PreInit_GlobalVariable_Init();
             break;
 
         case EN_PRE_INIT_STAGE_POWERSETTING_INIT:
+            DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_Chip_Init() \n"););
             MApp_PreInit_PowerSettingVariable_Init();
 
         #if(ENABLE_FLASH_ON_DRAM)
@@ -325,23 +326,27 @@ MS_BOOL MApp_PreInit_State(void)
             break;
 
         case EN_PRE_INIT_STAGE_CHIP_INIT:
+           DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_Chip_Init() \n"););
             MApp_PreInit_Chip_Init();
             break;
 
         case EN_PRE_INIT_STAGE_AUDIO_INIT_1:
+            DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_Audio_Init_1() \n"););
             MApp_PreInit_Audio_Init_1();
             break;
 
         case EN_PRE_INIT_STAGE_CUSTOMER_INFO_INIT:
+            DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_CustomerInfo() \n"););
             MApp_PreInit_CustomerInfo();
             break;
 
         case EN_PRE_INIT_STAGE_PANEL_BACKLIGHT_OFF:
-            printf(">> NPN --  MApp_PreInit_Panel_Backlight_Off() \n");
+            DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_Panel_Backlight_Off() \n"););
             MApp_PreInit_Panel_Backlight_Off();
             break;
 
         case EN_PRE_INIT_STAGE_READ_DDRPHASE_INIT:
+            DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_ReadDDRPhase() \n"););
             MApp_PreInit_ReadDDRPhase();
             break;
 
@@ -390,6 +395,7 @@ MS_BOOL MApp_PreInit_State(void)
         case EN_PRE_INIT_STAGE_XC_HDMI_INIT:
             DEBUG_INIT_STATE_NAME( printf("EN_PRE_INIT_STAGE_XC_HDMI_INIT\n"); );
             MApp_PreInit_XC_HDMI_Init();
+            
             break;
 
         case EN_PRE_INIT_STAGE_DRIVER_IR_KEYPAD_INIT:
@@ -408,12 +414,12 @@ MS_BOOL MApp_PreInit_State(void)
             break;
 
         case EN_PRE_INIT_STAGE_PANEL_INIT:
-            DEBUG_INIT_STATE_NAME( printf("EN_PRE_INIT_STAGE_PANEL_INIT\n"); );
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_Panel_Init()\n"); );
             MApp_PreInit_Panel_Init();
             break;
 
         case EN_PRE_INIT_STAGE_ENABLE_DCC_DDC2BI_INIT:
-            printf(">> NPN --  MApp_PreInit_EnableDCC_DDC2BI_Init() \n");
+            DEBUG_INIT_STATE_NAME(printf(">> NPN --  MApp_PreInit_EnableDCC_DDC2BI_Init() \n"););
             MApp_PreInit_EnableDCC_DDC2BI_Init();
             break;
 
@@ -424,6 +430,7 @@ MS_BOOL MApp_PreInit_State(void)
             break;
 
         case EN_PRE_INIT_STAGE_ADC_INIT:
+            DEBUG_INIT_STATE_NAME( printf("EN_PRE_INIT_STAGE_ADC_INIT\n"); );
             MApp_PreInit_ADC_Init();
             break;
 
@@ -443,43 +450,53 @@ MS_BOOL MApp_PreInit_State(void)
             break;
 
         case EN_PRE_INIT_STAGE_UI_INPUTSOURCE_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_UI_InputSource_Init\n"); );
             MApp_PreInit_UI_InputSource_Init();
             break;
 
         case EN_PRE_INIT_STAGE_CI_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_CI_Init\n"); );
             MApp_PreInit_CI_Init();
             break;
 
         case EN_PRE_INIT_STAGE_DevHDMISWITCH_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_DevHDMISwitch_Init\n"); );
             MApp_PreInit_DevHDMISwitch_Init();
             break;
 
         case EN_PRE_INIT_STAGE_DB_CH_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_DB_CH_Init\n"); );
             MApp_PreInit_DB_CH_Init();
             break;
 
         case EN_PRE_INIT_STAGE_TIME_SETTING_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_Time_Setting_Init\n"); );
             MApp_PreInit_Time_Setting_Init();
             break;
 
         case EN_PRE_INIT_STAGE_EPGTIMER_DATA_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_EPGTimer_Data_Init\n"); );
             MApp_PreInit_EPGTimer_Data_Init();
             break;
 
         case EN_PRE_INIT_STAGE_CHECKONTIMER_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_CheckOnTimer_Init\n"); );
             MApp_PreInit_CheckOnTimer_Init();
             break;
 
         case EN_PRE_INIT_STAGE_HDMI_HDP_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_HDMI_HPD_Init\n"); );
             MApp_PreInit_HDMI_HPD_Init();
             break;
 
         case EN_PRE_INIT_STAGE_LOGO_INIT:
             PRINT_AUTOTEST_CHECKPT_TIME("start Logo");
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_Logo_Init()\n"); );
             MApp_PreInit_Logo_Init();
             break;
 
         case EN_PRE_INIT_STAGE_TUNER_DEMOD_INIT:
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_Tuner_And_Demod_Init()\n"); );
             MApp_PreInit_Tuner_And_Demod_Init();
             break;
 
@@ -496,19 +513,23 @@ MS_BOOL MApp_PreInit_State(void)
             break;
 
         case EN_PRE_INIT_STAGE_USB_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_USB_Init\n"); );
             MApp_PreInit_USB_Init();
             break;
 
         case EN_PRE_INIT_STAGE_TUNER_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_Tuner_Init\n"); );
             MApp_PreInit_Tuner_Init();
             break;
 
         case EN_PRE_INIT_STAGE_ATV_SYSTEM_INIT:
             PRINT_AUTOTEST_CHECKPT_TIME("start ATVProc_Init_Others");
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_ATVSystem_Init\n"); );
             MApp_PreInit_ATVSystem_Init();
             break;
 
         case EN_PRE_INIT_STAGE_AVD_INIT:
+            DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_AVD_Init\n"); );
             MApp_PreInit_AVD_Init();
             break;
 
@@ -531,32 +552,41 @@ MS_BOOL MApp_PreInit_State(void)
     #endif
 
         case EN_PRE_INIT_STAGE_LOGO_OFF:
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_Logo_Off()\n"); );
             MApp_PreInit_Logo_Off();
             break;
 
         case EN_PRE_INIT_STAGE_DTV_SYSTEM_INIT:
             //PRINT_AUTOTEST_CHECKPT_TIME("start display step 1 init");
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_DTV_System_Init()\n"); );
             MApp_PreInit_DTV_System_Init();
             break;
 
         case EN_PRE_INIT_STAGE_PVR_INIT:
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_PVR_Init()\n"); );    
             MApp_PreInit_PVR_Init();
             break;
 
         case EN_PRE_INIT_STAGE_BEFORE_CHANGE_SOURCE:
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_Before_ChangeSource()\n"); );    
+            
             MApp_PreInit_Before_ChangeSource();
             break;
 
         case EN_PRE_INIT_STAGE_SORCE_CHANGE_INIT:
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_Source_Change_Init()\n"); );    
             MApp_PreInit_Source_Change_Init();
             break;
 
         case EN_PRE_INIT_STAGE_DISPLAY_STEP2_INIT:
+
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_Display_Step2_Init()\n"); );    
             PRINT_AUTOTEST_CHECKPT_TIME("start display step 2 init");
             MApp_PreInit_Display_Step2_Init();
             break;
 
         case EN_PRE_INIT_STAGE_OTHERS_INIT:
+            DEBUG_INIT_STATE_NAME(printf("MApp_PreInit_Others_Init()\n"); );    
             MApp_PreInit_Others_Init();
             break;
 
@@ -633,6 +663,7 @@ MS_BOOL MApp_PreInit_State(void)
 
 void MApp_While_Loop_State(void)
 {
+    
     switch (enWhileLoop_Sub_State)
     {
         default:
@@ -664,7 +695,8 @@ void MApp_While_Loop_State(void)
         {
     #if GAME_ENABLE
             if(MApp_TopStateMachine_GetTopState() != STATE_TOP_GAME)
-    #endif
+    #endif      
+                // printf("npn -- MApp_While_Loop_State -- MApp_MultiTasks\n");
                 MApp_MultiTasks();
 
             enWhileLoop_Sub_State++;  // go to next WHILELOOP Sub state
@@ -673,6 +705,7 @@ void MApp_While_Loop_State(void)
 
         case EN_WHILE_LOOP_TOPSTATEMACHINE:
         {
+            // printf("npn -- MApp_While_Loop_State -- MApp_TopStateMachine\n");
             MApp_TopStateMachine();
 
             enWhileLoop_Sub_State++;  // go to next WHILELOOP Sub state
@@ -681,6 +714,7 @@ void MApp_While_Loop_State(void)
 
         case EN_WHILE_LOOP_INTERMEDIATE_MINI_DUMP:
         {
+            // printf("npn -- MApp_While_Loop_State -- MApp_Power_On_Mini_Dump\n");    
             MApp_Power_On_Mini_Dump();
 
             enWhileLoop_Sub_State++;  // go to next WHILELOOP Sub state
@@ -688,7 +722,7 @@ void MApp_While_Loop_State(void)
         }
 
         case EN_WHILE_LOOP_IDLE:
-        {
+        {   
             enWhileLoop_Sub_State = EN_WHILE_LOOP_INITIATION;
             break;
         }
@@ -702,6 +736,9 @@ int main(void)
     U32 u32MainLoopTime_Last = 0;
     U32 u32MainLoopTime_Cur = 0;
 
+    //nguyen
+    U32 bToogleLED = 0;
+    //U32 bBacklight= false;
 
     DEBUG_BOOT_TIME( printf("main() at %u\n", MsOS_GetSystemTime()); );
 
@@ -795,7 +832,7 @@ int main(void)
 
                 printf("\n===== Enter main loop at %u\n", MsOS_GetSystemTime());
                 printf("\n===== Timestamp %s, %s\n",__DATE__, __TIME__);
-
+                MApp_PreInit_TurnOnPanel_();
               #ifdef BENCH_CODE_USAGE
                 MApp_Bench_AudioTest();
                 MApp_Bench_PowerOffLED();
@@ -811,12 +848,27 @@ int main(void)
                 //MAIN_FUNC_STATE_DBG(printf(" %d: [EN_MSTAR_MAIN_FUNCTION_ENTERING_WHILE_LOOP] \n", __LINE__));
 
                 u32MainLoopTime_Cur = MsOS_GetSystemTime();
-                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 5000 )
+                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 1000 )
                 {
                     u32MainLoopTime_Last = u32MainLoopTime_Cur;
+                    //nguyen
+                    if (bToogleLED == 0){
+                        LED_RED_Off();
+                        LED_GRN_On(); 
+                        //MApp_PreInit_Logo_Init();
+                        //MApi_PNL_En(TRUE);
+                        //MApi_PNL_SetBackLight(ENABLE);
+                        bToogleLED = 1;    
+                    } else {
+                        LED_RED_On();
+                        LED_GRN_Off();
+                        //MApi_PNL_En(FALSE);
+                        //MApi_PNL_SetBackLight(DISABLE);
+                        bToogleLED = 0;
+                    }
+                    
                     //printf("t=%u\n", u32MainLoopTime_Cur );
                 }
-
                 MApp_While_Loop_State();
 
                 break;

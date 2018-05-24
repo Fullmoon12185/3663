@@ -446,7 +446,7 @@
     #define CHANNEL_ADD_AND_MERGE_FUNC      DISABLE
     #define ENABLE_BGM                      DISABLE //enable it to allow playing background music when photo slide show
     #define ENABLE_POWERON_MUSIC            DISABLE //enable it to play music when system boot up
-    #define DISPLAY_LOGO                    DISABLE //enable it to display LOGO when system boot up
+    #define DISPLAY_LOGO                    ENABLE //enable it to display LOGO when system boot up
 
     #define ENABLE_SUBTITLE_DMP             DISABLE  //enable it to support MM subtitle
     #define ENABLE_INTERNAL_TS_SUBTITLE     DISABLE  //enable it need enough memory layout for subtitle decoder.

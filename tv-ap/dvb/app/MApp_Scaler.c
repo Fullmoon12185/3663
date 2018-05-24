@@ -215,16 +215,16 @@
 /*                     Definition                                             */
 /* ****************************************************************************/
 
-#define NEWCROPMSG(x)                   //x
-#define MSG(x)                          //x
-#define DEBUG_SET_WIN(x)                //x
-#define DEBUG_CAP_WIN(x)                //x
-#define DEBUG_ASPECT_RATIO(x)           //x
-#define DEBUG_SCALER_FLOW(x)            //x
-#define DEBUG_SCALER_INPUT_TIMING(x)    //x
-#define DEBUG_OVERSCAN(x)               //x
+#define NEWCROPMSG(x)                   x
+#define MSG(x)                          x
+#define DEBUG_SET_WIN(x)                x
+#define DEBUG_CAP_WIN(x)                x
+#define DEBUG_ASPECT_RATIO(x)           x
+#define DEBUG_SCALER_FLOW(x)            x
+#define DEBUG_SCALER_INPUT_TIMING(x)    x
+#define DEBUG_OVERSCAN(x)               x
 
-#define MENU_3D_DBG(x)                 // x
+#define MENU_3D_DBG(x)                  x
 #if 0
     #define DEBUG_3D(x)  do { \
         msDebug_ANSI_SetColorText(E_FONT_COLOR_GREEN); \
@@ -1890,11 +1890,12 @@ void MApp_PreInitPanelTiming(void)
     stTimingInfo.u16InputVFreq  = 600;
     stTimingInfo.u16InputVTotal = 525;;
   #else
-    stTimingInfo.u16InputVFreq  = 500;
-    stTimingInfo.u16InputVTotal = 625;;
+    stTimingInfo.u16InputVFreq  = 600;
+    stTimingInfo.u16InputVTotal = 525;;
   #endif
     stTimingInfo.bInterlace     = TRUE;
-
+    printf("\nNguyen stTimingInfo.u16InputVFreq = %d", stTimingInfo.u16InputVFreq);
+    printf("\nNguyen stTimingInfo.u16InputVTotal = %d", stTimingInfo.u16InputVTotal);
 #if(CHAKRA3_AUTO_TEST)
     MApi_SC_ForceFreerun(TRUE);
     MApi_SC_SetFreerunVFreq(VFREQ_60HZ);

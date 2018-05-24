@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -142,7 +142,7 @@
 
 #include "MApp_GlobalVar.h"
 
-#define DEBUG_ACT_INPUT_SRC(x)  //x
+#define DEBUG_ACT_INPUT_SRC(x)  x
 
 /////////////////////////////////////////////////////////////////////
 extern BOOLEAN _MApp_ZUI_API_WindowProcOnIdle(void);
@@ -945,7 +945,7 @@ BOOLEAN MApp_ZUI_ACT_HandleInputSourceKey(VIRTUAL_KEY_CODE key)
     if (VK_NUM_0 <= key && key <= VK_NUM_9)
     {
         _u16LaunchKeys = (_u16LaunchKeys<<4)|(key-VK_NUM_0);
-        //printf("key=%u => 0x%X\n", (key-VK_NUM_0), _u16LaunchKeys );
+        printf("Nguyen key=%u => 0x%X\n", (key-VK_NUM_0), _u16LaunchKeys );
         switch (_u16LaunchKeys)
         {
             case 0x2580:

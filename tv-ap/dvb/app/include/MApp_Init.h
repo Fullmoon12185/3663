@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -117,6 +117,10 @@ INTERFACE  void MApp_PreInit_Audio_Init_1(void);
 INTERFACE  void MApp_PreInit_CustomerInfo(void);
 
 void MApp_PreInit_CheckGoToPowerDown(void);
+//nguyen
+void MApp_PreInit_TurnOnPanel_(void);
+
+
 
 INTERFACE  void MApp_PreInit_Panel_Backlight_Off(void);
 

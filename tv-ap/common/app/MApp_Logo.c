@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -99,6 +99,10 @@
 #include <stdio.h>
 #include "datatype.h"
 #include "Board.h"
+
+//nguyen
+#include "SW_Config.h"
+
 
 #if (DISPLAY_LOGO)
 // Common Definition
@@ -132,7 +136,7 @@
 
 #define LOGO_DISPLAY_RESOLUTION     DTVRES_704x480_60P
 
-#define LOGO_DBG(x)      //x
+#define LOGO_DBG(x)      x
 
 #define LOGO_DEC_AND_DISPLAY_BY_NEW_METHOD      1 // Ray, 0219.2013
 
@@ -308,7 +312,7 @@ BOOLEAN _MApp_Logo_LoadJpeg(U16 u16LogoBinID)
        //MDrv_SERFLASH_Init();
 
         msAPI_Flash_Read(BinInfo.B_FAddr, BinInfo.B_Len, (U8 *)_PA2VA(u32LogoAddr));
-
+        LOGO_DBG( printf( "msAPI_Flash_Read.\n" ) );
        // msAPI_Flash_ChipSelect(E_FLASH_CHIP_SELECT_0);
        // MDrv_SERFLASH_Init();
     #endif
@@ -324,7 +328,7 @@ BOOLEAN _MApp_Logo_LoadJpeg(U16 u16LogoBinID)
             LOGO_DBG( printf( "could not find logo binary on flash.\n" ) );
             return FALSE;
         }
-
+        LOGO_DBG( printf( "found logo binary on flash.\n" ) );
         msAPI_MIU_LoadLogo(BinInfo.B_FAddr, u32LogoAddr, GE_ALIGNED_VALUE(BinInfo.B_Len, 8));
     }
 
@@ -345,6 +349,7 @@ BOOLEAN MApp_Logo_Load(void)
         LOGO_DBG(printf(" msAPI_Logo_LoadJpeg failed\n"));
         return FALSE;
     }
+    LOGO_DBG(printf(" msAPI_Logo_LoadJpeg succeeded\n"));
 
 #if (LOGO_DEC_AND_DISPLAY_BY_NEW_METHOD)
 
@@ -386,7 +391,7 @@ BOOLEAN MApp_Logo_Load(void)
     {
         LOGO_DBG(printf("logo decode failed\n"));
     }
-
+    LOGO_DBG(printf("logo decode succeeded\n"));
     return bRet;
 }
 
@@ -401,8 +406,8 @@ void MApp_Logo_Display(BOOLEAN bDisplayLogo)
 
         // fill frame buffer to black color
         msAPI_GE_ClearFrameBufferByWord((U32)PHOTO_DISPLAY_BUFFER_ADDR,
-               (PHOTO_ADJUSTED_PANEL_WIDTH * PANEL_HEIGHT * 2),
-               0x80008000);
+               (PHOTO_ADJUSTED_PANEL_WIDTH * PANEL_HEIGHT * 2), 0xf0f0f0f0);
+               //0x80008000);
 
         // after clear frame buffer, flush cmd
         MApi_GFX_FlushQueue();

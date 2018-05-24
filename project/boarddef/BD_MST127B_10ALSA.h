@@ -228,10 +228,12 @@
 
 #define PIN_159_IS_GPIO    GPIO_OUT_HIGH //GPIO18, AMP-MUTE(AMP-EN) (RT9116 Audio Amp Enable, L:Enable)  init: MUTE
 #define PIN_158_IS_GPIO    GPIO_OUT_HIGH//GPIO19, PANEL_ON_OFF (Panel Power Enable, L:On)
-#define PIN_160_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
-//nguyen
-//#define PIN_161_IS_GPIO    GPIO_OUT_LOW//GPIO16, NORMAL_PWR-ON_OFF
+//#define PIN_160_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
 
+//nguyen
+//#define PIN_161_IS_GPIO    GPIO_OUT_HIGH //GPIO16, NORMAL_PWR-ON_OFF
+//#define PIN_168_IS_GPIO    GPIO_OUT_HIGH //GPIO168, pwm
+#define PIN_168_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
 
 #define PIN_180_IS_GPIO    GPIO_IN           //GPIO94, MHL CABLE_DET
 #define PIN_163_IS_GPIO    GPIO_OUT_LOW     // DISH_RT5047 LNB_EN
@@ -683,11 +685,11 @@
 #define Adj_Volume_On()                 mdrv_gpio_set_low( PIN_159 ) // RT9116 Audio Amp, ENABLE
 #define Adj_Volume_Off()                mdrv_gpio_set_high( PIN_159 ) // RT9116 Audio Amp, MUTE
 
-#define Panel_VCC_ON()                  mdrv_gpio_set_low( PIN_158 )
-#define Panel_VCC_OFF()                 mdrv_gpio_set_high( PIN_158 )
+#define Panel_VCC_ON()                  mdrv_gpio_set_high( PIN_158 )
+#define Panel_VCC_OFF()                 mdrv_gpio_set_low( PIN_158 )
 
-#define Panel_Backlight_VCC_ON()        mdrv_gpio_set_high( PIN_160 )
-#define Panel_Backlight_VCC_OFF()       mdrv_gpio_set_low( PIN_160 )
+#define Panel_Backlight_VCC_ON()        mdrv_gpio_set_high( PIN_168 )
+#define Panel_Backlight_VCC_OFF()       mdrv_gpio_set_low( PIN_168 )
 
 #define Panel_Backlight_PWM_ADJ(x)      MDrv_PWM_DutyCycle(E_PWM_CH0, x)
 #define Panel_Backlight_Max_Current(x)  MDrv_PWM_DutyCycle(E_PWM_CH0, x)
@@ -700,8 +702,8 @@
 #define PCMCIA_VCC_OFF()               _FUNC_NOT_USED()
 
 // Power Saving
-#define Power_On()                      _FUNC_NOT_USED()
-#define Power_Off()                     _FUNC_NOT_USED()
+#define Power_On()                       _FUNC_NOT_USED()// mdrv_gpio_set_low(PIN_161)
+#define Power_Off()                       _FUNC_NOT_USED() //mdrv_gpio_set_high(PIN_161)
 #define MDrv_Sys_GetSvideoSw()          _FUNC_NOT_USED()
 
 #define Peripheral_Device_Reset_ON()    _FUNC_NOT_USED()
@@ -719,8 +721,8 @@
 // LED Control
 #define LED_RED_ON()                    _FUNC_NOT_USED()
 #define LED_RED_OFF()                   _FUNC_NOT_USED()
-#define LED_GREEN_ON()                  _FUNC_NOT_USED() //mdrv_gpio_set_low( PIN_67 )
-#define LED_GREEN_OFF()                 _FUNC_NOT_USED() //mdrv_gpio_set_high( PIN_67 )
+#define LED_GREEN_ON()                  mdrv_gpio_set_low( PIN_67 )
+#define LED_GREEN_OFF()                 mdrv_gpio_set_high( PIN_67 )
 
 
 
@@ -742,7 +744,7 @@
 #define LED_GRN_Off()                   LED_GREEN_OFF()
 #define LED_GRN_On()                    LED_GREEN_ON()
 #define LED_RED_Off()                   LED_GRN_On()
-#define LED_RED_On()                    LED_GRN_Off()
+#define LED_RED_On()                   LED_GRN_Off()
 #define ANT_5V_CTL_Off()                _FUNC_NOT_USED()
 #define ANT_5V_CTL_On()                 _FUNC_NOT_USED()
 #define BOOSTER_Off()                   _FUNC_NOT_USED()

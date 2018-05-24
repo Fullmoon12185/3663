@@ -144,11 +144,11 @@
 #if ENABLE_TCON_2014
 #include "msAPI_TCON.h"
 #endif
-#define DBG_PANEL(x)                        //x
+#define DBG_PANEL(x)                        x
 #define USE_PANEL_DEFINE                    1
 #define PANEL_DUMMY                         0
 
-#define PANEL_ON_SEQ(x)         //x
+#define PANEL_ON_SEQ(x)         x
 
 /***************************************************************************************/
 
@@ -284,6 +284,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_FULLHD_SEC32_LE32A =
     LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
 };
 
+
 ST_PANEL_NEW_PANELTYPE stPanel_SXGA_AU17_EN05 =
 {
    {
@@ -382,7 +383,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_SXGA_AU17_EN05 =
     108,        //DWORD m_dwPanelDCLK;              //PANEL_DCLK
     100,        //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
     LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
-};//
+};
 
 
 ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
@@ -485,6 +486,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
     60, //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
     LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
 };
+
 
 ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02_LGD=
 {
@@ -791,7 +793,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_WSXGA_AU22_M201EW01=
 ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
 {
     {
-        "FullHD_CMO216_H1L01",//m_pPanelName
+       "FullHD_CMO216_NGUYE",//m_pPanelName
         //////////////////////////////////////////////
         // Panel output
         //////////////////////////////////////////////
@@ -800,7 +802,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
 
         1,          //BOOL m_bPanelDualPort :1;         //PANEL_DUAL_PORT
 
-        1^PANEL_CONNECTOR_SWAP_PORT,                    // shall swap if
+        0,//1^PANEL_CONNECTOR_SWAP_PORT,                    // shall swap if
                                                         // (PANEL_SWAP_PORT XOR Board_Connect_Swap) is TRUE
 
         0,          //BOOL m_bPanelSwapOdd_ML   :1;     //PANEL_SWAP_ODD_ML
@@ -808,9 +810,9 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         0,          //BOOL m_bPanelSwapOdd_RB   :1;     //PANEL_SWAP_ODD_RB
         0,          //BOOL m_bPanelSwapEven_RB  :1;     //PANEL_SWAP_EVEN_RB
 
-        PANEL_SWAP_LVDS_POL,
+        0,//PANEL_SWAP_LVDS_POL,
 
-        PANEL_SWAP_LVDS_CH,          //BOOL m_bPanelSwapLVDS_CH  :1;     //PANEL_SWAP_LVDS_CH
+        0,//PANEL_SWAP_LVDS_CH,          //BOOL m_bPanelSwapLVDS_CH  :1;     //PANEL_SWAP_LVDS_CH
         PANEL_PDP_10BIT,          //BOOL m_bPanelPDP10BIT     :1;     //PANEL_PDP_10BIT
         1,          //BOOL m_bPanelLVDS_TI_MODE :1;     //PANEL_LVDS_TI_MODE
 
@@ -830,25 +832,25 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         0x01,       //BYTE m_ucPanelEvenDataCurrent;    //PANEL_EVEN_DATA_CURRENT    // even data current
 
         30,         //BYTE m_ucPanelOnTiming1;          //PANEL_ON_TIMING1          // time between panel & data while turn on power
-#if ((MS_BOARD_TYPE_SEL == BD_MST074B_10AGS))
-        320,        //BYTE m_ucPanelOnTiming2;          //PANEL_ON_TIMING2          // time between data & back light while turn on power
-#else
-        300,        //BYTE m_ucPanelOnTiming2;          //PANEL_ON_TIMING2          // time between data & back light while turn on power
-#endif
+//#if ((MS_BOARD_TYPE_SEL == BD_MST074B_10AGS))
+//        550,        //BYTE m_ucPanelOnTiming2;          //PANEL_ON_TIMING2          // time between data & back light while turn on power
+//#else
+        550,        //BYTE m_ucPanelOnTiming2;          //PANEL_ON_TIMING2          // time between data & back light while turn on power
+//#endif
         220,        //BYTE m_ucPanelOffTiming1;         //PANEL_OFF_TIMING1         // time between back light & data while turn off power
         10,         //BYTE m_ucPanelOffTiming2;         //PANEL_OFF_TIMING2         // time between data & panel while turn off power
 
-    #if(CHAKRA3_AUTO_TEST)
-        // For auto test PC
-        44,         //BYTE m_ucPanelHSyncWidth;         //PANEL_HSYNC_WIDTH
-        148,        //BYTE m_ucPanelHSyncBackPorch;     //PANEL_HSYNC_BACK_PORCH
+//    #if(CHAKRA3_AUTO_TEST)
+//        // For auto test PC
+//        32,         //BYTE m_ucPanelHSyncWidth;         //PANEL_HSYNC_WIDTH
+//        80,        //BYTE m_ucPanelHSyncBackPorch;     //PANEL_HSYNC_BACK_PORCH
 
-        5,          //BYTE m_ucPanelVSyncWidth;         //PANEL_VSYNC_WIDTH
-        36,         //BYTE m_ucPanelBackPorch;          //PANEL_VSYNC_BACK_PORCH
+//        8,          //BYTE m_ucPanelVSyncWidth;         //PANEL_VSYNC_WIDTH
+//        16,         //BYTE m_ucPanelBackPorch;          //PANEL_VSYNC_BACK_PORCH
 
-        44+148,      //WORD m_wPanelHStart;              //PANEL_HSTART             (PANEL_HSYNC_WIDTH + PANEL_HSYNC_BACK_PORCH)
-        5+36,       //WORD m_wPanelVStart;              //PANEL_VSTART             (PANEL_VSYNC_WIDTH + PANEL_VSYNC_BACK_PORCH)
-    #else
+//        32+80,      //WORD m_wPanelHStart;              //PANEL_HSTART             (PANEL_HSYNC_WIDTH + PANEL_HSYNC_BACK_PORCH)
+//        8+16,       //WORD m_wPanelVStart;              //PANEL_VSTART             (PANEL_VSYNC_WIDTH + PANEL_VSYNC_BACK_PORCH)
+//    #else
         32,         //BYTE m_ucPanelHSyncWidth;         //PANEL_HSYNC_WIDTH
         80,         //BYTE m_ucPanelHSyncBackPorch;     //PANEL_HSYNC_BACK_PORCH
 
@@ -857,7 +859,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
 
         32+80,      //WORD m_wPanelHStart;              //PANEL_HSTART             (PANEL_HSYNC_WIDTH + PANEL_HSYNC_BACK_PORCH)
         8+16,       //WORD m_wPanelVStart;              //PANEL_VSTART             (PANEL_VSYNC_WIDTH + PANEL_VSYNC_BACK_PORCH)
-    #endif
+//    #endif
 
         1920,       //WORD m_wPanelWidth;               //PANEL_WIDTH
         1080,       //WORD m_wPanelHeight;              //PANEL_HEIGHT
@@ -867,24 +869,24 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         2020,       //WORD m_wPanelMinHTotal;           //PANEL_MIN_HTOTAL
 
         1200,       //WORD m_wPanelMaxVTotal;           //PANEL_MAX_VTOTAL
-    #if(CHAKRA3_AUTO_TEST)
+//    #if(CHAKRA3_AUTO_TEST)
         // For auto test PC
-        1125,       //WORD m_wPanelVTotal;              //PANEL_VTOTAL
-    #else
+//        1130,       //WORD m_wPanelVTotal;              //PANEL_VTOTAL
+//    #else
         1130,       //WORD m_wPanelVTotal;              //PANEL_VTOTAL 20060511 chris :for Frame Lock operation
-    #endif
+//    #endif
         1090,       //WORD m_wPanelMinVTotal;           //PANEL_MIN_VTOTAL
 
-    #if(CHAKRA3_AUTO_TEST)
-        // For auto test PC
-        (159),      //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
-        (149),      //DWORD m_dwPanelDCLK;              //PANEL_DCLK
-        (139),      //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
-    #else
+//    #if(CHAKRA3_AUTO_TEST)
+//        // For auto test PC
+//        (164),      //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
+//        (150),      //DWORD m_dwPanelDCLK;              //PANEL_DCLK
+//        (120),      //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
+//    #else
         (164),      //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
         (150),      //DWORD m_dwPanelDCLK;              //PANEL_DCLK
         (120),      //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
-    #endif
+//    #endif
 
         0x0019,     //m_wSpreadSpectrumStep;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
         0x00C0,     //m_wSpreadSpectrumSpan;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
@@ -894,13 +896,13 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         255,        //m_ucMaxPWMVal;
         0x20,//63,  //m_ucMinPWMVal;
         0,          //BOOL m_bPanelDeinterMode  :1;     //PANEL_DEINTER_MODE
-        E_PNL_ASPECT_RATIO_WIDE,
+        1,//E_PNL_ASPECT_RATIO_WIDE,
         //
         //  Board related params.
         //
-       (LVDS_PN_SWAP_H<<8) | LVDS_PN_SWAP_L,            //MS_U16 m_u16LVDSTxSwapValue
-       TI_8BIT_MODE,               //8bit ti bit mode
-       OUTPUT_10BIT_MODE,          //10bit ti bit mode
+       0,//(LVDS_PN_SWAP_H<<8) | LVDS_PN_SWAP_L,            //MS_U16 m_u16LVDSTxSwapValue
+       2,//TI_10BIT_MODE,               //8bit ti bit mode
+       0,//OUTPUT_10BIT_MODE,          //10bit ti bit mode
        0,          //   PANEL_SWAP_ODD_RG
        0,          //   PANEL_SWAP_EVEN_RG
        0,          //   PANEL_SWAP_ODD_GB
@@ -909,26 +911,26 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
        0x20EA0E,    // MS_U32 m_dwPanelMaxSET;  ///<  define PANEL_MAX_SET
        0x181568,    // MS_U32 m_dwPanelMinSET;    ///<  define PANEL_MIN_SET
 
-    #if(CHAKRA3_AUTO_TEST)
-        // For auto test PC
-        E_PNL_CHG_DCLK, // APIPNL_OUT_TIMING_MODE m_ucOutTimingMode;   ///<Define which panel output timing change mode is used to change VFreq for same panel
-    #else
-        E_PNL_CHG_VTOTAL, // APIPNL_OUT_TIMING_MODE m_ucOutTimingMode;   ///<Define which panel output timing change mode is used to change VFreq for same panel
-    #endif
+//    #if(CHAKRA3_AUTO_TEST)
+//        // For auto test PC
+//        2, //E_PNL_CHG_DCLK, // APIPNL_OUT_TIMING_MODE m_ucOutTimingMode;   ///<Define which panel output timing change mode is used to change VFreq for same panel
+//    #else
+        2,//E_PNL_CHG_VTOTAL, // APIPNL_OUT_TIMING_MODE m_ucOutTimingMode;   ///<Define which panel output timing change mode is used to change VFreq for same panel
+//    #endif
         1,///<  PAFRC mixed with noise dither disable
     },
 
-    #if(CHAKRA3_AUTO_TEST)
-        // For auto test PC
-        (159),      //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
-        (149),      //DWORD m_dwPanelDCLK;              //PANEL_DCLK
-        (139),      //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
-    #else
+    //#if(CHAKRA3_AUTO_TEST)
+    //    // For auto test PC
+    //    (159),      //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
+    //    (149),      //DWORD m_dwPanelDCLK;              //PANEL_DCLK
+    //    (139),      //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
+    //#else
         (164),      //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
         (150),      //DWORD m_dwPanelDCLK;              //PANEL_DCLK
         (120),      //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
-    #endif
-    LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
+    //#endif
+    24, //LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
 };
 
 ST_PANEL_NEW_PANELTYPE stPanel_WUXGA_CMO_260J2=
@@ -5357,7 +5359,7 @@ ST_PANEL_NEW_PANELTYPE* stPanelIndexTbl[] =
     &stPanel_WUXGA_CMO_260J2,         // 1920*1200, PNL_WUXGA_CMO260_J2
     &stPanel_WXGA_AU20_T200XW02_LGD,  // 1366*768 , PNL_AU20_T200XW02_WXGA,
 
-#if(ENABLE_SUPPORT_PNL_LC320DXJ)
+ #if(ENABLE_SUPPORT_PNL_LC320DXJ)
     &stPanel_LC320DXJ,                // 1366*768 , PNL_LC320DXJ
 #endif
 
@@ -6260,9 +6262,12 @@ void MApi_PNL_Set_PanelVCC(MS_BOOL bEnable)
 
     if( bEnable )
     {
+
         PANEL_CTL_On();
         //stSystemInfo[MAIN_WINDOW].u8PanelPowerStatus |= PANEL_POWER_VCC;
         g_PNL_u32PanelVcc_TurnOn_Time = MsOS_GetSystemTime();
+        
+        
     }
     else
     {
@@ -6270,6 +6275,7 @@ void MApi_PNL_Set_PanelVCC(MS_BOOL bEnable)
         //stSystemInfo[MAIN_WINDOW].u8PanelPowerStatus &= ~PANEL_POWER_VCC;
         g_PNL_u32PanelVcc_TurnOn_Time = 0;
     }
+    MApp_Print_ST_PANEL_NEW_PANELTYPE_Variable(stPanelIndexTbl[g_PNL_TypeSel]);
 }
 
 #if (CONFIG_3D_HWLVDSLRFLAG)

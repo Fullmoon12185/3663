@@ -635,63 +635,63 @@ static void MApp_ParseKey(void)
             case IRKEY_NUM_9:               u8KeyCode = KEY_9;                  break;
         #endif
 
-            case IRKEY_CHANNEL_FAV_LIST:
-        #if(IR_TYPE_SEL == IR_TYPE_MSTAR_DTV)
-            case IRKEY_GUIDE:
-        #endif
-                u8KeyCode = KEY_CHANNEL_FAV_LIST;
-                break;
+        //     case IRKEY_CHANNEL_FAV_LIST:
+        // #if(IR_TYPE_SEL == IR_TYPE_MSTAR_DTV)
+        //     case IRKEY_GUIDE:
+        // #endif
+        //         u8KeyCode = KEY_CHANNEL_FAV_LIST;
+        //         break;
 
             case IRKEY_MUTE:                u8KeyCode = KEY_MUTE;               break;
             case IRKEY_FREEZE:              u8KeyCode = KEY_FREEZE;             break;
-            case IRKEY_INFO:                u8KeyCode = KEY_INFO;               break;
+            //case IRKEY_INFO:                u8KeyCode = KEY_INFO;               break;
             case IRKEY_AUDIO:               u8KeyCode = KEY_AUDIO;              break;
-            case IRKEY_MTS:                 u8KeyCode = KEY_MTS;                break;
+            //case IRKEY_MTS:                 u8KeyCode = KEY_MTS;                break;
 #if (IR_TYPE_SEL != IR_TYPE_CUS21SH)
-            case IRKEY_PICTURE:             u8KeyCode = KEY_PICTURE;            break;
+            //case IRKEY_PICTURE:             u8KeyCode = KEY_PICTURE;            break;
 #endif
-            case IRKEY_ZOOM:                u8KeyCode = KEY_ZOOM;               break;
+            //case IRKEY_ZOOM:                u8KeyCode = KEY_ZOOM;               break;
             case IRKEY_RED:                 u8KeyCode = KEY_RED;                break;
             case IRKEY_GREEN:               u8KeyCode = KEY_GREEN;              break;
             case IRKEY_YELLOW:              u8KeyCode = KEY_YELLOW;             break;
             case IRKEY_BLUE:                u8KeyCode = KEY_BLUE;               break;
 #if (IR_TYPE_SEL != IR_TYPE_NEW)
-            case IRKEY_RED2:                u8KeyCode = KEY_RED;                break;
-            case IRKEY_GREEN2:              u8KeyCode = KEY_GREEN;              break;
+            //case IRKEY_RED2:                u8KeyCode = KEY_RED;                break;
+            //case IRKEY_GREEN2:              u8KeyCode = KEY_GREEN;              break;
 #endif
             case IRKEY_SUBTITLE:            u8KeyCode = KEY_SUBTITLE;           break;
 
 #if (IR_TYPE_SEL != IR_TYPE_NEW)
-            case IRKEY_UPDATE:              u8KeyCode = KEY_UPDATE;             break;        // add UPDATE key
-            case IRKEY_TTX_MODE:            u8KeyCode = KEY_TTX_MODE;           break;
+            //case IRKEY_UPDATE:              u8KeyCode = KEY_UPDATE;             break;        // add UPDATE key
+            //case IRKEY_TTX_MODE:            u8KeyCode = KEY_TTX_MODE;           break;
 #endif
-            case IRKEY_MIX:                 u8KeyCode = KEY_MIX;                break;
+            //case IRKEY_MIX:                 u8KeyCode = KEY_MIX;                break;
 #if (IR_TYPE_SEL != IR_TYPE_CUS21SH)
-            case IRKEY_CLOCK:               u8KeyCode = KEY_CLOCK;              break;
+            //case IRKEY_CLOCK:               u8KeyCode = KEY_CLOCK;              break;
 #endif
-            case IRKEY_TTX:                 u8KeyCode = KEY_TTX;                break;
-            case IRKEY_SIZE:                u8KeyCode = KEY_SIZE;               break;
+            //case IRKEY_TTX:                 u8KeyCode = KEY_TTX;                break;
+            //case IRKEY_SIZE:                u8KeyCode = KEY_SIZE;               break;
             case IRKEY_HOLD:                u8KeyCode = KEY_HOLD;               break;
-            case IRKEY_INDEX:               u8KeyCode = KEY_INDEX;              break;
+            //case IRKEY_INDEX:               u8KeyCode = KEY_INDEX;              break;
 
-            case IRKEY_CHANNEL_LIST:        u8KeyCode = KEY_CHANNEL_LIST;       break;
-            case IRKEY_SLEEP:               u8KeyCode = KEY_SLEEP;              break;
-            case IRKEY_DASH:                u8KeyCode = KEY_DASH;               break;
+            //case IRKEY_CHANNEL_LIST:        u8KeyCode = KEY_CHANNEL_LIST;       break;
+            //case IRKEY_SLEEP:               u8KeyCode = KEY_SLEEP;              break;
+            //case IRKEY_DASH:                u8KeyCode = KEY_DASH;               break;
             case IRKEY_TV_INPUT:            u8KeyCode = KEY_TV_INPUT;           break;
 
             //Because some IR key codes are defined un-correctly, so we have to change key mapping below.
-            case IRKEY_BACKWARD:            u8KeyCode = KEY_PREVIOUS;            break;
-            case IRKEY_FORWARD:             u8KeyCode = KEY_NEXT;                break;
+            //case IRKEY_BACKWARD:            u8KeyCode = KEY_PREVIOUS;            break;
+            //case IRKEY_FORWARD:             u8KeyCode = KEY_NEXT;                break;
 
           #if (ENABLE_DMP)
-            case IRKEY_PAGE_UP:             u8KeyCode = KEY_PAGE_UP;             break;
+            //case IRKEY_PAGE_UP:             u8KeyCode = KEY_PAGE_UP;             break;
           #endif
 
-            case IRKEY_PAGE_DOWN:           u8KeyCode = KEY_PAGE_DOWN;           break;
-            case IRKEY_PREVIOUS:            u8KeyCode = KEY_FF;                  break;
-            case IRKEY_NEXT:                u8KeyCode = KEY_REWIND;              break;
+            //case IRKEY_PAGE_DOWN:           u8KeyCode = KEY_PAGE_DOWN;           break;
+            //case IRKEY_PREVIOUS:            u8KeyCode = KEY_FF;                  break;
+            //case IRKEY_NEXT:                u8KeyCode = KEY_REWIND;              break;
 #if (IR_TYPE_SEL != IR_TYPE_NEW)
-            case IRKEY_CC:                  u8KeyCode = KEY_CC;                  break;
+            //case IRKEY_CC:                  u8KeyCode = KEY_CC;                  break;
 #endif
 
             case IRKEY_CHANNEL_PLUS:
@@ -809,13 +809,13 @@ static void MApp_ParseKey(void)
                 }
                 break;
 
-            case IRKEY_ADJUST:                  u8KeyCode = KEY_ADJUST;             break;
-            case IRKEY_KEY_DISABLE_KEYPAD:      u8KeyCode = KEY_DISABLE_KEYPAD;     break;
+            //case IRKEY_ADJUST:                  u8KeyCode = KEY_ADJUST;             break;
+            //case IRKEY_KEY_DISABLE_KEYPAD:      u8KeyCode = KEY_DISABLE_KEYPAD;     break;
             case IRKEY_REVEAL:                  u8KeyCode = KEY_REVEAL;             break;
 
         #if ENABLE_DMP || ENABLE_PVR
-            case IRKEY_RECORD:                  u8KeyCode = KEY_RECORD;           break;
-            case IRKEY_STOP:                    u8KeyCode = KEY_STOP;             break;
+            //case IRKEY_RECORD:                  u8KeyCode = KEY_RECORD;           break;
+            //case IRKEY_STOP:                    u8KeyCode = KEY_STOP;             break;
         #else
             //CEC
         #endif
@@ -823,27 +823,27 @@ static void MApp_ParseKey(void)
         #if (ENABLE_CEC)
     //        case IRKEY_CC:                       u8KeyCode = KEY_UARTDEBUGPORT;      break;
           #if ENABLE_DMP
-            case IRKEY_PLAY:                     u8KeyCode = KEY_PLAY;               break;
-            case IRKEY_PAUSE:                    u8KeyCode = KEY_PAUSE;              break;
+            //case IRKEY_PLAY:                     u8KeyCode = KEY_PLAY;               break;
+            //case IRKEY_PAUSE:                    u8KeyCode = KEY_PAUSE;              break;
           #endif
         #endif
 
-            case IRKEY_SUBPAGE:                 u8KeyCode = KEY_SUBPAGE;            break;
-            case IRKEY_DTV:                     u8KeyCode = KEY_DTV;                 break;
-            case IRKEY_TV:                      u8KeyCode = KEY_TV;                    break;
+            //case IRKEY_SUBPAGE:                 u8KeyCode = KEY_SUBPAGE;            break;
+            //case IRKEY_DTV:                     u8KeyCode = KEY_DTV;                 break;
+            //case IRKEY_TV:                      u8KeyCode = KEY_TV;                    break;
 #if (IR_TYPE_SEL != IR_TYPE_CUS21SH)
-            case IRKEY_SCART:                   u8KeyCode = KEY_SCART;             break;
-            case IRKEY_HDMI:                    u8KeyCode = KEY_HDMI;                 break;
-            case IRKEY_AV:                      u8KeyCode = KEY_AV;                 break;
+            //case IRKEY_SCART:                   u8KeyCode = KEY_SCART;             break;
+            //case IRKEY_HDMI:                    u8KeyCode = KEY_HDMI;                 break;
+            //case IRKEY_AV:                      u8KeyCode = KEY_AV;                 break;
 #endif
 
-            case IRKEY_PC:                      u8KeyCode = KEY_PC;                    break;
-            case IRKEY_COMPONENT:               u8KeyCode = KEY_COMPONENT;             break;
-            case IRKEY_SV:                      u8KeyCode = KEY_SV;                    break;
+            //case IRKEY_PC:                      u8KeyCode = KEY_PC;                    break;
+            //case IRKEY_COMPONENT:               u8KeyCode = KEY_COMPONENT;             break;
+            //case IRKEY_SV:                      u8KeyCode = KEY_SV;                    break;
 
 #if (IR_TYPE_SEL == IR_TYPE_SAMSUNG_REMOTE)
-            case IRKEY_MEDIA_PLAYER:    u8KeyCode = KEY_MEDIA_PLAYER;   break;
-            case IRKEY_TOOL:                u8KeyCode = KEY_TOOL;   break;
+            //case IRKEY_MEDIA_PLAYER:    u8KeyCode = KEY_MEDIA_PLAYER;   break;
+            //case IRKEY_TOOL:                u8KeyCode = KEY_TOOL;   break;
 #endif
             default:                             u8KeyCode = KEY_NULL;               break;
         }

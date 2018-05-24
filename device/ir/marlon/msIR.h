@@ -178,6 +178,7 @@
 
 #ifndef IR_MODE_SEL
 #define IR_MODE_SEL             IR_TYPE_FULLDECODE_MODE
+//#define IR_MODE_SEL             IR_TYPE_RAWDATA_MODE
 #endif
 
 #if (IR_TYPE_SEL==IR_TYPE_DC_BN59_611 || IR_TYPE_SEL==IR_TYPE_DC_BN59)

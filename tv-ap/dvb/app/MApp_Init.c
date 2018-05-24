@@ -160,6 +160,9 @@
 #include "msAPI_DCC.h"
 #include "msAPI_FS_SysInfo.h"
 
+//nguyen
+#include "SW_Config.h"
+
 #if (VECTOR_FONT_ENABLE) && (COPRO_MVF_ENABLE)
 #include "msAPI_CPU.h"
 #endif
@@ -237,6 +240,10 @@
 #include "MApp_BlockSys.h"
 #include "MApp_ZUI_Main.h"
 #include "MApp_LoadFontInit.h"
+
+//nguyen
+#include "SW_Config.h"
+
 #if (ENABLE_ATSC)
 #include "MApp_ChannelProc_ATSC.h"
 #endif
@@ -1975,7 +1982,6 @@ void MApp_PreInit_XC_HDMI_Init(void)
 
     // Set XC use memory
     MApp_PreInit_SetupScalerMemory();
-
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }
 
@@ -2048,7 +2054,7 @@ void MApp_PreInit_TurnOn_Backlight(void)
     }
 }
 
-/*
+
 void MApp_PreInit_TurnOnPanel_(void)
 {
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_START());
@@ -2059,7 +2065,7 @@ void MApp_PreInit_TurnOnPanel_(void)
 
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }
-*/
+
 void MApp_PreInit_Panel_Init(void)
 {
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_START());
@@ -2084,8 +2090,7 @@ void MApp_PreInit_Panel_Init(void)
 void MApp_PreInit_EnableDCC_DDC2BI_Init(void)
 {
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_START());
-    printf(">> NPN --  MApp_PreInit_EnableDCC_DDC2BI_Init() \n");
-
+   
     //Set GOP Stop to wait VSync
     MApi_GOP_GWIN_SetForceWrite(ENABLE); // 0 ms
 
@@ -2427,7 +2432,7 @@ void MApp_PreInit_HDMI_HPD_Init(void)
 void MApp_PreInit_Logo_Init(void)
 {
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_START());
-
+    DEBUG_BOOT_TIME(printf("[DISPLAY_LOGO]: %d\n", DISPLAY_LOGO));
 #if (DISPLAY_LOGO)
 
     if( 1//(u8IsAutoSleep_Skip_Logo == FALSE)
@@ -2441,14 +2446,17 @@ void MApp_PreInit_Logo_Init(void)
 #if ENABLE_OAD
      && (MApp_OAD_IsScheduleOnCheck() == FALSE)
 #endif
-     )
+    ) 
     {
         BOOL bLogoInitResult = MApp_Logo_Load(); // 40ms
-
+        DEBUG_BOOT_TIME(printf("MApp_Logo_Load\n"););
+        
         //MApp_PreInit_TurnOnPanel();
 
         if(bLogoInitResult ) // use 30ms
         {
+
+            DEBUG_BOOT_TIME(printf("bLogoInitResult\n"););
             MApp_Logo_Display(TRUE); // use 160ms
 
             MApp_PreInit_TurnOn_Backlight();

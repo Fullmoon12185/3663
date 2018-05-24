@@ -134,9 +134,10 @@ static U8 g_u8IRRpt=0;
 static BOOLEAN g_u8IRRes=MSRET_ERROR;
 static U8 u8PrevIrKey = 0;
 
-#if (IR_MODE_SEL == IR_TYPE_FULLDECODE_MODE)
-#define IRPRINT(a)    //a
+#define IRPRINT(a)    a
 #define IRCHAR(a)    putchar(a)
+#if (IR_MODE_SEL == IR_TYPE_FULLDECODE_MODE)
+
 U8 g_ucIrPulseCntIndex = 0;
 U16 g_wIrPulseCounter = 0;
 U8 g_ucIrRepeatTimer = 0;
@@ -1068,6 +1069,7 @@ BOOLEAN msIsNECKeyRepeat(void)
 /// @param pu8flag \b IN return the repeat flag(1:Repeat)
 /// @param bChkCCode \b IN : ENABLE: check customer code, DISABLE: do not check
 /******************************************************************************/
+#define IR_RAW_DATA_NUM 4
 static BOOLEAN msIR_GetRawKey(U8 *pu8key,U8 *pu8flag,BOOLEAN bChkCCode)
 {
     U8 u8IRRawModeDone;
@@ -1154,7 +1156,8 @@ BOOLEAN msIR_GetIRKeyCodeISR(U8 *pkey, U8 *pu8flag)
             *pkey = msIR_ReadByte(IR_KEY); //msIR_GetIrKeyData();
             MDrv_WriteByte(IR_FIFO_READ_PULSE, MDrv_ReadByte(IR_FIFO_READ_PULSE)| 0x01);
           #else
-            msIR_GetRawKey(pkey,pu8flag,ENABLE);
+            //msIR_GetRawKey(pkey,pu8flag, ENABLE);
+            msIR_GetRawKey(pkey,pu8flag,DISABLE);
           #endif
             msIR_DelayTime(10);
             *pu8flag = 0;
@@ -1182,7 +1185,7 @@ BOOLEAN msIR_GetIRKeyCodeISR(U8 *pkey, U8 *pu8flag)
                 //printf("# flag=%d,(PrevKey=%x, pkey=%x)\n",*pu8flag,u8PrevIrKey,*pkey);
                 if ( (*pu8flag == 1) && (u8PrevIrKey == *pkey))
               #else
-                msIR_GetRawKey(pkey,pu8flag,ENABLE);
+                msIR_GetRawKey(pkey,pu8flag,DISABLE);
                 msIR_DelayTime(10);
                 if ( (*pu8flag == 1))
               #endif
@@ -1213,11 +1216,19 @@ BOOLEAN msIR_GetIRKeyCode(U8 *pkey, U8 *pu8flag)
     if(FALSE == g_bIsIrModeSwitchedToSWmode)
     {
         BOOLEAN u8IRRes=MSRET_ERROR;
-
+        
         msIR_Lock();
         *pkey = g_u8IRKey;
         *pu8flag = g_u8IRRpt;
         u8IRRes = g_u8IRRes;
+        
+        
+        if(g_u8IRKey != 0xff){
+            IRPRINT(printf("nguyen test IR IR_TYPE_FULLDECODE_MODE!\n"));
+            IRPRINT(printf("nnRP:%bx\n", g_u8IRKey));
+            IRPRINT(printf("nnC0:%bx\n", g_u8IRRpt));
+            IRPRINT(printf("nn:%bx\n", g_u8IRRes));
+        }
         g_u8IRKey = 0xFF;
         g_u8IRRpt = 0;
         g_u8IRRes = MSRET_ERROR;
@@ -1230,7 +1241,7 @@ BOOLEAN msIR_GetIRKeyCode(U8 *pkey, U8 *pu8flag)
         {
             g_bIrDetect = FALSE;
     //       g_bIrHold = TRUE;
-
+            IRPRINT(printf("nguyen test 123!\n"));
             IRPRINT(printf("RP:%bx\n", g_bIrRepeat));
             IRPRINT(printf("C0:%bx\n", g_ucIrCode[0]));
             IRPRINT(printf("C1:%bx\n", g_ucIrCode[1]));
@@ -1284,6 +1295,14 @@ BOOLEAN msIR_GetIRKeyCode(U8 *pkey, U8 *pu8flag)
     *pkey = g_u8IRKey;
     *pu8flag = g_u8IRRpt;
     u8IRRes = g_u8IRRes;
+    
+    if(g_u8IRKey != 0xff){
+            
+            IRPRINT(printf("nguyen test IR IR_TYPE_RAWDATA_MODE!\n"));
+            IRPRINT(printf("nnRP:%bx\n", g_u8IRKey));
+            IRPRINT(printf("nnC0:%bx\n", g_u8IRRpt));
+            IRPRINT(printf("nn:%bx\n", g_u8IRRes));
+        }
     g_u8IRKey = 0xFF;
     g_u8IRRpt = 0;
     g_u8IRRes = MSRET_ERROR;
@@ -2816,12 +2835,12 @@ BOOLEAN MDrv_IR_IsIRkeyEnabled(U8 u8IRkey)
     switch(u8IRkey)
     {
 
-        #if (IR_MODE_SEL != IR_TYPE_SWDECODE_SHA_MODE)
-        case IRKEY_P_CHECK:
-        case IRKEY_S_CHECK:
-        case IRKEY_ADJUST:
-            return TRUE;
-        #endif
+        // #if (IR_MODE_SEL != IR_TYPE_SWDECODE_SHA_MODE)
+        // case IRKEY_P_CHECK:
+        // case IRKEY_S_CHECK:
+        // case IRKEY_ADJUST:
+        //     return TRUE;
+        // #endif
         case IRKEY_POWER:
             {
                 return TRUE;

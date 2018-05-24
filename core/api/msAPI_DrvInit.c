@@ -583,7 +583,7 @@ void msAPI_Power_PowerDown_EXEC(void)
 /***************************************************************************************/
 void msAPI_PowerON_EXEC(void)
 {
-    printf(">>npn --  msAPI_PowerON_EXEC() \n");
+    //printf(">>npn --  msAPI_PowerON_EXEC() \n");
 
   #if ( POWER_CONTROL != ENABLE )
     POWER_ON_OFF1_On();
@@ -1180,7 +1180,7 @@ void msAPI_DrvInitStep2(void)
     //mdrv_irq_unmask(IRQ_TSP2HK);
 #if (ENABLE_DTV)
     msAPI_DrvInit_InitDemux(E_INIT_DEMUX_AT_POWER_ON_INIT);
-
+    DEBUG_INIT_FLOW( printf("msAPI_DrvInit_InitDemux init done\n"); );
     msAPI_DMX_Init();
 
  #if (!BLOADER)

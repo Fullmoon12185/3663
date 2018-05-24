@@ -543,7 +543,7 @@ LINT_INC  += \
         $(TVAP)/dvb/app/include                                    \
         $(TVAP)/dvb/ui2/include                                    \
         $(TVAP)/dvb/ui2/osdcomposer/include                        \
-        $(TVAP)/dvb/ui2/res1366x768x565/osdcomposer/include        \
+        $(TVAP)/dvb/ui2/res1920x1080x565/osdcomposer/include        \
         $(ROOT)/device/mhl                                         \
 
 #LDLIB += -Wl,--whole-archive $(ROOT)/core/lib/milan/libprana_milan_a.a -Wl,--no-whole-archive

@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -448,7 +448,7 @@ BOOL _msAPI_DB_GEN_Read_Header(U8 u8UnitIdx, Stru_DB_Gen_Header* pstDB_Gen_Heade
                         (U8*)pstDB_Gen_Header);
     if( FALSE == bResult )
     {
-        printf("\nError: Read_Header: Read flash faild\n");
+        printf("\nError: Read_Header: Read flash failed\n");
         return FALSE;
     }
 

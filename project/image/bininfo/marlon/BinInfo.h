@@ -270,10 +270,16 @@
 #define BIN_ID_OSDCP_BMP_1366x768x565           0x0301  //~533KB   //@..\..\..\tv-ap\dvb\ui2\res1366x768x565\osdcomposer\osdbin\ZUI_bitmap.bin -g
 #define BIN_ID_OSDCP_BMP_1366x768x565_SW_LOAD   0x0302  //~533KB   //@..\..\..\tv-ap\dvb\ui2\res1366x768x565\osdcomposer\osdbin\ZUI_bitmap_SW_LOAD.bin
 
+
 // BMP for 960x540x565
 #define BIN_ID_OSDCP_BMP_960x540x565            0x0311  //~533KB   //@..\..\..\tv-ap\dvb\ui2\res960x540x565\osdcomposer\osdbin\ZUI_bitmap.bin -g
 #define BIN_ID_OSDCP_BMP_960x540x565_SW_LOAD    0x0312  //~220KB   //@..\..\..\tv-ap\dvb\ui2\res960x540x565\osdcomposer\osdbin\ZUI_bitmap_SW_LOAD.bin
 #define BIN_ID_OSDCP_BMP_960x540x565_SW_LOAD_SMALL  0x0313  //~220KB   //@..\..\..\tv-ap\dvb\ui2\res960x540x565\osdcomposer\osdbin\ZUI_bitmap_SW_LOAD_no_POP.bin
+
+// BMP for 1920x1080x565
+#define BIN_ID_OSDCP_BMP_1920x1080x565          0x0318  //~533KB   //@..\..\..\tv-ap\dvb\ui2\res1920x1080x565\osdcomposer\osdbin\ZUI_bitmap.bin -g
+#define BIN_ID_OSDCP_BMP_1920x1080x565_SW_LOAD  0x0319  //~533KB   //@..\..\..\tv-ap\dvb\ui2\res1920x1080x565\osdcomposer\osdbin\ZUI_bitmap_SW_LOAD.bin
+
 
 // BMP for 965x540xI8
 #define BIN_ID_OSDCP_BMP_960x540xI8_SW_LOAD     0x0322  //~161KB   //@..\..\..\tv-ap\dvb\ui2\res960x540xI8\osdcomposer\osdbin\ZUI_bitmap_I8_SW_LOAD.bin
@@ -284,6 +290,8 @@
 #define BIN_ID_OSDCP_TEXT_1366x768x565          0x0380  //~285KB   //@..\..\..\tv-ap\dvb\ui2\res1366x768x565\osdcomposer\osdbin\ZUI_strings.bin  -g
 #define BIN_ID_OSDCP_TEXT_960x540x565           0x0388  //~285KB   //@..\..\..\tv-ap\dvb\ui2\res960x540x565\osdcomposer\osdbin\ZUI_strings.bin  -g
 #define BIN_ID_OSDCP_TEXT_960x540xI8            0x0390  //~285KB   //@..\..\..\tv-ap\dvb\ui2\res960x540xI8\osdcomposer\osdbin\ZUI_strings.bin  -g
+#define BIN_ID_OSDCP_TEXT_1920x1080x565         0x0391  //~285KB   //@..\..\..\tv-ap\dvb\ui2\res1920x1080x565\osdcomposer\osdbin\ZUI_strings.bin  -7
+
 //=================================================================================================
 
 

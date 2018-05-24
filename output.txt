@@ -1,0 +1,134 @@
+[Rule - PROJ_MIPS_MARLON_128M_DVBT_SZ_NPN]
+make loader
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make[1]: Nothing to be done for 'loader'.
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make setup
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[Rule - setup] PROJ_MIPS_MARLON_128M_DVBT_SZ_NPN
+Tool Chain = mips-sde-elf-gcc 
+GNU Awk 4.1.3, API: 1.1 (GNU MPFR 3.1.4, GNU MP 6.1.0)
+(LOADER)=.//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/loader_mips_MIPS_MARLON_128M_DVBT_SZ_NPN.ld
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make sboot
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[CC]  tv-ap/dvb/ui2/MApp_ZUI_ACTmenufunc.c
+[Rule - AP_ELF]
+[LD]  Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf
+[LD]  -lm -lc -L./core/lib/marlon -T.//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/loader_mips_MIPS_MARLON_128M_DVBT_SZ_NPN.ld
+   text	   data	    bss	    dec	    hex	filename
+4150480	 936496	1400000	6486976	 62fbc0	Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf
+[BIN] Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.bin
+[SBOOT START]
+-e \x1b[31m
+HEAP_START= 0x0000000081037480                
+HEAP_END  = 0x0000000081180000                
+HEAP_SIZE = 1314 KB
+-e \x1b[0m
+[SBOOT] sboot
+make[2]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+/bin/rm -rf obj out inc/linux/autoconf.h inc/config.h out/boot1.inc ./boot1.inc
+make[2]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+cp ./boot/sboot/bin/BD_MST127B_10ALSA/sboot.bin ./boot/sboot/out/sboot.bin;
+make -C ./boot/sboot
+make[2]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+[32m
+---------------------------------------
+[GEN] out/chunk_header.bin
+OS_TYPE=nos_mips
+_SIZE_CHAKRA = 0x17D902(1562882)
+_BEON_MEM_ADR = 0xA00000
+RAM_BASE = 0x20000000
+_RAM_START = 0x80A00180
+_RAM_END   = 0x80DF8240
+_RAM_ENTRY = 0x80A00600
+BEON_START_OFFSET = 0x0
+
+ROM_START  = 0xBFC20080
+RAM_START  = 0xA0A00180
+RAM_END    = 0xA0B7DA82
+ROM_END    = 0xBFD9D982
+RAM_ENTRY  = 0x80A00600
+../../scripts/util/hex2bin out/chunk_header.txt out/chunk_header.bin
+iDataCount=128
+[0m
+[BIN] out/all.bin
+make[2]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+[SBOOT - End]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make ap
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[SYM] Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.sym
+[Rule - ap]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make checkbinsize
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[Rule - checkbinsize - skip]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make merge
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+-e \x1b[33m
+[Rule - MERGE_BIN] => Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin
+AP_PACK__FILE_ALIGN=8
+BLOADER_PACK__FILE_ALIGN=65536
+BIN_FORMAT=COMPRESS7
+COMPRESS_FORMAT=1
+python scripts/BinIDPackFiles_Compress.py -BIGENDIAN -CRC16ENABLE -multiflash 8 8 0958336900 Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin ./project/image/bininfo/marlon/BinInfo.h 69632 .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP_C.bin 1 nos_mips
+bin_align=8
+file_align=8
+magic=0958336900
+dst_fn=Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin
+os_type=nos_mips
+doPack()
+magic = 0958336900
+data_size = 0x19D982
+getFlashTable2()
+merge_bin_size = 0x19D982
+.isp_info at 0x31FC
+.isp_info tbl1 end at 0x339C
+magic-2 = 0x958336900
+magic-5: 0x21F03
+0003 @ 19D988  BEFD8 8 FB76 ../../../core/bin/marlon/audio/aucode_adec_r2.binc
+0011 @ 25C960   54D8 0 1BB4 ../../../core/bin/marlon/demux/fwTSP.bin
+0051 @ 261E38  54C60 8 5E81 ../../../core/bin/marlon/cape/mheg5_LE.binc
+01A0 @ 2B6A98  178F8 8 3CF0 ../../../tv-ap/dvb/ui2/font/MStar_Unicode5.mvfc
+0202 @ 2CE390   3EF0 8 A808 ../../../core/bin/common/ttx_font/tt_font_34x30.binc
+0300 @ 2D2280   C7C8 0 595F ../../../tv-ap/dvb/ui2/logo/Mstar_OSD1_480p.jpg
+0701 @ 2DEA48   D9B8 0 198B ../../../tv-ap/dvb/ui2/logo/mp3.mp3
+0302 @ 2EC400  4C960 0 685C ../../../tv-ap/dvb/ui2/res1366x768x565/osdcomposer/osdbin/ZUI_bitmap_SW_LOAD.bin
+0380 @ 338D60  1D820 4 2EA3 ../../../tv-ap/dvb/ui2/res1366x768x565/osdcomposer/osdbin/ZUI_strings.binc
+00B0 @ 356580  6F098 0 73F5 ../../../core/bin/marlon/vdec/fwVPU.bin
+00B3 @ 3C5618  170A0 8 B6B4 ../../../core/bin/marlon/vdec/fwVPU_VLC.binc
+0061 @ 3DC6B8  65D40 8 EB94 ../../../core/bin/marlon/cape/vdplayer.binc
+[35mBin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin:
+		 0x4423F8 octets (4360.992188 KB / 4.258781 MB)[0m
+[35m.//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP_C.bin:
+		 0x17D902 octets (1526.251953 KB / 1.490480 MB)[0m
+crc16  27
+crc32 of AP C6776088
+[35mPACK: file_size: 0x4423FC octets (4360.996094 KB / 4.258785 MB)[0m
+
+[Rule - merge]
+[MERGE]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make debug_info
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[Rule - debug_info]
+mips-sde-elf-nm -a -S --size-sort .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf > .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/ap_sym__sort_by_size.txt
+sort .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/ap_sym__sort_by_size.txt > .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/ap_sym__sort_by_addr.txt
+mips-sde-elf-readelf -a .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf > .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP_elf.txt
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+-e \x1b[32;01m
+=== Merge finish ===
+Thứ năm, 19 Tháng tư năm 2018 13:23:08 +07
+-e \x1b[0m
+make lint
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+_
+Binary file .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/LINT.txt matches
+
+1 LINT Errors
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+-e \x1b[32;01m
+Thứ năm, 19 Tháng tư năm 2018 13:24:27 +07
+-e \x1b[0m

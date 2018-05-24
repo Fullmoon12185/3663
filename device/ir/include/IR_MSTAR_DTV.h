@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -99,19 +99,20 @@
 // Customer IR Specification parameter define (Please modify them by IR SPEC)
 //*************************************************************************
 #define IR_MODE_SEL             IR_TYPE_FULLDECODE_MODE
+//#define IR_MODE_SEL             IR_TYPE_RAWDATA_MODE
 #define IR_CHANNEL_USE_AS_UPDOWN   1
 #define IR_VOLUME_USE_AS_LEFTRIGHT      1
 // IR Header code define
-#define IR_HEADER_CODE0         0x80    // Custom 0     //0x04
-#define IR_HEADER_CODE1         0x7F    // Custom 1     //0xFB
+#define IR_HEADER_CODE0         0xA0//0x80    // Custom 0     //0x04
+#define IR_HEADER_CODE1         0x5f//0x7F    // Custom 1     //0xFB
 
 // IR Timing define
 #define IR_HEADER_CODE_TIME     9000    // us
 #define IR_OFF_CODE_TIME        4500    // us
-#define IR_OFF_CODE_RP_TIME     2500    // us
-#define IR_LOGI_01H_TIME        560     // us
-#define IR_LOGI_0_TIME          1120    // us
-#define IR_LOGI_1_TIME          2240    // us
+#define IR_OFF_CODE_RP_TIME     2250    // us
+#define IR_LOGI_01H_TIME        562     // us
+#define IR_LOGI_0_TIME          1250    // us
+#define IR_LOGI_1_TIME          2250    // us
 #define IR_TIMEOUT_CYC          140000  // us
 
 #define IR_HEADER_CODE_TIME_UB  20
@@ -132,6 +133,142 @@
 
 #define IR_LEADER_CODE_CHECKING_OPTION 0xBF
 #define ENABLE_IR_MSTAR_SOURCE_HOTKEY   0
+typedef enum _IrCommandType
+{
+ //   IRKEY_TV_ANTENNA        = 0x0C,
+#if (ENABLE_DMP == DISABLE)
+    IRKEY_TV_RADIO          = 0x03,//same as IRKEY_PAGE_UP
+#endif
+//    IRKEY_CHANNEL_LIST      = 0x10,
+    IRKEY_CHANNEL_FAV_LIST  = 0x49,
+    IRKEY_CHANNEL_RETURN    = 0x47,
+    IRKEY_CHANNEL_PLUS      = 0x03,
+    IRKEY_CHANNEL_MINUS     = 0x1F,
+
+    IRKEY_AUDIO             = 0x1B,
+    IRKEY_VOLUME_PLUS       = 0x40,
+    IRKEY_VOLUME_MINUS      = 0x5D,
+
+    IRKEY_UP                = 0x59,
+    IRKEY_POWER             = 0x5F,
+    IRKEY_EXIT              = 0x10,
+    IRKEY_MENU              = 0x13,
+    IRKEY_DOWN              = 0x51,
+    IRKEY_LEFT              = 0x56,
+    IRKEY_SELECT            = 0x55,
+    IRKEY_RIGHT             = 0x14,
+
+    IRKEY_NUM_0             = 0x44,
+    IRKEY_NUM_1             = 0x53,
+    IRKEY_NUM_2             = 0x50,
+    IRKEY_NUM_3             = 0x12,
+    IRKEY_NUM_4             = 0x4F,
+    IRKEY_NUM_5             = 0x4C,
+    IRKEY_NUM_6             = 0x0E,
+    IRKEY_NUM_7             = 0x4B,
+    IRKEY_NUM_8             = 0x48,
+    IRKEY_NUM_9             = 0x0A,
+
+    IRKEY_MUTE              = 0x1C,
+    IRKEY_FREEZE            = 0x57,
+#if ENABLE_DMP
+    IRKEY_PAGE_UP           = 0x03,
+#endif
+    //IRKEY_PAGE_DOWN         = 0x05,
+    //IRKEY_CLOCK             = 0x5F,
+
+    IRKEY_INFO              = IRKEY_DUMY-1,
+    IRKEY_RED               = 0x42,
+    IRKEY_GREEN             = 0x41,
+    IRKEY_YELLOW            = 0x1,
+    IRKEY_BLUE              = 0x0,
+    IRKEY_MTS               = 0x41,
+ //   IRKEY_NINE_LATTICE      = IRKEY_DUMY,
+    IRKEY_TTX               = IRKEY_DUMY-1,
+    IRKEY_CC                = 0x52,
+    IRKEY_INPUT_SOURCE      = 0x1A,
+    IRKEY_CRADRD            = IRKEY_DUMY-1,
+    IRKEY_PICTURE           = IRKEY_DUMY-1,
+    // IRKEY_ZOOM              = 0x4C,
+    // IRKEY_DASH              = 0x0B,
+// #if ENABLE_IR_MSTAR_SOURCE_HOTKEY
+//     IRKEY_AV                = 0x4E,
+//     IRKEY_HDMI              = 0x02,
+//     IRKEY_SCART             = 0x1E,
+//     IRKEY_PC                = 0x01,
+//     IRKEY_DTV               = 0x0D,
+//     IRKEY_TV                = 0x11,
+//     IRKEY_COMPONENT         = 0x1D,
+//     IRKEY_SV                = 0X17,
+
+//     IRKEY_DASH              = IRKEY_DUMY-7,  // no use
+//     IRKEY_BACKWARD          = IRKEY_DUMY-8,  // no use
+//     IRKEY_FORWARD           = IRKEY_DUMY-9, // no use
+//     IRKEY_PLAY              = IRKEY_DUMY-10, // no use
+//     IRKEY_RECORD            = IRKEY_DUMY-11, // no use
+//     IRKEY_STOP              = IRKEY_DUMY-12, // no use
+//     IRKEY_PAUSE             = IRKEY_DUMY-13, // no use
+//     IRKEY_MEMORY_RECALL     = IRKEY_DUMY-14, // no use
+// #else
+//     IRKEY_BACKWARD          = 0x02,
+//     IRKEY_FORWARD           = 0x1E,
+//     IRKEY_PLAY              = 0x01,
+//     IRKEY_RECORD            = 0x0D,
+//     IRKEY_STOP              = 0x11,
+//     IRKEY_PAUSE             = 0x1D,
+//     IRKEY_MEMORY_RECALL       = 0X17,
+
+//     IRKEY_AV                = IRKEY_DUMY-7, // no use
+//     IRKEY_HDMI              = IRKEY_DUMY-8, // no use
+//     IRKEY_SCART             = IRKEY_DUMY-9, // no use
+//     IRKEY_PC                = IRKEY_DUMY-10, // no use
+//     IRKEY_DTV               = IRKEY_DUMY-11, // no use
+//     IRKEY_TV                = IRKEY_DUMY-12, // no use
+//     IRKEY_COMPONENT  = IRKEY_DUMY-13, // no use
+//     IRKEY_SV                = IRKEY_DUMY-14, // no use
+// #endif
+    //IRKEY_SLEEP             = 0x45,
+    IRKEY_EPG               = 0x45,
+
+ //   IRKEY_P_CHECK           = 0x57,
+ //   IRKEY_S_CHECK           = 0x5b,
+
+ //   IRKEY_MIX               = 0x1C,
+ //   IRKEY_INDEX             = 0x18,
+    IRKEY_HOLD              = 0x0C,
+
+    IRKEY_PREVIOUS          = 0x12,
+    IRKEY_NEXT              = 0x0E,
+  //IRKEY_BRIGHTNESS_PLUS   = 0x0E,
+  //IRKEY_BRIGHTNESS_MINUS  = 0x12,
+
+    IRKEY_POWERONLY         = 0xFE,
+
+    IRKEY_TTX_MODE          = 0x22,
+    IRKEY_RED2              = 0x72,
+    IRKEY_GREEN2            = 0x71,
+    IRKEY_UPDATE            = 0x0C,
+    IRKEY_SUBTITLE          = 0x52,
+//  IRKEY_SUBCODE           = 0x53,
+    //IRKEY_TIME                 = 0x26,
+
+    //IRKEY_SIZE              = 0x43,
+    IRKEY_REVEAL            = 0x4D,
+//    IRKEY_RETURN            = 0x00,
+    IRKEY_ADJUST            = IRKEY_DUMY-2,
+    IRKEY_TV_INPUT          = IRKEY_DUMY-3,
+    IRKEY_KEY_DISABLE_KEYPAD = IRKEY_DUMY-4,
+    IRKEY_BACK              = IRKEY_DUMY-5,
+    IRKEY_SUBPAGE   =   IRKEY_DUMY-6,
+
+ //   IRKEY_SUBCODE       = 0x5E,
+ //   IRKEY_PHOTO           = 0x56,
+ //   IRKEY_MINU             = 0x0B,
+ //   IRKEY_GUIDE            = 0x42,
+    IRKEY_HOME              = 0x17,
+
+}IrCommandType;
+/*
 typedef enum _IrCommandType
 {
     IRKEY_TV_ANTENNA        = 0x0C,
@@ -266,7 +403,7 @@ typedef enum _IrCommandType
     IRKEY_GUIDE            = 0x42,
     IRKEY_HOME              = 0x17,
 
-}IrCommandType;
+}IrCommandType;*/
 //*************************************************************************
 
 //*************************************************************************
