@@ -1896,7 +1896,7 @@ void MApp_PreInitPanelTiming(void)
     stTimingInfo.bInterlace     = TRUE;
     printf("\nNguyen stTimingInfo.u16InputVFreq = %d", stTimingInfo.u16InputVFreq);
     printf("\nNguyen stTimingInfo.u16InputVTotal = %d", stTimingInfo.u16InputVTotal);
-#if(CHAKRA3_AUTO_TEST)
+#if 1 //(CHAKRA3_AUTO_TEST)
     MApi_SC_ForceFreerun(TRUE);
     MApi_SC_SetFreerunVFreq(VFREQ_60HZ);
 #endif

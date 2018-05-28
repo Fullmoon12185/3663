@@ -798,7 +798,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         // Panel output
         //////////////////////////////////////////////
         0,          //BOOL m_bPanelDither :1;           //PANEL_DITHER          // 8/6 bits panel
-        LINK_LVDS,  //BOOL m_ePanelLinkType :2;         //PANEL_LINK
+        1, //LINK_LVDS,  //BOOL m_ePanelLinkType :2;         //PANEL_LINK
 
         1,          //BOOL m_bPanelDualPort :1;         //PANEL_DUAL_PORT
 
@@ -813,8 +813,8 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         0,//PANEL_SWAP_LVDS_POL,
 
         0,//PANEL_SWAP_LVDS_CH,          //BOOL m_bPanelSwapLVDS_CH  :1;     //PANEL_SWAP_LVDS_CH
-        PANEL_PDP_10BIT,          //BOOL m_bPanelPDP10BIT     :1;     //PANEL_PDP_10BIT
-        1,          //BOOL m_bPanelLVDS_TI_MODE :1;     //PANEL_LVDS_TI_MODE
+        1, //PANEL_PDP_10BIT,          //BOOL m_bPanelPDP10BIT     :1;     //PANEL_PDP_10BIT
+        0,          //BOOL m_bPanelLVDS_TI_MODE :1;     //PANEL_LVDS_TI_MODE
 
         0x00,       //BYTE m_ucPanelDCLKDelay;          //PANEL_DCLK_DELAY
         0,          //BOOL m_bPanelInvDCLK  :1;         //PANEL_INV_DCLK
