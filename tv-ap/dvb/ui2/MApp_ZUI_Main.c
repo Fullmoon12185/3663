@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -345,7 +345,7 @@ void MApp_ZUI_ProcessKey(U8 u8IRKey)
         if (vk_code != VK_NULL)
         {
             //printf("[]st=%bu,at=%bu\n", _eZUIState, _eActiveOSD);
-            ZUI_MSG(printf("KeyDown:%x\n", u8IRKey));
+            ZUI_MSG(printf("Nguyen KeyDown:%x\n", u8IRKey));
             MApp_ZUI_ACT_GetTenKeyNum(u8IRKey);
             MApp_ZUI_API_PostMessage(HWND_MAINFRAME, MSG_KEYDOWN, vk_code);
         }

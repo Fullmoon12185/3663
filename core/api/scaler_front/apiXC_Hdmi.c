@@ -232,7 +232,7 @@ void MApi_XC_HDMI_Set_HpdStatus(E_MUX_INPUTPORT enInputPortType, EnuHdmiHpdStatu
 
     s_HDMI_aePortStatus[u8PortIdx].eHpdStatus = eHpdStatus;
 
-    //MApi_XC_HDMI_Print_PortStatus();
+    MApi_XC_HDMI_Print_PortStatus();
 }
 
 EnuHdmiHpdStatus MApi_XC_HDMI_Get_HpdStatus(E_MUX_INPUTPORT enInputPortType)
@@ -253,7 +253,7 @@ void MApi_XC_HDMI_Set_ClkStatus(E_MUX_INPUTPORT enInputPortType, EnuHdmiClkStatu
     U8 u8PortIdx = enInputPortType - INPUT_PORT_DVI0;
 
     s_HDMI_aePortStatus[u8PortIdx].eClkStatus = eClkStatus;
-    //MApi_XC_HDMI_Print_PortStatus();
+    MApi_XC_HDMI_Print_PortStatus();
 }
 
 void MApi_XC_HDMI_Print_PortStatus(void)
@@ -285,7 +285,7 @@ U16 MApi_XC_HDMI_Func_Caps(void)
     return MDrv_HDMI_Func_Caps();
 }
 
-#if (INPUT_HDMI_VIDEO_COUNT > 0)
+#if 1 //(INPUT_HDMI_VIDEO_COUNT > 0)
 
 char* MApi_HDMI_Get_ColorFormatString(U8 u8ColorFormat)
 {

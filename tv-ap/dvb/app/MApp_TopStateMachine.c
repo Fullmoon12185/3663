@@ -349,7 +349,7 @@ static EN_TOP_STATE s_TSM_eLastTopState = (EN_TOP_STATE)0xFF;
 
 #define ENABLE_DEBUG_TSM_TIME   1
 
-#define TOP_STATE_TASK_CHECK_POINT()    //printf("<T %u>", __LINE__ );
+#define TOP_STATE_TASK_CHECK_POINT()    printf("<T %u>", __LINE__ );
 
 void MApp_TopStateMachine(void)
 {

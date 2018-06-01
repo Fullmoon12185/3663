@@ -314,9 +314,9 @@
 #define INPUT_SCART2_RGBMUX         INPUT_PORT_NONE_PORT
 #define INPUT_SCART2_FB_MUX         INPUT_PORT_NONE_PORT
 
-#define INPUT_HDMI1_MUX             INPUT_PORT_DVI0
+#define INPUT_HDMI1_MUX             INPUT_PORT_DVI3
 #define INPUT_HDMI2_MUX             INPUT_PORT_DVI1
-#define INPUT_HDMI3_MUX             INPUT_PORT_DVI3
+#define INPUT_HDMI3_MUX             INPUT_PORT_DVI0
 
 /// for PWS path mapping
 #define PWS_INPUT_HDMI1_PATH        _HDMI1_

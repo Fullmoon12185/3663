@@ -857,8 +857,8 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         8,          //BYTE m_ucPanelVSyncWidth;         //PANEL_VSYNC_WIDTH
         16,         //BYTE m_ucPanelBackPorch;          //PANEL_VSYNC_BACK_PORCH
 
-        32+80,      //WORD m_wPanelHStart;              //PANEL_HSTART             (PANEL_HSYNC_WIDTH + PANEL_HSYNC_BACK_PORCH)
-        8+16,       //WORD m_wPanelVStart;              //PANEL_VSTART             (PANEL_VSYNC_WIDTH + PANEL_VSYNC_BACK_PORCH)
+        112,      //WORD m_wPanelHStart;              //PANEL_HSTART             (PANEL_HSYNC_WIDTH + PANEL_HSYNC_BACK_PORCH)
+        24,       //WORD m_wPanelVStart;              //PANEL_VSTART             (PANEL_VSYNC_WIDTH + PANEL_VSYNC_BACK_PORCH)
 //    #endif
 
         1920,       //WORD m_wPanelWidth;               //PANEL_WIDTH

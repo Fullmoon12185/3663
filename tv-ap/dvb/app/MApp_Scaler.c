@@ -215,16 +215,16 @@
 /*                     Definition                                             */
 /* ****************************************************************************/
 
-#define NEWCROPMSG(x)                   x
-#define MSG(x)                          x
-#define DEBUG_SET_WIN(x)                x
-#define DEBUG_CAP_WIN(x)                x
-#define DEBUG_ASPECT_RATIO(x)           x
-#define DEBUG_SCALER_FLOW(x)            x
-#define DEBUG_SCALER_INPUT_TIMING(x)    x
-#define DEBUG_OVERSCAN(x)               x
+#define NEWCROPMSG(x)                   //x
+#define MSG(x)                          //x
+#define DEBUG_SET_WIN(x)                //x
+#define DEBUG_CAP_WIN(x)                //x
+#define DEBUG_ASPECT_RATIO(x)           //x
+#define DEBUG_SCALER_FLOW(x)            //x
+#define DEBUG_SCALER_INPUT_TIMING(x)    //x
+#define DEBUG_OVERSCAN(x)               //x
 
-#define MENU_3D_DBG(x)                  x
+#define MENU_3D_DBG(x)                  //x
 #if 0
     #define DEBUG_3D(x)  do { \
         msDebug_ANSI_SetColorText(E_FONT_COLOR_GREEN); \
