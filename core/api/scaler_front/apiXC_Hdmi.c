@@ -150,7 +150,7 @@
 //-------------------------------------------------------------------------------------------------
 //  Local Defines
 //-------------------------------------------------------------------------------------------------
-#define msg_hdmi(x)                 x
+#define msg_hdmi(x)                 //x
 #define HDMI_AUDIO_STABLE_CNT       (40)
 
 
@@ -232,7 +232,7 @@ void MApi_XC_HDMI_Set_HpdStatus(E_MUX_INPUTPORT enInputPortType, EnuHdmiHpdStatu
 
     s_HDMI_aePortStatus[u8PortIdx].eHpdStatus = eHpdStatus;
 
-    MApi_XC_HDMI_Print_PortStatus();
+    //MApi_XC_HDMI_Print_PortStatus();
 }
 
 EnuHdmiHpdStatus MApi_XC_HDMI_Get_HpdStatus(E_MUX_INPUTPORT enInputPortType)
@@ -253,7 +253,7 @@ void MApi_XC_HDMI_Set_ClkStatus(E_MUX_INPUTPORT enInputPortType, EnuHdmiClkStatu
     U8 u8PortIdx = enInputPortType - INPUT_PORT_DVI0;
 
     s_HDMI_aePortStatus[u8PortIdx].eClkStatus = eClkStatus;
-    MApi_XC_HDMI_Print_PortStatus();
+    //MApi_XC_HDMI_Print_PortStatus();
 }
 
 void MApi_XC_HDMI_Print_PortStatus(void)
