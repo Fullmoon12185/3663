@@ -682,8 +682,8 @@
 #define Audio_Amplifier_ON()            _FUNC_NOT_USED()
 #define Audio_Amplifier_OFF()           _FUNC_NOT_USED()
 
-#define Adj_Volume_On()                 mdrv_gpio_set_low( PIN_159 ) // RT9116 Audio Amp, ENABLE
-#define Adj_Volume_Off()                mdrv_gpio_set_high( PIN_159 ) // RT9116 Audio Amp, MUTE
+#define Adj_Volume_On()                 mdrv_gpio_set_high( PIN_159 ) // RT9116 Audio Amp, ENABLE
+#define Adj_Volume_Off()                mdrv_gpio_set_low( PIN_159 ) // RT9116 Audio Amp, MUTE
 
 #define Panel_VCC_ON()                  mdrv_gpio_set_high( PIN_158 )
 #define Panel_VCC_OFF()                 mdrv_gpio_set_low( PIN_158 )
