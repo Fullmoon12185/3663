@@ -277,7 +277,7 @@
 #define RM_EEPROM_TYPE          	RM_TYPE_24C64//RM_TYPE_24C512
 #define DIGITAL_I2S_SELECT        	AUDIO_I2S_NONE
 
-#define INPUT_AV_VIDEO_COUNT      	0
+#define INPUT_AV_VIDEO_COUNT      	1
 #define INPUT_SV_VIDEO_COUNT       	0
 #define INPUT_YPBPR_VIDEO_COUNT    	0
 #ifdef ATSC_SYSTEM
@@ -560,7 +560,7 @@
 
 //------IR & Key Setting--------------------------------------------------------
 #define IR_TYPE_SEL                     IR_TYPE_MSTAR_DTV   // IR_TYPE_MSTAR_DTV // IR_TYPE_CUS03_DTV // IR_TYPE_NEW
-#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
+#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
 #define POWER_KEY_SEL                   POWER_KEY_PAD_INT
 
 //------Power Setting-----------------------------------------------------------
@@ -570,7 +570,7 @@
 #define SCREENSAVER_ENABLE              1
 #define NO_SIGNAL_AUTO_SHUTDOWN         1
 #define STANDBY_MODE                    POWERMODE_S3
-#define POWERUP_MODE                    PUMODE_WORK
+#define POWERUP_MODE                    PUMODE_STANDBY
 #define ENABLE_POWER_GOOD_DETECT        1
 #define ENABLE_POWER_SAVING_SIF         1
 #define ENABLE_POWER_SAVING_VDMVD       0
@@ -770,15 +770,15 @@
 #define ADC_KEY_LAST_CHANNEL            ADC_KEY_CHANNEL_NUM - 1
 //config which keypad channel enabled
 #define ENABLE_KPDCHAN_1                ENABLE
-#define ENABLE_KPDCHAN_2                ENABLE // for scart
+#define ENABLE_KPDCHAN_2                DISABLE // for scart
 #define ENABLE_KPDCHAN_3                DISABLE
 #define ENABLE_KPDCHAN_4                DISABLE
 
 #define KEYPAD_KEY_VALIDATION           3
 #define KEYPAD_REPEAT_KEY_CHECK         KEYPAD_KEY_VALIDATION + 2
 #define KEYPAD_REPEAT_KEY_CHECK_1       KEYPAD_KEY_VALIDATION + 3
-#define KEYPAD_STABLE_NUM               10
-#define KEYPAD_STABLE_NUM_MIN           9
+#define KEYPAD_STABLE_NUM               200
+#define KEYPAD_STABLE_NUM_MIN           199
 #define KEYPAD_REPEAT_PERIOD            2 // 6
 #define KEYPAD_REPEAT_PERIOD_1          KEYPAD_REPEAT_PERIOD/2
 
@@ -810,13 +810,13 @@
 #define ADC_CH4_LEVELS                  4 //### must be <= ADC_KEY_LEVEL
 
 #define ADC_KEY_1_L0                    0x10//0x27
-#define ADC_KEY_1_L1                    0x3C//0x47
-#define ADC_KEY_1_L2                    0x5A//0x63
-#define ADC_KEY_1_L3                    0x7A//0x7B
-#define ADC_KEY_1_L4                    0x95//RFU
-#define ADC_KEY_1_L5                    0xA8//RFU
-#define ADC_KEY_1_L6                    0xBA//RFU
-#define ADC_KEY_1_L7                    0xD3//RFU
+#define ADC_KEY_1_L1                    0x4a//0x33
+#define ADC_KEY_1_L2                    0x61//0x51
+#define ADC_KEY_1_L3                    0x7b//0x6b
+#define ADC_KEY_1_L4                    0x9a//0x8a RFU
+#define ADC_KEY_1_L5                    0xC0//0xb0 RFU
+#define ADC_KEY_1_L6                    0xe9//0xd9 RFU
+#define ADC_KEY_1_L7                    0xFF//RFU
 
 #define ADC_KEY_2_L0                    0x00//0x27
 #define ADC_KEY_2_L1                    0x00//0x47
@@ -829,13 +829,13 @@
 
 #if (KEYPAD_TYPE_SEL == KEYPAD_TYPE_CUSTMOER)   // CUSTMOER keypad
 #define ADC_KEY_1_L0_FLAG               IRKEY_POWER
-#define ADC_KEY_1_L1_FLAG               IRKEY_CHANNEL_PLUS
-#define ADC_KEY_1_L2_FLAG               IRKEY_CHANNEL_MINUS
-#define ADC_KEY_1_L3_FLAG               IRKEY_VOLUME_PLUS
-#define ADC_KEY_1_L4_FLAG               IRKEY_VOLUME_MINUS//RFU
-#define ADC_KEY_1_L5_FLAG               IRKEY_SELECT//RFU
-#define ADC_KEY_1_L6_FLAG               IRKEY_INPUT_SOURCE//RFU
-#define ADC_KEY_1_L7_FLAG               IRKEY_MENU//RFU
+#define ADC_KEY_1_L1_FLAG               IRKEY_INPUT_SOURCE
+#define ADC_KEY_1_L2_FLAG               IRKEY_CHANNEL_PLUS
+#define ADC_KEY_1_L3_FLAG               IRKEY_CHANNEL_MINUS
+#define ADC_KEY_1_L4_FLAG               IRKEY_VOLUME_PLUS//RFU
+#define ADC_KEY_1_L5_FLAG               IRKEY_VOLUME_MINUS//RFU
+#define ADC_KEY_1_L6_FLAG               IRKEY_MENU//RFU
+#define ADC_KEY_1_L7_FLAG               IRKEY_SELECT//RFU
 
 #define ADC_KEY_2_L0_FLAG               IRKEY_POWER
 #define ADC_KEY_2_L1_FLAG               IRKEY_INPUT_SOURCE

@@ -3503,26 +3503,26 @@ void msAPI_Scaler_PrintMuteClient(SCALER_WIN eWindow)
 
     if( u32MuteStatus )
     {
-        printf("VideoMute[%u]=0x%X", eWindow, u32MuteStatus);
+        // printf("VideoMute[%u]=0x%X", eWindow, u32MuteStatus);
 
-        if( u32MuteStatus&E_SCREEN_MUTE_TEMPORARY )
-            printf(" Temp,");
-        if( u32MuteStatus&E_SCREEN_MUTE_RATING )
-            printf(" Rating,");
-        if( u32MuteStatus&E_SCREEN_MUTE_FREERUN )
-            printf(" Freerun,");
-        if( u32MuteStatus&E_SCREEN_MUTE_CHANNEL )
-            printf(" Channel,");
-        if( u32MuteStatus&E_SCREEN_MUTE_BLOCK )
-            printf(" Block,");
-        if( u32MuteStatus&E_SCREEN_MUTE_MHEG5 )
-            printf(" MHEG5,");
-        if( u32MuteStatus&E_SCREEN_MUTE_HDMI_AVMUTE )
-            printf(" HDMI_AVMute,");
-        if( u32MuteStatus&E_SCREEN_MUTE_BY_UI )
-            printf(" UI,");
-        if( u32MuteStatus&E_SCREEN_MUTE_BY_SCALER_FPLL )
-            printf(" SCALER_FPLL,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_TEMPORARY )
+        //     printf(" Temp,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_RATING )
+        //     printf(" Rating,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_FREERUN )
+        //     printf(" Freerun,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_CHANNEL )
+        //     printf(" Channel,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_BLOCK )
+        //     printf(" Block,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_MHEG5 )
+        //     printf(" MHEG5,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_HDMI_AVMUTE )
+        //     printf(" HDMI_AVMute,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_BY_UI )
+        //     printf(" UI,");
+        // if( u32MuteStatus&E_SCREEN_MUTE_BY_SCALER_FPLL )
+        //     printf(" SCALER_FPLL,");
 
     #if( ENABLE_ATSC )
         if( u32MuteStatus&E_SCREEN_MUTE_BY_VCHIP )

@@ -279,7 +279,7 @@ DTVPROGRAMID_M g_stCurS2ProggramId; //TP;
 /*                     Macro                    */
 /******************************************************************************/
 
-#define CHANNELCHANGE_DBINFO(y)     //y
+#define CHANNELCHANGE_DBINFO(y)     y
 
 #define ENABLE_CH_CHANGE_TIMER_DEBUG    0
 
@@ -792,6 +792,7 @@ static void MApp_ChannelChange_ProcessUserInput( void )
         case KEY_SELECT:
             fWaitforMSGBoxFading = FALSE;
             u8KeyCode = KEY_NULL;
+            CHANNELCHANGE_DBINFO(printf("KEY_SELECT \n"));
             break;
 
         case KEY_NULL:

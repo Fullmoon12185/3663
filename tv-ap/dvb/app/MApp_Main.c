@@ -738,6 +738,7 @@ int main(void)
 
     //nguyen
     U32 bToogleLED = 0;
+    U8 pwmValueBackLight = 0;
     //U32 bBacklight= false;
 
     DEBUG_BOOT_TIME( printf("main() at %u\n", MsOS_GetSystemTime()); );
@@ -850,7 +851,7 @@ int main(void)
                 u32MainLoopTime_Cur = MsOS_GetSystemTime();
                 if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 1000 )
                 {
-                    u32MainLoopTime_Last = u32MainLoopTime_Cur;
+                     u32MainLoopTime_Last = u32MainLoopTime_Cur;
                     //nguyen
                     if (bToogleLED == 0){
                         LED_RED_Off();
@@ -866,7 +867,8 @@ int main(void)
                         //MApi_PNL_SetBackLight(DISABLE);
                         bToogleLED = 0;
                     }
-                    
+                    pwmValueBackLight = (pwmValueBackLight + 10)%250;
+                    //MApi_PNL_BackLight_Adjust(pwmValueBackLight);
                     //printf("t=%u\n", u32MainLoopTime_Cur );
                 }
                 MApp_While_Loop_State();

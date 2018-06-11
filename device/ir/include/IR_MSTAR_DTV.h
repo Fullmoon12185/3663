@@ -100,8 +100,8 @@
 //*************************************************************************
 #define IR_MODE_SEL             IR_TYPE_FULLDECODE_MODE
 //#define IR_MODE_SEL             IR_TYPE_RAWDATA_MODE
-#define IR_CHANNEL_USE_AS_UPDOWN   1
-#define IR_VOLUME_USE_AS_LEFTRIGHT      1
+#define IR_CHANNEL_USE_AS_UPDOWN   0
+#define IR_VOLUME_USE_AS_LEFTRIGHT      0
 // IR Header code define
 #define IR_HEADER_CODE0         0xA0//0x80    // Custom 0     //0x04
 #define IR_HEADER_CODE1         0x5f//0x7F    // Custom 1     //0xFB

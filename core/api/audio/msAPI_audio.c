@@ -1521,25 +1521,25 @@ void msAPI_AUD_PrintMuteClient(void)
     #endif
       )
     {
-        printf("\n\033[37;1m AudioMute:");
-        if( m_bPermanentAudioMute ) printf(" Permanent,");
-        if( m_bMomentAudioMute )    printf(" Moment,");
-        if( m_bByUserAudioMute )    printf(" User,");
-        if( m_bBySyncAudioMute )    printf(" Sync,");
-        if( m_bByVChipAudioMute )   printf(" VChip,");
-        if( m_bByBlockAudioMute )   printf(" Block,");
+        // printf("\n\033[37;1m AudioMute:");
+        // if( m_bPermanentAudioMute ) printf(" Permanent,");
+        // if( m_bMomentAudioMute )    printf(" Moment,");
+        // if( m_bByUserAudioMute )    printf(" User,");
+        // if( m_bBySyncAudioMute )    printf(" Sync,");
+        // if( m_bByVChipAudioMute )   printf(" VChip,");
+        // if( m_bByBlockAudioMute )   printf(" Block,");
 
-        if( m_bInternal1AudioMute ) printf(" Inter1,");
-        if( m_bInternal2AudioMute ) printf(" Inter2,");
-        if( m_bInternal3AudioMute ) printf(" Inter3,");
-        if( m_bInternal4AudioMute ) printf(" Inter4,");
+        // if( m_bInternal1AudioMute ) printf(" Inter1,");
+        // if( m_bInternal2AudioMute ) printf(" Inter2,");
+        // if( m_bInternal3AudioMute ) printf(" Inter3,");
+        // if( m_bInternal4AudioMute ) printf(" Inter4,");
 
-        if( m_bByDuringLimitedTimeAudioMute ) printf(" Time,");
-        if( m_bMHEGApMute )         printf(" MHEG,");
-        if( m_bCIAudioMute )        printf(" CI,");
+        // if( m_bByDuringLimitedTimeAudioMute ) printf(" Time,");
+        // if( m_bMHEGApMute )         printf(" MHEG,");
+        // if( m_bCIAudioMute )        printf(" CI,");
 
-        if( m_bMuteByHdmiAvMute )   printf(" HdmiAv,");
-        if( m_bMuteByUiFunc )       printf(" UiFunc,");
+        // if( m_bMuteByHdmiAvMute )   printf(" HdmiAv,");
+        // if( m_bMuteByUiFunc )       printf(" UiFunc,");
 
     #if (ENABLE_CEC)
         if( m_bMuteByCecArc )       printf(" CEC ARC,");

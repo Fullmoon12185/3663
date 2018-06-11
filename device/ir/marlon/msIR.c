@@ -134,7 +134,7 @@ static U8 g_u8IRRpt=0;
 static BOOLEAN g_u8IRRes=MSRET_ERROR;
 static U8 u8PrevIrKey = 0;
 
-#define IRPRINT(a)    a
+#define IRPRINT(a)    //a
 #define IRCHAR(a)    putchar(a)
 #if (IR_MODE_SEL == IR_TYPE_FULLDECODE_MODE)
 

@@ -6441,7 +6441,7 @@ U8 MApi_PNL_Cal_PWMValue(void)
 #else
     //g_u8TransientBacklight = MIN(MAX_BACKLIGHT, MAX_BACKLIGHT);
 
-  #if 0//(ENABLE_BACKLIGHT_ADJUST)
+  #if (ENABLE_BACKLIGHT_ADJUST)
     g_u8TransientBacklight = ST_PICTURE.u8Backlight;
   #endif
 
@@ -6479,7 +6479,11 @@ void MApi_PNL_WaitSystemTime(U32 u32SysTime)
         }
     }
 }
-
+//Nguyen
+void MApi_PNL_BackLight_Adjust(U8 pwmValue){
+    Panel_Backlight_PWM_ADJ(pwmValue);
+}
+//end Nguyen
 void MApi_PNL_SetBackLight(MS_BOOL bEnable)
 {
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_START());
@@ -6518,7 +6522,7 @@ void MApi_PNL_SetBackLight(MS_BOOL bEnable)
         // Set PWM
     #if(!LD_ENABLE)
         U8 u8PWM_Value = MApi_PNL_Cal_PWMValue();
-        //printf("u8PWM_Value=%u\n", u8PWM_Value);
+        printf("Nguyen u8PWM_Value=%u\n", u8PWM_Value);
         Panel_Backlight_PWM_ADJ(u8PWM_Value);
     #endif
 

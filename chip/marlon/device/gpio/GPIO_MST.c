@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -187,6 +187,7 @@ void Mst_PwmPortInit( void )
 #if defined(PWM1_PERIOD) && defined(INIT_PWM1_DUTY)
     if ( !PAD_PWM1_IS_GPIO )
     {
+        printf("PAD_PWM1_IS_GPIO\n");
         PWMPort = E_PWM_CH1;
         MDrv_PWM_Oen(PWMPort, 0);    /* Set 0 for output enable */
         MDrv_PWM_Period(PWMPort, PWM1_PERIOD);
@@ -239,8 +240,8 @@ void msGPIO_Init()
 
     Mst_PwmPortInit();
 
-    //msPWM_OutputEnable( (PWM0_ENABLE | PWM1_ENABLE | PWM2_ENABLE | PWM3_ENABLE) );
-//    MApi_PNL_SetBackLight(BACKLITE_INIT_SETTING);
+    //msPWM_OutputEnable( (PWM1_ENABLE));// | PWM0_ENABLE | PWM2_ENABLE | PWM3_ENABLE) );
+    //MApi_PNL_SetBackLight(BACKLITE_INIT_SETTING);
     //MApi_PNL_SetBackLight(DISABLE);
     //CUS03 No Use
     //===============================

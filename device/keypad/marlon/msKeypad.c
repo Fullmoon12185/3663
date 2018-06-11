@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -519,7 +519,7 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
         {
             PressKey = TRUE;
             *pkey = *(Keymapping+i);
-            //printf("CH[%d]=%02X\n",Channel,*pkey);
+            printf("CH[%d]=%02X\n",Channel,*pkey);
 //Only First press and repeat key are regarded as valid key
 //First key: The first time when [No key to some key] or [A key to B key]
 //Repeat key: Keep pressing some key and keep for >=KEYPAD_REPEAT_PERIOD
@@ -618,6 +618,9 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
 
 }
 #else
+
+U8 pkey1, pkey2, pkey3;
+
 static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
 {
     U16 i, KEY_LV[ADC_KEY_LEVEL];
@@ -647,12 +650,17 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
     for ( i = 0; i < KEYPAD_STABLE_NUM; i++ )
     {
         msKeypad_Get_ADC_Channel(Channel,&Key_Value);
+
+        //if(Key_Value != 0xff) printf("NGUYEN Key_Value CH[%d]=%02X\n",Channel, Key_Value);
+        
         for (j=0;j<u8CHLVLs[Channel];j++)
         {
             if (Key_Value < tADCKeyLevel[u8ChIdx][j])
             {
                 KEY_LV[j]++;
                 break;
+            } else {
+                KEY_LV[j] = 0; 
             }
         }
     }
@@ -661,69 +669,75 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
     {
         if(KEY_LV[i] >= KEYPAD_STABLE_NUM_MIN)
         {
-            PressKey = TRUE;
-            *pkey = *(Keymapping+i);
-            //printf("CH[%d]=%02X\n",Channel,*pkey);
-            if (PreviousCMD != *pkey)
-            {
-                PreviousCMD = *pkey;
-                KeyPadCheckCount = 0;
-            }
-            else
-            {
-                if (KeyPadCheckCount < KEYPAD_KEY_VALIDATION)
+            
+            pkey3 = pkey2;
+            pkey2 = pkey1;
+            pkey1 = *(Keymapping+i);
+            if(pkey3 == pkey1 && pkey2 == pkey1){
+                *pkey = pkey1;
+                PressKey = TRUE;
+                //printf("NGUYEN CH[%d]=%02X\n",Channel,*pkey);
+                if (PreviousCMD != *pkey)
                 {
-                    KeyPadCheckCount++;
-                    return MSRET_ERROR;
-                }
-                else if (KeyPadCheckCount == KEYPAD_KEY_VALIDATION)
-                {
-                    KeyPadCheckCount++;
-                    KeyPadTimePeriod = g100msTimeCount;
-                    return MSRET_OK;
-                }
-
-                if (KeyPadCheckCount == KEYPAD_REPEAT_KEY_CHECK)    //3+2
-                {
-                    if (g100msTimeCount > KeyPadTimePeriod + KEYPAD_REPEAT_PERIOD_1)
-                    {
-                        KeyPadTimePeriod = g100msTimeCount;
-                        KeyPadCheckCount = KEYPAD_REPEAT_KEY_CHECK_1;
-                        *pflag = 0x01;
-                    }
-                    else
-                    {
-                        *pkey = 0xFF;
-                        *pflag = 0x01;
-                    }
-                    return MSRET_OK;
-                }
-                else if (KeyPadCheckCount == KEYPAD_REPEAT_KEY_CHECK_1) //3+3
-                {
-                    if (g100msTimeCount > KeyPadTimePeriod)
-                    {
-                        KeyPadTimePeriod = g100msTimeCount;
-                        KeyPadCheckCount = KEYPAD_REPEAT_KEY_CHECK_1;
-                        *pflag = 0x01;
-                    }
-                    else
-                    {
-                        *pkey = 0xFF;
-                        *pflag = 0x01;
-                    }
-                    return MSRET_OK;
-                }
-
-                if (g100msTimeCount > KeyPadTimePeriod + KEYPAD_REPEAT_PERIOD)  //if 700ms
-                {
-                    KeyPadTimePeriod = g100msTimeCount;
-                    KeyPadCheckCount = KEYPAD_REPEAT_KEY_CHECK; //3+2
-                    *pflag = 0x01;
-                    return MSRET_OK;
+                    PreviousCMD = *pkey;
+                    KeyPadCheckCount = 0;
                 }
                 else
                 {
-                    return MSRET_ERROR;
+                    if (KeyPadCheckCount < KEYPAD_KEY_VALIDATION)
+                    {
+                        KeyPadCheckCount++;
+                        return MSRET_ERROR;
+                    }
+                    else if (KeyPadCheckCount == KEYPAD_KEY_VALIDATION)
+                    {
+                        KeyPadCheckCount++;
+                        KeyPadTimePeriod = g100msTimeCount;
+                        return MSRET_OK;
+                    }
+
+                    if (KeyPadCheckCount == KEYPAD_REPEAT_KEY_CHECK)    //3+2
+                    {
+                        if (g100msTimeCount > KeyPadTimePeriod + KEYPAD_REPEAT_PERIOD_1)
+                        {
+                            KeyPadTimePeriod = g100msTimeCount;
+                            KeyPadCheckCount = KEYPAD_REPEAT_KEY_CHECK_1;
+                            *pflag = 0x01;
+                        }
+                        else
+                        {
+                            *pkey = 0xFF;
+                            *pflag = 0x01;
+                        }
+                        return MSRET_OK;
+                    }
+                    else if (KeyPadCheckCount == KEYPAD_REPEAT_KEY_CHECK_1) //3+3
+                    {
+                        if (g100msTimeCount > KeyPadTimePeriod)
+                        {
+                            KeyPadTimePeriod = g100msTimeCount;
+                            KeyPadCheckCount = KEYPAD_REPEAT_KEY_CHECK_1;
+                            *pflag = 0x01;
+                        }
+                        else
+                        {
+                            *pkey = 0xFF;
+                            *pflag = 0x01;
+                        }
+                        return MSRET_OK;
+                    }
+
+                    if (g100msTimeCount > KeyPadTimePeriod + KEYPAD_REPEAT_PERIOD)  //if 700ms
+                    {
+                        KeyPadTimePeriod = g100msTimeCount;
+                        KeyPadCheckCount = KEYPAD_REPEAT_KEY_CHECK; //3+2
+                        *pflag = 0x01;
+                        return MSRET_OK;
+                    }
+                    else
+                    {
+                        return MSRET_ERROR;
+                    }
                 }
             }
         }

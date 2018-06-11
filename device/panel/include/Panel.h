@@ -353,7 +353,7 @@ INTERFACE BOOLEAN devPanel_IsVx1(PANEL_RESOLUTION_TYPE enResolutionType);
 INTERFACE void MApi_PNL_En(MS_BOOL bPanelOn );
 INTERFACE void MApi_PNL_SetBackLight(MS_BOOL bEnable);
 INTERFACE void MApi_PNL_Set_PanelVCC(MS_BOOL bEnable);
-
+INTERFACE void MApi_PNL_BackLight_Adjust(U8 pwmValue);
 /*
 *   Get PanelType by a given panel index.
 *
