@@ -504,7 +504,7 @@ extern int MDrv_Sys_RunCodeInL1Cache(void);
 //
 //#######################
 
-#define DEBUG_PM_WAKE_UP(x)     //x
+#define DEBUG_PM_WAKE_UP(x)     x
 void MDrv_Power_Standby_CheckWakeupDevice(void)
 {
     DEBUG_PM_WAKE_UP( printf("1.stPowerGenSetting.wPM_WakeUpDevice=0x%X\n", stPowerGenSetting.wPM_WakeUpDevice); );
@@ -635,6 +635,26 @@ static void MDrv_Power_Standby_ConfigWakeupDevice(void)
     MDrv_WriteByte(PM_SLEEP_SW_DUMMY1, u8KeyPower);
 #endif
 
+//nguyen
+    // MDrv_WriteByte(PM_SLEEP_SW_DUMMY0, IRKEY_POWER);
+    // MDrv_WriteByte(PM_SLEEP_SW_DUMMY1, IRKEY_POWER);
+#if 1
+    printf("bPmWakeEnableIR     = %x\n", PmWakeCfg.bPmWakeEnableIR);
+    printf("bPmWakeEnableSAR    = %x\n", PmWakeCfg.bPmWakeEnableSAR);
+    printf("bPmWakeEnableGPIO0  = %x\n", PmWakeCfg.bPmWakeEnableGPIO0);
+    printf("bPmWakeEnableGPIO1  = %x\n", PmWakeCfg.bPmWakeEnableGPIO1);
+    printf("bPmWakeEnableUART1  = %x\n", PmWakeCfg.bPmWakeEnableUART1);
+    printf("bPmWakeEnableSYNC   = %x\n", PmWakeCfg.bPmWakeEnableSYNC);
+    printf("bPmWakeEnableESYNC  = %x\n", PmWakeCfg.bPmWakeEnableESYNC);
+    printf("bPmWakeEnableRTC0   = %x\n", PmWakeCfg.bPmWakeEnableRTC0);
+    printf("bPmWakeEnableRTC1   = %x\n", PmWakeCfg.bPmWakeEnableRTC1);
+    printf("bPmWakeEnableDVI0   = %x\n", PmWakeCfg.bPmWakeEnableDVI0);
+    printf("bPmWakeEnableDVI2   = %x\n", PmWakeCfg.bPmWakeEnableDVI2);
+    printf("bPmWakeEnableCEC    = %x\n", PmWakeCfg.bPmWakeEnableCEC);
+    printf("bPmWakeEnableAVLINK = %x\n", PmWakeCfg.bPmWakeEnableAVLINK);
+    printf("bPmWakeEnableMHL    = %x\n", PmWakeCfg.bPmWakeEnableMHL);
+    printf("bPmWakeEnableWOL    = %x\n", PmWakeCfg.bPmWakeEnableWOL);
+#endif
 
 }
 
