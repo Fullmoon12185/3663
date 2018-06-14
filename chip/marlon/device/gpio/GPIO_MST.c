@@ -185,9 +185,9 @@ void Mst_PwmPortInit( void )
 #endif
 
 #if defined(PWM1_PERIOD) && defined(INIT_PWM1_DUTY)
-    if ( !PAD_PWM1_IS_GPIO )
+    if ( PADS_PWM1_MODE != Unknown_pad_mux)
     {
-        printf("PAD_PWM1_IS_GPIO\n");
+        printf("PAD_PWM1_IS_GPIO5677889\n");
         PWMPort = E_PWM_CH1;
         MDrv_PWM_Oen(PWMPort, 0);    /* Set 0 for output enable */
         MDrv_PWM_Period(PWMPort, PWM1_PERIOD);
@@ -197,6 +197,11 @@ void Mst_PwmPortInit( void )
         MDrv_PWM_Vdben(PWMPort, NO);
         MDrv_PWM_Dben(PWMPort, NO);
     }
+    else {
+        printf("Test PWM 123\n");
+    }
+#else 
+    printf("123456\n");
 #endif
 
 #if defined(PWM2_PERIOD) && defined(INIT_PWM2_DUTY)
@@ -237,7 +242,7 @@ void msGPIO_Init()
 
     Power_On();
     SCART_OUT_ON();
-
+    printf("Test PWM\n");
     Mst_PwmPortInit();
 
     //msPWM_OutputEnable( (PWM1_ENABLE));// | PWM0_ENABLE | PWM2_ENABLE | PWM3_ENABLE) );

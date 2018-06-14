@@ -317,7 +317,8 @@ INTERFACE PANEL_RESOLUTION_TYPE g_PNL_TypeSel_4K2K;
 INTERFACE PANEL_RESOLUTION_TYPE g_PNL_TypeSel_4K1K;
 INTERFACE PANEL_RESOLUTION_TYPE g_PNL_TypeSel_FHD;
 
-
+//nguyen
+INTERFACE BOOLEAN g_bIsSoftStartValid;
 ////////////////////////////////////////////////////
 //      Functions
 ////////////////////////////////////////////////////

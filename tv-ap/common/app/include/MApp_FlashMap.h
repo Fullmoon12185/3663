@@ -189,9 +189,13 @@
 #define FMAP_CAPTURE_LOGO_ADDR           (FMAP_CAPTURE_LOGO_START * FLASH_BLOCK_SIZE)
 #define FMAP_CAPTURE_LOGO_SIZE           (FMAP_CAPTURE_LOGO_COUNT * FLASH_BLOCK_SIZE)
 
+
+
 //-------------------------------------------------------------------------------------
 // Total usage
-#define FMAP_TOTAL_USE_BANK_END         (FMAP_CAPTURE_LOGO_START)
+#define FMAP_TOTAL_USE_BANK_END         (FMAP_CAPTURE_LOGO_BANK)
+
+
 
 #endif
 

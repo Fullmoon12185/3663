@@ -118,6 +118,7 @@
 #include "MApp_MultiTasks.h"
 #include "MApp_Main.h"
 #include "MApp_Init.h"
+#include "MApp_IR.h"
 #include "MApp_TopStateMachine.h"
 #include "MApp_TV.h"
 #include "MApp_Scan.h"
@@ -738,7 +739,7 @@ int main(void)
 
     //nguyen
     U32 bToogleLED = 0;
-    U8 pwmValueBackLight = 0;
+    //U8 pwmValueBackLight = 0;
     //U32 bBacklight= false;
 
     DEBUG_BOOT_TIME( printf("main() at %u\n", MsOS_GetSystemTime()); );
@@ -849,7 +850,7 @@ int main(void)
                 //MAIN_FUNC_STATE_DBG(printf(" %d: [EN_MSTAR_MAIN_FUNCTION_ENTERING_WHILE_LOOP] \n", __LINE__));
 
                 u32MainLoopTime_Cur = MsOS_GetSystemTime();
-                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 1000 )
+                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 500 )
                 {
                      u32MainLoopTime_Last = u32MainLoopTime_Cur;
                     //nguyen
@@ -867,11 +868,12 @@ int main(void)
                         //MApi_PNL_SetBackLight(DISABLE);
                         bToogleLED = 0;
                     }
-                    pwmValueBackLight = (pwmValueBackLight + 10)%250;
-                    //MApi_PNL_BackLight_Adjust(pwmValueBackLight);
+                    
+                    
                     //printf("t=%u\n", u32MainLoopTime_Cur );
                 }
                 MApp_While_Loop_State();
+                HomeShop_FSM();
 
                 break;
             }
@@ -898,6 +900,77 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 
     return FALSE;
 }
+
+//nguyen
+#define     NUM_PRESS_TIME_BEFORE_GO_TO_HOME  10
+#define     SHOP_BACKLIGHT      255
+#define     HOME_BACKLIGHT      100
+static U16 fourKeyPressed = 0;
+static U16 countForHomeShop = 0;
+static U16 countForHomeShopSaved = 0;
+U8 buff_count[2];
+U8 keytemp = 0;
+HomeShop_FSM_STATE homeshop_state = HOMESHOP_INIT;
+static U32 timeLast = 0;
+static U32 timeCurr = 0;
+void HomeShop_FSM (void){
+    timeCurr = MsOS_GetSystemTime();
+    if(msAPI_Timer_DiffTime_2(timeLast, timeCurr) > 1000){ 
+        if(get_isKeyVolumePressed()){
+            if(countForHomeShop <= NUM_PRESS_TIME_BEFORE_GO_TO_HOME){
+                countForHomeShop ++;
+                MApp_Save_UserDataForHomeShop(countForHomeShop);
+                printf("\n*************************************************\n");
+                printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop);
+                printf("\n*************************************************\n");
+                countForHomeShopSaved = MApp_Load_UserDataForHomeShop();
+                printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
+            } else {
+                printf("\n*************************************************\n");
+                printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop);
+                printf("\n*************************************************\n");
+            }
+            printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+            printf("\n******homeshop_state %u\n", homeshop_state);
+            printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+            timeLast = timeCurr;
+        }
+        keytemp = getKeyPressed() - KEY_0;
+        if(keytemp <= 9){
+            fourKeyPressed = (fourKeyPressed<<4)|keytemp;
+            printf("\n*************************************************\n");
+            printf("\nFourKeyPressed 0x%x\n", fourKeyPressed);
+            printf("\n*************************************************\n");
+            if(fourKeyPressed == 0x1234){
+                homeshop_state = SHOP_STATE;
+                countForHomeShop = 0;
+                MApp_Save_UserDataForHomeShop(countForHomeShop);
+                MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);
+            }
+        }
+        
+        switch(homeshop_state){
+            case HOMESHOP_INIT:
+                countForHomeShop = MApp_Load_UserDataForHomeShop();
+                if(countForHomeShop == 0xffff){
+                    countForHomeShop = 0;    
+                }
+                MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);  
+                homeshop_state = SHOP_STATE;
+            break;
+            case SHOP_STATE:
+                if(countForHomeShop >= NUM_PRESS_TIME_BEFORE_GO_TO_HOME){
+                    homeshop_state = HOME_STATE;  
+                    MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);   
+                }
+            break;
+            case HOME_STATE:
+
+            break;
+        }
+    }
+}
+//nguyen
 
 #undef MAPP_MAIN_C
 

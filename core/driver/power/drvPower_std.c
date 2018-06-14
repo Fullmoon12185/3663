@@ -638,7 +638,7 @@ static void MDrv_Power_Standby_ConfigWakeupDevice(void)
 //nguyen
     // MDrv_WriteByte(PM_SLEEP_SW_DUMMY0, IRKEY_POWER);
     // MDrv_WriteByte(PM_SLEEP_SW_DUMMY1, IRKEY_POWER);
-#if 1
+#if 0
     printf("bPmWakeEnableIR     = %x\n", PmWakeCfg.bPmWakeEnableIR);
     printf("bPmWakeEnableSAR    = %x\n", PmWakeCfg.bPmWakeEnableSAR);
     printf("bPmWakeEnableGPIO0  = %x\n", PmWakeCfg.bPmWakeEnableGPIO0);

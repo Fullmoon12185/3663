@@ -761,7 +761,7 @@
 #endif
 #if (PADS_PWM1_MODE!=Unknown_pad_mux)
 #define PWM1_PERIOD                     0xff
-#define INIT_PWM1_DUTY                  0x7e
+#define INIT_PWM1_DUTY                  0xfb
 #endif
 #if (PADS_PWM2_MODE!=Unknown_pad_mux)
 #define PWM2_PERIOD                     0xff

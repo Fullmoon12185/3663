@@ -6522,6 +6522,7 @@ void MApi_PNL_SetBackLight(MS_BOOL bEnable)
         // Set PWM
     #if(!LD_ENABLE)
         U8 u8PWM_Value = MApi_PNL_Cal_PWMValue();
+        u8PWM_Value = 0xfb;//u8PWM_Value + 50;
         printf("Nguyen u8PWM_Value=%u\n", u8PWM_Value);
         Panel_Backlight_PWM_ADJ(u8PWM_Value);
     #endif

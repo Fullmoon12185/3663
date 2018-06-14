@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -377,8 +377,14 @@
     #define RM_DTV_ATSC_CHDATA_END_ADDR     RM_DTV_ATSC_CHDATA_START_ADDR
 #endif
 
+//nguyen
+#define FMAP_USER_DATA_FOR_HOME_SHOP_SIZE          2
+#define FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR          (RM_DTV_ATSC_CHDATA_END_ADDR)
+#define FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR           (FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR + FMAP_USER_DATA_FOR_HOME_SHOP_SIZE)     
+
+//nguyen
 //--------------------------------------------------------------------------------------------
-#define RM_DB_CH_END_ADDR                   (RM_DTV_ATSC_CHDATA_END_ADDR)
+#define RM_DB_CH_END_ADDR                   (FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR) //(RM_DTV_ATSC_CHDATA_END_ADDR)
 
 #define RM_DB_CH_TOTAL_USAGE_REAL           (RM_DB_CH_END_ADDR - RM_DB_CH_START_ADDR)
 
@@ -390,6 +396,7 @@
 #define RM_DB_VERSION_START_ADDR            (RM_DB_CH_START_ADDR+RM_64K_USAGE)
 #define RM_DB_VERSION_SIZE                  12 // DATABASE_ID(x4) + VERSION(x4)
 #define RM_DB_VERSION_END_ADDR              (RM_DB_VERSION_START_ADDR + RM_DB_VERSION_SIZE)
+
 
 //--------------------------------------------------------------------------------------------
 // This define is for check ...
@@ -726,6 +733,10 @@ BOOL MApp_SaveData_Check_IfDataChanged(U8 u8SaveDataId);
 void MApp_SaveData_Update_CheckSum(U8 u8SaveDataId);
 void MApp_SaveData_RestoreToDefault(U8 u8SaveDataId);
 
+//nguyen
+void MApp_Save_UserDataForHomeShop(U16 countForHomeShop);
+U16 MApp_Load_UserDataForHomeShop(void);
+//nguyen
 //==============================================================
 
 

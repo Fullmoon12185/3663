@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -171,7 +171,7 @@
 
 
 
-#define DEBUG_SAVE_DATA(x)  //x
+#define DEBUG_SAVE_DATA(x)  x
 
 #define DEBUG_GEN_SETTING(x)    //x
 
@@ -211,36 +211,45 @@ extern BOOLEAN b_isCIkeyFileExit;
 /*                                 Local                                        */
 /******************************************************************************/
 
+
 WORD checkSum;
 static U32 su32DataSavePeriod = 0;
 //static BOOLEAN sbPcModeSaveFlag = FALSE;
 
-BOOL g_SaveData_bDebug = 0;
+BOOL g_SaveData_bDebug = 1;
 
 BOOL MApp_ReadDatabase(U32 srcIndex, U8* dstAddr, U16 size)
 {
-    //printf("MApp_ReadDatabase(srcIndex=0x%X, size=%u)\n", srcIndex, size);
+    DEBUG_SAVE_DATA(printf("MApp_ReadDatabase(srcIndex=0x%X, size=%u)\n", srcIndex, size););
 
     // Check address of ramdisk:
     if( (srcIndex > RM_DB_TOTAL_USAGE)
       ||(srcIndex > DATABASE_START_LEN)
       )
     {
-        printf("\nError: WriteDatabase: address(0x%X) is over range!", srcIndex);
+        DEBUG_SAVE_DATA(printf("\nError: WriteDatabase: address(0x%X) is over range!", srcIndex););
         return FALSE;
+    } else {
+        //nguyen
+        DEBUG_SAVE_DATA(printf("Nguyen MApp_ReadDatabase(srcIndex=0x%X, size=%u)\n", srcIndex, size););
+
     }
 
     //if( srcIndex < RM_GEN_USAGE )
     if( srcIndex < RM_DB_CH_START_ADDR )
     {
+
       #if (ENABLE_DRAM_GEN_SAVE_TO_FLASH)
         memcpy(dstAddr,(void *)_PA2VA(srcIndex+RAM_DISK_MEM_ADDR),size);
+        DEBUG_SAVE_DATA(printf("Nguyen ENABLE_DRAM_GEN_SAVE_TO_FLASH\n"););
       #else
         msAPI_rmBurstReadBytes(srcIndex, dstAddr, size);
+        DEBUG_SAVE_DATA(printf("Nguyen msAPI_rmBurstReadBytes\n"););
       #endif
     }
     else //if(srcIndex>=RM_GEN_USAGE && srcIndex<(RM_64K_SIZE+RM_GEN_USAGE))
     {
+        DEBUG_SAVE_DATA(printf("ENABLE_DRAM_DB_CH_SAVE_TO_EEPROM\n"););
       #if (ENABLE_DRAM_DB_CH_SAVE_TO_EEPROM)
         msAPI_rmBurstReadBytes(srcIndex, dstAddr, size);
       #else
@@ -274,6 +283,10 @@ BOOL MApp_WriteDatabase(U32 dstIndex, U8* srcAddr, U16 size)
         printf(" RM_DB_TOTAL_USAGE=%X\n", RM_DB_TOTAL_USAGE);
         printf(" DATABASE_START_LEN=%X\n", DATABASE_START_LEN);
         return FALSE;
+    } else {
+        //nguyen
+        DEBUG_SAVE_DATA(printf("Nguyen MApp_WriteDatabase(dstIndex=0x%X, size=%u)\n", dstIndex, size););
+
     }
 
     //if( dstIndex < RM_GEN_USAGE )
@@ -1047,6 +1060,24 @@ void MApp_ResetGenUserSetting(void)
 
     MApp_SaveGenSetting();
 }
+
+//nguyen
+void MApp_Save_UserDataForHomeShop(U16 countForHomeShop){
+    U8 buff_count[2];
+    buff_count[0] = countForHomeShop & 0xff;
+    buff_count[1] = (countForHomeShop >> 8) & 0xff;
+    DEBUG_SAVE_DATA(printf("MApp_Save_UserDataForHomeShop buff_count[0] = %u, buff_count[1] = %u\n", buff_count[0], buff_count[1]));
+    MApp_WriteDatabase(FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR, buff_count, FMAP_USER_DATA_FOR_HOME_SHOP_SIZE);
+}
+
+U16 MApp_Load_UserDataForHomeShop(void) {
+    U8 buff_count[2];
+    MApp_ReadDatabase(FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR, buff_count, FMAP_USER_DATA_FOR_HOME_SHOP_SIZE);
+    DEBUG_SAVE_DATA(printf("MApp_Load_UserDataForHomeShop buff_count[0] = %u, buff_count[1] = %u\n", buff_count[0], buff_count[1]));
+    return (buff_count[1] << 8) | buff_count[0];
+}
+//nguyen
+
 
 void MApp_SaveData_CallBack_BeforeWriteFlash(void)
 {
@@ -3775,6 +3806,7 @@ void MApp_DB_PrintVar(U8 u8Flag)
 
         printf(" FMAP_CANALREADY_AUTH_START=0x%X, size=0x%X\n", FMAP_CANALREADY_AUTH_BANK, FMAP_CANALREADY_AUTH_SIZE);
 
+        
         printf("FMAP_TOTAL_USE_BANK_END=0x%X\n", FMAP_TOTAL_USE_BANK_END);
         printf("MERGE.bin max size=0x%X\n", (FMAP_TOTAL_USE_BANK_END)*FLASH_BLOCK_SIZE );
     }
@@ -3966,7 +3998,7 @@ BOOL MApp_DB_Check(void)
     U8 i;
 
     //PRINT_CURRENT_LINE();
-    //printf("MApp_DB_Check()\n");
+    printf("MApp_DB_Check()\n");
 
 
 #if 0//( RM_GEN_SIZE != QUICK_DB_GENST_SIZE )
@@ -3977,7 +4009,7 @@ BOOL MApp_DB_Check(void)
     // Check if flash size correct
     if( MDrv_SERFLASH_DetectSize(&u32FlashSize) )
     {
-        //printf(" u32FlashSize=0x%x\n", u32FlashSize);
+        printf(" u32FlashSize=0x%x\n", u32FlashSize);
         if( u32FlashSize != FLASH_SIZE )
         {
             for( i = 0; i < 5; ++ i )
@@ -4085,7 +4117,7 @@ BOOL MApp_DB_Check(void)
     }
 
 
-    //MApp_DB_PrintVar(0xFF);
+    MApp_DB_PrintVar(0xFF);
     //while(10){}
 
     return TRUE;

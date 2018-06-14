@@ -194,8 +194,8 @@
 #define PADS_SPDIF_IN        Unknown_pad_mux
 #define PADS_SPDIF_OUT       SPDIF_OUT_MODE(3)
 #define PADS_INTGPIO_MODE    Unknown_pad_mux
-#define PADS_PWM0_MODE       PWM0_MODE(1)
-#define PADS_PWM1_MODE       Unknown_pad_mux
+#define PADS_PWM0_MODE       Unknown_pad_mux //PWM0_MODE(1)
+#define PADS_PWM1_MODE       PWM1_MODE(1)
 #define PADS_PWM2_MODE       Unknown_pad_mux
 #define PADS_PWM3_MODE       Unknown_pad_mux
 #define PADS_PWM4_MODE       Unknown_pad_mux
@@ -228,12 +228,12 @@
 
 #define PIN_159_IS_GPIO    GPIO_OUT_HIGH //GPIO18, AMP-MUTE(AMP-EN) (RT9116 Audio Amp Enable, L:Enable)  init: MUTE
 #define PIN_158_IS_GPIO    GPIO_OUT_HIGH//GPIO19, PANEL_ON_OFF (Panel Power Enable, L:On)
-//#define PIN_160_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
+#define PIN_160_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
 
 //nguyen
 //#define PIN_161_IS_GPIO    GPIO_OUT_HIGH //GPIO16, NORMAL_PWR-ON_OFF
-//#define PIN_168_IS_GPIO    GPIO_OUT_HIGH //GPIO168, pwm
-#define PIN_168_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
+#define PIN_168_IS_GPIO    GPIO_OUT_HIGH //GPIO168, pwm
+//#define PIN_168_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
 
 #define PIN_180_IS_GPIO    GPIO_IN           //GPIO94, MHL CABLE_DET
 #define PIN_163_IS_GPIO    GPIO_OUT_LOW     // DISH_RT5047 LNB_EN
@@ -688,11 +688,11 @@
 #define Panel_VCC_ON()                  mdrv_gpio_set_high( PIN_158 )
 #define Panel_VCC_OFF()                 mdrv_gpio_set_low( PIN_158 )
 
-#define Panel_Backlight_VCC_ON()        mdrv_gpio_set_high( PIN_168 )
-#define Panel_Backlight_VCC_OFF()       mdrv_gpio_set_low( PIN_168 )
+#define Panel_Backlight_VCC_ON()        _FUNC_NOT_USED() //mdrv_gpio_set_high( PIN_160 )
+#define Panel_Backlight_VCC_OFF()       _FUNC_NOT_USED() //mdrv_gpio_set_low( PIN_160 )
 
-#define Panel_Backlight_PWM_ADJ(x)      MDrv_PWM_DutyCycle(E_PWM_CH0, x)
-#define Panel_Backlight_Max_Current(x)  MDrv_PWM_DutyCycle(E_PWM_CH0, x)
+#define Panel_Backlight_PWM_ADJ(x)      MDrv_PWM_DutyCycle(E_PWM_CH1, x)
+#define Panel_Backlight_Max_Current(x)  MDrv_PWM_DutyCycle(E_PWM_CH1, x)
 
 #define Panel_VG_HL_CTL_ON()            _FUNC_NOT_USED()
 #define Panel_VG_HL_CTL_OFF()           _FUNC_NOT_USED()

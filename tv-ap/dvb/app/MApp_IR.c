@@ -284,6 +284,22 @@ U8 g_u8IR_HEADER_CODE1 =0;
 #endif
 
 
+//nguyen
+static U8 isKeyVolumePressed = 0;
+
+U8 get_isKeyVolumePressed(void){
+    if((u8KeyCode == KEY_VOLUME_PLUS || u8KeyCode == KEY_VOLUME_PLUS) && (stKeyStatus.keyrepeat == 0)){
+        isKeyVolumePressed = 1;
+    } else {
+        isKeyVolumePressed = 0; 
+    }
+        
+    return isKeyVolumePressed;
+}
+U8 getKeyPressed(void){
+    return u8KeyCode;
+}
+//nguyen
 //******************************************************************************
 
 BOOLEAN MApp_isKeypadSourceKeyCanSelect(void)
@@ -1178,6 +1194,7 @@ static void MApp_CheckKeyStatus(void)
         stKeyStatus.keydata = key;
 #endif
         stKeyStatus.keyrepeat = KeyRepeatStatus;
+        
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_IR, key, KeyRepeatStatus);
         //When user enter any key input during key logger simulation
