@@ -171,11 +171,11 @@
 
 
 
-#define DEBUG_SAVE_DATA(x)  x
+#define DEBUG_SAVE_DATA(x)  //x
 
 #define DEBUG_GEN_SETTING(x)    //x
 
-#define DEBUG_DATA_CHECK_HANDLER(x)     x
+#define DEBUG_DATA_CHECK_HANDLER(x)     //x
 
 
 
@@ -229,11 +229,7 @@ BOOL MApp_ReadDatabase(U32 srcIndex, U8* dstAddr, U16 size)
     {
         DEBUG_SAVE_DATA(printf("\nError: WriteDatabase: address(0x%X) is over range!", srcIndex););
         return FALSE;
-    } else {
-        //nguyen
-        DEBUG_SAVE_DATA(printf("Nguyen MApp_ReadDatabase(srcIndex=0x%X, size=%u)\n", srcIndex, size););
-
-    }
+    } 
 
     //if( srcIndex < RM_GEN_USAGE )
     if( srcIndex < RM_DB_CH_START_ADDR )
@@ -244,12 +240,10 @@ BOOL MApp_ReadDatabase(U32 srcIndex, U8* dstAddr, U16 size)
         DEBUG_SAVE_DATA(printf("Nguyen ENABLE_DRAM_GEN_SAVE_TO_FLASH\n"););
       #else
         msAPI_rmBurstReadBytes(srcIndex, dstAddr, size);
-        DEBUG_SAVE_DATA(printf("Nguyen msAPI_rmBurstReadBytes\n"););
       #endif
     }
     else //if(srcIndex>=RM_GEN_USAGE && srcIndex<(RM_64K_SIZE+RM_GEN_USAGE))
     {
-        DEBUG_SAVE_DATA(printf("ENABLE_DRAM_DB_CH_SAVE_TO_EEPROM\n"););
       #if (ENABLE_DRAM_DB_CH_SAVE_TO_EEPROM)
         msAPI_rmBurstReadBytes(srcIndex, dstAddr, size);
       #else
