@@ -86,6 +86,7 @@ def doPack(bin_align, file_align, magic, dst_fn, binid_fn, ImgInfo_Offset, ap_c_
     #print "dst_fn = %s" % (dst_fn)
     dir = os.path.dirname(binid_fn)
     bin_id = parseBinIDInfo(binid_fn)
+    
     f = open(dst_fn, 'r+b', 0)
     data = f.read()
     data_size = len(data)
@@ -94,6 +95,7 @@ def doPack(bin_align, file_align, magic, dst_fn, binid_fn, ImgInfo_Offset, ap_c_
     tail = ((tail + file_align - 1) / file_align) * file_align
     tbl2 = getFlashTable2(data)
     
+    print "magic = %s" % (magic)
     magic = int(magic, 16)
     print "magic-2 = 0x%X" % (magic)
     magic = struct.pack("BBBBB",
@@ -124,8 +126,12 @@ def doPack(bin_align, file_align, magic, dst_fn, binid_fn, ImgInfo_Offset, ap_c_
                 break
             count = count + 1
             tail = (tail + (bin_align - 1)) & ~(bin_align - 1)
-
+            print "ID"
+            print "%04X" % id
+            #print bin_id[id]
+            print "%04X" % tail
             (fn, rs, flags) = bin_id[id]
+            
 
             try:
                 if bMultiFlash and (flags & FLAG_FLASH2):
@@ -134,6 +140,7 @@ def doPack(bin_align, file_align, magic, dst_fn, binid_fn, ImgInfo_Offset, ap_c_
                     f.write(struct.pack('>L', 0))
                     f.write(struct.pack('>L', 0))
                     f.write(struct.pack('>B', 0x80 | ((flags & FLAG_COMPRESS) != 0)))
+                    print 'bMultiFlash'
                 else:
                     if flags & FLAG_COMPRESS:
     				    os.system(LZSS + dir + "/../" + fn + " " + dir + "/../" + fn + "c");
@@ -146,14 +153,16 @@ def doPack(bin_align, file_align, magic, dst_fn, binid_fn, ImgInfo_Offset, ap_c_
     				    fn = fn + "c"
                     b = open(dir + "/../" + fn, "rb")
                     d = b.read()
+                    print "len(d) before adding CRC = 0x%x" % len(d)
                     bin_file_ori_size = len(d)
                     d += '\x00' * (8 - ((len(d) + 2) % 8))  # padding + CRC16
                     bin_size_2 = len(d)
                     bin_crc16 = CRC16(d)
+                    
                     #bin_crc32 = CRC32(d)
                     #print  "crc16=0x%X" % CRC16(d)
                     d += struct.pack('>H', CRC16(d))
-
+                    print "len(d) after adding CRC = 0x%x" % len(d)
                     print "%04X @ %06X %6X %X %04X %s" % (id, tail, len(d), flags, bin_crc16, fn)
                     #print "0x%X crc16=%X, bin_crc32=%X" % (bin_size_2, bin_crc16, bin_crc32 )
 

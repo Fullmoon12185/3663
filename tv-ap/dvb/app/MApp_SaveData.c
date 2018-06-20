@@ -171,11 +171,11 @@
 
 
 
-#define DEBUG_SAVE_DATA(x)  x
+#define DEBUG_SAVE_DATA(x)  //x
 
 #define DEBUG_GEN_SETTING(x)    //x
 
-#define DEBUG_DATA_CHECK_HANDLER(x)     x
+#define DEBUG_DATA_CHECK_HANDLER(x)     //x
 
 
 

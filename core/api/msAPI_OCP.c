@@ -231,12 +231,12 @@
     msDebug_ANSI_AllAttrOffText();          \
 } while(0)
 #else
-    #define DEBUG_BMP(x)
+    #define DEBUG_BMP(x) 
 #endif
 
 #define DEBUG_BMP_MEM(x)    //x
 #define DEBUG_BMP_LOAD_EACH(x)  //x
-#define DEBUG_BMP_DECOMP_EACH(x)  //x
+#define DEBUG_BMP_DECOMP_EACH(x) //x
 
 
 //--------------------------------------------------------------------------------------------
@@ -1126,8 +1126,8 @@ static void msAPI_OCP_ReadBinaryString_ptr(U8 language, U16 id, U16 *pu16stringb
     language_addr = readbin_language_addr(language);
     struct_string_info = readbin_string_info(language_addr, id);
 
-    //printf("language_addr=0x%X\n", language_addr);
-    //printf("startaddr=0x%X, length=0x%X\n", struct_string_info.startaddr, struct_string_info.length);
+    DEBUG_STRING(printf("language_addr=0x%X\n", language_addr););
+    DEBUG_STRING(printf("struct_string_info startaddr=0x%X, struct_string_info length=0x%X\n", struct_string_info.startaddr, struct_string_info.length););
 
     if ( sStringBininfo.bodyEncodingMethod == ENCODING_UTF8 )
     {

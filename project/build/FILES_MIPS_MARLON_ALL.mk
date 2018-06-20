@@ -514,7 +514,7 @@ INC_DIR  += \
         -I$(TVAP)/dvb/app/include                                  \
         -I$(TVAP)/dvb/ui2/include                                  \
         -I$(TVAP)/dvb/ui2/osdcomposer/include                      \
-        -I$(TVAP)/dvb/ui2/res1366x768x565/osdcomposer/include      \
+        -I$(TVAP)/dvb/ui2/res1366X768X565/osdcomposer/include      \
         -I$(ROOT)/device/mhl                                       \
 
 LINT_INC  += \

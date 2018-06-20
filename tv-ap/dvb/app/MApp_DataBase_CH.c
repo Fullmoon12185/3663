@@ -113,7 +113,7 @@
 #endif
 
 
-#define DEBUG_APP_DB_CH(x)      x
+#define DEBUG_APP_DB_CH(x)      //x
 
 
 static BOOL s_DB_CH_bDataChanged = FALSE;

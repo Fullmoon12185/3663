@@ -941,7 +941,7 @@ void HomeShop_FSM (void){
             printf("\n*************************************************\n");
             printf("\nFourKeyPressed 0x%x\n", fourKeyPressed);
             printf("\n*************************************************\n");
-            if(fourKeyPressed == 0x1234){
+            if(fourKeyPressed == 0x1349){
                 homeshop_state = SHOP_STATE;
                 countForHomeShop = 0;
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
@@ -952,9 +952,10 @@ void HomeShop_FSM (void){
         switch(homeshop_state){
             case HOMESHOP_INIT:
                 countForHomeShop = MApp_Load_UserDataForHomeShop();
-                if(countForHomeShop == 0xffff){
+                if(countForHomeShop > NUM_PRESS_TIME_BEFORE_GO_TO_HOME + 1){
                     countForHomeShop = 0;    
-                }
+                    MApp_Save_UserDataForHomeShop(countForHomeShop);
+                } 
                 MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);  
                 homeshop_state = SHOP_STATE;
             break;
