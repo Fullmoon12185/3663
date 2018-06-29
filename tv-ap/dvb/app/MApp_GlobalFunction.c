@@ -193,7 +193,7 @@ extern U16 Subtitle_L;
 
 extern BOOLEAN bFontSysInit;
 
-/* ??Cë¤?*/
+/* ??Cï¿½?*/
 code U8 SolarCal[12] =
 {
     31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
@@ -2138,13 +2138,13 @@ EN_LANGUAGE MApp_GetMenuLanguage(void)
 {
     if (stGenSetting.g_SysSetting.Language > LANGUAGE_MAX)
     {
-        MS_DEBUG_MSG(printf("Get Lang Overflow: %u\n", (U16)stGenSetting.g_SysSetting.Language));
+        MS_DEBUG_MSG(printf("Get Lang Overflow: %u\n", (U16)stGenSetting.g_SysSetting.Language););
         stGenSetting.g_SysSetting.Language = DEFAULT_MENU_LANG;
 #if ( ENABLE_ARABIC_OSD || ENABLE_THAI_OSD || ENABLE_INDIA_OSD )
         //msAPI_OSD_SetOSDLanguage((EN_OSDAPI_LANGUAGE)DEFAULT_MENU_LANG);
 #endif
     }
-
+    printf("Get Lang: %u\n", (U16)stGenSetting.g_SysSetting.Language);
     return stGenSetting.g_SysSetting.Language;
 }
 
@@ -2341,7 +2341,7 @@ void MApp_SetMenuLanguage(EN_LANGUAGE eLanguage)
         MS_DEBUG_MSG(printf("Set Lang Overflow: %u\n", (U16)eLanguage));
         eLanguage = DEFAULT_MENU_LANG;
     }
-
+    printf("Set Lang: %u\n", (U16)eLanguage);
     stGenSetting.g_SysSetting.Language = eLanguage;
 
 #if ( ENABLE_ARABIC_OSD || ENABLE_THAI_OSD )
@@ -3737,7 +3737,7 @@ U8 MApp_ReMapAudioLanguage_SelectProcess(BOOLEAN bSelectProcess)
                                                                                                                         ,astgSoundTrack[iu8Loop_i].u8IsAudLangGetinPMT));
 
                 if ((astgSoundTrack[iu8Loop_i].u8AudAc3Bsmod == EN_PSIP_AC3_BSMOD_NUM) //no ac3ad descriptor
-                    && ((!astgSoundTrack[iu8Loop_i].u16IsAudLangGetinPMT)&&(astgSoundTrack[iu8Loop_i].u8AudLangIdx == AUD_LANG_UND)))  //no ¡§language¡¨ and ¡§ISO_639_language¡¨ exists
+                    && ((!astgSoundTrack[iu8Loop_i].u16IsAudLangGetinPMT)&&(astgSoundTrack[iu8Loop_i].u8AudLangIdx == AUD_LANG_UND)))  //no ï¿½ï¿½languageï¿½ï¿½ and ï¿½ï¿½ISO_639_languageï¿½ï¿½ exists
                 {
                     continue;
                 }

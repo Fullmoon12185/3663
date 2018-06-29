@@ -295,8 +295,8 @@ FONTHANDLE msAPI_OSD_RESOURCE_LoadFont (MS_U32 start_addr, MS_U32 glyph_addr, MS
 
     memcpy(&_FontTable[_enResGroup][font_count], &GEFontTable, sizeof(OSD_RESOURCE_FONT_INFO));
 
- //   printf("LOADTEXT: %x, %x, %x, %x, %x, %x, %x, %x, %x\n", font_count, _FontTable[font_count].glyph_addr, _FontTable[font_count].fmt, _FontTable[font_count].height, _FontTable[font_count].char_glyph_bytes,_FontTable[font_count].char_num,
-//       _FontTable[font_count].bbox_addr, _FontTable[font_count].pitch , _FontTable[font_count].width );
+    //printf("LOADTEXT: %x, %x, %x, %x, %x, %x, %x, %x, %x\n", font_count, _FontTable[font_count].glyph_addr, _FontTable[font_count].fmt, _FontTable[font_count].height, _FontTable[font_count].char_glyph_bytes,_FontTable[font_count].char_num,
+    //   _FontTable[font_count].bbox_addr, _FontTable[font_count].pitch , _FontTable[font_count].width );
 
 
     return font_count++;

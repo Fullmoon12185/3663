@@ -193,7 +193,7 @@
 
 //-------------------------------------------------------------------------------------
 // Total usage
-#define FMAP_TOTAL_USE_BANK_END         (FMAP_CAPTURE_LOGO_BANK)
+#define FMAP_TOTAL_USE_BANK_END         (FMAP_CAPTURE_LOGO_START)
 
 
 

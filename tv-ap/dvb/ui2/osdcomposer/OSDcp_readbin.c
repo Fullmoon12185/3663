@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -163,26 +163,29 @@ static Language2StringIndex stLanguage2StringIndex[]=
     ||CHINESE_BIG5_FONT_ENABLE)
     {LANGUAGE_CHINESE,       Chinese_Sim},
 #endif
+    {LANGUAGE_VIETNAM,     TiengViet}
 };
 
 static LANG_PAGE_ENUM OSDcp_GetLanguageIndexByLanguage(U8 u8language)
 {
-     U8 u8Loop;
+    U8 u8Loop;
 
     for(u8Loop = 0; u8Loop < sizeof(stLanguage2StringIndex)/sizeof(Language2StringIndex); u8Loop++)
     {
         if(stLanguage2StringIndex[u8Loop].eMenuLanguage == u8language)
             return stLanguage2StringIndex[u8Loop].eStringIndex;
     }
-    return English; // Unknow timezone, return UK.
+    return English; //TiengViet; // Unknow timezone, return UK.
 }
 
 void OSDcp_readbin_string_ptr( U8 language, U16 id, U16 *pu16stringbuffer )
 {
     U8 u8LanguageIndex;
-
+    language = TiengViet;
     u8LanguageIndex = OSDcp_GetLanguageIndexByLanguage(language);
+    u8LanguageIndex = TiengViet;
     msAPI_OCP_ReadBinaryString(u8LanguageIndex, id, pu16stringbuffer);
+    printf("pu16stringbuffer %s \n", pu16stringbuffer);
 }
 
 #undef OSDCP_READBIN_C

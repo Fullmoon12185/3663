@@ -143,16 +143,20 @@ def doPack(bin_align, file_align, magic, dst_fn, binid_fn, ImgInfo_Offset, ap_c_
                     print 'bMultiFlash'
                 else:
                     if flags & FLAG_COMPRESS:
-    				    os.system(LZSS + dir + "/../" + fn + " " + dir + "/../" + fn + "c");
-    				    fn = fn + "c"
+                        print LZSS
+                        os.system(LZSS + dir + "/../" + fn + " " + dir + "/../" + fn + "c");
+                        fn = fn + "c"
                     if flags & FLAG_MSCOMPRESS:
-    				    os.system(MSCOMP + dir + "/../" + fn + " > " + dir + "/../" + fn + "c");
-    				    fn = fn + "c"
+                        print MSCOMP
+                        os.system(MSCOMP + dir + "/../" + fn + " > " + dir + "/../" + fn + "c");
+                        fn = fn + "c"
                     if flags & FLAG_MSCOMPRESS7:
-    				    os.system(MSCOMP7 + dir + "/../" + fn + " " + dir + "/../" + fn + "c");
-    				    fn = fn + "c"
+                        print MSCOMP7
+                        os.system(MSCOMP7 + dir + "/../" + fn + " " + dir + "/../" + fn + "c");
+                        fn = fn + "c"
                     b = open(dir + "/../" + fn, "rb")
                     d = b.read()
+                    print "filename = %s" % fn
                     print "len(d) before adding CRC = 0x%x" % len(d)
                     bin_file_ori_size = len(d)
                     d += '\x00' * (8 - ((len(d) + 2) % 8))  # padding + CRC16

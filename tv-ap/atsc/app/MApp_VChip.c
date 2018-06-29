@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -1320,6 +1320,7 @@ U8* VChipTVPGMenuItemName_Text(void)//EN_STRING_CANADACE_TEXT
     }
 
     MApp_U16StringToU8String(MApp_ZUI_API_GetString(u16TempStringID),(U8*)CHAR_BUFFER,MApp_UiMenu_u16Strlen(MApp_ZUI_API_GetString(u16TempStringID)));
+    
     return  (U8*)CHAR_BUFFER;
 }
 

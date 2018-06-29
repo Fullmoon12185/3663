@@ -164,7 +164,7 @@
 /* binary. If changed, need to sync them to Bin_ID.h and PackList_X.txt       */
 /*----------------------------------------------------------------------------*/
 
-#define BIN_ID_FONT_MSTAR_MVF       0x01A0  //~271KB    //@..\..\..\tv-ap\dvb\ui2\font\MStar_Unicode5.mvf -7
+#define BIN_ID_FONT_MSTAR_MVF       0x01A0  //~271KB    //@..\..\..\tv-ap\dvb\ui2\font\MStar_Unicode2.mvf -7
 #define BIN_ID_CODE_AEON_MVF        0x01A1  //~81KB     //@..\..\..\core\bin\marlon\cape\aeon_mvf_LE.bin
 #define BIN_ID_FONT_MSTAR_MVF_ATSC  0x01A2  //~264KB    //@..\..\..\tv-ap\atsc\ui2\font\MStar_Unicode4.mvf
 #define BIN_ID_FONT_KOREA_20        0x0100  //~847KB    //@..\..\..\tv-ap\atsc\ui2\font\KOREA_20.bin

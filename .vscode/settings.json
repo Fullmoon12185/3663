@@ -4,9 +4,6 @@
         "mapp_init.h": "c",
         "if_demodulator.h": "c",
         "sysinit.h": "c",
-        "bininfo.h": "c",
-        "osdcp_readbin.h": "c",
-        "zui_strings_enum.h": "c",
-        "mscommon.h": "c"
+        "zui_strings_enum.h": "c"
     }
 }
