@@ -3355,7 +3355,7 @@ EN_OSD_COUNTRY_SETTING MApp_DataBase_Get_Default_Country(void)
     }
     else
     {
-        return OSD_COUNTRY_UK;
+        return OSD_COUNTRY_VIETNAM;
     }
 }
 #endif
@@ -3556,6 +3556,9 @@ void MApp_DataBase_RestoreDefault_TVSetting(void)
 
 #if (ENABLE_DTV)
     stGenSetting.stTvSetting.eCountry = DEFAULT_COUNTRY;
+
+    printf("DEFAULT_COUNTRY\n", DEFAULT_COUNTRY);
+    printf("stGenSetting.stTvSetting.eCountry\n", stGenSetting.stTvSetting.eCountry);
 
     stGenSetting.stTvSetting.u16DTVRFChannelOrder = DEFAULT_CURRENT_ORDER_TV;
     stGenSetting.stTvSetting.u16DATARFChannelOrder = DEFAULT_CURRENT_ORDER_DATA(E_DTV_DB_SEL_DVBT);

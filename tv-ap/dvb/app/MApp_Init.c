@@ -584,9 +584,9 @@ void MApp_Init_UIVariable(void)
      eCountry = (EN_OSD_COUNTRY_SETTING)stGenSetting.stTvSetting.eCountry;
    #endif
  #else
-    eCountry = OSD_COUNTRY_UK;
+    eCountry = OSD_COUNTRY_VIETNAM;
  #endif
-
+    printf("nguyen eCountry: 0x%x\n", eCountry);
     MApp_SetOSDCountrySetting(eCountry, FALSE);
 
 #if(DVBC_CERTIFICATION_AUTOSCAN_ENABLE)
@@ -610,7 +610,8 @@ void MApp_Init_UIVariable(void)
     memset(&stLMGenSetting.stMFactory_Adjust, 0, sizeof(L_MENU_FACTORY_ADJUST_VAR));
 
   #if ENABLE_DTV
-    SET_OSD_MENU_LANGUAGE(GET_OSD_MENU_LANGUAGE());
+    //SET_OSD_MENU_LANGUAGE(GET_OSD_MENU_LANGUAGE());
+    SET_OSD_MENU_LANGUAGE(LANGUAGE_DEFAULT);
   #endif
 }
 

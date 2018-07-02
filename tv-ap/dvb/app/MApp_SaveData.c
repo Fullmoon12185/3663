@@ -1193,7 +1193,7 @@ void MApp_SysSetting_UpdateChecksum(void)
 
 void MApp_InitSysSetting(void)
 {
-    SET_OSD_MENU_LANGUAGE(LANGUAGE_ENGLISH); // menu language
+    SET_OSD_MENU_LANGUAGE(LANGUAGE_VIETNAM); // menu language
 
     MApp_DataBase_RestoreDefaultSystem(RESTORE_KEEP_NONE);
 

@@ -216,7 +216,7 @@ ZUI_RET MApp_ZUI_MainTask(void)
                 while(MApp_ZUI_API_GetMessage(&msg))
                 {
                     //printf("[taskX]\n");
-                    //printf("[MainTask] got message win %u, msg %bu, wparam %lu\n", (U16)msg.hwnd, (U8)msg.message, (U32)msg.wParam);
+                    //printf("E_ZUI_STATE_RUNNING [MainTask] got message win %u, msg %bu, wparam %lu\n", (U16)msg.hwnd, (U8)msg.message, (U32)msg.wParam);
                     ZUI_TASK_CHECKPOINT();
                     MApp_ZUI_API_DispatchMessage (&msg);
                     ZUI_TASK_CHECKPOINT();
@@ -261,7 +261,7 @@ ZUI_RET MApp_ZUI_MainTask(void)
             if (_eZUIState != s_eZUIPrevState)
             {
                 MSG msg;
-                //printf("s_eZUIPrevState=%bx\n",s_eZUIPrevState);
+                //printf("E_ZUI_STATE_TRANSEFF_DOING s_eZUIPrevState=%bx\n",s_eZUIPrevState);
                 //keep all messages are processed...
                 while(MApp_ZUI_API_GetMessage(&msg))
                 {

@@ -2144,7 +2144,6 @@ EN_LANGUAGE MApp_GetMenuLanguage(void)
         //msAPI_OSD_SetOSDLanguage((EN_OSDAPI_LANGUAGE)DEFAULT_MENU_LANG);
 #endif
     }
-    printf("Get Lang: %u\n", (U16)stGenSetting.g_SysSetting.Language);
     return stGenSetting.g_SysSetting.Language;
 }
 

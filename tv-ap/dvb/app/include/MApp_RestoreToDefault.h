@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -166,9 +166,9 @@
 #if (ENABLE_DTMB_CHINA_APP || ENABLE_ATV_CHINA_APP || ENABLE_DVBC_PLUS_DTMB_CHINA_APP||CHINESE_SIMP_FONT_ENABLE ||CHINESE_BIG5_FONT_ENABLE)
 #define DEFAULT_MENU_LANG                       LANGUAGE_CHINESE
 #else
-#define DEFAULT_MENU_LANG                       LANGUAGE_ENGLISH
+#define DEFAULT_MENU_LANG                       LANGUAGE_VIETNAM
 #endif
-#define DEFAULT_SUB_LANG                        LANGUAGE_ENGLISH
+#define DEFAULT_SUB_LANG                        LANGUAGE_VIETNAM
 
 
 #if(ENABLE_ISDBT_AND_DVB)
@@ -179,7 +179,7 @@
 #elif (ENABLE_ISDBT_NO_DVB)
     #define DEFAULT_TUNING_COUNTRY              OSD_COUNTRY_BRAZIL
 #else
-    #define DEFAULT_TUNING_COUNTRY              OSD_COUNTRY_UK
+    #define DEFAULT_TUNING_COUNTRY              OSD_COUNTRY_VIETNAM
 #endif
 
 

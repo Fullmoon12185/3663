@@ -6,7 +6,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -360,7 +360,7 @@ typedef BYTE    PROGRAMDATA_MEMBER;
 #elif ( ENABLE_DVB_TAIWAN_APP )
 #define DEFAULT_COUNTRY                         E_TAIWAN
 #else
-#define DEFAULT_COUNTRY                         E_GERMANY //E_UK should set defualt country to Germany for CI+1.3
+#define DEFAULT_COUNTRY                         E_VIETNAM //E_UK should set defualt country to Germany for CI+1.3
 #endif
 
 #define DEFAULT_PRINDEX                         INVALID_PRINDEX

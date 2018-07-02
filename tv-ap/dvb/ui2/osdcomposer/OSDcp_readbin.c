@@ -107,6 +107,7 @@
 #include "MApp_GlobalSettingSt.h"
 #include "ZUI_strings_enum.h"
 
+#define DEBUG_LANGUAGE(x) x
 /********************************************************************************/
 /*                     Macro                    */
 /* ******************************************************************************/
@@ -127,6 +128,7 @@ typedef struct _Language2StringIndex
 
 static Language2StringIndex stLanguage2StringIndex[]=
 {
+    {LANGUAGE_VIETNAM,     TiengViet},
     {LANGUAGE_CZECH,             Czech},
     {LANGUAGE_DANISH,            Danish},
     {LANGUAGE_GERMAN,           German},
@@ -163,29 +165,40 @@ static Language2StringIndex stLanguage2StringIndex[]=
     ||CHINESE_BIG5_FONT_ENABLE)
     {LANGUAGE_CHINESE,       Chinese_Sim},
 #endif
-    {LANGUAGE_VIETNAM,     TiengViet}
 };
 
 static LANG_PAGE_ENUM OSDcp_GetLanguageIndexByLanguage(U8 u8language)
 {
     U8 u8Loop;
 
+    DEBUG_LANGUAGE(printf("sizeof(stLanguage2StringIndex)/sizeof(Language2StringIndex) = %d \n", sizeof(stLanguage2StringIndex)/sizeof(Language2StringIndex)););
     for(u8Loop = 0; u8Loop < sizeof(stLanguage2StringIndex)/sizeof(Language2StringIndex); u8Loop++)
     {
-        if(stLanguage2StringIndex[u8Loop].eMenuLanguage == u8language)
+        if(stLanguage2StringIndex[u8Loop].eMenuLanguage == u8language){
+            DEBUG_LANGUAGE(printf("stLanguage2StringIndex[u8Loop].eStringIndex: 0x%x ", stLanguage2StringIndex[u8Loop].eStringIndex););
             return stLanguage2StringIndex[u8Loop].eStringIndex;
+        }
     }
-    return English; //TiengViet; // Unknow timezone, return UK.
+    return TiengViet; // Unknow timezone, return UK.
 }
 
 void OSDcp_readbin_string_ptr( U8 language, U16 id, U16 *pu16stringbuffer )
 {
     U8 u8LanguageIndex;
-    language = TiengViet;
+    //U8 index = 0;
+    // language = TiengViet;
     u8LanguageIndex = OSDcp_GetLanguageIndexByLanguage(language);
-    u8LanguageIndex = TiengViet;
+    DEBUG_LANGUAGE(printf("u8LanguageIndex = OSDcp_GetLanguageIndexByLanguage(language): 0x%x \n ", u8LanguageIndex););
+    DEBUG_LANGUAGE(printf("language = 0x%x, TiengViet 0x%x\n", language, TiengViet););
+    // u8LanguageIndex = TiengViet;
     msAPI_OCP_ReadBinaryString(u8LanguageIndex, id, pu16stringbuffer);
-    printf("pu16stringbuffer %s \n", pu16stringbuffer);
+    // printf("pu16stringbuffer\n");
+    // while(pu16stringbuffer[index] != 0){
+    //     printf("0x%x ", pu16stringbuffer[index]);
+    //     index ++;
+    // }
+    // printf("\n");
+    
 }
 
 #undef OSDCP_READBIN_C

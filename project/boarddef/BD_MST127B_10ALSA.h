@@ -223,7 +223,12 @@
 //------GPIO setting(default GPIO pin level)------------------------------------
 #define PIN_63_IS_GPIO      GPIO_IN       	//GPIO44, Tuner_SDA
 #define PIN_64_IS_GPIO      GPIO_IN       	//GPIO45, Tuner_SCL
+
 //nguyen
+#define PIN_65_IS_GPIO      GPIO_OUT_HIGH  // Ex IR IC
+#define PIN_68_IS_GPIO      GPIO_OUT_HIGH  // Ex IR IC
+#define PIN_71_IS_GPIO      GPIO_OUT_HIGH  // Ex IR IC
+
 #define PIN_67_IS_GPIO      GPIO_OUT_HIGH
 
 #define PIN_159_IS_GPIO    GPIO_OUT_HIGH //GPIO18, AMP-MUTE(AMP-EN) (RT9116 Audio Amp Enable, L:Enable)  init: MUTE
@@ -723,6 +728,10 @@
 #define LED_RED_OFF()                   _FUNC_NOT_USED()
 #define LED_GREEN_ON()                  mdrv_gpio_set_low( PIN_67 )
 #define LED_GREEN_OFF()                 mdrv_gpio_set_high( PIN_67 )
+
+//IR out
+#define IR_ON()                  mdrv_gpio_set_low( PIN_68 )
+#define IR_OFF()                 mdrv_gpio_set_high( PIN_68 )
 
 
 
