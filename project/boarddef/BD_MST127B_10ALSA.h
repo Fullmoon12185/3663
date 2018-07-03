@@ -242,7 +242,7 @@
 
 #define PIN_180_IS_GPIO    GPIO_IN           //GPIO94, MHL CABLE_DET
 #define PIN_163_IS_GPIO    GPIO_OUT_LOW     // DISH_RT5047 LNB_EN
-#define PIN_65_IS_GPIO     GPIO_OUT_LOW     // DISH_RT5047 LNB_SEL
+//#define PIN_65_IS_GPIO     GPIO_OUT_LOW     // DISH_RT5047 LNB_SEL
 
 //------Chip Type---------------------------------------------------------------
 #include "chip/MSD92LGSW1.h"
@@ -730,8 +730,12 @@
 #define LED_GREEN_OFF()                 mdrv_gpio_set_high( PIN_67 )
 
 //IR out
-#define IR_ON()                  mdrv_gpio_set_low( PIN_68 )
-#define IR_OFF()                 mdrv_gpio_set_high( PIN_68 )
+#define IR_ON()                  mdrv_gpio_set_low( PIN_65 )
+#define IR_OFF()                 mdrv_gpio_set_high( PIN_65 )
+#define IR_ON1()                  mdrv_gpio_set_low( PIN_68 )
+#define IR_OFF1()                 mdrv_gpio_set_high( PIN_68 )
+#define IR_ON2()                  mdrv_gpio_set_low( PIN_71 )
+#define IR_OFF2()                 mdrv_gpio_set_high( PIN_71 )
 
 
 

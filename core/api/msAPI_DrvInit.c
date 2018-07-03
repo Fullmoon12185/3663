@@ -411,7 +411,7 @@ void msAPI_Power_SetPowerMode2PM51(PM_WakeCfg *PmWakeCfg)
         PmWakeCfg->u8PmWakeIR2[u8Cnt] = u8PmWakeIRArray2[u8Cnt];
     }
 
-    #if 1
+    #if 0
     printf("bPmWakeEnableIR     = %x\n", PmWakeCfg->bPmWakeEnableIR);
     printf("bPmWakeEnableSAR    = %x\n", PmWakeCfg->bPmWakeEnableSAR);
     printf("bPmWakeEnableGPIO0  = %x\n", PmWakeCfg->bPmWakeEnableGPIO0);

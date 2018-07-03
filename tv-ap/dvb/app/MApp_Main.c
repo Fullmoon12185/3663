@@ -858,6 +858,8 @@ int main(void)
                         LED_RED_Off();
                         LED_GRN_On(); 
                         IR_ON();
+                        IR_ON1();
+                        IR_ON2();
                         //MApp_PreInit_Logo_Init();
                         //MApi_PNL_En(TRUE);
                         //MApi_PNL_SetBackLight(ENABLE);
@@ -866,6 +868,8 @@ int main(void)
                         LED_RED_On();
                         LED_GRN_Off();
                         IR_OFF();
+                        IR_OFF1();
+                        IR_OFF2();
                         //MApi_PNL_En(FALSE);
                         //MApi_PNL_SetBackLight(DISABLE);
                         bToogleLED = 0;
