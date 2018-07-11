@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -200,6 +200,7 @@ S32 MApp_ZUI_API_DefaultWindowProc (HWND hWnd, PMSG pMsg)
                     keyevent = GETWNDKEYEVENT(focus);
                     while (keyevent->u16VirKey != VK_NULL)
                     {
+                         GUI_CTL_DBG(printf("keyevent->u16VirKey=0x%x, keyevent->u16ExeActID = 0x%x, pMsg->wParam = 0x%x\n", keyevent->u16VirKey, keyevent->u16ExeActID, pMsg->wParam););
                         if (keyevent->u16VirKey == pMsg->wParam)
                         {
                             handled = MApp_ZUI_ACT_ExecuteWndAction(keyevent->u16ExeActID);

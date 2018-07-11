@@ -611,7 +611,7 @@ const char* msAPI_AUD_Get_StdString(AUDIOSTANDARD_TYPE eAudioStd);
 
 //=============================================================
 
-#define ENABLE_DEBUG_AU_PATH_MUTE  1
+#define ENABLE_DEBUG_AU_PATH_MUTE  0
 #if( ENABLE_DEBUG_AU_PATH_MUTE )
 typedef enum
 {

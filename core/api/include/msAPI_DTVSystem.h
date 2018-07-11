@@ -360,7 +360,7 @@ typedef BYTE    PROGRAMDATA_MEMBER;
 #elif ( ENABLE_DVB_TAIWAN_APP )
 #define DEFAULT_COUNTRY                         E_TAIWAN
 #else
-#define DEFAULT_COUNTRY                         E_VIETNAM //E_UK should set defualt country to Germany for CI+1.3
+#define DEFAULT_COUNTRY                         E_RUSSIA //E_UK should set defualt country to Germany for CI+1.3
 #endif
 
 #define DEFAULT_PRINDEX                         INVALID_PRINDEX

@@ -394,11 +394,11 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
         // Panel output
         //////////////////////////////////////////////
         0,          //BOOL m_bPanelDither :1;           //PANEL_DITHER          // 8/6 bits panel
-        LINK_LVDS,  //BOOL m_ePanelLinkType :2;         //PANEL_LINK
+        1, //LINK_LVDS,  //BOOL m_ePanelLinkType :2;         //PANEL_LINK
 
         0,          //BOOL m_bPanelDualPort :1;         //PANEL_DUAL_PORT
 
-        0^PANEL_CONNECTOR_SWAP_PORT,                    // shall swap if
+        0, //0^PANEL_CONNECTOR_SWAP_PORT,                    // shall swap if
                                                         // (PANEL_SWAP_PORT XOR Board_Connect_Swap) is TRUE
 
         0,          //BOOL m_bPanelSwapOdd_ML   :1;     //PANEL_SWAP_ODD_ML
@@ -406,10 +406,10 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
         0,          //BOOL m_bPanelSwapOdd_RB   :1;     //PANEL_SWAP_ODD_RB
         0,          //BOOL m_bPanelSwapEven_RB  :1;     //PANEL_SWAP_EVEN_RB
 
-        PANEL_SWAP_LVDS_POL,
+        0, //PANEL_SWAP_LVDS_POL,
 
-        PANEL_SWAP_LVDS_CH,          //BOOL m_bPanelSwapLVDS_CH  :1;     //PANEL_SWAP_LVDS_CH
-        PANEL_PDP_10BIT,          //BOOL m_bPanelPDP10BIT     :1;     //PANEL_PDP_10BIT
+        0, //PANEL_SWAP_LVDS_CH,          //BOOL m_bPanelSwapLVDS_CH  :1;     //PANEL_SWAP_LVDS_CH
+        1, //PANEL_PDP_10BIT,          //BOOL m_bPanelPDP10BIT     :1;     //PANEL_PDP_10BIT
         1,          //BOOL m_bPanelLVDS_TI_MODE :1;     //PANEL_LVDS_TI_MODE
 
         0x00,       //BYTE m_ucPanelDCLKDelay;          //PANEL_DCLK_DELAY
@@ -427,10 +427,10 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
         0x01,       //BYTE m_ucPanelODDDataCurrent;     //PANEL_ODD_DATA_CURRENT     // odd data current
         0x01,       //BYTE m_ucPanelEvenDataCurrent;    //PANEL_EVEN_DATA_CURRENT    // even data current
 
-        30, //45,   //BYTE m_ucPanelOnTiming1;          //PANEL_ON_TIMING1          // time between panel & data while turn on power
-        400,        //BYTE m_ucPanelOnTiming2;          //PANEL_ON_TIMING2          // time between data & back light while turn on power
-        80,         //BYTE m_ucPanelOffTiming1;         //PANEL_OFF_TIMING1         // time between back light & data while turn off power
-        30, //20,   //BYTE m_ucPanelOffTiming2;         //PANEL_OFF_TIMING2         // time between data & panel while turn off power
+        20, //45,   //BYTE m_ucPanelOnTiming1;          //PANEL_ON_TIMING1          // time between panel & data while turn on power
+        600,        //BYTE m_ucPanelOnTiming2;          //PANEL_ON_TIMING2          // time between data & back light while turn on power
+        220,         //BYTE m_ucPanelOffTiming1;         //PANEL_OFF_TIMING1         // time between back light & data while turn off power
+        20, //20,   //BYTE m_ucPanelOffTiming2;         //PANEL_OFF_TIMING2         // time between data & panel while turn off power
 
         20,         //BYTE m_ucPanelHSyncWidth;         //PANEL_HSYNC_WIDTH
         40,         //BYTE m_ucPanelHSyncBackPorch;     //PANEL_HSYNC_BACK_PORCH
@@ -453,24 +453,24 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
         789,        //WORD m_wPanelMinVTotal;           //PANEL_MIN_VTOTAL
 
         88, //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
-        76, //DWORD m_dwPanelDCLK;              //PANEL_DCLK
+        79, //DWORD m_dwPanelDCLK;              //PANEL_DCLK
         60, //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
 
-        0x0019,     //m_wSpreadSpectrumStep;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
-        0x00C0,     //m_wSpreadSpectrumSpan;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
+        25,     //m_wSpreadSpectrumStep;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
+        192,     //m_wSpreadSpectrumSpan;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
 
-        0xA0,       //m_ucDimmingCtl
+        160,       //m_ucDimmingCtl
         255,        //m_ucMaxPWMVal;
-        0x50,//63,        //m_ucMinPWMVal;
+        80,//63,        //m_ucMinPWMVal;
 
         0,          //BOOL m_bPanelDeinterMode  :1;     //PANEL_DEINTER_MODE
-        E_PNL_ASPECT_RATIO_WIDE,
+        1, //E_PNL_ASPECT_RATIO_WIDE,
         //
         //  Board related params.
         //
-       (LVDS_PN_SWAP_H<<8) | LVDS_PN_SWAP_L,            //MS_U16 m_u16LVDSTxSwapValue
-       TI_8BIT_MODE,               //8bit ti bit mode
-       OUTPUT_10BIT_MODE,          //10bit ti bit mode
+       0,//(LVDS_PN_SWAP_H<<8) | LVDS_PN_SWAP_L,            //MS_U16 m_u16LVDSTxSwapValue
+       2, //TI_8BIT_MODE,               //8bit ti bit mode
+       0, //OUTPUT_8BIT_MODE,          //10bit ti bit mode
        0,          //   PANEL_SWAP_ODD_RG
        0,          //   PANEL_SWAP_EVEN_RG
        0,          //   PANEL_SWAP_ODD_GB
@@ -478,13 +478,13 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
        0,          //   double clock
        0x20ea0e,
        0x167109,
-       E_PNL_CHG_VTOTAL,
+       2,//E_PNL_CHG_VTOTAL,
        1,///<  PAFRC mixed with noise dither disable
     },
     88, //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
-    76, //DWORD m_dwPanelDCLK;              //PANEL_DCLK
+    79, //DWORD m_dwPanelDCLK;              //PANEL_DCLK
     60, //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
-    LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
+    24, //LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
 };
 
 

@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -292,8 +292,8 @@ S32 MApp_ZUI_API_DispatchMessage (PMSG pMsg)
             if (!MApp_ZUI_ACT_HandleGlobalKey((VIRTUAL_KEY_CODE)pMsg->wParam))
             {
                 focus = GETWNDFOCUS();
-                //printf("/focus=%bu\n", (U8)focus);
-                //printf("[dispmsg2]\n");
+                printf("/focus=%bu\n", (U8)focus);
+                printf("[dispmsg2]\n");
                 if(!(E_OSD_DMP == _eActiveOSD))
                 {
                     MApp_FuncExec_AdjustVolume((VIRTUAL_KEY_CODE)pMsg->wParam);
@@ -849,7 +849,7 @@ BOOLEAN _MApp_ZUI_API_WindowProcOnTimer(void)
 ///////////////////////////////////////////////////////////////////////////////
 HWND MApp_ZUI_API_GetFocus(void)
 {
-    //PRINT("\n[Note] focus window = %d", _FocusHwnd);
+    //printf("\n[Note] focus window = %d", _FocusHwnd);
     return _FocusHwnd;
 }
 

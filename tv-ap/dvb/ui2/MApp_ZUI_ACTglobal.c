@@ -227,6 +227,7 @@ extern E_OSD_ID _eActiveOSD;
 #if ENABLE_DMP_MINI_MENU
 extern void MApp_ZUI_ACT_AppShowDmpMiniMenu(void);
 #endif
+
 /////////////////////////////////////////////////////////
 // for customize
 
@@ -730,6 +731,7 @@ BOOLEAN MApp_ZUI_ACT_StartupOSD2(U32 id)
         #endif
 
         case E_OSD_AUTO_TUNING:
+            ZUI_MSG(printf("MApp_ZUI_ACT_AppShowAutoTuning();\n"););
             MApp_ZUI_ACT_AppShowAutoTuning();
             break;
 
@@ -746,6 +748,7 @@ BOOLEAN MApp_ZUI_ACT_StartupOSD2(U32 id)
             break;
 
         case E_OSD_INSTALL_GUIDE:
+            ZUI_MSG(printf("E_OSD_INSTALL_GUIDE();\n"););
             MApp_ZUI_ACT_AppShowInstallGuide();
             break;
 
@@ -1550,60 +1553,72 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
     switch (u8WinProcID)
     {
         case EN_ZUI_DEFAULTWINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DEFAULTWINPROC \n"););
             return DEFAULTWINPROC(msg->hwnd, msg);
 
         case EN_ZUI_MAINFRAMEWINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_MAINFRAMEWINPROC \n"););
             return MAINFRAMEWINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_TOPICON_WINPROC:
             //return TOPICON_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_INPUT_SOURCE_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_INPUT_SOURCE_WINPROC \n"););
             return INPUT_SOURCE_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_MAIN_PAGE_DIRECTION_ICON_WINPROC:
             //eturn MAINMENU_TRIICON_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_BGTANSPARENT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_BGTANSPARENT_WINPROC \n"););
             return BGTRANSPARENT_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_MENUITEMBAR_WINPROC:
         //    return MENUITEMBAR_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_BUTTONANICLICK_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_BUTTONANICLICK_WINPROC \n"););
             return BUTTONANICLICK_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_BUTTONANICLICKCHILD_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_BUTTONANICLICKCHILD_WINPROC \n"););
             return BUTTONANICLICKCHILD_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_DYNAMICTEXT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DYNAMICTEXT_WINPROC \n"););
             return DYNAMICTEXT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_ANIMATION_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_ANIMATION_WINPROC \n"););
             return ANIMATION_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_DYNAMICTEXTEFFECT_WINPROC:
         //    return DYNAMICTEXTEFFECT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_DYNAMICCOLORTEXT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DYNAMICCOLORTEXT_WINPROC \n"););
             return DYNAMICCOLORTEXT_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_MENUROOT_WINPROC:
         //    return MENUROOT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_BALLPROGRESSBAR_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_BALLPROGRESSBAR_WINPROC \n"););
             return BALLPROGRESSBAR_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_BALLPROGRESSBAR_FOCUSSTYLE_WINPROC:
             //return BALLPROGRESSBAR_FOCUSSTYLE_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_RECTPROGRESSBAR_2_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_RECTPROGRESSBAR_2_WINPROC \n"););
             return RECTPROGRESSBAR_2_WINPROC(msg->hwnd, msg);
         #if TXTFONT_ZOOM2X
                 case EN_ZUI_DYNAMICZOOM2X_WINPROC:
                     return DYNAMICZOOM2XPUNCTEXT_WINPROC(msg->hwnd,msg);
         #else
                 case EN_ZUI_DYNAMICZOOM2X_WINPROC:
+                    ZUI_MSG(printf("nguyen EN_ZUI_DYNAMICZOOM2X_WINPROC \n"););
                     return DYNAMICEPGPUNCTEXT_WINPROC(msg->hwnd,msg);
         #endif
 
@@ -1649,12 +1664,14 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
             //return MENUPICTUREPAGE1_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_CHANNELINFOROOT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_CHANNELINFOROOT_WINPROC \n"););
             return CHANNELINFOROOT_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_INPUTSOURCELIST_WINPROC:
         //    return INPUTSOURCELIST_WINPROC(msg->hwnd, msg);
 #if (ENABLE_DTMB || ENABLE_DVBT || ENABLE_DVBC || ENABLE_ISDBT || ENABLE_ATSC_SCAN_NEW_MODE)
         case EN_ZUI_DTVMANUALTUNING_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DTVMANUALTUNING_WINPROC \n"););
             return DTVMANUALTUNING_WINPROC(msg->hwnd, msg);
     #endif
 
@@ -1665,13 +1682,16 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
 
     #if ENABLE_DVBC
         case EN_ZUI_CADTVMANUALTUNING_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_CADTVMANUALTUNING_WINPROC \n"););
             return CADTVMANUALTUNING_WINPROC(msg->hwnd, msg);
     #endif
 
         case EN_ZUI_ATVMANUALTUNING_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_ATVMANUALTUNING_WINPROC \n"););
             return ATVMANUALTUNING_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_SCREENSAVER_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_SCREENSAVER_WINPROC \n"););
             return SCREENSAVER_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_AUDIOVOLUME_WINPROC:
@@ -1693,21 +1713,26 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
         //    return MESSAGEBOX_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_DYNAMICLIST_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DYNAMICLIST_WINPROC \n"););
             return DYNAMICLIST_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_ACT_MAINPAGE_DYNAMICLIST_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_ACT_MAINPAGE_DYNAMICLIST_WINPROC \n"););
             return MApp_ZUI_ACT_Mainpage_DynamicListWinProc(msg->hwnd, msg);
 
         //case EN_ZUI_INSTALLGUIDEROOT_WINPROC:
         //    return INSTALLGUIDEROOT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_MENUCOMMONDLGROOT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_MENUCOMMONDLGROOT_WINPROC \n"););
             return MENUCOMMONDLGROOT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_MENUPWDINPUT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_MENUPWDINPUT_WINPROC \n"););
             return MENUPWDINPUT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_MSGBOX_PWDINPUT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DYNAMICBITMAP_WINPROC \n"););
             return MSGBOXPWDINPUT_WINPROC(msg->hwnd, msg);
 #if (ENABLE_CI)
         case EN_ZUI_CIMMIPWDINPUT_WINPROC:
@@ -1720,10 +1745,12 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
         //    return CHANNELLISTROOT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_DYNAMICBITMAP_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DYNAMICBITMAP_WINPROC \n"););
             return DYNAMICBITMAP_WINPROC(msg->hwnd, msg);
 
     #if (ENABLE_DVB_PR_EDIT)
         case EN_ZUI_PREDITRENAMEINPUT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_PREDITRENAMEINPUT_WINPROC \n"););
             return PREDITRENAMEINPUT_WINPROC(msg->hwnd, msg);
     #endif
 
@@ -1733,6 +1760,7 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
     #endif
 
         case EN_ZUI_KEYBOARDINPUT_WINPROC:
+            ZUI_MSG(printf("nguyen KEYBOARDINPUT_WINPROC \n"););
             return KEYBOARDINPUT_WINPROC(msg->hwnd, msg);
 
         //case EN_ZUI_EPGROOT_WINPROC:
@@ -1741,25 +1769,33 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
   //      case EN_ZUI_EPGSERVICEBAR_WINPROC:
   //          return EPGSERVICEBAR_WINPROC(msg->hwnd, msg);
         case EN_ZUI_EPGPROGRAMMEGUIDE_TITLE_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPGPROGRAMMEGUIDE_TITLE_WINPROC \n"););
             return EPGPROGRAMMEGUIDE_TITLE_WINPROC(msg->hwnd, msg);
+            ZUI_MSG(printf("nguyen EPGPROGRAMMEGUIDE_TITLE_WINPROC \n"););
         case EN_ZUI_EPGPROGRAMMEGUIDE_TIMEITEM_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPGPROGRAMMEGUIDE_TIMEITEM_WINPROC \n"););
             return EPGPROGRAMMEGUIDE_TIMEITEM_WINPROC(msg->hwnd, msg);
         case EN_ZUI_EPGTIMEITEMEVENT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPGTIMEITEMEVENT_WINPROC \n"););
             return EPGTIMEITEMEVENT_WINPROC(msg->hwnd, msg);
         case EN_ZUI_EPGPROGRAMMEGUIDE_CHANNELITEM_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPGPROGRAMMEGUIDE_CHANNELITEM_WINPROC \n"););
             return EPGPROGRAMMEGUIDE_CHANNELITEM_WINPROC(msg->hwnd, msg);
         case EN_ZUI_EPGCHANNELITEMEVENT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPGCHANNELITEMEVENT_WINPROC \n"););
             return EPGCHANNELITEMEVENT_WINPROC(msg->hwnd, msg);
 //        case EN_ZUI_EPGTIMEPANE_WINPROC:
  //           return EPGTIMEPANE_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_EPGUPDATEALLTIMEITEM_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPGUPDATEALLTIMEITEM_WINPROC \n"););
             return EPG_UPDATEALLTIMEITEM_WINPROC(msg->hwnd, msg);
 #endif  //#if (ENABLE_DTV_EPG)
         //case EN_ZUI_DYNAMICPUNCTEXT_WINPROC:
         //    return DYNAMICPUNCTEXT_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_DYNAMICEPGPUNCTEXT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_DYNAMICEPGPUNCTEXT_WINPROC \n"););
             return DYNAMICEPGPUNCTEXT_WINPROC(msg->hwnd, msg);
 
 #if (UI_SKIN_SEL ==  UI_SKIN_1920X1080X565)
@@ -1774,12 +1810,15 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
 
 
         case EN_ZUI_AUTOCLOSE_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_AUTOCLOSE_WINPROC \n"););
             return AUTOCLOSE_WINPROC(msg->hwnd, msg);
 #if (ENABLE_CI)
         case EN_ZUI_CIMMIMSGBOX_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_CIMMIMSGBOX_WINPROC \n"););
             return CIMMIMSGBOX_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_CIMMI_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_CIMMI_WINPROC \n"););
             return CIMMI_WINPROC(msg->hwnd, msg);
 #endif
 #if (ENABLE_CI_PLUS)
@@ -1787,19 +1826,24 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
             return OPMENUMSGBOX_WINPROC(msg->hwnd, msg);
 #endif
         case EN_ZUI_MSGBOXTEXTPANE_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_MSGBOXTEXTPANE_WINPROC \n"););
             return MSGBOXTEXTPANE_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_AUTOTUNINGSKIPATV_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_AUTOTUNINGSKIPATV_WINPROC \n"););
             return AUTOTUNINGSKIPATV_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_AUTOTUNINGSKIPDTV_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_AUTOTUNINGSKIPDTV_WINPROC \n"););
             return AUTOTUNINGSKIPDTV_WINPROC(msg->hwnd, msg);
 
 #if (ENABLE_DTV_EPG)
         case EN_ZUI_EPG_TIMER_LIST_ITEM_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPG_TIMER_LIST_ITEM_WINPROC \n"););
             return EPG_TIMER_LIST_ITEM_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_EPG_TIMER_SAVE_DLG_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EPG_TIMER_SAVE_DLG_WINPROC \n"););
             return EPG_TIMER_SAVE_DLG_WINPROC(msg->hwnd, msg);
 #endif  //#if (ENABLE_DTV_EPG)
 
@@ -1836,6 +1880,7 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
 #endif
 
         case EN_ZUI_EFFECT_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_EFFECT_WINPROC \n"););
             return EFFECT_WINPROC(msg->hwnd, msg);
 
 #if 0
@@ -1869,18 +1914,22 @@ S32 MApp_ZUI_ACT_ExecuteWndProc(U8 u8WinProcID, PMSG msg)
 
 
         case EN_ZUI_FLIPPAGE_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_FLIPPAGE_WINPROC \n"););
             return FLIPPAGE_WINPROC(msg->hwnd, msg);
 
         case EN_ZUI_GRID_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_GRID_WINPROC \n"););
             return MApp_ZUI_CTL_GridWinProc(msg->hwnd, msg);
 
         case EN_ZUI_INSTALL_GUIDE_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_INSTALL_GUIDE_WINPROC \n"););
             return INSTALL_GUIDE_WINPROC(msg->hwnd, msg);
 #if ENABLE_ATSC
         case EN_ZUI_INSTALL_GUIDE_WINPROC_ATSC:
             return INSTALL_GUIDE_WINPROC_ATSC(msg->hwnd, msg);
 #endif
         case EN_ZUI_UPDATE_CEC_DEVICE_WINPROC:
+            ZUI_MSG(printf("nguyen EN_ZUI_UPDATE_CEC_DEVICE_WINPROC \n"););
             return UPDATE_CEC_DEVICE_WINPROC(msg->hwnd, msg);
 #if ENABLE_WAIT_CEC_READY
         case EN_ZUI_WAIT_CEC_POLLING_WINPROC:
@@ -1921,52 +1970,62 @@ BOOLEAN MApp_ZUI_ACT_ExecuteWndAction(U16 act)
     switch (act)
     {
         case EN_EXE_NAV_KEY_UP:
+            ZUI_MSG(printf("nguyen EN_EXE_NAV_KEY_UP \n"););
             MApp_ZUI_API_SetFocusByNav(MApp_ZUI_API_GetFocus(), NAV_UP);
             return TRUE;
 
         case EN_EXE_NAV_KEY_DOWN:
+            ZUI_MSG(printf("nguyen EN_EXE_NAV_KEY_DOWN \n"););
             MApp_ZUI_API_SetFocusByNav(MApp_ZUI_API_GetFocus(), NAV_DOWN);
             return TRUE;
 
         case EN_EXE_NAV_KEY_LEFT:
+            ZUI_MSG(printf("nguyen EN_ZUI_UPDATE_CEC_DEVICE_WINPROC \n"););
             MApp_ZUI_API_SetFocusByNav(MApp_ZUI_API_GetFocus(), NAV_LEFT);
             return TRUE;
 
         case EN_EXE_NAV_KEY_RIGHT:
+            ZUI_MSG(printf("nguyen EN_EXE_NAV_KEY_RIGHT \n"););
             MApp_ZUI_API_SetFocusByNav(MApp_ZUI_API_GetFocus(), NAV_RIGHT);
             return TRUE;
 
 
         case EN_EXE_NOTIFY_PARENT_KEY_SELECT:
+            ZUI_MSG(printf("nguyen EN_EXE_NOTIFY_PARENT_KEY_SELECT \n"););
             MApp_ZUI_API_PostMessage(
                 MApp_ZUI_API_GetParent(MApp_ZUI_API_GetFocus()),
                 MSG_NOTIFY_KEYDOWN, VK_SELECT);
             return TRUE;
         case EN_EXE_NOTIFY_PARENT_KEY_UP:
+            ZUI_MSG(printf("nguyen EN_EXE_NOTIFY_PARENT_KEY_UP \n"););
             MApp_ZUI_API_PostMessage(
                 MApp_ZUI_API_GetParent(MApp_ZUI_API_GetFocus()),
                 MSG_NOTIFY_KEYDOWN, VK_UP);
             return TRUE;
 
         case EN_EXE_NOTIFY_PARENT_KEY_DOWN:
+            ZUI_MSG(printf("nguyen EN_EXE_NOTIFY_PARENT_KEY_DOWN \n"););
             MApp_ZUI_API_PostMessage(
                 MApp_ZUI_API_GetParent(MApp_ZUI_API_GetFocus()),
                 MSG_NOTIFY_KEYDOWN, VK_DOWN);
             return TRUE;
 
         case EN_EXE_NOTIFY_PARENT_KEY_LEFT:
+            ZUI_MSG(printf("nguyen EN_EXE_NOTIFY_PARENT_KEY_LEFT \n"););
             MApp_ZUI_API_PostMessage(
                 MApp_ZUI_API_GetParent(MApp_ZUI_API_GetFocus()),
                 MSG_NOTIFY_KEYDOWN, VK_LEFT);
             return TRUE;
 
         case EN_EXE_NOTIFY_PARENT_KEY_RIGHT:
+            ZUI_MSG(printf("nguyen EN_EXE_NOTIFY_PARENT_KEY_RIGHT \n"););
             MApp_ZUI_API_PostMessage(
                 MApp_ZUI_API_GetParent(MApp_ZUI_API_GetFocus()),
                 MSG_NOTIFY_KEYDOWN, VK_RIGHT);
             return TRUE;
 
         case EN_EXE_REPAINT_ALL:
+            ZUI_MSG(printf("nguyen EN_EXE_REPAINT_ALL \n"););
             MApp_ZUI_API_InvalidateRect(NULL);
             return TRUE;
 
@@ -1979,29 +2038,37 @@ BOOLEAN MApp_ZUI_ACT_ExecuteWndAction(U16 act)
     switch(_eActiveOSD)
     {
         case E_OSD_MAIN_MENU:
+            //ZUI_MSG(printf("nguyen E_OSD_MAIN_MENU \n"););
             return MApp_ZUI_ACT_ExecuteMainMenuAction(act);
 
         case E_OSD_AUTO_TUNING:
+            ZUI_MSG(printf("nguyen E_OSD_AUTO_TUNING \n"););
             return MApp_ZUI_ACT_ExecuteAutoTuningAction(act);
 
         case E_OSD_CHANNEL_INFO:
+            ZUI_MSG(printf("nguyen E_OSD_CHANNEL_INFO \n"););
             return MApp_ZUI_ACT_ExecuteChannelInfoAction(act);
 
 #if (ENABLE_ATSC)
         case E_OSD_CHANNEL_INFO_ATSC:
+            ZUI_MSG(printf("nguyen E_OSD_CHANNEL_INFO_ATSC \n"););
             return MApp_ZUI_ACT_ExecuteChannelInfoAction_ATSC(act);
 #endif
 
         case E_OSD_INPUT_SOURCE:
+            ZUI_MSG(printf("nguyen E_OSD_INPUT_SOURCE \n"););
             return MApp_ZUI_ACT_ExecuteInputSourceAction(act);
 
         case E_OSD_AUDIO_VOLUME:
+            ZUI_MSG(printf("nguyen E_OSD_AUDIO_VOLUME \n"););
             return MApp_ZUI_ACT_ExecuteAudioVolumeAction(act);
 
         case E_OSD_SCREEN_SAVER:
+            ZUI_MSG(printf("nguyen E_OSD_SCREEN_SAVER \n"););
             return MApp_ZUI_ACT_ExecuteScreenSaverAction(act);
 
         case E_OSD_AUDIO_LANGUAGE:
+            ZUI_MSG(printf("nguyen E_OSD_AUDIO_LANGUAGE \n"););
             return MApp_ZUI_ACT_ExecuteAudioLanguageAction(act);
 
     #if ENABLE_SUBTITLE
@@ -2011,39 +2078,49 @@ BOOLEAN MApp_ZUI_ACT_ExecuteWndAction(U16 act)
 
 #if (ENABLE_DTMB || ENABLE_DVBT || ENABLE_DVBC || ENABLE_ISDBT || ENABLE_ATSC_SCAN_NEW_MODE)
         case E_OSD_DTV_MANUAL_TUNING:
+            ZUI_MSG(printf("nguyen E_OSD_DTV_MANUAL_TUNING \n"););
             return MApp_ZUI_ACT_ExecuteDtvManualTuningAction(act);
 #endif
         case E_OSD_ATV_MANUAL_TUNING:
+            ZUI_MSG(printf("nguyen E_OSD_ATV_MANUAL_TUNING \n"););
             return MApp_ZUI_ACT_ExecuteAtvManualTuningAction(act);
 
     #if (ENABLE_DVB_PR_EDIT)
         case E_OSD_PROGRAM_EDIT:
+            ZUI_MSG(printf("nguyen E_OSD_PROGRAM_EDIT \n"););
             return MApp_ZUI_ACT_ExecuteProgramEditAction(act);
     #endif
 
         case E_OSD_HOTKEY_OPTION:
+            ZUI_MSG(printf("nguyen E_OSD_HOTKEY_OPTION \n"););
             return MApp_ZUI_ACT_ExecuteHotkeyOptionAction(act);
 
         case E_OSD_MESSAGE_BOX:
+            ZUI_MSG(printf("nguyen E_OSD_MESSAGE_BOX \n"););
             return MApp_ZUI_ACT_ExecuteMessageBoxAction(act);
 
         case E_OSD_INSTALL_GUIDE:
+            ZUI_MSG(printf("nguyen E_OSD_INSTALL_GUIDE \n"););
             return MApp_ZUI_ACT_ExecuteInstallGuideAction(act);
 
 #if ENABLE_ATSC_INSTALLGUIDE
         case E_OSD_INSTALL_GUIDE_ATSC:
+            ZUI_MSG(printf("nguyen E_OSD_INSTALL_GUIDE_ATSC \n"););
             return MApp_ZUI_ACT_ExecuteInstallGuideAction_ATSC(act);
 #endif
 
         case E_OSD_CHANNEL_LIST:
+            ZUI_MSG(printf("nguyen E_OSD_CHANNEL_LIST \n"););
             return MApp_ZUI_ACT_ExecuteChannelListAction(act);
 #if (ENABLE_OAD)
         case E_OSD_OAD:
+            ZUI_MSG(printf("nguyen E_OSD_OAD \n"););
             return MApp_ZUI_ACT_ExecuteOADAction(act);
 #endif
 
 
         case E_OSD_EPG:
+            ZUI_MSG(printf("nguyen E_OSD_EPG \n"););
             #if (ENABLE_ATSC)
             if (IsAtscInUse() || IsATVInUse())
             {
@@ -2061,32 +2138,40 @@ BOOLEAN MApp_ZUI_ACT_ExecuteWndAction(U16 act)
 
 #if (ENABLE_CI)
         case E_OSD_CIMMI:
+            ZUI_MSG(printf("nguyen E_OSD_CIMMI \n"););
             return MApp_ZUI_ACT_ExecuteCIMMIAction(act);
 #endif
 #if ENABLE_DMP
         case E_OSD_DMP:
+            ZUI_MSG(printf("nguyen E_OSD_DMP \n"););
             return MApp_ZUI_ACT_ExecuteDmpAction(act);
 
     #if ENABLE_DMP_MINI_MENU
         case E_OSD_DMP_MINI_MENU:
+            ZUI_MSG(printf("nguyen E_OSD_DMP_MINI_MENU \n"););
             return MApp_ZUI_ACT_ExecuteDmpMiniMenuAction(act);
     #endif
 #endif
 #if ENABLE_FM_RADIO
         case E_OSD_FMRADIO:
+            ZUI_MSG(printf("nguyen E_OSD_FMRADIO \n"););
             return MApp_ZUI_ACT_ExecuteFMRadioAction(act);
 #endif
 
         case E_OSD_FACTORY_MENU:
+            ZUI_MSG(printf("nguyen E_OSD_FACTORY_MENU \n"););
             return MApp_ZUI_ACT_ExecuteFactoryMenuAction(act);
 
         case E_OSD_EXPERT_MENU:
+            ZUI_MSG(printf("nguyen E_OSD_EXPERT_MENU \n"););
             return MApp_ZUI_ACT_ExecuteExpertMenuAction(act);
 
         case E_OSD_DESIGN_MENU:
+            ZUI_MSG(printf("nguyen E_OSD_DESIGN_MENU \n"););
             return MApp_ZUI_ACT_ExecuteDesignMenuAction(act);
 
         case E_OSD_TENKEY_NUMBER:
+            ZUI_MSG(printf("nguyen E_OSD_TENKEY_NUMBER \n"););
             return MApp_ZUI_ACT_ExecuteTenKeyNumberAction(act);
 
     #if 0//def ENABLE_BT
@@ -2111,19 +2196,23 @@ BOOLEAN MApp_ZUI_ACT_ExecuteWndAction(U16 act)
 
     #if ENABLE_DVBC
         case E_OSD_CADTV_MANUAL_TUNING:
+            ZUI_MSG(printf("nguyen E_OSD_CADTV_MANUAL_TUNING \n"););
             return MApp_ZUI_ACT_ExecuteCadtvManualTuningAction(act);
     #endif
 
         case E_OSD_EFFECT_SETTING:
+            ZUI_MSG(printf("nguyen E_OSD_EFFECT_SETTING \n"););
             return MApp_ZUI_ACT_ExecuteEffectSettingAction(act);
 
     #if ENABLE_S2
         case E_OSD_MENU_DISHSETUP:
+            ZUI_MSG(printf("nguyen E_OSD_MENU_DISHSETUP \n"););
             return MApp_ZUI_ACT_ExecuteDishSetupMenuAction(act);
     #endif
 
     #if ENABLE_E_POP
         case E_OSD_EPOP:
+            ZUI_MSG(printf("nguyen ENABLE_E_POP \n"););
             return MApp_ZUI_ACT_ExecuteEpopAction(act);
     #endif
 #if GAME_ENABLE

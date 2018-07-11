@@ -107,7 +107,7 @@
 #include "MApp_GlobalSettingSt.h"
 #include "ZUI_strings_enum.h"
 
-#define DEBUG_LANGUAGE(x) x
+#define DEBUG_LANGUAGE(x)    //x
 /********************************************************************************/
 /*                     Macro                    */
 /* ******************************************************************************/

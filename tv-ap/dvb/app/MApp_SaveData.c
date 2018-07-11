@@ -216,7 +216,7 @@ WORD checkSum;
 static U32 su32DataSavePeriod = 0;
 //static BOOLEAN sbPcModeSaveFlag = FALSE;
 
-BOOL g_SaveData_bDebug = 1;
+BOOL g_SaveData_bDebug = 0;
 
 BOOL MApp_ReadDatabase(U32 srcIndex, U8* dstAddr, U16 size)
 {

@@ -1566,7 +1566,7 @@ void msAPI_AUD_PrintMuteClient(void)
         if( u32AuPathMuteStatus&AU_PATH_IN_MAIN)        printf(" IN_MAIN,");
     #endif
 
-        printf("\033[0m \n");
+        //printf("\033[0m \n");
     }
 }
 

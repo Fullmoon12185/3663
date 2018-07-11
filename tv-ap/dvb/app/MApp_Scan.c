@@ -295,7 +295,7 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 #else
 #define SCAN_ONE_LINE_DBINFO(y)         //y
 #endif
-#define SCAN_DBINFO(y)                  //y
+#define SCAN_DBINFO(y)                  y
 #define DVBC_SCAN_DBINFO(y)             //y
 
 //------------------------------------------------------------------------------
@@ -4809,6 +4809,7 @@ EN_RET MApp_DTV_Scan_Update_Mux( void )
 
             if( IS_NETWORK_UPDARE_COUNTRY(OSD_COUNTRY_SETTING) )
             {   //Direct to auto tuning flow
+                printf("abc123\n");
                 _stNetworkChangInfo.bCellRemove=_stNetworkChangInfo.bMuxAdd=_stNetworkChangInfo.bMuxRemove=_stNetworkChangInfo.bFreqChange = FALSE;
                 enDVBScanState = STATE_DVB_SCAN_INIT;
 
@@ -4850,9 +4851,11 @@ EN_RET MApp_DTV_Scan_Update_Mux( void )
             if(MApp_ZUI_GetActiveOSD() == E_OSD_MESSAGE_BOX)
             {
                 MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_CLOSE_CURRENT_OSD);
+                printf("abc123 E_OSD_MESSAGE_BOX\n");
             }
         #if 1   //TODO
             MApp_ZUI_ACT_StartupOSD(E_OSD_MESSAGE_BOX);
+             printf("abc123 MApp_ZUI_ACT_StartupOSD(E_OSD_MESSAGE_BOX);\n");
             MApp_ZUI_ACT_ExecuteWndAction( EN_EXE_SHOW_SCANNING_MSGBOX );
         #else
             uniSys_Funs_MessageBox_Show( EN_EXE_SHOW_SCANNING_MSGBOX );
@@ -4928,6 +4931,7 @@ EN_RET MApp_DTV_Scan_Update_Mux( void )
                     if(u8RFCh != SI_INVALID_PHYSICAL_CHANNEL_NUMBER && u8RFCh !=0)
                     {
                         msAPI_DFT_GetTSSetting( u8RFCh, &stTPSetting );
+                        printf("abc123 MmsAPI_DFT_GetTSSetting( u8RFCh, &stTPSetting );;\n");
                         //msAPI_Aeon_Disable();
                     }
                     else

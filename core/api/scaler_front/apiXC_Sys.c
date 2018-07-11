@@ -3803,7 +3803,7 @@ void msAPI_Scaler_SetScreenMute2(E_SCREEN_MUTE_STATUS eScreenMute, BOOLEAN bMute
                     // Log time for ChangeChannel
                     LOG_CHANGE_CHANNEL_TIME("UnMute Video");
                 #if (ENABLE_TIME_LOG)
-                    printf("Unmute Video at %u, %u\n", g_Debug_u32Time_ChangeChannel, MsOS_GetSystemTime());
+                    //printf("Unmute Video at %u, %u\n", g_Debug_u32Time_ChangeChannel, MsOS_GetSystemTime());
                 #endif
 
                 #if(ENABLE_DEBUG_BOOT_TIME)

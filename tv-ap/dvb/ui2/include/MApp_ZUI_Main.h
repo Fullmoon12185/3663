@@ -152,7 +152,7 @@ typedef enum
     #define ABORT()
     #define ZUI_DBG_FAIL(x) //x
 #endif  // ZUI_DBG_ERR
-    #define ZUI_MSG(x)      x
+    #define ZUI_MSG(x)      //x
 
 
 #ifndef ENABLE_MAINPAGE_EFFECT

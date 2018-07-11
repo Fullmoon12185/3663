@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -341,7 +341,11 @@ FUNC_MAINPAGE_STATUS MApp_FuncExec_Mainpage(FUNC_MAINPAGE_TYPE func, void *para1
                 else
             #endif
                 {
-                    MApp_SetOSDCountrySetting((EN_OSD_COUNTRY_SETTING)MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_GET_TUNNING_COUNTRY, 0, 0), TRUE);
+                    //MApp_SetOSDCountrySetting((EN_OSD_COUNTRY_SETTING)MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_GET_TUNNING_COUNTRY, 0, 0), TRUE);
+                    MApp_SetOSDCountrySetting(E_RUSSIA, TRUE);
+                    //printf("nguyen eTuneType=%u\n", eTuneType);
+                    //printf("nguyen (EN_OSD_COUNTRY_SETTING)MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_GET_TUNNING_COUNTRY, 0, 0)=%u\n", (EN_OSD_COUNTRY_SETTING)MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_GET_TUNNING_COUNTRY, 0, 0));
+                    
                 }
 
                 u8ScanAtvChNum = 0;

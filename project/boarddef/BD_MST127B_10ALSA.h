@@ -597,8 +597,10 @@
 //------Analog Function Setting-------------------------------------------------
 #define MOD_LVDS_GPIO                   0x820
 
-#define LVDS_PN_SWAP_L                  0xFC
-#define LVDS_PN_SWAP_H                  0x3F
+//#define LVDS_PN_SWAP_L                  0xFC
+//#define LVDS_PN_SWAP_H                  0x3F
+#define LVDS_PN_SWAP_L                  0x00
+#define LVDS_PN_SWAP_H                  0x00
 
 #if ENABLE_AUTOTEST
 #define ENABLE_SSC                      DISABLE

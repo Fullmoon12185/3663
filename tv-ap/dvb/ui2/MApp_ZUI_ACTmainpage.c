@@ -7234,7 +7234,8 @@ BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
                         #endif
                     }
                   #else
-                    MApp_ZUI_ACT_ExecuteMainMenuAction(EN_EXE_GOTO_TUNING_CONFIRM);
+                    //MApp_ZUI_ACT_ExecuteMainMenuAction(EN_EXE_GOTO_TUNING_CONFIRM);
+                    MApp_ZUI_ACT_ExecuteMainMenuAction(EN_EXE_GOTO_AUTO_TUNING);
                   #endif // #if ENABLE_T_C_COMBO
                 }
             }
@@ -7834,6 +7835,8 @@ BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
             MApp_ZUI_CTL_Grid_SetIndex(HWND_MENU_DLG_TUNE_CONFIRM_COUNTRY_GRID, MApp_ZUI_ACT_GetTuningCountryIndex, MApp_ZUI_ACT_SetTuningCountryIndex, 0, MApp_ZUI_ACT_GetTuningCountryIndexMax());
             MApp_ZUI_CTL_Grid_SetFnGetTextByIndex(HWND_MENU_DLG_TUNE_CONFIRM_COUNTRY_GRID, MApp_ZUI_ACT_GetCountryStringByIndex);
             MApp_ZUI_API_SetFocus(HWND_MENU_DLG_TUNE_CONFIRM_COUNTRY_GRID);
+            //MApp_ZUI_API_SetFocus(HWND_MENU_OPTION_SETUPWIZARD);
+            printf("nguyen abc MApp_ZUI_API_SetFocus(HWND_MENU_DLG_TUNE_CONFIRM_COUNTRY_GRID);\n");
             return TRUE;
 
         #if(DVBC_CERTIFICATION_AUTOSCAN_ENABLE)

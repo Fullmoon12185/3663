@@ -112,7 +112,7 @@
 
 
 
-#define DEBUG_UI_NOTIFY(x)  x
+#define DEBUG_UI_NOTIFY(x)  //x
 
 void MApp_UI_NotifySysEvent(EnuSysEvent enSysEvent, void* pPara)
 {

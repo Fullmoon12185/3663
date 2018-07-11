@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -223,6 +223,7 @@ EN_RET MApp_Menu_Main(void)
     {
         case STATE_MENU_INIT:
             MApp_ZUI_ACT_StartupOSD(E_OSD_MAIN_MENU);
+            printf("nguyen MApp_ZUI_ACT_StartupOSD(E_OSD_MAIN_MENU);\n");
             enMainMenuState = STATE_MENU_WAIT;
           #if ENABLE_TTX
             MApp_TTX_SetChInfoOnOff(FALSE);
