@@ -293,7 +293,7 @@ S32 MApp_ZUI_API_DispatchMessage (PMSG pMsg)
             {
                 focus = GETWNDFOCUS();
                 printf("/focus=%bu\n", (U8)focus);
-                printf("[dispmsg2]\n");
+                //printf("[dispmsg2]\n");
                 if(!(E_OSD_DMP == _eActiveOSD))
                 {
                     MApp_FuncExec_AdjustVolume((VIRTUAL_KEY_CODE)pMsg->wParam);

@@ -165,7 +165,7 @@ extern MS_U8 bPreviousSoundMode, bCurrentSoundMode;
 #endif
 
 //#define CHANNELCHANGE_DBINFO(y)         y
-#define DEBUG_ENABLE_CHANNEL_ATSC(x)    //x
+#define DEBUG_ENABLE_CHANNEL_ATSC(x)    x
 
 #define ENABLE_CH_CHANGE_TIMER_DEBUG    0
 
@@ -747,8 +747,8 @@ void MApp_ChannelChange_EnableChannel_ATSC (void)
     MApp_DB_ATSC_LoadCurChSetting();
 #endif
 
-    //printf("stChSetting.u16TotalHideSrvNum=%u\n", stChSetting.u16TotalHideSrvNum);
-    //printf("stChSetting.u16MainListSrvNum=%u\n", stChSetting.u16MainListSrvNum);
+    printf("stChSetting.u16TotalHideSrvNum=%u\n", stChSetting.u16TotalHideSrvNum);
+    printf("stChSetting.u16MainListSrvNum=%u\n", stChSetting.u16MainListSrvNum);
 
     if ( ( fEnableSignalCheck ) // Already enable channel
     #if 0//ndef CHANNEL_HIDE_AS_SKIP_ONLY

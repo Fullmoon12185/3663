@@ -243,7 +243,7 @@
 #if ENABLE_SCAN_ONELINE_MSG     // this option is for easy debugging missing channel
 #define INTERN_DVBT_INTERNAL_DEBUG             0
 #else
-#define INTERN_DVBT_INTERNAL_DEBUG             0
+#define INTERN_DVBT_INTERNAL_DEBUG             1
 #endif
 
 #if(FRONTEND_TUNER_TYPE==MSTAR_AVATAR2)
@@ -1090,7 +1090,7 @@ BOOLEAN INTERN_DVBT_Get_SW_ChannelLength(U16 *ch_length);
 //#define     DMD_DVBT_CHECKSUM                           0x00
 /*END INTERN_DVBT_DSPREG_TABLE*/
 #define FS_H        ((DVBT_FS>>8)&0xFF)    // FS=45473, Fs = 45.474MHz
-#define FS_L        (DVBT_FS&0xFF)    // andy 2009-8-18 ¿ÀÈÄ 10:22:29 0x9E
+#define FS_L        (DVBT_FS&0xFF)    // andy 2009-8-18 ï¿½ï¿½ï¿½ï¿½ 10:22:29 0x9E
 #define SET_ZIF     0x00
 #define IQB_EN      0x00
 

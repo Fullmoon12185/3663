@@ -223,7 +223,6 @@ EN_RET MApp_Menu_Main(void)
     {
         case STATE_MENU_INIT:
             MApp_ZUI_ACT_StartupOSD(E_OSD_MAIN_MENU);
-            printf("nguyen MApp_ZUI_ACT_StartupOSD(E_OSD_MAIN_MENU);\n");
             enMainMenuState = STATE_MENU_WAIT;
           #if ENABLE_TTX
             MApp_TTX_SetChInfoOnOff(FALSE);

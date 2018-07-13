@@ -123,6 +123,7 @@
 #include "MApp_TV.h"
 #include "MApp_Scan.h"
 #include "GPIO_macro.h"
+#include "MApp_SaveData.h"
 
 #if (ENABLE_SECURITY_R2)
 #include "msAPI_SecurityR2.h"
@@ -911,6 +912,7 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 #define     NUM_PRESS_TIME_BEFORE_GO_TO_HOME  10
 #define     SHOP_BACKLIGHT      255
 #define     HOME_BACKLIGHT      100
+#define     DEBUG_HOME_SHOP(x)  x
 static U16 fourKeyPressed = 0;
 static U16 countForHomeShop = 0;
 static U16 countForHomeShopSaved = 0;
@@ -926,27 +928,27 @@ void HomeShop_FSM (void){
             if(countForHomeShop <= NUM_PRESS_TIME_BEFORE_GO_TO_HOME){
                 countForHomeShop ++;
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
-                printf("\n*************************************************\n");
-                printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop);
-                printf("\n*************************************************\n");
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
                 countForHomeShopSaved = MApp_Load_UserDataForHomeShop();
-                printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
+                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved););
             } else {
-                printf("\n*************************************************\n");
-                printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop);
-                printf("\n*************************************************\n");
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
             }
-            printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-            printf("\n******homeshop_state %u\n", homeshop_state);
-            printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
+            DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
+            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
             timeLast = timeCurr;
         }
         keytemp = getKeyPressed() - KEY_0;
         if(keytemp <= 9){
             fourKeyPressed = (fourKeyPressed<<4)|keytemp;
-            printf("\n*************************************************\n");
-            printf("\nFourKeyPressed 0x%x\n", fourKeyPressed);
-            printf("\n*************************************************\n");
+            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            DEBUG_HOME_SHOP(printf("\nFourKeyPressed 0x%x\n", fourKeyPressed););
+            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
             if(fourKeyPressed == 0x1349){
                 homeshop_state = SHOP_STATE;
                 countForHomeShop = 0;

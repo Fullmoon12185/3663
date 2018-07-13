@@ -1413,6 +1413,7 @@ static void _MApp_ZUI_ACT_MainMenu_Indicate_Signal_Status(void)
 
         if(stChSetting.u16MainListSrvNum > 0)
         {
+            
             MApp_ZUI_API_EnableWindow(HWND_MENU_CHANNEL_DTV_SIGNAL_TEXT,TRUE);
             MApp_ZUI_API_EnableWindow(HWND_MENU_CHANNEL_DTV_SIGNAL_QULITY_TEXT, TRUE);
         }
