@@ -493,7 +493,7 @@ static HWND _MApp_ZUI_ACT_EpgProGuideChannelItemIndexMapToWindow(U8 u8Index)
 #define     DBG_TIMER       0x40
 #define     DBG_SCHE        0x80
 
-#define     EPG_UI_DEBUG    0x00
+#define     EPG_UI_DEBUG    0x01
 
 #if        (EPG_UI_DEBUG)
 #define    EPG_UI( flag, s )    { if (EPG_UI_DEBUG & flag)    {printf s;} }

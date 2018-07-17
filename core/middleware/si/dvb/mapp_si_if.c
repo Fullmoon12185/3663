@@ -1366,7 +1366,9 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
     printf("\n ---------------------------------\n");
     printf(" >>>> msAPI_SI_AddProgram()\n");
     printf(" cRFChannelNumber=%u,", stDtvIDTable->cRFChannelNumber);
-
+    
+    printf("wLCN:%d, VideoPID:%d, ", pSIDTVProgramData->wLCN, DTVProgramData.wVideo_PID);
+    
 
 #if ENABLE_DVBC
     if( (FALSE == msAPI_SI_GetOpMode())
@@ -1411,8 +1413,7 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
 
     printf(" ONID:%d, NID:%d, ", stDtvIDTable->wOriginalNetwork_ID, stDtvIDTable->wNetwork_ID);
     printf(" wLCN :%d, wTS_LCN:%d, sLCN:%d\n", pSIDTVProgramData->wLCN, pSIDTVProgramData->wTS_LCN, pSIDTVProgramData->wSimu_LCN);
-
-    if (FALSE == msAPI_SI_AddProgramIDTable(stDtvIDTable, &DTVProgramData.bIDIdex))
+     if (FALSE == msAPI_SI_AddProgramIDTable(stDtvIDTable, &DTVProgramData.bIDIdex))
     {
         return FALSE;
     }
@@ -1501,8 +1502,8 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
 
     printf("wLCN:%d, VideoPID:%d, ", pSIDTVProgramData->wLCN, DTVProgramData.wVideo_PID);
     printf("\r\n >>>> ServiceType:0x%x, VisibleFlag:0x%x, ", pSIDTVProgramData->stCHAttribute.bServiceType, pSIDTVProgramData->stCHAttribute.bVisibleServiceFlag);
-    printf("TSID:%d, SID:%d, Scram:%d, ", stDtvIDTable->wTransportStream_ID, pSIDTVProgramData->wService_ID, pSIDTVProgramData->stCHAttribute.bIsScramble);
-
+    printf("TSID:%d, SID:%d, Scram:%d, \n", stDtvIDTable->wTransportStream_ID, pSIDTVProgramData->wService_ID, pSIDTVProgramData->stCHAttribute.bIsScramble);
+    
 
 #if( ENABLE_CM_STORE_AUD_INFO_NEW_METHOD )
 

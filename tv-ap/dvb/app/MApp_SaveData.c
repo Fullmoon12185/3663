@@ -3630,7 +3630,7 @@ void MApp_SaveData_LoadGenSettingExt(void)
 
 #if(ENABLE_DTV_EPG)
 
-#define DEBUG_DB_MANUAL_EVENT(x)    //x
+#define DEBUG_DB_MANUAL_EVENT(x)    x
 void MApp_DB_Load_ManualEventSetting(U8* pu8ManualEventData, U32 u32Size)
 {
     DEBUG_DB_MANUAL_EVENT(printf("Load_ManualEventSetting()\n"););

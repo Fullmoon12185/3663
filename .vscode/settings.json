@@ -6,5 +6,6 @@
         "sysinit.h": "c",
         "zui_strings_enum.h": "c",
         "panel.h": "c"
-    }
+    },
+    "C_Cpp.dimInactiveRegions": false
 }

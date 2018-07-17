@@ -2615,8 +2615,10 @@ BOOLEAN MApp_ZUI_ACT_HandleMainPageKey(VIRTUAL_KEY_CODE key)
         {
             #if NORDIG_FUNC //for Nordig Spec v2.0
                 U16 u16TotalProNum = msAPI_CM_CountProgram(E_SERVICETYPE_DTV, E_PROGACESS_INCLUDE_VISIBLE_ONLY) + msAPI_CM_CountProgram(E_SERVICETYPE_RADIO, E_PROGACESS_INCLUDE_VISIBLE_ONLY) + msAPI_CM_CountProgram(E_SERVICETYPE_DATA, E_PROGACESS_INCLUDE_VISIBLE_ONLY);
+                printf("nguyen NORDIG_FUNC u16TotalProNum %d \n", u16TotalProNum);
             #else
                 U16 u16TotalProNum = msAPI_CM_CountProgram(E_SERVICETYPE_DTV, E_PROGACESS_INCLUDE_VISIBLE_ONLY) + msAPI_CM_CountProgram(E_SERVICETYPE_RADIO, E_PROGACESS_INCLUDE_VISIBLE_ONLY);
+                printf("nguyen u16TotalProNum %d \n", u16TotalProNum);
             #endif
 
             if(!IsStorageInUse()

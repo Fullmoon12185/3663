@@ -5856,7 +5856,7 @@ BOOLEAN msAPI_CM_AddProgram(DTV_CHANNEL_INFO *pDTVProgramData, BOOLEAN *bDBFull,
     wCurrentTSID = msAPI_CM_GetTS_ID(bServiceType, wPosition);
 
     //remove old same service
-    printf("pDTVProgramData->bIDIdex...%d\n",pDTVProgramData->bIDIdex);
+    DEBUG_CM_ADD_PROG(printf("pDTVProgramData->bIDIdex...%d\n",pDTVProgramData->bIDIdex););
 #if (ENABLE_CI_PLUS)
     if(TRUE == msAPI_CM_GetOpMode())
     {
@@ -5864,7 +5864,7 @@ BOOLEAN msAPI_CM_AddProgram(DTV_CHANNEL_INFO *pDTVProgramData, BOOLEAN *bDBFull,
         //printf("Op mode! bUpdateCurrentService = %d,  bNotAddThisService = %d\n", bUpdateCurrentService,bNotAddThisService);
         if(TRUE == bNotAddThisService)
         {
-            printf("[LCN Conflict: %u] Mark bVisibleServiceFlag False\n", pDTVProgramData->wLCN);
+            DEBUG_CM_ADD_PROG(printf("[LCN Conflict: %u] Mark bVisibleServiceFlag False\n", pDTVProgramData->wLCN););
             pDTVProgramData->stCHAttribute.bVisibleServiceFlag = FALSE;
         }
     }
@@ -5970,19 +5970,19 @@ BOOLEAN msAPI_CM_AddProgram(DTV_CHANNEL_INFO *pDTVProgramData, BOOLEAN *bDBFull,
 
     }
 
-    printf("add service valid %d idindex %x sid %x lcn %d simulcn %d\n",bIsValidService,
+    DEBUG_CM_ADD_PROG(printf("add service valid %d idindex %x sid %x lcn %d simulcn %d\n",bIsValidService,
         pDTVProgramData->bIDIdex,pDTVProgramData->wService_ID,
-        pDTVProgramData->wLCN,pDTVProgramData->wSimu_LCN  );
+        pDTVProgramData->wLCN,pDTVProgramData->wSimu_LCN  ););
 
-    printf("cPLPID=%u, cHpLp=%u\n", pMuxTable[pDTVProgramData->bIDIdex].cPLPID, pMuxTable[pDTVProgramData->bIDIdex].cHpLp );
+    DEBUG_CM_ADD_PROG(printf("cPLPID=%u, cHpLp=%u\n", pMuxTable[pDTVProgramData->bIDIdex].cPLPID, pMuxTable[pDTVProgramData->bIDIdex].cHpLp ););
 
-    printf(" bChannelName=");
+    DEBUG_CM_ADD_PROG(printf(" bChannelName="););
     msAPI_DtvSys_PrintServiceName( pDTVProgramData->bChannelName, MAX_SERVICE_NAME );
-    printf("\n");
+    DEBUG_CM_ADD_PROG(printf("\n"););
 
     if( FALSE == bIsValid)
     {
-        printf("bIsValid=FALSE!\n");
+        DEBUG_CM_ADD_PROG(printf("bIsValid=FALSE!\n"););
         return FALSE;
     }
     if( FALSE == bIsValidService)

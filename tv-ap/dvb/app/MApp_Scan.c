@@ -291,12 +291,12 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 //                     Macro
 //------------------------------------------------------------------------------
 #if ENABLE_SCAN_ONELINE_MSG
-#define SCAN_ONE_LINE_DBINFO(y)         y
+#define SCAN_ONE_LINE_DBINFO(y)         //y
 #else
-#define SCAN_ONE_LINE_DBINFO(y)         y
+#define SCAN_ONE_LINE_DBINFO(y)         //y
 #endif
 #define SCAN_DBINFO(y)                  y
-#define DVBC_SCAN_DBINFO(y)             y
+#define DVBC_SCAN_DBINFO(y)             //y
 
 //------------------------------------------------------------------------------
 
@@ -395,7 +395,188 @@ static U8 _CurrentPlpID = 0xFF;
 U8 _TotalPlpIDNum;
 extern MS_U8 u8PlpIDList[32];
 #endif
+//nguyen
+#define MAX_CHANNEL 169
+#define ALL_AVAILABLE_CHANNELS 66
+#define ALL_LOCKED_CHANNELS (MAX_CHANNEL - ALL_AVAILABLE_CHANNELS)
+typedef struct {
+    U8 tsid;
+    U16 sid;
+    U8 scram;
+} TV_Channel;
+static TV_Channel tvChannel[ALL_LOCKED_CHANNELS] = {
+    // {1, 11, 0}, //[VTV1 HD DB]
+    // {1, 12, 0}, //[VTV2 HD]
+    // {1, 13, 0}, //[VTV3 HD DB]
+    // {1, 14, 0}, //[VTV4]
+    // {1, 15, 0}, //[VTV5 Tay Nam Bo]
+    // {1, 16, 0}, //[VTV6 HD DB]
+    // {1, 17, 0}, //[VTV7]
+    // {1, 18, 0}, //[VTV8]
+    // {1, 19, 0}, //[VTV9 HD]
+    // {2, 1, 0}, //[]
+    // {2, 2, 0}, //[]
+    // {2, 3, 0}, //[]
+    // {2, 4, 0}, //[]
+    // {2, 5, 0}, //[]
+    // {2, 6, 0}, //[]
+    // {2, 7, 0}, //[]
+    // {2, 8, 0}, //[]
+    // {2, 9, 0}, //[]
+    // {2, 10, 0}, //[]
+    // {2, 11, 0}, //[]
+    // {2, 12, 0}, //[]
+    // {2, 13, 0}, //[]
+    // {1, 51, 0}, //[VTC1HD]
+    // {1, 53, 0}, //[VTC3HD]
+    // {1, 57, 0}, //[VTC7HD]
+    // {1, 59, 0}, //[VTC9HD]
+    // {1, 63, 0}, //[VTC13HD]
+    // {1, 64, 0}, //[VTC14HD]
+    // {1, 71, 0}, //[HAIPHONG HD]
+    // {1, 72, 0}, //[THAIBINH HD]
+    // {1, 73, 0}, //[THANHHOA HD]
+    // {1, 81, 0}, //[DN1]
+    // {3, 1, 0}, //[HTV7 HD]
+    // {3, 2, 0}, //[HTV9]
+    // {3, 3, 0}, //[HTV2]
+    // {3, 5, 0}, //[HTV3]
+    // {3, 7, 0}, //[SCJ TV SHOPPING]
+    // {3, 20, 0}, //[TH TAY NINH]
+    // {3, 15, 0}, //[HTV THE THAO]
+    // {3, 8, 0}, //[CAN THO]
+    // {3, 9, 0}, //[DONG THAP]
+    // {3, 10, 0}, //[BINH DUONG 1]
+    // {3, 6, 0}, //[HTV4]
+    // {3, 12, 0}, //[BRVT]
+    // {3, 17, 0}, //[LONG AN]
+    // {3, 14, 0}, //[YOU TV]
+    // {3, 16, 0}, //[GIAI TRI TV]
+    // {3, 22, 0}, //[BINH THUAN]
+    // {3, 4, 0}, //[HTVC - VGS SHOP]
+    // {3, 13, 0}, //[BINH PHUOC 2]
+    // {3, 11, 0}, //[TTXVN]
+    // {3, 23, 0}, //[TH DA NANG 2]
+    // {3, 19, 0}, //[TH BINH PHUOC 1]
+    // {3, 21, 0}, //[SCTV10]
+    // {3, 18, 0}, //[SOC TRANG 2]
+    // {1, 3403, 0}, //[TH An Giang]
+    // {1, 3405, 0}, //[TH Ben Tre]
+    // {1, 3404, 0}, //[TH Bac Lieu]
+    // {1, 3407, 0}, //[TH Hau Giang]
+    // {1, 3409, 0}, //[TH Soc Trang]
+    // {1, 3410, 0}, //[TH Tien Giang]
+    // {1, 3411, 0}, //[TH Tra Vinh ]
+    // {1, 3401, 0}, //[THVL1-HD]
+    // {1, 3402, 0}, //[THVL2-HD]
+    // {1, 3408, 0}, //[TH Kien Giang]
+    // {1, 3406, 0}, //[TH Ca Mau]
+    {4, 109, 1}, //[HTVC - Phim]
+    {4, 105, 1}, //[<21>QPVN - Qu(0xE1)(0xBB)(0x91)c Ph(0xC3)(0xB2)ng]
+    {4, 106, 0}, //[<21>Qu(0xE1)(0xBB)(0x91)c H(0xE1)(0xBB)(0x99)i]
+    {4, 76, 1}, //[<21>TH(0xC4)(0x90)T - TH (0xC4)(0x90)(0xE1)(0xBB)(0x93)ng Th(0xC3)(0xA1)p]
+    {4, 113, 1}, //[HTV4 - TH TPHCM]
+    {4, 104, 1}, //[VTC14]
+    {4, 140, 1}, //[<21>SCTV9 - Phim truy(0xE1)(0xBB)(0x87)n ch(0xC3)(0xA2)u (0xC3)(0xA1)]
+    {4, 141, 1}, //[<21>SCTV14 - Phim Vi(0xE1)(0xBB)(0x87)t]
+    {4, 123, 1}, //[VTC13]
+    {4, 118, 1}, //[Diva]
+    {4, 25, 1}, //[VTC1]
+    {4, 122, 1}, //[OutDoor]
+    {4, 82, 1}, //[Da Vinci]
+    {4, 83, 1}, //[<21>THTG - TH Ti(0xE1)(0xBB)(0x81)n Giang]
+    {4, 125, 1}, //[Channel News Asia]
+    {4, 120, 1}, //[(0x5)TH Nh(0xE2)n D(0xE2)n]
+    {4, 142, 1}, //[<21>SCTV Phim t(0xE1)(0xBB)(0x95)ng h(0xE1)(0xBB)(0xA3)p]
+    {4, 47, 1}, //[DW]
+    {4, 207, 1}, //[VTVCab8 - Bibi]
+    {4, 50, 1}, //[TV5]
+    {4, 81, 1}, //[Fox HD]
+    {4, 402, 1}, //[VTC11  Kids TV]
+    {4, 403, 1}, //[VTVcab17 - YEAH 1 TV]
+    {4, 404, 1}, //[VTVcab5 - EChannel]
+    {4, 405, 1}, //[You TV]
+    {4, 407, 1}, //[BTV4 Imovie]
+    {4, 406, 1}, //[<21>THBT - TH B(0xE1)(0xBA)(0xBF)n Tre]
+    {1, 24, 1}, //[Fashion TV HD]
+    {1, 57, 1}, //[AXN HD]
+    {1, 61, 1}, //[HBO HD]
+    {1, 63, 1}, //[NationalGeographic HD]
+    {1, 5, 1}, //[ANTV - TH CAND]
+    {1, 4, 1}, //[Vnews - TTXVN]
+    {1, 36, 1}, //[<21>VTV3 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
+    {1, 37, 0}, //[HTV7 - TH TPHCM]
+    {1, 9, 0}, //[HTV9 - TH TPHCM]
+    {1, 19, 1}, //[<21>VietTeen - Nh(0xE1)(0xBA)(0xA1)c tr(0xE1)(0xBA)(0xBB)]
+    {1, 34, 1}, //[Channel V]
+    {1, 21, 1}, //[Discovery]
+    {1, 43, 1}, //[(0x5)KTV - TH Kh(0xE1)nh H(0xF2)a]
+    {1, 51, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c C(0xC3)(0xA1)ch M(0xE1)(0xBA)(0xA1)ng]
+    {1, 52, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Tr(0xE1)(0xBB)(0xAF) T(0xC3)(0xAC)nh]
+    {1, 107, 1}, //[<21>An Ninh Th(0xE1)(0xBA)(0xBF) Gi(0xE1)(0xBB)(0x9B)i]
+    {1, 108, 1}, //[MOV]
+    {1, 72, 1}, //[THVL2 - TH Vinh Long]
+    {1, 69, 1}, //[<21>DN1 - TH (0xC4)(0x90)(0xE1)(0xBB)(0x93)ng Nai]
+    {1, 71, 1}, //[<21>VTV8 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
+    {1, 42, 1}, //[<21>VTV2 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
+    {1, 401, 1}, //[VTVcab18 - Tin tuc The thao HD]
+    {1, 41, 1}, //[VTC16 - 3NTV]
+    {1, 204, 0}, //[SSU_Zinwell]
+    {2, 59, 1}, //[<21>An Vi(0xC3)(0xAA)n HD - V(0xC4)(0x83)n H(0xC3)(0xB3)a]
+    {2, 39, 1}, //[<21>BTV1 - TH B(0xC3)(0xAC)nh D(0xC6)(0xB0)(0xC6)(0xA1)ng]
+    {2, 58, 1}, //[Fox Sports HD]
+    {2, 98, 1}, //[Discovery Asia HD]
+    {2, 60, 1}, //[Fox Movies HD]
+    {2, 53, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c D(0xC3)(0xA2)n T(0xE1)(0xBB)(0x99)c]
+    {2, 56, 1}, //[CNN]
+    {2, 23, 1}, //[Disney Junior]
+    {2, 8, 1}, //[Animal Planet]
+    {2, 1, 1}, //[Fox Sports 2]
+    {2, 2, 1}, //[MAX BY HBO]
+    {2, 20, 1}, //[<21>SAM - Thi(0xE1)(0xBA)(0xBF)u nhi]
+    {2, 22, 1}, //[Disney Channel]
+    {2, 26, 1}, //[<21>Ca nh(0xE1)(0xBA)(0xA1)c Thi(0xE1)(0xBA)(0xBF)u Nhi]
+    {2, 29, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Nam B(0xE1)(0xBB)(0x99)]
+    {2, 10, 1}, //[Today TV - VTC]
+    {2, 44, 1}, //[THVL1 - TH Vinh Long]
+    {2, 126, 1}, //[AFC]
+    {2, 200, 1}, //[<21>VTVCab3 - Th(0xE1)(0xBB)(0x83) Thao TV]
+    {2, 201, 1}, //[(0x10)]
+    {2, 27, 1}, //[VOV TV]
+    {2, 14, 1}, //[VTC9]
+    {2, 38, 0}, //[<21>ANT - Thi(0xE1)(0xBA)(0xBF)u Nhi]
+    {2, 2560, 0}, //[SSU_kaon]
+    {2, 7000, 0}, //[SSU_CFT]
+    {3, 12, 1}, //[<21>VTV6 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
+    {3, 17, 1}, //[Phim Hay]
+    {3, 15, 1}, //[<21>NCM - Th(0xE1)(0xBB)(0x83) thao]
+    {3, 310, 1}, //[HTV2 - TH TPHCM]
+    {3, 43, 1}, //[HTV3 - TH TPHCM]
+    {3, 202, 1}, //[D Dramas - VTVcab]
+    {3, 40, 1}, //[<21>Thu(0xE1)(0xBA)(0xA7)n Vi(0xE1)(0xBB)(0x87)t - TH TPHCM]
+    {3, 203, 1}, //[<21>VTVcab2 - Phim Vi(0xE1)(0xBB)(0x87)t]
+    {3, 70, 1}, //[History]
+    {3, 45, 1}, //[Cartoon Network]
+    {3, 204, 1}, //[<21>VTVcab1 - Gi(0xE1)(0xBA)(0xA3)i Tr(0xC3)(0xAD) TV]
+    {3, 48, 1}, //[Arirang]
+    {3, 46, 1}, //[<21>VTV9 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
+    {3, 49, 1}, //[NHK World]
+    {3, 124, 1}, //[BBC - World News]
+    {3, 64, 1}, //[LA34 - TH Long An]
+    {3, 103, 1}, //[<21>TH(0xC4)(0x90)T2 - Mi(0xE1)(0xBB)(0x81)n T(0xC3)(0xA2)y]
+    {3, 67, 1}, //[<21>BTV2 - TH B(0xC3)(0xAC)nh D(0xC6)(0xB0)(0xC6)(0xA1)ng]
+    {3, 1000, 0}, //[<21>H(0xC6)(0xB0)(0xE1)(0xBB)(0x9B)ng d(0xE1)(0xBA)(0xAB)n Kh(0xC3)(0xA1)ch H(0xC3)(0xA0)ng]
+    {3, 62, 1}, //[FOXlife HD]
+    {3, 18, 1}, //[<21>VTV1 HD - TH Vi(0xE1)(0xBB)(0x87)t Nam]
+    {3, 54, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Tr(0xE1)(0xBA)(0xBB)]
+    {3, 55, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c C(0xE1)(0xBB)(0x95) (0xC4)(0x90)i(0xE1)(0xBB)(0x83)n]
+    {3, 11, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Nh(0xE1)(0xBA)(0xB9)]
+    {3, 68, 1}, //[<21>(0xC4)(0x90)(0xE1)(0xBB)(0x8D)c S(0xC3)(0xA1)ch]
+    {3, 14, 1}, //[VTVcab12-STYLE TV]
+    {3, 200, 1}, //[<21>THTPCT - TH C(0xE1)(0xBA)(0xA7)n Th(0xC6)(0xA1)]
 
+};
+//nguyen
 //********************************************************************************
 //                     local prototype
 //********************************************************************************
@@ -1377,7 +1558,15 @@ void MApp_DTV_Scan_End( BOOLEAN bSkipDupSrvRemove )
 //    }
 //}
 
-
+BOOLEAN channelCheck(U8 tsid, U16 sid, U8 scram) {
+    U8 i;
+    for(i = 0; i < MAX_CHANNEL; i ++){
+        if((tvChannel[i].tsid == tsid) && (tvChannel[i].sid == sid) && (tvChannel[i].scram == scram)){
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
 
 /********************************************************************************************************************************************************/
 /********************************************************************************************************************************************************/
@@ -1388,7 +1577,7 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
     U8 u8TotalCh = 0;
     BOOLEAN fIsDummyCh;
     BOOLEAN bBackupUsingBuffer;
-    BOOLEAN eResult;
+    BOOLEAN eResult = FALSE;
     MEMBER_SERVICETYPE bServiceType = E_SERVICETYPE_INVALID;
     WORD wPosition,wLCN;
     SI_DTV_CHANNEL_INFO stDtvPgmData;
@@ -1563,17 +1752,28 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
           #endif
            )
         {
-            eResult = msAPI_SI_AddProgram(&stDtvIDTable, &stDtvPgmData,&bFull, FALSE);
-            if(TRUE == eResult)
+            
+            //if(channelCheck(stDtvIDTable.wTransportStream_ID, stDtvPgmData.wService_ID, stDtvPgmData.stCHAttribute.bIsScramble))
             {
-                if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DTV)
-                    u16ScanDtvChNum++;
-              #if NORDIG_FUNC //for Nordig Spec v2.0
-                else if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DATA)
-                    u16ScanDataChNum++;
-              #endif
-                else if (stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_RADIO)
-                    u16ScanRadioChNum++;
+                SCAN_DBINFO( printf("CreateTable %d, %d, %d, ", stDtvIDTable.wTransportStream_ID, stDtvPgmData.wService_ID, stDtvPgmData.stCHAttribute.bIsScramble););
+                SCAN_DBINFO( msAPI_DtvSys_PrintServiceName(stDtvPgmData.bChannelName, SI_MAX_SERVICE_NAME););
+                SCAN_DBINFO( printf("\n"););
+                
+                eResult = msAPI_SI_AddProgram(&stDtvIDTable, &stDtvPgmData,&bFull, FALSE);
+                if(TRUE == eResult)
+                {                      
+                    if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DTV){
+                        u16ScanDtvChNum++;
+                    }
+                #if NORDIG_FUNC //for Nordig Spec v2.0
+                    else if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DATA){
+                        u16ScanDataChNum++;
+                    }
+                #endif
+                    else if (stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_RADIO){
+                        u16ScanRadioChNum++;
+                    }
+                }
             }
         }
         else
@@ -1670,6 +1870,8 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
 
             if(TRUE == eResult)
             {
+                printf("nguyen 3 u8ServiceType %d, add service id %x name %s\n", stDtvPgmData.stCHAttribute.bServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
+               
                 if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DTV)
                     u16ScanDtvChNum++;
 #if NORDIG_FUNC //for Nordig Spec v2.0
@@ -1996,6 +2198,8 @@ static U8 MApp_S2_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANN
             eResult = msAPI_SI_AddProgram(&stDtvIDTable, &stDtvPgmData,&bFull, FALSE);
             if(TRUE == eResult)
             {
+                printf("nguyen ENABLE_S2_FAST_SCAN u8ServiceType %d, add service id %x name %s\n", stDtvPgmData.stCHAttribute.bServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
+               
                 if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DTV)
                 {
                     u16ScanDtvChNum++;
@@ -2055,6 +2259,8 @@ static U8 MApp_S2_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANN
 
             if(TRUE == eResult)
             {
+                printf("nguyen 5 u8ServiceType %d, add service id %x name %s\n", stDtvPgmData.stCHAttribute.bServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
+               
                 if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DTV)
                 {
                     u16ScanDtvChNum++;
@@ -3554,6 +3760,7 @@ EN_RET MApp_DTV_Scan( void )
                                 {
                                     if(!stDtvPgmData.stCHAttribute.bInvalidService)
                                     {
+                                        printf("nguyen 1 u8ServiceType %d, add service id %x name %s\n", pServiceListInfo[i].u8ServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
                                         if(pServiceListInfo[i].u8ServiceType == E_TYPE_DTV)u16ScanDtvChNum++;
                                         else if(pServiceListInfo[i].u8ServiceType == E_TYPE_RADIO)u16ScanRadioChNum++;
                                         else u16ScanDataChNum++;
@@ -3626,6 +3833,7 @@ EN_RET MApp_DTV_Scan( void )
                                 {
                                     if(!stDtvPgmData.stCHAttribute.bInvalidService)
                                     {
+                                        printf("add service id %x name %s\n",stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
                                         if(pServiceListInfo[i].u8ServiceType == E_TYPE_DTV)u16ScanDtvChNum++;
                                         else if(pServiceListInfo[i].u8ServiceType == E_TYPE_RADIO)u16ScanRadioChNum++;
                                         else u16ScanDataChNum++;
@@ -3798,6 +4006,8 @@ EN_RET MApp_DTV_Scan( void )
                         {
                             if(!stDtvPgmData.stCHAttribute.bInvalidService)
                             {
+                                printf("nguyen 6 u8ServiceType %d, add service id %x name %s\n", ServiceInfo.u8ServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
+               
                                 if(ServiceInfo.u8ServiceType == E_TYPE_DTV)u16ScanDtvChNum++;
                                 else if(ServiceInfo.u8ServiceType == E_TYPE_RADIO)u16ScanRadioChNum++;
                                 else u16ScanDataChNum++;
