@@ -2613,12 +2613,13 @@ BOOLEAN MApp_ZUI_ACT_HandleMainPageKey(VIRTUAL_KEY_CODE key)
         #if ENABLE_DTV
         case VK_EPG:
         {
+            ZUI_MSG(printf("nguyen VK_EPG %d \n", VK_EPG););
             #if NORDIG_FUNC //for Nordig Spec v2.0
                 U16 u16TotalProNum = msAPI_CM_CountProgram(E_SERVICETYPE_DTV, E_PROGACESS_INCLUDE_VISIBLE_ONLY) + msAPI_CM_CountProgram(E_SERVICETYPE_RADIO, E_PROGACESS_INCLUDE_VISIBLE_ONLY) + msAPI_CM_CountProgram(E_SERVICETYPE_DATA, E_PROGACESS_INCLUDE_VISIBLE_ONLY);
-                printf("nguyen NORDIG_FUNC u16TotalProNum %d \n", u16TotalProNum);
+                ZUI_MSG(printf("nguyen NORDIG_FUNC u16TotalProNum %d \n", u16TotalProNum););
             #else
                 U16 u16TotalProNum = msAPI_CM_CountProgram(E_SERVICETYPE_DTV, E_PROGACESS_INCLUDE_VISIBLE_ONLY) + msAPI_CM_CountProgram(E_SERVICETYPE_RADIO, E_PROGACESS_INCLUDE_VISIBLE_ONLY);
-                printf("nguyen u16TotalProNum %d \n", u16TotalProNum);
+                ZUI_MSG(printf("nguyen u16TotalProNum %d \n", u16TotalProNum););
             #endif
 
             if(!IsStorageInUse()
@@ -2632,6 +2633,7 @@ BOOLEAN MApp_ZUI_ACT_HandleMainPageKey(VIRTUAL_KEY_CODE key)
                 ))
                 )
             {
+                ZUI_MSG(printf("nguyen  MApp_ZUI_ACT_ExecuteMainMenuAction(EN_EXE_EPG_SHOW_PROGRAMMEGUIDE_TIME_PAGE);"););
                 MApp_ZUI_ACT_ExecuteMainMenuAction(EN_EXE_EPG_SHOW_PROGRAMMEGUIDE_TIME_PAGE);
                 return TRUE;
             }

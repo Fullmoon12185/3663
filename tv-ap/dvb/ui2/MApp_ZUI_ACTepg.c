@@ -4508,6 +4508,7 @@ LPTSTR MApp_ZUI_ACT_GetEpgDynamicText(HWND hwnd)
             }
             else
             {
+                //nguyen en_str_No_Title
                 MApp_ZUI_API_LoadString(en_str_No_Title ,str);
             }
             str += MApp_ZUI_API_Strlen(str);

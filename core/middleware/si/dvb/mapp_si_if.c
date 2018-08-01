@@ -1365,10 +1365,7 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
 
     printf("\n ---------------------------------\n");
     printf(" >>>> msAPI_SI_AddProgram()\n");
-    printf(" cRFChannelNumber=%u,", stDtvIDTable->cRFChannelNumber);
-    
-    printf("wLCN:%d, VideoPID:%d, ", pSIDTVProgramData->wLCN, DTVProgramData.wVideo_PID);
-    
+      
 
 #if ENABLE_DVBC
     if( (FALSE == msAPI_SI_GetOpMode())

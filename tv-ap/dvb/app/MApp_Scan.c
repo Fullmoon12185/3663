@@ -396,186 +396,202 @@ U8 _TotalPlpIDNum;
 extern MS_U8 u8PlpIDList[32];
 #endif
 //nguyen
-#define MAX_CHANNEL 169
-#define ALL_AVAILABLE_CHANNELS 66
-#define ALL_LOCKED_CHANNELS (MAX_CHANNEL - ALL_AVAILABLE_CHANNELS)
-typedef struct {
-    U8 tsid;
-    U16 sid;
-    U8 scram;
-} TV_Channel;
-static TV_Channel tvChannel[ALL_LOCKED_CHANNELS] = {
-    // {1, 11, 0}, //[VTV1 HD DB]
-    // {1, 12, 0}, //[VTV2 HD]
-    // {1, 13, 0}, //[VTV3 HD DB]
-    // {1, 14, 0}, //[VTV4]
-    // {1, 15, 0}, //[VTV5 Tay Nam Bo]
-    // {1, 16, 0}, //[VTV6 HD DB]
-    // {1, 17, 0}, //[VTV7]
-    // {1, 18, 0}, //[VTV8]
-    // {1, 19, 0}, //[VTV9 HD]
-    // {2, 1, 0}, //[]
-    // {2, 2, 0}, //[]
-    // {2, 3, 0}, //[]
-    // {2, 4, 0}, //[]
-    // {2, 5, 0}, //[]
-    // {2, 6, 0}, //[]
-    // {2, 7, 0}, //[]
-    // {2, 8, 0}, //[]
-    // {2, 9, 0}, //[]
-    // {2, 10, 0}, //[]
-    // {2, 11, 0}, //[]
-    // {2, 12, 0}, //[]
-    // {2, 13, 0}, //[]
-    // {1, 51, 0}, //[VTC1HD]
-    // {1, 53, 0}, //[VTC3HD]
-    // {1, 57, 0}, //[VTC7HD]
-    // {1, 59, 0}, //[VTC9HD]
-    // {1, 63, 0}, //[VTC13HD]
-    // {1, 64, 0}, //[VTC14HD]
-    // {1, 71, 0}, //[HAIPHONG HD]
-    // {1, 72, 0}, //[THAIBINH HD]
-    // {1, 73, 0}, //[THANHHOA HD]
-    // {1, 81, 0}, //[DN1]
-    // {3, 1, 0}, //[HTV7 HD]
-    // {3, 2, 0}, //[HTV9]
-    // {3, 3, 0}, //[HTV2]
-    // {3, 5, 0}, //[HTV3]
-    // {3, 7, 0}, //[SCJ TV SHOPPING]
-    // {3, 20, 0}, //[TH TAY NINH]
-    // {3, 15, 0}, //[HTV THE THAO]
-    // {3, 8, 0}, //[CAN THO]
-    // {3, 9, 0}, //[DONG THAP]
-    // {3, 10, 0}, //[BINH DUONG 1]
-    // {3, 6, 0}, //[HTV4]
-    // {3, 12, 0}, //[BRVT]
-    // {3, 17, 0}, //[LONG AN]
-    // {3, 14, 0}, //[YOU TV]
-    // {3, 16, 0}, //[GIAI TRI TV]
-    // {3, 22, 0}, //[BINH THUAN]
-    // {3, 4, 0}, //[HTVC - VGS SHOP]
-    // {3, 13, 0}, //[BINH PHUOC 2]
-    // {3, 11, 0}, //[TTXVN]
-    // {3, 23, 0}, //[TH DA NANG 2]
-    // {3, 19, 0}, //[TH BINH PHUOC 1]
-    // {3, 21, 0}, //[SCTV10]
-    // {3, 18, 0}, //[SOC TRANG 2]
-    // {1, 3403, 0}, //[TH An Giang]
-    // {1, 3405, 0}, //[TH Ben Tre]
-    // {1, 3404, 0}, //[TH Bac Lieu]
-    // {1, 3407, 0}, //[TH Hau Giang]
-    // {1, 3409, 0}, //[TH Soc Trang]
-    // {1, 3410, 0}, //[TH Tien Giang]
-    // {1, 3411, 0}, //[TH Tra Vinh ]
-    // {1, 3401, 0}, //[THVL1-HD]
-    // {1, 3402, 0}, //[THVL2-HD]
-    // {1, 3408, 0}, //[TH Kien Giang]
-    // {1, 3406, 0}, //[TH Ca Mau]
-    {4, 109, 1}, //[HTVC - Phim]
-    {4, 105, 1}, //[<21>QPVN - Qu(0xE1)(0xBB)(0x91)c Ph(0xC3)(0xB2)ng]
-    {4, 106, 0}, //[<21>Qu(0xE1)(0xBB)(0x91)c H(0xE1)(0xBB)(0x99)i]
-    {4, 76, 1}, //[<21>TH(0xC4)(0x90)T - TH (0xC4)(0x90)(0xE1)(0xBB)(0x93)ng Th(0xC3)(0xA1)p]
-    {4, 113, 1}, //[HTV4 - TH TPHCM]
-    {4, 104, 1}, //[VTC14]
-    {4, 140, 1}, //[<21>SCTV9 - Phim truy(0xE1)(0xBB)(0x87)n ch(0xC3)(0xA2)u (0xC3)(0xA1)]
-    {4, 141, 1}, //[<21>SCTV14 - Phim Vi(0xE1)(0xBB)(0x87)t]
-    {4, 123, 1}, //[VTC13]
-    {4, 118, 1}, //[Diva]
-    {4, 25, 1}, //[VTC1]
-    {4, 122, 1}, //[OutDoor]
-    {4, 82, 1}, //[Da Vinci]
-    {4, 83, 1}, //[<21>THTG - TH Ti(0xE1)(0xBB)(0x81)n Giang]
-    {4, 125, 1}, //[Channel News Asia]
-    {4, 120, 1}, //[(0x5)TH Nh(0xE2)n D(0xE2)n]
-    {4, 142, 1}, //[<21>SCTV Phim t(0xE1)(0xBB)(0x95)ng h(0xE1)(0xBB)(0xA3)p]
-    {4, 47, 1}, //[DW]
-    {4, 207, 1}, //[VTVCab8 - Bibi]
-    {4, 50, 1}, //[TV5]
-    {4, 81, 1}, //[Fox HD]
-    {4, 402, 1}, //[VTC11  Kids TV]
-    {4, 403, 1}, //[VTVcab17 - YEAH 1 TV]
-    {4, 404, 1}, //[VTVcab5 - EChannel]
-    {4, 405, 1}, //[You TV]
-    {4, 407, 1}, //[BTV4 Imovie]
-    {4, 406, 1}, //[<21>THBT - TH B(0xE1)(0xBA)(0xBF)n Tre]
-    {1, 24, 1}, //[Fashion TV HD]
-    {1, 57, 1}, //[AXN HD]
-    {1, 61, 1}, //[HBO HD]
-    {1, 63, 1}, //[NationalGeographic HD]
-    {1, 5, 1}, //[ANTV - TH CAND]
-    {1, 4, 1}, //[Vnews - TTXVN]
-    {1, 36, 1}, //[<21>VTV3 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
-    {1, 37, 0}, //[HTV7 - TH TPHCM]
-    {1, 9, 0}, //[HTV9 - TH TPHCM]
-    {1, 19, 1}, //[<21>VietTeen - Nh(0xE1)(0xBA)(0xA1)c tr(0xE1)(0xBA)(0xBB)]
-    {1, 34, 1}, //[Channel V]
-    {1, 21, 1}, //[Discovery]
-    {1, 43, 1}, //[(0x5)KTV - TH Kh(0xE1)nh H(0xF2)a]
-    {1, 51, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c C(0xC3)(0xA1)ch M(0xE1)(0xBA)(0xA1)ng]
-    {1, 52, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Tr(0xE1)(0xBB)(0xAF) T(0xC3)(0xAC)nh]
-    {1, 107, 1}, //[<21>An Ninh Th(0xE1)(0xBA)(0xBF) Gi(0xE1)(0xBB)(0x9B)i]
-    {1, 108, 1}, //[MOV]
-    {1, 72, 1}, //[THVL2 - TH Vinh Long]
-    {1, 69, 1}, //[<21>DN1 - TH (0xC4)(0x90)(0xE1)(0xBB)(0x93)ng Nai]
-    {1, 71, 1}, //[<21>VTV8 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
-    {1, 42, 1}, //[<21>VTV2 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
-    {1, 401, 1}, //[VTVcab18 - Tin tuc The thao HD]
-    {1, 41, 1}, //[VTC16 - 3NTV]
-    {1, 204, 0}, //[SSU_Zinwell]
-    {2, 59, 1}, //[<21>An Vi(0xC3)(0xAA)n HD - V(0xC4)(0x83)n H(0xC3)(0xB3)a]
-    {2, 39, 1}, //[<21>BTV1 - TH B(0xC3)(0xAC)nh D(0xC6)(0xB0)(0xC6)(0xA1)ng]
-    {2, 58, 1}, //[Fox Sports HD]
-    {2, 98, 1}, //[Discovery Asia HD]
-    {2, 60, 1}, //[Fox Movies HD]
-    {2, 53, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c D(0xC3)(0xA2)n T(0xE1)(0xBB)(0x99)c]
-    {2, 56, 1}, //[CNN]
-    {2, 23, 1}, //[Disney Junior]
-    {2, 8, 1}, //[Animal Planet]
-    {2, 1, 1}, //[Fox Sports 2]
-    {2, 2, 1}, //[MAX BY HBO]
-    {2, 20, 1}, //[<21>SAM - Thi(0xE1)(0xBA)(0xBF)u nhi]
-    {2, 22, 1}, //[Disney Channel]
-    {2, 26, 1}, //[<21>Ca nh(0xE1)(0xBA)(0xA1)c Thi(0xE1)(0xBA)(0xBF)u Nhi]
-    {2, 29, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Nam B(0xE1)(0xBB)(0x99)]
-    {2, 10, 1}, //[Today TV - VTC]
-    {2, 44, 1}, //[THVL1 - TH Vinh Long]
-    {2, 126, 1}, //[AFC]
-    {2, 200, 1}, //[<21>VTVCab3 - Th(0xE1)(0xBB)(0x83) Thao TV]
-    {2, 201, 1}, //[(0x10)]
-    {2, 27, 1}, //[VOV TV]
-    {2, 14, 1}, //[VTC9]
-    {2, 38, 0}, //[<21>ANT - Thi(0xE1)(0xBA)(0xBF)u Nhi]
-    {2, 2560, 0}, //[SSU_kaon]
-    {2, 7000, 0}, //[SSU_CFT]
-    {3, 12, 1}, //[<21>VTV6 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
-    {3, 17, 1}, //[Phim Hay]
-    {3, 15, 1}, //[<21>NCM - Th(0xE1)(0xBB)(0x83) thao]
-    {3, 310, 1}, //[HTV2 - TH TPHCM]
-    {3, 43, 1}, //[HTV3 - TH TPHCM]
-    {3, 202, 1}, //[D Dramas - VTVcab]
-    {3, 40, 1}, //[<21>Thu(0xE1)(0xBA)(0xA7)n Vi(0xE1)(0xBB)(0x87)t - TH TPHCM]
-    {3, 203, 1}, //[<21>VTVcab2 - Phim Vi(0xE1)(0xBB)(0x87)t]
-    {3, 70, 1}, //[History]
-    {3, 45, 1}, //[Cartoon Network]
-    {3, 204, 1}, //[<21>VTVcab1 - Gi(0xE1)(0xBA)(0xA3)i Tr(0xC3)(0xAD) TV]
-    {3, 48, 1}, //[Arirang]
-    {3, 46, 1}, //[<21>VTV9 - TH Vi(0xE1)(0xBB)(0x87)t Nam]
-    {3, 49, 1}, //[NHK World]
-    {3, 124, 1}, //[BBC - World News]
-    {3, 64, 1}, //[LA34 - TH Long An]
-    {3, 103, 1}, //[<21>TH(0xC4)(0x90)T2 - Mi(0xE1)(0xBB)(0x81)n T(0xC3)(0xA2)y]
-    {3, 67, 1}, //[<21>BTV2 - TH B(0xC3)(0xAC)nh D(0xC6)(0xB0)(0xC6)(0xA1)ng]
-    {3, 1000, 0}, //[<21>H(0xC6)(0xB0)(0xE1)(0xBB)(0x9B)ng d(0xE1)(0xBA)(0xAB)n Kh(0xC3)(0xA1)ch H(0xC3)(0xA0)ng]
-    {3, 62, 1}, //[FOXlife HD]
-    {3, 18, 1}, //[<21>VTV1 HD - TH Vi(0xE1)(0xBB)(0x87)t Nam]
-    {3, 54, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Tr(0xE1)(0xBA)(0xBB)]
-    {3, 55, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c C(0xE1)(0xBB)(0x95) (0xC4)(0x90)i(0xE1)(0xBB)(0x83)n]
-    {3, 11, 1}, //[<21>Nh(0xE1)(0xBA)(0xA1)c Nh(0xE1)(0xBA)(0xB9)]
-    {3, 68, 1}, //[<21>(0xC4)(0x90)(0xE1)(0xBB)(0x8D)c S(0xC3)(0xA1)ch]
-    {3, 14, 1}, //[VTVcab12-STYLE TV]
-    {3, 200, 1}, //[<21>THTPCT - TH C(0xE1)(0xBA)(0xA7)n Th(0xC6)(0xA1)]
+// #define MAX_CHANNEL 169
+// #define ALL_AVAILABLE_CHANNELS 66
+// #define ALL_LOCKED_CHANNELS (MAX_CHANNEL - ALL_AVAILABLE_CHANNELS)
+// typedef struct {
+//     U8 rfChannel;
+//     U8 channelOrder;
+//     U16 wPmt_PID;
+//     U16 serviceID;
+// } TV_Channel;
+// static TV_Channel tvChannel[ALL_LOCKED_CHANNELS] = {
+//     // {25, 0, 111, 11},
+//     // {25, 1, 112, 12},
+//     // {25, 2, 113, 13},
+//     // {25, 3, 104, 14},
+//     // {25, 4, 151, 15},
+//     // {25, 5, 116, 16},
+//     // {25, 6, 107, 17},
+//     // {25, 7, 108, 18},
+//     // {25, 8, 119, 19},
+//     // {30, 0, 1000, 1},
+//     // {30, 1, 1005, 2},
+//     // {30, 2, 1010, 3},
+//     // {30, 3, 1015, 4},
+//     // {30, 4, 1020, 5},
+//     // {30, 5, 1025, 6},
+//     // {30, 6, 1030, 7},
+//     // {30, 7, 1035, 8},
+//     // {30, 8, 1040, 9},
+//     // {30, 9, 1045, 10},
+//     // {30, 10, 1050, 11},
+//     // {30, 11, 1055, 12},
+//     // {30, 12, 1060, 13},
+//     // {31, 0, 1200, 51},
+//     // {31, 1, 1210, 53},
+//     // {31, 2, 1230, 57},
+//     // {31, 3, 1240, 59},
+//     // {31, 4, 1260, 63},
+//     // {31, 5, 1265, 64},
+//     // {31, 6, 1300, 71},
+//     // {31, 7, 1305, 72},
+//     // {31, 8, 1310, 73},
+//     // {31, 9, 1350, 81},
+//     // {33, 0, 3601, 1},
+//     // {33, 1, 3602, 2},
+//     // {33, 2, 3603, 3},
+//     // {33, 3, 3605, 5},
+//     // {33, 4, 3607, 7},
+//     // {33, 5, 3620, 20},
+//     // {33, 6, 3615, 15},
+//     // {33, 7, 3608, 8},
+//     // {33, 8, 3609, 9},
+//     // {33, 9, 3610, 10},
+//     // {33, 10, 3606, 6},
+//     // {33, 11, 3612, 12},
+//     // {33, 12, 3617, 17},
+//     // {33, 13, 3614, 14},
+//     // {33, 14, 3616, 16},
+//     // {33, 15, 3622, 22},
+//     // {33, 16, 3604, 4},
+//     // {33, 17, 3613, 13},
+//     // {33, 18, 3611, 11},
+//     // {33, 19, 3623, 23},
+//     // {33, 20, 3619, 19},
+//     // {33, 21, 3621, 21},
+//     // {33, 22, 3618, 18},
+//     // {34, 0, 3612, 3403},
+//     // {34, 1, 4111, 3405},
+//     // {34, 2, 4110, 3404},
+//     // {34, 3, 4105, 3407},
+//     // {34, 4, 4100, 3409},
+//     // {34, 5, 3608, 3410},
+//     // {34, 6, 4102, 3411},
+//     // {34, 7, 32, 3401},
+//     // {34, 8, 31, 3402},
+//     // {34, 9, 4106, 3408},
+//     // {34, 10, 4101, 3406},
+//     // {50, 0, 1094, 109},
+//     // {50, 1, 1054, 105},
+//     // {50, 2, 1064, 106},
+//     // {50, 3, 5760, 76},
+//     // {50, 4, 1134, 113},
+//     // {50, 5, 1044, 104},
+//     // {50, 6, 1404, 140},
+//     // {50, 7, 1414, 141},
+//     // {50, 8, 1234, 123},
+//     // {50, 9, 1184, 118},
+//     // {50, 10, 1250, 25},
+//     // {50, 11, 1224, 122},
+//     // {50, 12, 4820, 82},
+//     // {50, 13, 2830, 83},
+//     // {50, 14, 1254, 125},
+//     // {50, 15, 1204, 120},
+//     // {50, 16, 1424, 142},
+//     // {50, 17, 4470, 47},
+//     // {50, 18, 2074, 207},
+//     // {50, 19, 4500, 50},
+//     // {50, 20, 4810, 81},
+//     // {50, 21, 4020, 402},
+//     // {50, 22, 4030, 403},
+//     // {50, 23, 4040, 404},
+//     // {50, 24, 4050, 405},
+//     // {50, 25, 4070, 407},
+//     // {50, 26, 4060, 406},
+//     {57, 0, 1240, 24},
+//     {57, 1, 1570, 57},
+//     {57, 2, 1610, 61},
+//     {57, 3, 1630, 63},
+//     {57, 4, 1050, 5},
+//     {57, 5, 1040, 4},
+//     {57, 6, 1360, 36},
+//     {57, 7, 1370, 37},
+//     {57, 8, 1090, 9},
+//     {57, 9, 1190, 19},
+//     {57, 10, 1340, 34},
+//     {57, 11, 1210, 21},
+//     {57, 12, 1430, 43},
+//     {57, 13, 1510, 51},
+//     {57, 14, 1520, 52},
+//     {57, 15, 1074, 107},
+//     {57, 16, 1084, 108},
+//     {57, 17, 5720, 72},
+//     {57, 18, 1194, 69},
+//     {57, 19, 1710, 71},
+//     {57, 20, 2420, 42},
+//     {57, 21, 4010, 401},
+//     {57, 22, 1410, 41},
+//     {57, 23, 204, 204},
+//     {58, 0, 2590, 59},
+//     {58, 1, 5390, 39},
+//     {58, 2, 2580, 58},
+//     {58, 3, 2980, 98},
+//     {58, 4, 2600, 60},
+//     {58, 5, 1530, 53},
+//     {58, 6, 2565, 56},
+//     {58, 7, 2230, 23},
+//     {58, 8, 2080, 8},
+//     {58, 9, 2010, 1},
+//     {58, 10, 2020, 2},
+//     {58, 11, 2200, 20},
+//     {58, 12, 2220, 22},
+//     {58, 13, 2260, 26},
+//     {58, 14, 2290, 29},
+//     {58, 15, 5100, 10},
+//     {58, 16, 5440, 44},
+//     {58, 17, 1264, 126},
+//     {58, 18, 2004, 200},
+//     {58, 19, 2014, 201},
+//     {58, 20, 2270, 27},
+//     {58, 21, 2140, 14},
+//     {58, 22, 2380, 38},
+//     {58, 23, 2560, 2560},
+//     {58, 24, 7001, 7000},
+//     {59, 0, 4120, 12},
+//     {59, 1, 4170, 17},
+//     {59, 2, 4150, 15},
+//     {59, 3, 4310, 310},
+//     {59, 4, 4430, 43},
+//     {59, 5, 2024, 202},
+//     {59, 6, 4400, 40},
+//     {59, 7, 2037, 203},
+//     {59, 8, 4700, 70},
+//     {59, 9, 2450, 45},
+//     {59, 10, 2044, 204},
+//     {59, 11, 5480, 48},
+//     {59, 12, 4460, 46},
+//     {59, 13, 4490, 49},
+//     {59, 14, 1244, 124},
+//     {59, 15, 4640, 64},
+//     {59, 16, 1034, 103},
+//     {59, 17, 4670, 67},
+//     {59, 18, 3000, 1000},
+//     {59, 19, 2620, 62},
+//     {59, 20, 1180, 18},
+//     {59, 21, 1540, 54},
+//     {59, 22, 1550, 55},
+//     {59, 23, 1110, 11},
+//     {59, 24, 2680, 68},
+//     {59, 25, 4000, 14},
+//     {59, 26, 2000, 200},
 
-};
+
+
+// };
+// #define MAX_RF_SCAN_CHANNEL 3
+// U8 tv_RFScanChannel[MAX_RF_SCAN_CHANNEL] = {
+//     //25, // 9 channels  
+//     //28, // 0 channels
+//     //30, // 13 channels
+//     //31, // 10 channels
+//     //33, // 23 channels
+//     //34, // 11 channels
+//     //50, // 27 channels locked
+//     57, // 24 channels locked
+//     58, // 25 channels locked 
+//     59 // 27 channels locked
+// };
 //nguyen
 //********************************************************************************
 //                     local prototype
@@ -1557,16 +1573,14 @@ void MApp_DTV_Scan_End( BOOLEAN bSkipDupSrvRemove )
 //        stGenSetting.g_SysSetting.u16OverflowLCN = MAIN_OVERFLOW_AREA_START_INDEX;
 //    }
 //}
-
-BOOLEAN channelCheck(U8 tsid, U16 sid, U8 scram) {
-    U8 i;
-    for(i = 0; i < MAX_CHANNEL; i ++){
-        if((tvChannel[i].tsid == tsid) && (tvChannel[i].sid == sid) && (tvChannel[i].scram == scram)){
-            return FALSE;
-        }
-    }
+//nguyen
+U8 locked_channel_checking(SI_SHORT_DTV_CHANNEL_INFO virtualChannel){
+    
+    if(virtualChannel.stCHAttribute.bIsScramble == 0)
+        return FALSE;
     return TRUE;
 }
+//nguyen
 
 /********************************************************************************************************************************************************/
 /********************************************************************************************************************************************************/
@@ -1622,24 +1636,67 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
 
     //#endif
     //MApp_SI_GetDtvPmgData(&pastVirtualCh[0], 0, &stDtvPgmData);
+    for (u8Loop_1=0; u8Loop_1 < u8NumOfVch; u8Loop_1++){
+        SCAN_DBINFO(printf("\n***************************************************\n"););
+        SCAN_DBINFO(printf(" stDtvIDTable.cRFChannelNumber = %u", u16PhysicalChIdx););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wNetwork_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wNetwork_ID););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wCellID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wCellID););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wPmt_PID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wPmt_PID););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wOrder = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wOrder););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wTransportStream_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wTransportStream_ID););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wOriginalNetwork_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wOriginalNetwork_ID););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wService_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wService_ID););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wTS_LCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wTS_LCN););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wSimu_LCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wSimu_LCN););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wSgt_PID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wSgt_PID););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute = %u\n", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute););
+        
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bValidLCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bValidLCN););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bReplaceService = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bReplaceService););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.eVideoType = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.eVideoType););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bServiceType = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bServiceType););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsServiceIdOnly = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsServiceIdOnly););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsDataServiceAvailable = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsDataServiceAvailable););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsReplaceDel = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsReplaceDel););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsSpecialService = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsSpecialService););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsTerrestrial = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsTerrestrial););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bValidLCNv2 = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bValidLCNv2););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bInvalidService = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bInvalidService););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsNewService = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsNewService););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bVisibleServiceFlag = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bVisibleServiceFlag););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bNumericSelectionFlag = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bNumericSelectionFlag););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsScramble = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsScramble););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsStillPicture = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsStillPicture););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bServiceTypePrio = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bServiceTypePrio););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bInvalidCell = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bInvalidCell););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bUnconfirmedService = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bUnconfirmedService););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsFastScan = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsFastScan););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsbissSevice = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsbissSevice););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsVirtualSevice = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsVirtualSevice););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bIsOpService = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bIsOpService););
 
-    stDtvIDTable.wNetwork_ID = pastVirtualCh[0].wNetwork_ID;
-    stDtvIDTable.wTransportStream_ID = pastVirtualCh[0].wTransportStream_ID;
-    stDtvIDTable.wOriginalNetwork_ID = pastVirtualCh[0].wOriginalNetwork_ID;
 
+    }
+    if(locked_channel_checking(pastVirtualCh[0]) == FALSE){
+        stDtvIDTable.wNetwork_ID = pastVirtualCh[0].wNetwork_ID;
+        stDtvIDTable.wTransportStream_ID = pastVirtualCh[0].wTransportStream_ID;
+        stDtvIDTable.wOriginalNetwork_ID = pastVirtualCh[0].wOriginalNetwork_ID;
+    }
     for (u8Loop_1=0;u8Loop_1<u8NumOfVch;u8Loop_1++)
     {
         if (pastVirtualCh[u8Loop_1].wNetwork_ID != INVALID_NID && \
             pastVirtualCh[u8Loop_1].wOriginalNetwork_ID!=INVALID_ON_ID &&\
             pastVirtualCh[u8Loop_1].wService_ID!=INVALID_SERVICE_ID)
         {
-            stDtvIDTable.wNetwork_ID = pastVirtualCh[u8Loop_1].wNetwork_ID;
-            stDtvIDTable.wTransportStream_ID = pastVirtualCh[u8Loop_1].wTransportStream_ID;
-            stDtvIDTable.wOriginalNetwork_ID = pastVirtualCh[u8Loop_1].wOriginalNetwork_ID;
-#if (ENABLE_SAVE_SQI)
-            stDtvIDTable.wStrengthQuality = pastVirtualCh[u8Loop_1].stCHAttribute.wSignalStrength;
-#endif
-            break;
+            if(locked_channel_checking(pastVirtualCh[u8Loop_1]) == FALSE){
+                stDtvIDTable.wNetwork_ID = pastVirtualCh[u8Loop_1].wNetwork_ID;
+                stDtvIDTable.wTransportStream_ID = pastVirtualCh[u8Loop_1].wTransportStream_ID;
+                stDtvIDTable.wOriginalNetwork_ID = pastVirtualCh[u8Loop_1].wOriginalNetwork_ID;
+    #if (ENABLE_SAVE_SQI)
+                stDtvIDTable.wStrengthQuality = pastVirtualCh[u8Loop_1].stCHAttribute.wSignalStrength;
+    #endif
+                break;
+            }
         }
     }
 
@@ -1682,34 +1739,59 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
             stDtvIDTable.dwAlternativeTime = INVALID_ALTERNATIVETIME;
         }
     #endif
+        //if(locked_channel_checking(pastVirtualCh[u8Loop_1]) == FALSE)
+        {
+            msAPI_Tuner_Get_CELL_ID(&stDtvIDTable.wCellID);
 
-        msAPI_Tuner_Get_CELL_ID(&stDtvIDTable.wCellID);
+        #if 1//ENABLE_DVBC
+            memset(&pstCurTPsetting, 0, sizeof(MS_TP_SETTING));
+            msAPI_Tuner_GetCurTPSetting(&pstCurTPsetting);
+            stDtvIDTable.u32Frequency = pstCurTPsetting.u32Frequency ;
+            stDtvIDTable.u32SymbRate = pstCurTPsetting.u32Symbol_rate ;
+            stDtvIDTable.QamMode = pstCurTPsetting.u8Modulation ;
+            stDtvIDTable.enBandWidth = pstCurTPsetting.enBandWidth;
+        #endif
 
-    #if 1//ENABLE_DVBC
-        memset(&pstCurTPsetting, 0, sizeof(MS_TP_SETTING));
-        msAPI_Tuner_GetCurTPSetting(&pstCurTPsetting);
-        stDtvIDTable.u32Frequency = pstCurTPsetting.u32Frequency ;
-        stDtvIDTable.u32SymbRate = pstCurTPsetting.u32Symbol_rate ;
-        stDtvIDTable.QamMode = pstCurTPsetting.u8Modulation ;
-        stDtvIDTable.enBandWidth = pstCurTPsetting.enBandWidth;
-    #endif
+        #if (ENABLE_DVB_T2)
+            msAPI_Tuner_Get_PLP_ID(&stDtvIDTable.u8PLP_ID);
+        #endif
 
-    #if (ENABLE_DVB_T2)
-        msAPI_Tuner_Get_PLP_ID(&stDtvIDTable.u8PLP_ID);
-    #endif
-
-    #if (ENABLE_HIERARCHY)
-        stDtvIDTable.u8HpLp=msAPI_Tuner_Get_HpLp();
-    #endif
+        #if (ENABLE_HIERARCHY)
+            stDtvIDTable.u8HpLp=msAPI_Tuner_Get_HpLp();
+        #endif
+        }
+        if ((TRUE == MApp_SI_Get_NetWorkName(au8NetWorkName,&len,MAX_NETWORK_NAME)) /*&& (0!=au8NetWorkName[0])*/)
+        {
+            msAPI_CM_SetCurrentNetworkName(au8NetWorkName, len);
+        }
     }
-    if ((TRUE == MApp_SI_Get_NetWorkName(au8NetWorkName,&len,MAX_NETWORK_NAME)) /*&& (0!=au8NetWorkName[0])*/)
-    {
-        msAPI_CM_SetCurrentNetworkName(au8NetWorkName, len);
-    }
-
     for(u8Loop_1=0; u8Loop_1<u8NumOfVch; u8Loop_1++)
     {
+        if(locked_channel_checking(pastVirtualCh[u8Loop_1]) == TRUE) continue;
         MApp_SI_GetDtvPmgData(&pastVirtualCh[u8Loop_1], u8Loop_1, &stDtvPgmData);
+        // if(stDtvIDTable.cRFChannelNumber > 56 && stDtvIDTable.cRFChannelNumber < 60){
+        //     if()
+        // }
+        // SCAN_DBINFO(printf("\n***************************************************\n"););
+        // SCAN_DBINFO(printf(" stDtvIDTable.cRFChannelNumber = %u\n", stDtvIDTable.cRFChannelNumber););
+        // SCAN_DBINFO(printf(" u8Loop_1 = %u\n", u8Loop_1););
+        // SCAN_DBINFO(printf("***************************************************\n"););
+        // SCAN_DBINFO(printf(" --> bIDIdex = %u", stDtvPgmData.bIDIdex););
+        // SCAN_DBINFO(printf(" --> wPCR_PID = %u", stDtvPgmData.wPCR_PID););
+        // SCAN_DBINFO(printf(" --> wVideo_PID = %u", stDtvPgmData.wVideo_PID););
+        // SCAN_DBINFO(printf(" --> wOrder = %u", stDtvPgmData.wOrder););
+        // SCAN_DBINFO(printf(" --> stLCN.bVirtualChannel = %u", stDtvPgmData.stLCN.bVirtualChannel););
+        // SCAN_DBINFO(printf(" --> stLCN.bPhysicalChannel = %u", stDtvPgmData.stLCN.bPhysicalChannel););
+        // SCAN_DBINFO(printf(" --> wLCN = %u", stDtvPgmData.wLCN););
+        // SCAN_DBINFO(printf(" --> wPmt_PID = %u", stDtvPgmData.wPmt_PID););
+        // SCAN_DBINFO(printf(" --> wService_ID = %u", stDtvPgmData.wService_ID););
+        // SCAN_DBINFO(printf(" --> wTS_LCN = %u", stDtvPgmData.wTS_LCN););
+        // SCAN_DBINFO(printf(" --> bChannelName = %s", stDtvPgmData.bChannelName););
+        // SCAN_DBINFO(printf(" --> bProviderName = %u", stDtvPgmData.bProviderName););
+        // SCAN_DBINFO(printf(" --> satid = %u", stDtvPgmData.satid););
+        // SCAN_DBINFO(printf(" --> wSgt_PID = %u", stDtvPgmData.wSgt_PID););
+        
+
     #if(ENABLE_S2_FAST_SCAN)
         stDtvPgmData.stCHAttribute.bIsFastScan = FALSE;
     #endif
@@ -1755,9 +1837,7 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
             
             //if(channelCheck(stDtvIDTable.wTransportStream_ID, stDtvPgmData.wService_ID, stDtvPgmData.stCHAttribute.bIsScramble))
             {
-                SCAN_DBINFO( printf("CreateTable %d, %d, %d, ", stDtvIDTable.wTransportStream_ID, stDtvPgmData.wService_ID, stDtvPgmData.stCHAttribute.bIsScramble););
-                SCAN_DBINFO( msAPI_DtvSys_PrintServiceName(stDtvPgmData.bChannelName, SI_MAX_SERVICE_NAME););
-                SCAN_DBINFO( printf("\n"););
+                
                 
                 eResult = msAPI_SI_AddProgram(&stDtvIDTable, &stDtvPgmData,&bFull, FALSE);
                 if(TRUE == eResult)
@@ -1899,6 +1979,7 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
             continue;
         }
         u8TotalCh++;
+
     }
 
     #if ENABLE_SCAN_CM_DEBUG
@@ -2103,6 +2184,7 @@ static U8 MApp_S2_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANN
     memset(&stDtvIDTable, 0, sizeof(stDtvIDTable));
 
     MApp_SI_GetDtvPmgData(&pastVirtualCh[0], 0, &stDtvPgmData);
+    
     //if(pastVirtualCh[0].wTransportStream_ID != INVALID_TS_ID )//&& pastVirtualCh[0].wOriginalNetwork_ID != INVALID_ON_ID)
     {
         stDtvIDTable.wNetwork_ID = pastVirtualCh[0].wNetwork_ID;
@@ -3388,7 +3470,7 @@ EN_RET MApp_DTV_Scan( void )
 
 
         case STATE_SCAN_GET_PROGRAMS:   //Truman for digital only, analog scan shouldn't go into this state
-            SCAN_DBINFO( printf( "\n [%d]<<<STATE_SCAN_GET_PROGRAMS>>> ", __LINE__) );
+            //SCAN_DBINFO( printf( "\n [%d]<<<STATE_SCAN_GET_PROGRAMS>>> ", __LINE__) );
             u8KeyCode = KEY_NULL;
             u8NumOfVchFound = 0;
           #if 0//network test code
@@ -3492,7 +3574,7 @@ EN_RET MApp_DTV_Scan( void )
             if( MApp_Dmx_GetScanTables(&_stScanConfig, &u8NumOfVchFound ) == FALSE )
             {
                 u16GetProgramsCnt++;
-                SCAN_DBINFO( printf( "MApp_Dmx_GetScanTables\n" ) );
+                //SCAN_DBINFO( printf( "MApp_Dmx_GetScanTables\n" ) );
                 break;
             }
         #endif
@@ -3508,12 +3590,13 @@ EN_RET MApp_DTV_Scan( void )
           #if (ENABLE_SCAN_CM_DEBUG | ENABLE_SCAN_ONELINE_MSG)
             {
                 U8 j;
+                //SI_SHORT_DTV_CHANNEL_INFO *pastVirtualCh=(SI_SHORT_DTV_CHANNEL_INFO *)MApp_SI_Get_PastVirtualCh();
                 SI_SHORT_DTV_CHANNEL_INFO *pastVirtualCh=(SI_SHORT_DTV_CHANNEL_INFO *)MApp_SI_Get_PastVirtualCh();
 
                 SCAN_DBINFO(printf("\n MApp_DTV_Scan>> u8NumOfPatItem = %u ", u8NumOfVchFound));
                 for(j=0; j<u8NumOfVchFound; j++)
                 {
-                    printf("\n [%02u] Lcn %05u Sid %05u Vpid %05u Apid %05u Vis %u Sel %u data %u stype %u ",\
+                    printf("\n [%02u] Lcn %05u Sid %05u Vpid %05u Apid %05u Vis %u Sel %u data %u stype %u",\
                         j,pastVirtualCh[j].wLCN,pastVirtualCh[j].wService_ID,\
                         pastVirtualCh[j].wVideo_PID,pastVirtualCh[j].stAudInfo[0].wAudPID,\
                         (U8)pastVirtualCh[j].stCHAttribute.bVisibleServiceFlag,(U8)pastVirtualCh[j].stCHAttribute.bNumericSelectionFlag,\
@@ -3529,7 +3612,6 @@ EN_RET MApp_DTV_Scan( void )
         #if (ENABLE_S2)
             if (IsS2InUse())
             {
-                printf("\n u8NumOfVchFound = %d ", u8NumOfVchFound);
                 if( u8NumOfVchFound > 0 )
                 {
 
@@ -3583,7 +3665,7 @@ EN_RET MApp_DTV_Scan( void )
                         }
                     }
                   #endif
-
+                        
                     enScanState = STATE_SCAN_SAVE_PROGRAMS;
                 }
                 else
@@ -3760,7 +3842,6 @@ EN_RET MApp_DTV_Scan( void )
                                 {
                                     if(!stDtvPgmData.stCHAttribute.bInvalidService)
                                     {
-                                        printf("nguyen 1 u8ServiceType %d, add service id %x name %s\n", pServiceListInfo[i].u8ServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
                                         if(pServiceListInfo[i].u8ServiceType == E_TYPE_DTV)u16ScanDtvChNum++;
                                         else if(pServiceListInfo[i].u8ServiceType == E_TYPE_RADIO)u16ScanRadioChNum++;
                                         else u16ScanDataChNum++;
@@ -3833,7 +3914,6 @@ EN_RET MApp_DTV_Scan( void )
                                 {
                                     if(!stDtvPgmData.stCHAttribute.bInvalidService)
                                     {
-                                        printf("add service id %x name %s\n",stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
                                         if(pServiceListInfo[i].u8ServiceType == E_TYPE_DTV)u16ScanDtvChNum++;
                                         else if(pServiceListInfo[i].u8ServiceType == E_TYPE_RADIO)u16ScanRadioChNum++;
                                         else u16ScanDataChNum++;
@@ -4006,8 +4086,6 @@ EN_RET MApp_DTV_Scan( void )
                         {
                             if(!stDtvPgmData.stCHAttribute.bInvalidService)
                             {
-                                printf("nguyen 6 u8ServiceType %d, add service id %x name %s\n", ServiceInfo.u8ServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
-               
                                 if(ServiceInfo.u8ServiceType == E_TYPE_DTV)u16ScanDtvChNum++;
                                 else if(ServiceInfo.u8ServiceType == E_TYPE_RADIO)u16ScanRadioChNum++;
                                 else u16ScanDataChNum++;
@@ -4097,7 +4175,9 @@ EN_RET MApp_DTV_Scan( void )
                 else
             #endif
                 {
+                    
                     u16NumOfSrvAdd += MApp_Scan_AddOneDTVPchVchs(u8RFCh, pastVirtualCh, u8NumOfVchFound, TRUE, &fDBFull);
+                    SCAN_DBINFO(printf("\nNguyen 4 MApp_Scan_AddOneDTVPchVchs u16NumOfSrvAdd = %d ", u16NumOfSrvAdd));
                 }
                 //it will cause remove normal service: ex: 1~5 invalid,6~0 valid service
                 //if (SCAN_TYPE_MANUAL == g_enScanType)
