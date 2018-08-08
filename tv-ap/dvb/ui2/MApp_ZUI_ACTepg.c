@@ -6120,12 +6120,14 @@ static void _MApp_ZUI_ACT_EpgrOnPaintOneEvent(HWND hwnd, PAINT_PARAM * param,
             {
                 if( *str == 0 )
                 {
-                    MApp_ZUI_API_GetString(en_str_No_Information);
+                    //nguyen
+                    //MApp_ZUI_API_GetString(en_str_No_Information);
+                    //MApp_ZUI_API_GetString(en_str_3Dot);
                 }
             }
             else if ( rcEvent.width > 18 )    // 1 Char
             {
-                MApp_ZUI_API_GetString(en_str_3Dot);
+                //MApp_ZUI_API_GetString(en_str_3Dot);
             }
             else
             {
@@ -6263,12 +6265,14 @@ static void _MApp_ZUI_ACT_EpgOnPaintOneEventChannel(HWND hwnd, PAINT_PARAM * par
             {
                 if( *str == 0 )
                 {
-                    MApp_ZUI_API_GetString(en_str_No_Information);
+                    //nguyen
+                    //MApp_ZUI_API_GetString(en_str_No_Information);
+                    //MApp_ZUI_API_GetString(en_str_3Dot);
                 }
             }
             else if ( rcEvent.width > 18 )    // 1 Char
             {
-                MApp_ZUI_API_GetString(en_str_3Dot);
+                //MApp_ZUI_API_GetString(en_str_3Dot);
             }
             else
             {

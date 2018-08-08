@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -205,7 +205,11 @@ static void TimerISR(void)
     gu8100msTH++;
 
     msAPI_Timer_1ms_ISR();
-
+    //nguyen
+    // gTimerCount0LED++;
+    // if()
+    // if(gTimerCount0LED)
+    //nguyen
     // Use a threshold to check the 100 ms. If the threshold
     // is greater or equal than the 100 ms. Increase the 100 ms
     // counter.
@@ -320,7 +324,8 @@ static void TimerISR(void)
 void MDrv_Timer_ISR_Register(void)
 {
     MS_U32 check_timer_status;
-    check_timer_status = MsOS_CreateTimer( (TimerCb)TimerISR,
+    check_timer_status = MsOS_CreateTimer( (TimerCb
+)TimerISR,
                                                   0,
                                                   1,
                                                   TRUE,

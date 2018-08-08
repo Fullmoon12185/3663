@@ -150,7 +150,7 @@ BOOLEAN b_isCIkeyFileExit = TRUE;
 #endif
 
 // Debug message for USB Download
-#define USB_DL_DBG(x)           //x
+#define USB_DL_DBG(x)           x
 #define USB_DL_ASSERT(x)        x
 
 // Max USB detection duration
@@ -1278,7 +1278,7 @@ EnuUsbDlErrCode MW_UsbDlBin_SearchFileAndCopyToDram(U8 u8USBPortNo, U8* pu8FileN
     }
     else
     {
-        //printf(" Search file OK~\n");
+        printf(" Search file OK~\n");
     }
 
     MApp_UsbClearWatchDog();

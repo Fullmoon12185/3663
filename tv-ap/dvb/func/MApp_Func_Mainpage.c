@@ -127,6 +127,97 @@ extern EN_OSD_TUNE_TYPE_SETTING eTuneType;
 extern BOOLEAN MApp_UiMainpage_Notify(MAINPAGE_NOTIFY_TYPE enMainpageNotify, U16 para1, U16 para2);
 extern U16 _MApp_ZUI_ACT_PasswordConvertToSystemFormat(U16 password);
 
+//nguyen
+U8 MApp_Init_Usbupdate(pMainpageFuncCB pFuncCB){
+#if ( ENABLE_SW_UPGRADE && ENABLE_FILESYSTEM )
+    U8 u8PortEnStatus = 0;
+    u8PortEnStatus = MDrv_USBGetPortEnableStatus();
+    printf("u8PortEnStatus %u\n", u8PortEnStatus);
+    if((u8PortEnStatus & BIT0) == BIT0)
+    {
+        if (!MDrv_UsbDeviceConnect())
+        {
+            MsOS_DelayTask(1000);
+        }
+
+        if (!MDrv_UsbDeviceConnect())
+        {
+            if((u8PortEnStatus & BIT1) != BIT1)
+            {
+                //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_COMMON_DLG, EN_NOTIFY_DLG_MODE_USB_NOT_DETECTED, 6000);
+                return FALSE;
+            }
+        }
+        else
+        {
+            MApp_UsbDownload_Init(BIT0, pFuncCB);
+            printf("MApp_UsbDownload_Init(BIT0, pFuncCB);\n");
+            if (MW_UsbDownload_Search())
+            {
+                MApp_UsbStart();
+                //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_STORE_FOCUS, 0, 0);
+                //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_COMMON_DLG, EN_NOTIFY_DLG_MODE_USB_UPDATE_CONFIRM, 0);
+                return TRUE;
+            }
+            else //no sw file detected
+            {
+                MApp_UsbDownload_Exit();
+
+                if((u8PortEnStatus & BIT1) != BIT1)
+                {
+                    //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_COMMON_DLG, EN_NOTIFY_DLG_MODE_SW_FILE_NOT_DETECTED, 6000);
+                    return FALSE;
+                }
+            }
+            
+            printf("finish search\n");
+        }
+    }
+
+    if((u8PortEnStatus & BIT1) == BIT1)
+    {
+        if (!MDrv_UsbDeviceConnect_Port2())
+        {
+            MsOS_DelayTask(1000);
+        }
+
+        if (!MDrv_UsbDeviceConnect_Port2())
+        {
+            if((u8PortEnStatus & BIT2) != BIT2)
+            {
+                //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_COMMON_DLG, EN_NOTIFY_DLG_MODE_USB_NOT_DETECTED, 6000);
+                return FALSE;
+            }
+        }
+        else
+        {
+            MApp_UsbDownload_Init(BIT1, pFuncCB);
+            printf("MApp_UsbDownload_Init(BIT1, pFuncCB);\n");
+            if (MW_UsbDownload_Search())
+            {
+                MApp_UsbStart();
+                //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_STORE_FOCUS, 0, 0);
+                //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_COMMON_DLG, EN_NOTIFY_DLG_MODE_USB_UPDATE_CONFIRM, 0);
+                return TRUE;
+            }
+            else //no sw file detected
+            {
+                MApp_UsbDownload_Exit();
+                if((u8PortEnStatus & BIT2) != BIT2)
+                {
+                    //MApp_UiMainpage_Notify(EN_MAINPAGE_NOTIFY_COMMON_DLG, EN_NOTIFY_DLG_MODE_SW_FILE_NOT_DETECTED, 6000);
+                    return FALSE;
+                }
+
+            }
+            printf("finish search 1\n");
+        }
+    }
+    return FALSE;
+#endif
+}
+//nguyen
+
 U8 MApp_Function_Mainpage_Usbupdate(pMainpageFuncCB pFuncCB)
 {
 #if ( ENABLE_SW_UPGRADE && ENABLE_FILESYSTEM )

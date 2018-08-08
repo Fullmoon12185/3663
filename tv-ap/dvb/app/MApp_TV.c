@@ -5115,10 +5115,91 @@ void MApp_TV_ProcessUserInput(void)
             else if (IsAnyTVSourceInUse())
             {
                 MApp_ZUI_ACT_ShutdownOSD();
+                #if ENABLE_ATSC_TTS
+                    //MApp_TTSControlSetInputText(MApp_ZUI_API_GetString(en_str_EPG), MApp_UiMenu_u16Strlen(MApp_ZUI_API_GetString(en_str_EPG)));
+                    MApp_TTS_Cus_Add_Str_By_StrId(en_str_EPG);
+                    MApp_TTSControlSetOn(TRUE);
+                #endif
 
-                MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
-                MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_BRIEF_CH_INFO);
-                //MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_TV_BANNER);
+                #if (ENABLE_ATSC)
+                    if (IsAtscInUse() || IsATVInUse())
+                    {
+                        U8 SrvNum = MApp_ChanProc_GetNumOfServices(MAIN_LIST);
+                        printf("User press EPG key, current SrvNum=%d\n", SrvNum);
+                        if(SrvNum)
+                        {
+                            enTVState = STATE_TV_INIT;
+                            enTVRetVal = EXIT_GOTO_EPG;
+                        }
+                        else
+                        {
+                            MApp_ZUI_ACT_StartupOSD(E_OSD_MESSAGE_BOX);
+                            MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_FUNC_NOT_AVAIL_MSGBOX);
+                        }
+                        u8KeyCode = KEY_NULL;
+                        break;
+                    }
+                #endif
+
+
+            #if (ENABLE_DTV_EPG)
+                    if (u16TotalProNum && IsDTVInUse()
+                #if(!DVB_T_C_DIFF_DB)
+                && (DB_PROGRAM_SOURCE_TYPE  == UI_INPUT_SOURCE_TYPE)
+                #endif
+                )
+                    {
+                        if (IS_EPG_DISABLE_COUNTRY(OSD_COUNTRY_SETTING))
+                        {
+                        #if ENABLE_MHEG_MSG
+                            #if (MHEG5_ENABLE && (MHEG5_WITH_SUBTITLE==0) && CIPLUS_MHEG_1_3 == 0)
+                                #if ENABLE_SUBTITLE
+                                {
+                                    //show XX spec, when subtitle up, user need turn off subtitle
+                                    if ((MApp_SI_CheckMHEG5Status() != SI_MHEG5_DISABLE)&&
+                                            ( ((u8SubtitleMenuNum > 0)&&(stGenSetting.g_SysSetting.fEnableSubTitle == TRUE))))
+                                    {
+                                        MApp_ZUI_ACT_StartupOSD(E_OSD_MESSAGE_BOX);
+                                        MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_MHEG5_SUBTITLE_MSGBOX);
+                                    }
+                                }
+                                #endif // #if ENABLE_SUBTITLE
+                            #endif // #if (MHEG5_ENABLE && (MHEG5_WITH_SUBTITLE==0))
+                        #endif // #if ENABLE_MHEG_MSG
+                        }
+                    #if MHEG5_ENABLE
+                        MApp_ChannelPosition_Restore();
+                    #endif
+                        #if (ENABLE_PIP)
+                        if (IsPIPSupported())
+                        {
+                            if (MApp_Get_PIPMode() == EN_PIP_MODE_OFF)
+                            {
+                                enTVState = STATE_TV_INIT;
+                                enTVRetVal =EXIT_GOTO_EPG;
+                            }
+                            else
+                            {
+                                //PIP behavior: Do not go to EPG if PIP is enabled.
+                                //Do nothing here.
+                            }
+                        }
+                        else
+                        #endif
+                        {
+                            enTVState = STATE_TV_INIT;
+                            enTVRetVal =EXIT_GOTO_EPG;
+                        }
+                    }
+                    else
+                    {
+                        MApp_ZUI_ACT_StartupOSD(E_OSD_MESSAGE_BOX);
+                        MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_FUNC_NOT_AVAIL_MSGBOX);
+                    }
+                #endif
+                //MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
+                //MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_BRIEF_CH_INFO);
+                ////MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_TV_BANNER);
             }
             else//non DTV/ATV sources
             {
@@ -5135,6 +5216,7 @@ void MApp_TV_ProcessUserInput(void)
                 #endif
             }
             u8KeyCode = KEY_NULL;
+        
             break;
 
         case KEY_MUTE:

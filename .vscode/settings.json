@@ -5,7 +5,9 @@
         "if_demodulator.h": "c",
         "sysinit.h": "c",
         "zui_strings_enum.h": "c",
-        "panel.h": "c"
+        "panel.h": "c",
+        "mapp_usbdownload.h": "c",
+        "mapp_func_mainpage.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false
 }

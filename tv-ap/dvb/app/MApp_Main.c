@@ -124,6 +124,7 @@
 #include "MApp_Scan.h"
 #include "GPIO_macro.h"
 #include "MApp_SaveData.h"
+#include "MApp_ZUI_ACTmainpage.h"
 
 #if (ENABLE_SECURITY_R2)
 #include "msAPI_SecurityR2.h"
@@ -517,6 +518,7 @@ MS_BOOL MApp_PreInit_State(void)
         case EN_PRE_INIT_STAGE_USB_INIT:
             DEBUG_INIT_STATE_NAME( printf("MApp_PreInit_USB_Init\n"); );
             MApp_PreInit_USB_Init();
+            firmwareUpgradeViaUSB();
             break;
 
         case EN_PRE_INIT_STAGE_TUNER_INIT:
@@ -856,8 +858,8 @@ int main(void)
                      u32MainLoopTime_Last = u32MainLoopTime_Cur;
                     //nguyen
                     if (bToogleLED == 0){
-                        LED_RED_Off();
-                        LED_GRN_On(); 
+                        // LED_RED_Off();
+                        // LED_GRN_On(); 
                         IR_ON();
                         IR_ON1();
                         IR_ON2();
@@ -866,8 +868,8 @@ int main(void)
                         //MApi_PNL_SetBackLight(ENABLE);
                         bToogleLED = 1;    
                     } else {
-                        LED_RED_On();
-                        LED_GRN_Off();
+                        // LED_RED_On();
+                        // LED_GRN_Off();
                         IR_OFF();
                         IR_OFF1();
                         IR_OFF2();
@@ -909,38 +911,56 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 }
 
 //nguyen
-#define     NUM_PRESS_TIME_BEFORE_GO_TO_HOME  10
-#define     SHOP_BACKLIGHT      255
-#define     HOME_BACKLIGHT      100
+#define     NUM_OF_TIMES_KEY_VOLUME_PRESSED  10
+#define     MAX_COUNT  (10 * NUM_OF_TIMES_KEY_VOLUME_PRESSED)
+#define     DECREASE_STEP       5
+#define     SHOP_BACKLIGHT      250
+#define     HOME_BACKLIGHT      200
 #define     DEBUG_HOME_SHOP(x)  x
 static U16 fourKeyPressed = 0;
 static U16 countForHomeShop = 0;
 static U16 countForHomeShopSaved = 0;
 U8 buff_count[2];
 U8 keytemp = 0;
+
 HomeShop_FSM_STATE homeshop_state = HOMESHOP_INIT;
 static U32 timeLast = 0;
 static U32 timeCurr = 0;
+U8 backLightCompute(U16 count){
+    U8 backLight = 0;
+    backLight = SHOP_BACKLIGHT - count/NUM_OF_TIMES_KEY_VOLUME_PRESSED;
+    if(backLight <= HOME_BACKLIGHT)
+        backLight = HOME_BACKLIGHT;
+    DEBUG_HOME_SHOP(printf("\nXXXXXXX backLight %u\n", backLight););
+    return backLight;
+}
 void HomeShop_FSM (void){
     timeCurr = MsOS_GetSystemTime();
     if(msAPI_Timer_DiffTime_2(timeLast, timeCurr) > 1000){ 
         if(get_isKeyVolumePressed()){
-            if(countForHomeShop <= NUM_PRESS_TIME_BEFORE_GO_TO_HOME){
+            if(countForHomeShop <= MAX_COUNT){
                 countForHomeShop ++;
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
                 DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
                 DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
                 DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
                 countForHomeShopSaved = MApp_Load_UserDataForHomeShop();
-                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved););
+                
+                if(countForHomeShop != countForHomeShopSaved){
+                    MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);
+                    printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
+                } else {
+                   MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));      
+                }
+                
             } else {
                 DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
                 DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
                 DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
             }
-            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
-            DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
-            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
+            // DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
+            // DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
+            // DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
             timeLast = timeCurr;
         }
         keytemp = getKeyPressed() - KEY_0;
@@ -953,28 +973,29 @@ void HomeShop_FSM (void){
                 homeshop_state = SHOP_STATE;
                 countForHomeShop = 0;
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
-                MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);
+                MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));
             }
         }
         
         switch(homeshop_state){
             case HOMESHOP_INIT:
                 countForHomeShop = MApp_Load_UserDataForHomeShop();
-                if(countForHomeShop > NUM_PRESS_TIME_BEFORE_GO_TO_HOME + 1){
+                if(countForHomeShop > MAX_COUNT){
                     countForHomeShop = 0;    
                     MApp_Save_UserDataForHomeShop(countForHomeShop);
                 } 
-                MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);  
+                MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));  
                 homeshop_state = SHOP_STATE;
             break;
             case SHOP_STATE:
-                if(countForHomeShop >= NUM_PRESS_TIME_BEFORE_GO_TO_HOME){
+                if(countForHomeShop >= MAX_COUNT){
                     homeshop_state = HOME_STATE;  
-                    MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);   
+                    MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));   
                 }
             break;
             case HOME_STATE:
-
+            break;
+            default:
             break;
         }
     }

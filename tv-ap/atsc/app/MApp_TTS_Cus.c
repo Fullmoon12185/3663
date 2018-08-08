@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -141,13 +141,13 @@ extern void MApp_MPlayer_ResetPreviewTimer(void);
 //==========================================================================
 // Debug option
 
-#define DEBUG_TTS_CUS(x)        //x
+#define DEBUG_TTS_CUS(x)        x
 
-#define DEBUG_TTS_STR(x)        //x
-#define DEBUG_TTS_ADD_STR(x)    //x
-#define DEBUG_TTS_STR_SPLIT(x)  //x
+#define DEBUG_TTS_STR(x)        x
+#define DEBUG_TTS_ADD_STR(x)    x
+#define DEBUG_TTS_STR_SPLIT(x)  x
 
-#define DEBUG_TTS_CB(x)         //x
+#define DEBUG_TTS_CB(x)         x
 
 #define TTS_TEST_LONG_TEXT      0
 
@@ -159,7 +159,7 @@ extern void MApp_MPlayer_ResetPreviewTimer(void);
 //#define TTS_ENABLE_SPLIT_STR    1
 
 // One unicode convert to UTF8 1~3 Bytes,
-#define TTS_CUS_SPLIT_STR_LEN       300//(TTS_TEXT_BUF_LEN*2/3)
+#define TTS_CUS_SPLIT_STR_LEN       1000//(TTS_TEXT_BUF_LEN*2/3)
 
 #define TTS_TAG_SIZE_MAX            55
 

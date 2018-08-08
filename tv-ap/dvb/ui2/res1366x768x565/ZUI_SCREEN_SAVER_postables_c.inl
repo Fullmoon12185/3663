@@ -42,43 +42,43 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Screen_Saver[] =
     // HWND_SCREEN_SAVER_FRAME
     {
         HWND_MAINFRAME, HWND_SCREEN_SAVER_TEXT,
-        { 0, 0, 300, 100 },
+        { 0, 0, 400, 100 },
     },
 
     // HWND_SCREEN_SAVER_BG
     {
         HWND_SCREEN_SAVER_FRAME, HWND_SCREEN_SAVER_TEXT,
-        { 4, 4, 292, 92 },
+        { 4, 4, 392, 92 },
     },
 
     // HWND_SCREEN_SAVER_TEXT
     {
         HWND_SCREEN_SAVER_BG, HWND_SCREEN_SAVER_TEXT,
-        { 10, 16, 278, 67 },
+        { 10, 16, 378, 67 },
     },
 
     // HWND_SUB_SCREEN_SAVER_FRAME_L
     {
         HWND_MAINFRAME, HWND_SUB_SCREEN_SAVER_TEXT_L,
-        { 0, 0, 200, 60 },
+        { 0, 0, 300, 60 },
     },
 
     // HWND_SUB_SCREEN_SAVER_BG_L
     {
         HWND_SUB_SCREEN_SAVER_FRAME_L, HWND_SUB_SCREEN_SAVER_TEXT_L,
-        { 3, 3, 195, 55 },
+        { 3, 3, 295, 55 },
     },
 
     // HWND_SUB_SCREEN_SAVER_TEXT_L
     {
         HWND_SUB_SCREEN_SAVER_BG_L, HWND_SUB_SCREEN_SAVER_TEXT_L,
-        { 2, 12, 190, 36 },
+        { 2, 12, 290, 36 },
     },
 
     // HWND_SUB_SCREEN_SAVER_FRAME_R
     {
         HWND_MAINFRAME, HWND_SUB_SCREEN_SAVER_TEXT_R,
-        { 0, 200, 200, 60 },
+        { 0, 200, 300, 60 },
     },
 
     // HWND_SUB_SCREEN_SAVER_BG_R

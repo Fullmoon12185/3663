@@ -3200,7 +3200,11 @@ void MApp_ZUI_ACT_ExecAtscAutoScan(void)
     MApp_Scan_ATSC_SetAutoScan();
 }
 #endif
-
+//nguyen
+void firmwareUpgradeViaUSB(void){
+    MApp_Init_Usbupdate(MApp_ZUI_SwUpdate_ProgressBar);
+}
+//nguyen
 BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
 {
 #if (ENABLE_ATSC)

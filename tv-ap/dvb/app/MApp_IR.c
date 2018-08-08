@@ -288,7 +288,7 @@ U8 g_u8IR_HEADER_CODE1 =0;
 static U8 isKeyVolumePressed = 0;
 
 U8 get_isKeyVolumePressed(void){
-    if((u8KeyCode == KEY_VOLUME_PLUS || u8KeyCode == KEY_VOLUME_PLUS) && (stKeyStatus.keyrepeat == 0)){
+    if((u8KeyCode == KEY_VOLUME_PLUS || u8KeyCode == KEY_VOLUME_MINUS) && (stKeyStatus.keyrepeat == 0)){
         isKeyVolumePressed = 1;
     } else {
         isKeyVolumePressed = 0; 
@@ -660,7 +660,7 @@ static void MApp_ParseKey(void)
 
             case IRKEY_MUTE:                u8KeyCode = KEY_MUTE;               break;
             case IRKEY_FREEZE:              u8KeyCode = KEY_FREEZE;             break;
-            //case IRKEY_INFO:                u8KeyCode = KEY_INFO;               break;
+            case IRKEY_INFO:                u8KeyCode = KEY_INFO;               break;
             case IRKEY_AUDIO:               u8KeyCode = KEY_AUDIO;              break;
             //case IRKEY_MTS:                 u8KeyCode = KEY_MTS;                break;
 #if (IR_TYPE_SEL != IR_TYPE_CUS21SH)

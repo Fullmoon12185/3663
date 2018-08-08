@@ -194,9 +194,9 @@
 extern MS_BOOL mdev_CofdmGetSignalStrength(MS_U16 *strength);
 #endif
 
-#define TUNER_API_DBG(y)        //y
-#define NEW_SCAN_API_DBG(y)     //y
-#define TUNER_SERIAL_CONTROL_DBG(y) //y
+#define TUNER_API_DBG(y)        y
+#define NEW_SCAN_API_DBG(y)     y
+#define TUNER_SERIAL_CONTROL_DBG(y) y
 
 #define SCAN_DEBUG_CH       0x01
 #define SCAN_DEBUG_PAL      0x02
@@ -1149,7 +1149,7 @@ FUNCTION_RESULT msAPI_Tuner_CheckSignalStrength(WORD *wStrength)
 
 #else
     EN_DEMODULATOR_TYPE eCurDemod = msAPI_Demod_GetCurrentDemodType();
-    //printf("\nmsAPI_Tuner_CheckSignalStrength()- eCurDemod=%u\n", eCurDemod);
+    printf("\nmsAPI_Tuner_CheckSignalStrength()- eCurDemod=%u\n", eCurDemod);
 
     WORD wSignalStrength = 0; // fix coverity 207475
 

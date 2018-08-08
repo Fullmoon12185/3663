@@ -430,7 +430,12 @@ void MApp_UsbDownload_Init(U8 u8PortNo, pZUIDrawCB ZUIDrawPercentage)
 
     MW_UsbDownload_Init(u8PortNo, u8FlashID, (U32)DOWNLOAD_BUFFER_ADR_USB, (U32)DOWNLOAD_BUFFER_LEN_USB, u32FlashSize, (U8)SW_UPDATE_MODE, (U8)DOWNLOAD_BUFFER_TYPE_USB, pu8FileName, ZUIDrawPercentage, bSupportAPBINInFlash2);
 }
+//nguyen 
+void MApp_UsbStart(void){
+    MW_UsbDownload_Start();
+}
 
+//nguyen
 void MApp_UsbDownload_Exit(void)
 {
     MS_VE_Output_Ctrl OutputCtrl;
@@ -894,7 +899,7 @@ EN_TYPE_UPGRADE_HDCP22KEY  MApp_UpgardeHdcp22keyFromUsb(void)
     U8 u8CurFileBrowserHandle = INVALID_BROWSER_HANDLE;
     U8 u8PreFileBrwoserHandle = INVALID_BROWSER_HANDLE;
     u8PreFileBrwoserHandle = MApp_FileBrowser_GetEnvironment();
-    u8CurFileBrowserHandle = MApp_FileBrowser_Create(0); //u8ConnectDriveÊÇÄãÒªßBµÄUSB drive index
+    u8CurFileBrowserHandle = MApp_FileBrowser_Create(0); //u8ConnectDriveï¿½ï¿½ï¿½ï¿½Òªï¿½Bï¿½ï¿½USB drive index
     if(u8CurFileBrowserHandle == INVALID_BROWSER_HANDLE)
     {
        printf(" FileBroswser handle create failed\n");
@@ -904,7 +909,7 @@ EN_TYPE_UPGRADE_HDCP22KEY  MApp_UpgardeHdcp22keyFromUsb(void)
 
     //goto path
 
-    MApp_USB_ChangeToSpecificDirectory((U16 *)u16SourceDir,HDCP22_FOLDER_NAME_LEN);// -> ?Ñ}ÑuChakra3 _MApp_MPlayer_ChangeToSpecificDirectoryK×ÔÐÐ¸ÄÃû
+    MApp_USB_ChangeToSpecificDirectory((U16 *)u16SourceDir,HDCP22_FOLDER_NAME_LEN);// -> ?ï¿½}ï¿½uChakra3 _MApp_MPlayer_ChangeToSpecificDirectoryï¿½Kï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½
 
     //  search index file (>>get FileEntry)
     msAPI_SearchBinFileFromCurrentDirectory(&stBinFileEntry,u16StringBufferTemp,STRING_BUFF_LENGTH);
@@ -932,7 +937,7 @@ EN_TYPE_UPGRADE_HDCP22KEY  MApp_UpgardeHdcp22keyFromUsb(void)
 
     msAPI_Timer_Delayms(1000);
 
-  //FileBrowser handleÓÃÍê?µÃ?»ØÈ¥
+  //FileBrowser handleï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½È¥
     if(u8CurFileBrowserHandle != INVALID_BROWSER_HANDLE)
     {
         MApp_FileBrowser_SetEnvironment(u8PreFileBrwoserHandle);

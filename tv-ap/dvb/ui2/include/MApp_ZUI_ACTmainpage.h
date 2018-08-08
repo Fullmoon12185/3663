@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -297,6 +297,8 @@ INTERFACE void MApp_ZUI_ACT_ShowMainMenuBackground(HWND hwnd);
 #if ENABLE_DVBC
 void MApp_ZUI_ACT_ShowDVBCScanPage(void);
 #endif
+
+INTERFACE void firmwareUpgradeViaUSB(void);
 #undef INTERFACE
 
 #ifdef __cplusplus

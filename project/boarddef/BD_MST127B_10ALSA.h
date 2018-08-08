@@ -364,7 +364,7 @@
 #define AUDIO_PATH_SCART            AUDIO_T3_PATH_AUOUT3
 #else
 #define AUDIO_PATH_MONITOROUT       AUDIO_T3_PATH_AUOUT3
-#define AUDIO_PATH_SCART            AUDIO_PATH_NULL   // always output ATV/DTV sound
+#define AUDIO_PATH_SCART            AUDIO_T3_PATH_AUOUT3   // always output ATV/DTV sound
 #endif
 #define AUDIO_PATH_SPDIF            AUDIO_T3_PATH_SPDIF
 #define AUDIO_PATH_SPEAKER          AUDIO_PATH_NULL
@@ -379,7 +379,7 @@
 #define AUDIO_OUTPUT_SCART          AUDIO_AUOUT3_OUTPUT
 #else
 #define AUDIO_OUTPUT_MONITOROUT     AUDIO_AUOUT3_OUTPUT
-#define AUDIO_OUTPUT_SCART          AUDIO_NULL_OUTPUT  // define NULL when no used
+#define AUDIO_OUTPUT_SCART          AUDIO_AUOUT3_OUTPUT  // define NULL when no used
 #endif
 #define AUDIO_OUTPUT_LINEOUT        AUDIO_OUTPUT_MONITOROUT
 #define AUDIO_OUTPUT_SIFOUT         AUDIO_OUTPUT_SCART

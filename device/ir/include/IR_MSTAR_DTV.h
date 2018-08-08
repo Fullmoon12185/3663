@@ -177,7 +177,7 @@ typedef enum _IrCommandType
     //IRKEY_PAGE_DOWN         = 0x05,
     //IRKEY_CLOCK             = 0x5F,
 
-    IRKEY_INFO              = IRKEY_DUMY-1,
+    IRKEY_INFO              = 0x5A,
     IRKEY_RED               = 0x42,
     IRKEY_GREEN             = 0x41,
     IRKEY_YELLOW            = 0x1,

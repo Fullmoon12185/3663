@@ -139,6 +139,7 @@ EN_TYPE_UPGRADE_HDCP22KEY  MApp_UpgardeHdcp22keyFromUsb(void);
 EnuUsbDlErrCode MApp_Usb_Download_AQBin(void);
 #endif
 INTERFACE void MApp_UsbDownload_Init(U8 u8PortNo, pZUIDrawCB ZUIDrawPercentage);
+INTERFACE void MApp_UsbStart(void);
 INTERFACE void MApp_UsbDownload_Exit(void);
 INTERFACE U8 MApp_UsbDownloadCheckPort(void);
 #if (ENABLE_MFC_6M20||ENABLE_MFC_6M30||ENABLE_6M40_4KX2K_PROCESS)  //
