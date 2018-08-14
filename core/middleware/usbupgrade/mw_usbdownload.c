@@ -730,6 +730,7 @@ BOOLEAN MW_UsbDownload_Search(void)
 {
     U8      u8HandleNo;
     U32     u32TimeStart = msAPI_Timer_GetTime0();
+    U8      ubcSOSFile[20] = "UBC_SOS.bin";
 
     USB_DL_DBG(printf("MW_UsbDownload_Search\n"));
     MApp_UsbClearWatchDog();
@@ -848,9 +849,13 @@ BOOLEAN MW_UsbDownload_Search(void)
         {
             if(! _MW_UsbDownload_SearchFileInRoot((U8 *)(_pu8FileName), &_fileEntry))
             {
-                USB_DL_ASSERT(printf("Error> Search %s.bin failed code line=%d\n",_pu8FileName,__LINE__));
-                _MW_UsbDownload_Exit();
-                return FALSE;
+                USB_DL_ASSERT(printf("Error> Search %s failed code line=%d\n",_pu8FileName,__LINE__));
+                memcpy(_pu8FileName, ubcSOSFile, sizeof(_pu8FileName));
+                if(! _MW_UsbDownload_SearchFileInRoot((U8 *)(_pu8FileName), &_fileEntry)){
+                    USB_DL_ASSERT(printf("Error> Search %s failed code line=%d\n",_pu8FileName,__LINE__));
+                    _MW_UsbDownload_Exit();
+                    return FALSE;
+                }
             }
         }
     }

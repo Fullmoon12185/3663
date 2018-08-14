@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -112,6 +112,7 @@ typedef enum
 } EN_SW_UPDATE_MODE;
 
 INTERFACE BOOLEAN MApp_SwUpdate_Start(EN_SW_UPDATE_MODE u8UpdateMode, BOOLEAN allowTwoFlashMode, BOOLEAN bDownloadType, BOOLEAN bSecondRun, U32 u32DramStartAddr, U32 u32FileSize, U8 u8MemType, BOOLEAN bAPBinFlag);
+INTERFACE U8 Is_image_different(void);
 #undef INTERFACE
 
 #endif

@@ -279,7 +279,7 @@ void MApp_Bench_PowerOffLED(void)
 }
 #endif
 
-#define DEBUG_INIT_STATE_NAME(x) x
+#define DEBUG_INIT_STATE_NAME(x) //x
 
 MS_BOOL MApp_PreInit_State(void)
 {

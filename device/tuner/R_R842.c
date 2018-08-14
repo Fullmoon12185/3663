@@ -32,7 +32,9 @@
 #define DIVIDER_RATIO_166_7KHz      0x00
 
 // #define TN_FREQ_STEP                E_FREQ_STEP_62_5KHz
+//nguyen
 #define DIVIDER_RATIO               DIVIDER_RATIO_50KHz
+//#define DIVIDER_RATIO               DIVIDER_RATIO_166_7KHz
 
 #define _TUNER_I2C_ID               0xF6
 #define MIN_FREQ_SUPPORT_KHz        40000

@@ -627,8 +627,8 @@
  //------------------------------MHEG CONFIG-------------------------------------
 
  #if ((ENABLE_DTV) && (!BLOADER))
-    #define ENABLE_CI                   ENABLE  // DISABLE
-    #define ENABLE_CI_PLUS              ENABLE  // DISABLE
+    #define ENABLE_CI                   DISABLE
+    #define ENABLE_CI_PLUS              DISABLE
  #else // #if (ENABLE_DTV)
     #define ENABLE_CI                   DISABLE
     #define ENABLE_CI_PLUS              DISABLE

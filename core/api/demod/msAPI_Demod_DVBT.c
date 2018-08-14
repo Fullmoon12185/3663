@@ -363,9 +363,9 @@ void devCOFDM_DVBT_SetFrequency(DWORD dwFrequency, RF_CHANNEL_BANDWIDTH eBandWid
 
 #endif
 
-    //printf( "%s,%d,0x%x\n",__FUNCTION__,__LINE__,MDrv_ReadByte(0x100B50));
+    //printf( "nguyen %s,%d,0x%x\n",__FUNCTION__,__LINE__,MDrv_ReadByte(0x100B50));
     devDigitalTuner_SetFreq((double)(dwFrequency/1000.0), eBandWidth);
-    //printf( "%s,%d,0x%x\n",__FUNCTION__,__LINE__,MDrv_ReadByte(0x100B50));
+    //printf( "nguyen 2 %s,%d,0x%x\n",__FUNCTION__,__LINE__,MDrv_ReadByte(0x100B50));
     //printf( "%s,%d,0x%x\n",__FUNCTION__,__LINE__,MDrv_ReadByte(0x100B50));
 
 #if(FRONTEND_DEMOD_DVBT_TYPE == EMBEDDED_DVBT_DEMOD)

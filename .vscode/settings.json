@@ -7,7 +7,9 @@
         "zui_strings_enum.h": "c",
         "panel.h": "c",
         "mapp_usbdownload.h": "c",
-        "mapp_func_mainpage.h": "c"
+        "mapp_func_mainpage.h": "c",
+        "gpio_macro.h": "c",
+        "bd_mst127b_10alsa.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false
 }

@@ -125,6 +125,11 @@
 #include "apiXC_Hdmi.h"
 #include "msAPI_Timer.h"
 
+//nguyen
+#include "mapp_swupdate.h"
+#include "BD_MST127B_10ALSA.h"
+//nguyen
+
 #if ENABLE_TTX
 #include "msAPI_TTX.h"
 #endif
@@ -190,7 +195,8 @@ void MDrv_ISR_Init(void)
 #endif
 }
 extern MS_U32 gsystem_time_ms;
-
+MS_U32 upgrade_image_counter = 0;
+BOOLEAN bLedToggled = TRUE;
 //------------------------------------------------------------------------------------
 //extern void Timer_Setting_Register(void *ptCb);
 extern void Timer_IRQ_Register(void *ptCb);
@@ -203,12 +209,38 @@ static void TimerISR(void)
 {
     gTimerCount0++;
     gu8100msTH++;
-
+    upgrade_image_counter++;
     msAPI_Timer_1ms_ISR();
     //nguyen
-    // gTimerCount0LED++;
-    // if()
-    // if(gTimerCount0LED)
+    // if(Is_image_different() == 0){ //same
+    //     if(upgrade_image_counter >= 100){
+    //         if(bLedToggled){
+    //             bLedToggled = FALSE;
+    //             LED_RED_Off();
+    //             LED_GRN_On();
+    //         } else {
+    //             bLedToggled = TRUE;
+    //             LED_RED_On();            
+    //             LED_GRN_Off();
+    //         }        
+    //         upgrade_image_counter = 0;
+    //     }
+    // } else 
+    if (Is_image_different() == 1) { //different
+        if(upgrade_image_counter >= 1000){
+            if(bLedToggled){
+                bLedToggled = FALSE;
+                LED_RED_Off();
+                LED_GRN_On();
+            } else {
+                bLedToggled = TRUE;
+                LED_GRN_Off();
+                LED_RED_On();
+            }
+            upgrade_image_counter = 0;
+        }
+    }
+
     //nguyen
     // Use a threshold to check the 100 ms. If the threshold
     // is greater or equal than the 100 ms. Increase the 100 ms

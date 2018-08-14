@@ -291,12 +291,12 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 //                     Macro
 //------------------------------------------------------------------------------
 #if ENABLE_SCAN_ONELINE_MSG
-#define SCAN_ONE_LINE_DBINFO(y)         y
+#define SCAN_ONE_LINE_DBINFO(y)         //y
 #else
-#define SCAN_ONE_LINE_DBINFO(y)         y
+#define SCAN_ONE_LINE_DBINFO(y)         //y
 #endif
-#define SCAN_DBINFO(y)                  y
-#define DVBC_SCAN_DBINFO(y)             y
+#define SCAN_DBINFO(y)                  //y
+#define DVBC_SCAN_DBINFO(y)             //y
 
 //------------------------------------------------------------------------------
 

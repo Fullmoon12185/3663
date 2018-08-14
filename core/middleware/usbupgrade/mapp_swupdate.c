@@ -49,6 +49,8 @@
 
 #include "SysInit_Common.h"
 
+#include "drvGPIO.h"
+#include "BD_MST127B_10ALSA.h"
 /******************************************************************************/
 /*                                 Macro                                      */
 /******************************************************************************/
@@ -104,6 +106,7 @@ static U8 _u8PercentStart;
 static U8 _u8PercentEnd;
 static U32 _u32ProgressMaxSize;
 
+static U8 isImageDifferent = 3;
 #if 0
 static MSIF_Version _mw_swupdate_version = {
        .MW = { MW_USBU_VER },
@@ -169,6 +172,12 @@ extern BOOLEAN msFlash_ChipSelect(U8 u8FlashID);
 /// - 1: success
 /// - 0: false
  ******************************************************************************/
+
+//nguyen
+U8 Is_image_different(void){
+    return isImageDifferent;
+}
+//nguyen
 
 #if 0
 BOOLEAN MApp_SwUpdate_GetLibVer(const MSIF_Version **ppVersion)
@@ -523,6 +532,7 @@ static BOOLEAN _MApp_SwUpdate_VerifyFlash(U32 u32SrcAddr, U32 u32FlashAddr, U32 
     return TRUE;
 }
 
+
 // Set dirty blocks by binary comparison
 static U8 _MApp_SwUpdate_CompareImage(EN_SW_UPDATE_MODE u8UpdateMode, U32 u32SrcAddr, U32 u32FlashAddr, U32 u32DataSize)
 {
@@ -662,6 +672,16 @@ static U8 _MApp_SwUpdate_CompareImage(EN_SW_UPDATE_MODE u8UpdateMode, U32 u32Src
         {
             //APD_DBG(printf("Same image\n"));
             printf(" => Same image\n");
+            isImageDifferent = SAME_IMAGE;
+            U32 u32MainLoopTime_Cur1 = 0;
+            while(u32MainLoopTime_Cur1++ <= 20){
+                msAPI_Timer_Delayms(200);
+                LED_RED_Off();
+                LED_GRN_On();
+                msAPI_Timer_Delayms(200);
+                LED_RED_On();            
+                LED_GRN_Off();
+            }
         }
         else
         {
@@ -671,7 +691,7 @@ static U8 _MApp_SwUpdate_CompareImage(EN_SW_UPDATE_MODE u8UpdateMode, U32 u32Src
 
             //APD_DBG(printf("Different image\n"));
             printf("==> Different image\n");
-
+            isImageDifferent = DIFFERENT_IMAGE;
             APD_DBG(printf("The last block: %d\n", u16BlockNo));
 
             // make app's first block be dirty
