@@ -320,7 +320,7 @@ extern void MApp_ZUI_ACT_DrawAisIcon(void);
 #define DEBUG_CHG_SRC_TIME2()    //printf("ChgSrc %u at %u\n", __LINE__, MsOS_GetSystemTime());
 
 #define SIGNAL_PATH_DBG(x)      //do { msDebug_ANSI_SetColorText(E_FONT_BACKGROUND_COLOR_RED); x; msDebug_ANSI_AllAttrOffText(); } while(0)
-#define INPUTSOURCE_DBG(y)      y
+#define INPUTSOURCE_DBG(y)      //y
 #define AIS_DETECT_DUTY         100//150 // ms
 
 #define DEBUG_CVBS_OUT(x)   //do { msDebug_ANSI_SetColorText(E_FONT_BACKGROUND_COLOR_RED); x; msDebug_ANSI_AllAttrOffText(); } while(0)//x
@@ -548,6 +548,12 @@ static void _MApp_InputSource_ClearSysInputSourceFlag(SCALER_WIN eWindow)
     }
 }
 */
+
+
+//nguyen
+
+//nguyen
+
 
 #if ENABLE_DTV
 static EN_SYS_INPUT_SOURCE_TYPE MApp_GetDTV_Source_Type(void)
@@ -5659,7 +5665,7 @@ BOOLEAN MApp_Is_UI_INPUT_SOURCE_DTV(E_UI_INPUT_SOURCE eUiInputSourceType)
 //-----------------------------------------------------------------------------------
 
 // UI Inputsource control
-#define DEBUG_UI_INPUT_SRC(x)   x
+#define DEBUG_UI_INPUT_SRC(x)   //x
 static E_UI_INPUT_SOURCE g_InputSrc_eLastDtvUiSrc = UI_INPUT_SOURCE_NONE;
 void MApp_InputSrc_Set_UiInputSrcType(E_UI_INPUT_SOURCE enUiInputSourceType)
 {

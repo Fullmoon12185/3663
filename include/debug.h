@@ -129,8 +129,8 @@
 
 //-----------type "uu" to udpate software by USB--------------------------------
 
-#define STATE_PRINT         1
-#define ENABLE_DEBUG         1
+#define STATE_PRINT         0
+#define ENABLE_DEBUG         0
 
 #ifdef ENABLE_DEBUG
 #define DEBUG_INFO(y) y
@@ -358,7 +358,7 @@ int Debug_Log_MemPrintf(U8 u8GroupIdx, const char *fmt, ...);
 //******************************************************************************
 //
 
-#define ENABLE_TIME_LOG     ENABLE//ENABLE//DISABLE
+#define ENABLE_TIME_LOG     ENABLE
 
 //
 //******************************************************************************

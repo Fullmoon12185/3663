@@ -330,6 +330,9 @@ U8 msIR_ReadByte( U16 u16RegIndex )
 }
 #endif
 
+
+
+
 U8 msIR_GetIrKeyData( void )
 {
     U8 IrKeyData;

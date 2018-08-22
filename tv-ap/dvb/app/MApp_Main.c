@@ -126,6 +126,9 @@
 #include "MApp_SaveData.h"
 #include "MApp_ZUI_ACTmainpage.h"
 
+#include "MApp_InputSource.h"
+#include "msIR.h"
+
 #if (ENABLE_SECURITY_R2)
 #include "msAPI_SecurityR2.h"
 #endif
@@ -853,16 +856,22 @@ int main(void)
                 //MAIN_FUNC_STATE_DBG(printf(" %d: [EN_MSTAR_MAIN_FUNCTION_ENTERING_WHILE_LOOP] \n", __LINE__));
 
                 u32MainLoopTime_Cur = MsOS_GetSystemTime();
-                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 500 )
+                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 1000 )
                 {
                      u32MainLoopTime_Last = u32MainLoopTime_Cur;
+
+                    if(ANDROID_STATUS() == 1){
+                        printf("input = 1\n");
+                    } else {
+                        printf("input = 0\n");
+                    }
+                     
                     //nguyen
                     if (bToogleLED == 0){
                         // LED_RED_Off();
                         // LED_GRN_On(); 
-                        IR_ON();
-                        IR_ON1();
-                        IR_ON2();
+                        //EX_ACTIVE_IC_ON();
+                        
                         //MApp_PreInit_Logo_Init();
                         //MApi_PNL_En(TRUE);
                         //MApi_PNL_SetBackLight(ENABLE);
@@ -870,9 +879,7 @@ int main(void)
                     } else {
                         // LED_RED_On();
                         // LED_GRN_Off();
-                        IR_OFF();
-                        IR_OFF1();
-                        IR_OFF2();
+                        //EX_ACTIVE_IC_OFF();
                         //MApi_PNL_En(FALSE);
                         //MApi_PNL_SetBackLight(DISABLE);
                         bToogleLED = 0;
@@ -881,7 +888,11 @@ int main(void)
                     
                     //printf("t=%u\n", u32MainLoopTime_Cur );
                 }
+                
+                
+                
                 MApp_While_Loop_State();
+                SendIROut_FSM();
                 HomeShop_FSM();
 
                 break;
@@ -998,6 +1009,66 @@ void HomeShop_FSM (void){
             default:
             break;
         }
+    }
+}
+
+
+#define     ANDROID_STANDBY_MODE     0
+#define     ANDROID_ACTIVE_MODE      1
+SendIROut_STATE sendirout_state = SEND_IR_OUT_INIT;
+SendIROut_STATE sendirhome_standby = SEND_IR_KEY_HOME;
+U8 temp_key = 0xff;
+static U32 timeLastAndroid = 0;
+static U32 timeCurrAndroid = 0;
+
+void SendIROut_FSM(void){
+    if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2){
+        if(ANDROID_STATUS() == ANDROID_STANDBY_MODE){
+            timeCurrAndroid = MsOS_GetSystemTime();
+            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 1000 ){
+                MApp_IR_sendIROut(IRKEY_POWER);     
+                timeLastAndroid = timeCurrAndroid;   
+            }
+        } else {
+            switch (sendirout_state){
+                case SEND_IR_OUT_INIT:
+                    temp_key = getIRKey();
+                    //printf("temp_key = %d \n", temp_key);
+                    if(temp_key != 0xFF)
+                        sendirout_state = SEND_IR_OUT_1;
+                break;
+                case SEND_IR_OUT_1:
+                    MApp_IR_sendIROut(temp_key);
+                    sendirout_state = SEND_IR_OUT_2;
+                break;
+                case SEND_IR_OUT_2:
+                    temp_key = getIRKey();
+                    if(temp_key == 0xFF)
+                        sendirout_state = SEND_IR_OUT_INIT;
+                break;
+                default:
+                break;
+            }
+        }
+    } else {
+        if(ANDROID_STATUS() == ANDROID_ACTIVE_MODE){
+            timeCurrAndroid = MsOS_GetSystemTime();
+            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 2000 ){
+                switch(sendirhome_standby){
+                    case SEND_IR_KEY_HOME:
+                        MApp_IR_sendIROut(IRKEY_HOME);
+                        sendirhome_standby = SEND_IR_KEY_STANDBY;
+                    break;
+                    case SEND_IR_KEY_STANDBY:
+                        MApp_IR_sendIROut(IRKEY_POWER);     
+                        sendirhome_standby = SEND_IR_KEY_HOME;
+                    break;
+                    default:
+                    break;
+                }
+                timeLastAndroid = timeCurrAndroid;   
+            }
+        } 
     }
 }
 //nguyen

@@ -244,7 +244,7 @@ void msGPIO_Init()
     SCART_OUT_ON();
     printf("Test PWM\n");
     Mst_PwmPortInit();
-
+    ANDROID_INIT();
     //msPWM_OutputEnable( (PWM1_ENABLE));// | PWM0_ENABLE | PWM2_ENABLE | PWM3_ENABLE) );
     //MApi_PNL_SetBackLight(BACKLITE_INIT_SETTING);
     //MApi_PNL_SetBackLight(DISABLE);

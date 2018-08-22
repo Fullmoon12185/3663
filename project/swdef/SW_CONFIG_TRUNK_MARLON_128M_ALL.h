@@ -357,7 +357,7 @@
 
 //----OAD------------------------------------------------------------------------
 #if (ENABLE_DTV)
-    #define ENABLE_OAD                      ENABLE
+    #define ENABLE_OAD                      DISABLE //ENABLE
 #else
     #define ENABLE_OAD                      DISABLE
 #endif
@@ -648,7 +648,7 @@
     #define ENABLE_SUBTITLE DISABLE
 
 #elif (ENABLE_DVB)
-    #define ENABLE_SUBTITLE ENABLE
+    #define ENABLE_SUBTITLE DISABLE//ENABLE
 
 #else
     #define ENABLE_SUBTITLE DISABLE
@@ -697,7 +697,7 @@
 #if (ENABLE_DTMB_CHINA_APP || ENABLE_ATV_CHINA_APP || ENABLE_SBTVD_BRAZIL_APP || ENABLE_DVBC_PLUS_DTMB_CHINA_APP)
     #define ENABLE_TTX                  DISABLE
 #else
-    #define ENABLE_TTX                  ENABLE
+    #define ENABLE_TTX                  DISABLE//ENABLE
 #endif
 
 #if ENABLE_TTX
@@ -719,7 +719,7 @@
 #define ENABLE_HIERARCHY                    DISABLE
 
 #define ENABLE_RIKS_TV                      DISABLE     //for Riks TV test
-#define ENABLE_NZ_FREEVIEW                  ENABLE      //for NZ Freeview DTG Test
+#define ENABLE_NZ_FREEVIEW                  DISABLE//ENABLE      //for NZ Freeview DTG Test
 
 //---- SI -----------------------------------------------------------------------
 #if ENABLE_NZ_FREEVIEW

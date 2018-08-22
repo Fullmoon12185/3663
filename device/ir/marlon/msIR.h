@@ -193,6 +193,10 @@
 #define INTERFACE extern
 #endif
 
+//nguyen
+INTERFACE void msIR_sendIROut(void);
+//nguyen
+
 INTERFACE void msIR_Clear_FIFO(void);
 INTERFACE U8   msIR_ReadByte( U16 u16RegIndex );
 INTERFACE void msIR_WriteByte(U16 u16RegIndex, U8 u8Value);

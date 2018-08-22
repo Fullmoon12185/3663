@@ -160,8 +160,10 @@ typedef struct
     U8 keydata  ;
 } KEYSTAT;
 //nguyen
-U8 get_isKeyVolumePressed(void);
-U8 getKeyPressed(void);
+INTERFACE U8 get_isKeyVolumePressed(void);
+INTERFACE U8 getKeyPressed(void);
+INTERFACE U8 getIRKey(void);
+INTERFACE void MApp_IR_sendIROut(U8 remoteCode);
 //nguyen
 #undef INTERFACE
 

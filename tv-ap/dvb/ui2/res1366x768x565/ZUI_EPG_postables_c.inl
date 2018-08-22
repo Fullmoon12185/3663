@@ -420,13 +420,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM1_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_1, HWND_EPG_TIMEITEM1_SERVICE,
-        { 710, 185, 250, 50 },
+        { 710, 185, 500, 50 },
     },
 
     // HWND_EPG_TIMEITEM1_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_1, HWND_EPG_TIMEITEM1_EVENT,
-        { 988, 185, 290, 47 },
+        { 988, 185, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM1_ARROW_ICON
@@ -444,13 +444,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM2_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_2, HWND_EPG_TIMEITEM2_SERVICE,
-        { 710, 235, 250, 47 },
+        { 710, 235, 500, 47 },
     },
 
     // HWND_EPG_TIMEITEM2_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_2, HWND_EPG_TIMEITEM2_EVENT,
-        { 988, 235, 290, 47 },
+        { 988, 235, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM2_ARROW_ICON
@@ -468,13 +468,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM3_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_3, HWND_EPG_TIMEITEM3_SERVICE,
-        { 710, 285, 250, 47 },
+        { 710, 285, 500, 47 },
     },
 
     // HWND_EPG_TIMEITEM3_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_3, HWND_EPG_TIMEITEM3_EVENT,
-        { 988, 285, 290, 47 },
+        { 988, 285, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM3_ARROW_ICON
@@ -492,13 +492,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM4_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_4, HWND_EPG_TIMEITEM4_SERVICE,
-        { 710, 335, 250, 47 },
+        { 710, 335, 500, 47 },
     },
 
     // HWND_EPG_TIMEITEM4_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_4, HWND_EPG_TIMEITEM4_EVENT,
-        { 988, 335, 290, 47 },
+        { 988, 335, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM4_ARROW_ICON
@@ -516,13 +516,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM5_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_5, HWND_EPG_TIMEITEM5_SERVICE,
-        { 710, 385, 250, 47 },
+        { 710, 385, 500, 47 },
     },
 
     // HWND_EPG_TIMEITEM5_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_5, HWND_EPG_TIMEITEM5_EVENT,
-        { 988, 385, 290, 47 },
+        { 988, 385, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM5_ARROW_ICON
@@ -540,13 +540,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM6_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_6, HWND_EPG_TIMEITEM6_SERVICE,
-        { 710, 435, 250, 47 },
+        { 710, 435, 500, 47 },
     },
 
     // HWND_EPG_TIMEITEM6_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_6, HWND_EPG_TIMEITEM6_EVENT,
-        { 988, 435, 290, 47 },
+        { 988, 435, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM6_ARROW_ICON
@@ -564,13 +564,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM7_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_7, HWND_EPG_TIMEITEM7_SERVICE,
-        { 710, 485, 250, 47 },
+        { 710, 485, 500, 47 },
     },
 
     // HWND_EPG_TIMEITEM7_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_7, HWND_EPG_TIMEITEM7_EVENT,
-        { 988, 485, 290, 47 },
+        { 988, 485, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM7_ARROW_ICON
@@ -588,13 +588,13 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Epg[] =
     // HWND_EPG_TIMEITEM8_SERVICE
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_8, HWND_EPG_TIMEITEM8_SERVICE,
-        { 710, 535, 250, 47 },
+        { 710, 535, 500, 47 },
     },
 
     // HWND_EPG_TIMEITEM8_EVENT
     {
         HWND_EPG_PRO_GUIDE_TIME_ITEM_8, HWND_EPG_TIMEITEM8_EVENT,
-        { 988, 535, 290, 47 },
+        { 988, 535, 0, 47 },
     },
 
     // HWND_EPG_TIMEITEM8_ARROW_ICON

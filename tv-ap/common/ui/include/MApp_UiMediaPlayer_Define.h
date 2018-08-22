@@ -161,8 +161,8 @@
 
 
 #if( ENABLE_MPLAYER_MOVIE&& (MEMORY_MAP >= MMAP_64MB) )
-    #define ENABLE_DRM                          1
-    #define ENABLE_RESUME_STOP                  1
+    #define ENABLE_DRM                          0
+    #define ENABLE_RESUME_STOP                  0
 #else
     #define ENABLE_DRM                          0
     #define ENABLE_RESUME_STOP                  0
@@ -285,9 +285,9 @@ _GUI_WindowPositionList_Zui_Dmp
 #define TEXT_PREVIEW_WIDTH                      PHOTO_PREVIEW_WIDTH
 #define TEXT_PREVIEW_HEIGHT                     PHOTO_PREVIEW_HEIGHT
 
-#define ENABLE_MOVIE_PREVIEW_ALL_AND_1ST_FRAME  1//¼½¤@½ü>Åã¥Ü¤@±i
-#define ENABLE_MOVIE_PREVIEW_1ST_FRAME          0//ª½±µÅã¥Ü¤@±i
-#define MOVIE_REPEAT_PREVIEW                    0//0:¼½¤@½ü>°±¦í 1:¼½N½ü
+#define ENABLE_MOVIE_PREVIEW_ALL_AND_1ST_FRAME  1//ï¿½ï¿½ï¿½@ï¿½ï¿½>ï¿½ï¿½Ü¤@ï¿½i
+#define ENABLE_MOVIE_PREVIEW_1ST_FRAME          0//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¤@ï¿½i
+#define MOVIE_REPEAT_PREVIEW                    0//0:ï¿½ï¿½ï¿½@ï¿½ï¿½>ï¿½ï¿½ï¿½ï¿½ 1:ï¿½ï¿½Nï¿½ï¿½
 
 #define ENABLE_MOVIE_PREVIEW_1ST_FRAME_POS_MS   2000
 #define ENABLE_MOVIE_THUMBNAIL_1ST_FRAME_SHOW_TIMER 200

@@ -2001,7 +2001,7 @@ void MApp_CEC_Handler(void)
 
 
 //=============================================================
-#define DEBUG_MULTI_TASK_TOTAL_TIME     1
+#define DEBUG_MULTI_TASK_TOTAL_TIME     0
 
 #define ENABLE_MT_CHECK_POINT      0
 

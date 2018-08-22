@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -833,7 +833,7 @@ volatile U8 code padInitTbl[] __attribute__((__section__ (".isp_info"))) =
     _RVM1(0x1e07, 0, BIT4|BIT3 ),   //reg[101e07]#4 ~#3 = 00b
     #endif
 
-    #if(PAD_GPIO6_IS_GPIO != GPIO_NONE)
+#if(PAD_GPIO6_IS_GPIO != GPIO_NONE)
 #if (PADS_PCMCTRL_MODE == PCMCTRL_MODE(1))
     #define PAD_GPIO6_OEN (PAD_GPIO6_IS_GPIO == GPIO_IN ? 0: BIT3)
     #define PAD_GPIO6_OUT (PAD_GPIO6_IS_GPIO == GPIO_OUT_HIGH ? BIT2: 0)
@@ -868,8 +868,8 @@ volatile U8 code padInitTbl[] __attribute__((__section__ (".isp_info"))) =
     _RVM1(0x1e41, 0, BIT3|BIT2 ),   //reg[101e41]#3~#2 = 0b
     //reg_pcmctrlconfig[5] = 0b
     _RVM1(0x1ec8, 0, BIT5 ),   //reg[101ec8]#5 = 0b
-    #endif
-    #endif
+#endif
+#endif
 
     #if(PAD_GPIO7_IS_GPIO != GPIO_NONE)
     #define PAD_GPIO7_OEN (PAD_GPIO7_IS_GPIO == GPIO_IN ? BIT7: 0)

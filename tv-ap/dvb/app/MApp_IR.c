@@ -285,8 +285,100 @@ U8 g_u8IR_HEADER_CODE1 =0;
 
 
 //nguyen
-static U8 isKeyVolumePressed = 0;
+#define  PULSE_562ms            1760
+#define  PULSE_0                0
+#define  PULSE_1                1
+#define  PULSE_START            2
+#define  PULSE_STOP             3
+#define  USER_CODE              0x5FA0
 
+void delay(U32 inTime)
+{
+
+    msAPI_Timer_DelayUs(inTime * 562);
+}
+
+void send_one_pulse(U8 pulseType)
+{
+    //pulse normal high
+    switch (pulseType)
+    {
+    case 0: //1low, 1high
+        IR_OFF();
+        delay(1);
+        IR_ON();
+        delay(1);
+        break;
+    case 1: //1low, 3 high
+        IR_OFF();
+        delay(1);
+        IR_ON();
+        delay(3);
+        break;
+    case 2: //Start pulse: 16 low, 8 high
+        IR_OFF();
+        delay(16);
+        IR_ON();
+        delay(8);
+        break;
+    case 3: //stop pulse: 1 low to  high
+        IR_OFF();
+        delay(1);
+        IR_ON();
+        break;
+    case 4: // repeat pulse: 16low, 1high, 1low
+        IR_OFF();
+        delay(16);
+        IR_ON();
+        delay(1);
+        IR_OFF();
+        delay(1);
+        IR_ON();
+        break;
+    }
+}
+
+void send_code(U16 userCode, U8 remoteCode)
+{
+    U8 i;
+    
+    //start code
+    send_one_pulse(PULSE_START);
+    //send usercode
+    for (i = 0; i < 16; i++)
+    {
+        if ((userCode >> i) & 0x0001)
+            send_one_pulse(PULSE_1);
+        else
+            send_one_pulse(PULSE_0);
+    }
+    //send remote code
+    for (i = 0; i < 8; i++)
+    {
+        if ((remoteCode >> i) & 0x01)
+            send_one_pulse(PULSE_1);
+        else
+            send_one_pulse(PULSE_0);
+    }
+    //revert remote code
+    for (i = 0; i < 8; i++)
+    {
+        if ((remoteCode >> i) & 0x01)
+            send_one_pulse(PULSE_0);
+        else
+            send_one_pulse(PULSE_1);
+    }
+    //stop code
+    send_one_pulse(PULSE_STOP);
+}
+
+void MApp_IR_sendIROut(U8 remoteCode){
+    if(remoteCode != 0xFF){
+        send_code(USER_CODE, remoteCode);
+    }
+}
+
+static U8 isKeyVolumePressed = 0;
 U8 get_isKeyVolumePressed(void){
     if((u8KeyCode == KEY_VOLUME_PLUS || u8KeyCode == KEY_VOLUME_MINUS) && (stKeyStatus.keyrepeat == 0)){
         isKeyVolumePressed = 1;
@@ -299,6 +391,10 @@ U8 get_isKeyVolumePressed(void){
 U8 getKeyPressed(void){
     return u8KeyCode;
 }
+U8 getIRKey(void){
+    return stKeyStatus.keydata;
+}
+
 //nguyen
 //******************************************************************************
 
@@ -1161,7 +1257,7 @@ static void MApp_CheckKeyStatus(void)
     U8 u8KeyType=0;
   #endif
 
-
+    
     if ( msAPI_GetKeyPad(&key, &KeyRepeatStatus)== MSRET_OK )
     {
         stKeyStatus.keytype = KEY_TYPE_KEYPAD;

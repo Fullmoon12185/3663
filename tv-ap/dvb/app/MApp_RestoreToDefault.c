@@ -358,11 +358,11 @@ static code MS_TIME stDefaultTimeData =
     0,//u32ElapsedTimeCnt++;
     0, // s32Offset_Time
 #if ENABLE_ISDBT_NO_DVB
-    TIMEZONE_BRASILIA,
-    EN_Clock_TimeZone_18,
+    TIMEZONE_VIETNAM,
+    EN_Clock_TimeZone_38,
 #else
-    TIMEZONE_CANARY,
-    EN_Clock_TimeZone_24,
+    TIMEZONE_VIETNAM,
+    EN_Clock_TimeZone_38,
 #endif
     EN_ClockMode_Auto,
     EN_Time_OffTimer_Off,
@@ -496,7 +496,7 @@ static T_MS_VIDEO code astDefaultVideoDataTbl[DATA_INPUT_SOURCE_NUM] =
         },
 
         MS_BLACK_LEVEL_HIGH,
-        EN_AspectRatio_Original
+        EN_AspectRatio_16X9
     },
 #endif
     {// ATV
@@ -594,7 +594,7 @@ static T_MS_VIDEO code astDefaultVideoDataTbl[DATA_INPUT_SOURCE_NUM] =
             MS_MPEG_NR_LOW,
         },
         MS_BLACK_LEVEL_HIGH,
-        EN_AspectRatio_Original
+        EN_AspectRatio_16X9
 
     },
 #if (INPUT_AV_VIDEO_COUNT >= 1)
@@ -692,7 +692,7 @@ static T_MS_VIDEO code astDefaultVideoDataTbl[DATA_INPUT_SOURCE_NUM] =
             MS_MPEG_NR_LOW,
         },
         MS_BLACK_LEVEL_HIGH,
-        EN_AspectRatio_Original
+        EN_AspectRatio_16X9
     },
 #endif
 #if (INPUT_AV_VIDEO_COUNT >= 2)
@@ -790,7 +790,7 @@ static T_MS_VIDEO code astDefaultVideoDataTbl[DATA_INPUT_SOURCE_NUM] =
             MS_MPEG_NR_LOW,
         },
         MS_BLACK_LEVEL_HIGH,
-        EN_AspectRatio_Original
+        EN_AspectRatio_16X9
     },
 #endif
 #if (INPUT_AV_VIDEO_COUNT >= 3)
@@ -888,7 +888,7 @@ static T_MS_VIDEO code astDefaultVideoDataTbl[DATA_INPUT_SOURCE_NUM] =
             MS_MPEG_NR_LOW,
         },
         MS_BLACK_LEVEL_HIGH,
-        EN_AspectRatio_Original
+        EN_AspectRatio_16X9
     },
 #endif
 #if (INPUT_YPBPR_VIDEO_COUNT >= 1)
@@ -986,7 +986,7 @@ static T_MS_VIDEO code astDefaultVideoDataTbl[DATA_INPUT_SOURCE_NUM] =
             MS_MPEG_NR_LOW,
         },
         MS_BLACK_LEVEL_HIGH,
-        EN_AspectRatio_Original
+        EN_AspectRatio_16X9
     },
 #endif
 #if (INPUT_YPBPR_VIDEO_COUNT >= 2)
@@ -3419,10 +3419,10 @@ void MApp_DataBase_RestoreDefaultSystem(U16 u16KeepSetting)
     if( IS_NORDIC_COUNTRY(OSD_COUNTRY_SETTING) )
     {
     #if ENABLE_SUBTITLE_SWITCH_MENU
-        MENU_OPTION_SUBTITLE_ON = 1;
+        MENU_OPTION_SUBTITLE_ON = 0;
     #else
-        stGenSetting.g_SysSetting.fEnableSubTitle = 1;
-        stGenSetting.g_SysSetting.fEnableTTXSubTitle = 1;
+        stGenSetting.g_SysSetting.fEnableSubTitle = 0;
+        stGenSetting.g_SysSetting.fEnableTTXSubTitle = 0;
     #endif
     }
     else
@@ -3889,8 +3889,8 @@ void MApp_DataBase_RestoreDefaultTime(void)
 #if(ENABLE_ISDBT_AND_DVB)
     if( IS_COUNTRY_USE_SBTVD() )
     {
-        stGenSetting.g_Time.enTimeZone = TIMEZONE_BRASILIA;
-        stGenSetting.g_Time.en_Clock_TimeZone = EN_Clock_TimeZone_18;
+        stGenSetting.g_Time.enTimeZone = TIMEZONE_VIETNAM;
+        stGenSetting.g_Time.en_Clock_TimeZone = EN_Clock_TimeZone_38;
     }
     else
     {

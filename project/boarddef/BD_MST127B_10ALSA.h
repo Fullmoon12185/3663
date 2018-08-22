@@ -202,7 +202,7 @@
 #define PADS_PWM5_MODE       Unknown_pad_mux
 #define PADS_DDCR_MODE       Unknown_pad_mux
 #define PADS_PCMPE_MODE      PCMPE_MODE(1)
-#define PADS_PCMCTRL_MODE    PCMCTRL_MODE(1)
+#define PADS_PCMCTRL_MODE    Unknown_pad_mux //PCMCTRL_MODE(1)
 #define PADS_PCMAD_MODE      PCMAD_MODE(1)
 #define PADS_TS0_MODE        TS0_MODE(1)
 #define PADS_TS1_MODE        Unknown_pad_mux
@@ -210,7 +210,7 @@
 #define PADS_TS2_MODE        Unknown_pad_mux
 #define PADS_FLASH_MODE      FLASH_MODE(1)
 #define PADS_DISEQCIN_MODE   Unknown_pad_mux
-#define PADS_DISEQCOUT_MODE  DISEQCOUT_MODE(2)
+#define PADS_DISEQCOUT_MODE  Unknown_pad_mux //DISEQCOUT_MODE(2)
 #define PADS_ARC_MODE        ARC_MODE(1)
 
 //#############################
@@ -227,7 +227,7 @@
 //nguyen
 #define PIN_65_IS_GPIO      GPIO_OUT_HIGH  // Ex IR IC
 #define PIN_68_IS_GPIO      GPIO_OUT_HIGH  // Ex IR IC
-#define PIN_71_IS_GPIO      GPIO_OUT_HIGH  // Ex IR IC
+#define PIN_71_IS_GPIO      GPIO_IN//GPIO_OUT_HIGH  // Ex IR IC
 
 #define PIN_67_IS_GPIO      GPIO_OUT_HIGH
 
@@ -732,12 +732,12 @@
 #define LED_GREEN_OFF()                 mdrv_gpio_set_high( PIN_67 )
 
 //IR out
-#define IR_ON()                  mdrv_gpio_set_low( PIN_65 )
-#define IR_OFF()                 mdrv_gpio_set_high( PIN_65 )
-#define IR_ON1()                  mdrv_gpio_set_low( PIN_68 )
-#define IR_OFF1()                 mdrv_gpio_set_high( PIN_68 )
-#define IR_ON2()                  mdrv_gpio_set_low( PIN_71 )
-#define IR_OFF2()                 mdrv_gpio_set_high( PIN_71 )
+#define IR_ON()                         mdrv_gpio_set_high( PIN_65 )
+#define IR_OFF()                        mdrv_gpio_set_low( PIN_65 )
+#define EX_ACTIVE_IC_ON()               mdrv_gpio_set_high( PIN_68 )
+#define EX_ACTIVE_IC_OFF()              mdrv_gpio_set_low( PIN_68 )
+#define ANDROID_INIT()                  mdrv_gpio_set_input( PIN_71 )
+#define ANDROID_STATUS()                mdrv_gpio_get_level( PIN_71 )
 
 
 

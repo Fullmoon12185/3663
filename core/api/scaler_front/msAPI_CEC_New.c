@@ -175,8 +175,8 @@
     #define CEC_PR(x)                       //x
 #endif
 
-    #define CEC_TX(x)                       x
-    #define CEC_RX(x)                       x
+    #define CEC_TX(x)                       //x
+    #define CEC_RX(x)                       //x
 
 
 // CEC function catalog
@@ -1793,7 +1793,7 @@ BOOLEAN msCecCheckMsgFrame(ST_CEC_MSG stCecMsg)
             }
             break;
 
-        // Initiate a recording using the <Record On> message, or send a <Feature Abort> [!!¡ÓCannot provide source!!L]
+        // Initiate a recording using the <Record On> message, or send a <Feature Abort> [!!ï¿½ï¿½Cannot provide source!!L]
         // if the presently displayed source is not recordable.
         case E_MSG_OTR_RECORD_TV_SCREEN:
             if (MApi_CEC_CheckFrame(E_TRANS_DIRECT_MSG, 2) == 0)
@@ -2659,7 +2659,7 @@ static void msCecProcessRxCmdCore(ST_CEC_MSG stCecMsg)
                 case E_MSG_RECORD_INFO_NO_RECORDING_INVALID_EXTERNAL_PHYSICAL_ADDRESS:  // invalid External Physical Address
                 case E_MSG_RECORD_INFO_NO_RECORDING_CA_NOT_SUPPORT:  // CA system not supported
                 case E_MSG_RECORD_INFO_NO_RECORDING_CA_NO:  // No or Insufficient CA Entitlements
-                case E_MSG_RECORD_INFO_NO_RECORDING_COPY_NEVER:  // Not allowed to copy source, source is ¡§copy never¡¨.
+                case E_MSG_RECORD_INFO_NO_RECORDING_COPY_NEVER:  // Not allowed to copy source, source is ï¿½ï¿½copy neverï¿½ï¿½.
                 case E_MSG_RECORD_INFO_NO_RECORDING_NO_FURTHER_COPY:  // No further copies allowed
                 case E_MSG_RECORD_INFO_NO_RECORDING_NOT_ENOUGH_SPACE:  // not enough space available
                 case E_MSG_RECORD_INFO_NO_RECORDING_PARENTAL_LOCK:  // Parental Lock On
@@ -2667,7 +2667,7 @@ static void msCecProcessRxCmdCore(ST_CEC_MSG stCecMsg)
                 case E_MSG_RECORD_INFO_NO_RECORDING_NO_MEDIA:  // no media
                 case E_MSG_RECORD_INFO_NO_RECORDING_MEDIA_PROTECTED:  // media protected
                 case E_MSG_RECORD_INFO_NO_RECORDING_NO_SOURCE:  // no source signal
-                case E_MSG_RECORD_INFO_NO_RECORDING_OTHER_REASON:  // No recording ¡V other reason
+                case E_MSG_RECORD_INFO_NO_RECORDING_OTHER_REASON:  // No recording ï¿½V other reason
                     gCECRecordEnable= FALSE;
                     CEC_DPRINTF(" CEC no recording, error code is = %bx \n", para0);
                     break;
@@ -2703,7 +2703,7 @@ static void msCecProcessRxCmdCore(ST_CEC_MSG stCecMsg)
             break;
         }
 
-        // Initiate a recording using the <Record On> message, or send a <Feature Abort> [¡§Cannot provide source¡¨]
+        // Initiate a recording using the <Record On> message, or send a <Feature Abort> [ï¿½ï¿½Cannot provide sourceï¿½ï¿½]
         // if the presently displayed source is not recordable.
         case E_MSG_OTR_RECORD_TV_SCREEN:
         {

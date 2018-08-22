@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -150,7 +150,13 @@ static MS_U8 u8KpdUpdRepeat=0;
 #define MSAPI_KEYPAD_DBG(x)         //x
 
 //******************************************************************************
-
+// //nguyen
+// void msAPI_sendIROut(void){
+//     MDrv_IR_SendKey_Start();
+//     MDrv_IR_SendKey(0xaa, 0x55, 0x12, 0xed);
+//     MDrv_IR_SendKey_Stop();
+// }
+//nguyen
 void msAPI_IR_Callback(MS_U8 u8Key, MS_U8 u8Repeat)
 {
     MSAPI_IR_DBG(printf("[MApp_IR_Callback]: u8Key=0x%02X u8Repeat=0x%02X\n",u8Key,u8Repeat));

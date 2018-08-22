@@ -244,11 +244,22 @@ typedef enum
 BOOL MApp_Main_Is_PowerOnPreInitFinish(void);
 BOOL MApp_Main_Is_PowerOnInitFinish(void);
 void HomeShop_FSM (void);
+void SendIROut_FSM(void);
 typedef enum {
     HOMESHOP_INIT = 0,
     SHOP_STATE,
     HOME_STATE,
 }HomeShop_FSM_STATE;
+
+typedef enum {
+    SEND_IR_OUT_INIT = 0,
+    SEND_IR_OUT_1,
+    SEND_IR_OUT_2,
+    SEND_IR_KEY_HOME,
+    SEND_IR_KEY_STANDBY,
+    SEND_IR_NONE,
+} SendIROut_STATE;
+
 //==================================================
 
 #endif // MAPP_MAIN_H

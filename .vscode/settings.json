@@ -9,7 +9,11 @@
         "mapp_usbdownload.h": "c",
         "mapp_func_mainpage.h": "c",
         "gpio_macro.h": "c",
-        "bd_mst127b_10alsa.h": "c"
+        "bd_mst127b_10alsa.h": "c",
+        "msir.h": "c",
+        "mapp_inputsource.h": "c",
+        "msd92lgsw1.h": "c",
+        "drvgpio.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false
 }

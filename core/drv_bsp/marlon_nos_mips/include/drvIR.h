@@ -102,6 +102,9 @@
 #ifndef _DRV_IR_H_
 #define _DRV_IR_H_
 
+#ifndef IRSEND_ENABLE
+    #define IRSEND_ENABLE               1
+#endif
 
 #ifdef __cplusplus
 extern "C"
