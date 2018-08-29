@@ -1093,15 +1093,15 @@ void MApp_Audio_SearchAdAudio(void)
         #endif
             {
                 /* Get all audio information */
-                //printf("(%d)(%s)\n", __LINE__, __func__);
+                printf("(%d)(%s)\n", __LINE__, __func__);
                 msAPI_CM_GetAudioStreamInfo(bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
             }
 
-            //printf("bAudType = 0x%02bx\n", aAudioStreamInfo.aISOLangInfo[0].bAudType);
+            printf("bAudType = 0x%02bx\n", aAudioStreamInfo.aISOLangInfo[0].bAudType);
 
             for (j = 0; j < MAX_AUD_ISOLANG_NUM; j++)
             {
-                //printf("j = %d  bAudType = %d\n", j, aAudioStreamInfo.aISOLangInfo[j].bAudType);
+                printf("j = %d  bAudType = %d\n", j, aAudioStreamInfo.aISOLangInfo[j].bAudType);
                 if (aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex == SI_LANGUAGE_NONE)
                 {
                     break;
@@ -1129,18 +1129,18 @@ void MApp_Audio_SearchAdAudio(void)
                             {
                                 if (g_u8AudLangSelected == i)
                                 {
-                                    //printf("primary audio playing current found ad, find another\n");
+                                    printf("primary audio playing current found ad, find another\n");
                                     continue;
                                 }
 
                                 //if (aPriAudioStreamInfo.wAudType != aAudioStreamInfo.wAudType)
                                 if (aPriAudioStreamInfo.eSIAudType != aAudioStreamInfo.eSIAudType)
                                 {
-                                    //printf("primary audio stream type %x differs from ad audio stream type %x\n", aPriAudioStreamInfo.wAudType, aAudioStreamInfo.wAudType);
+                                    printf("primary audio stream type %x differs from ad audio stream type %x\n", aPriAudioStreamInfo.eSIAudType, aAudioStreamInfo.eSIAudType);
                                     continue;
                                 }
 
-                                //printf("####found ad audio 0x%02bx####\n", i);
+                                printf("####found ad audio 0x%02bx####\n", i);
                                 g_u8AdAudSelected = i;
                                 if ((aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex == aPriAudioStreamInfo.aISOLangInfo[k].bISOLangIndex))
                                 {
@@ -1161,7 +1161,7 @@ void MApp_Audio_SearchAdAudio(void)
     {
         g_u8AdAudSelected = u8ADIndex;
     }*/
-        //printf("MApp_UiMenu_SearchAdAudio : No AD found\n");
+        printf("MApp_UiMenu_SearchAdAudio : No AD found\n");
 
 #endif
 #endif // ENABLE_DVB

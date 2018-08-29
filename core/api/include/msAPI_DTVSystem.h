@@ -145,11 +145,11 @@ typedef enum
     #define MAX_AUD_LANG_NUM                16 //NZ default 16 //for SI04::SIT 21 test fail
 
 #else
-    #define MAX_AUD_LANG_NUM                8 //NZ default 16
+    #define MAX_AUD_LANG_NUM                16 //NZ default 16
 
 #endif
 
-#define MAX_AUD_ISOLANG_NUM                1 // 3
+#define MAX_AUD_ISOLANG_NUM                3
 #define MAX_AUD_LANG_LENGTH                3
 #define MAX_ISO639CODE_LENGTH              3
 #define MAX_UNSUPPORTED_ISO639CODE_NUM     20

@@ -152,9 +152,9 @@
 #define PQIOCTL_DBG(x)  do { if( _u16PQDbgSwitch & PQ_DBG_IOCTL) x; } while(0);
 #define PQP2P_DBG(x)    do { if( _u16PQDbgSwitch & PQ_DBG_P2P) x; } while(0);
 #define PQCUSTOMER_DBG(x)  do { if( _u16PQDbgSwitch & PQ_DBG_CUSTOMER) x; } while(0);
-#define PQMODE_DBG(x)   //x
+#define PQMODE_DBG(x)   x
 
-#define DEBUG_PQ_SRC_TYPE(x)    //x
+#define DEBUG_PQ_SRC_TYPE(x)    x
 
 static MSIF_Version _drv_pq_version = {
     .DDI = { PQ_DRV_VERSION },

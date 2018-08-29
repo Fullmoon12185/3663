@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -795,7 +795,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteAudioLanguageAction(U16 act)
                         u8CurrentItemIndex%HKEY_AUDIO_LANG_PAGE_MAX_ITEM));
 
                 if (audioLangTotal > DEFAULT_AUD_LANG_NUM)
-                {   //printf("set audio languge %u \n",g_u8AudLangSelected);
+                {   printf("set audio languge %u \n",g_u8AudLangSelected);
                 #if(ENABLE_DVB)
                     MApp_Audio_SetAudioLanguage(u8CurrentItemIndex);
                 #endif

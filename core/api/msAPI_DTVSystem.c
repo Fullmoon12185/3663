@@ -4350,7 +4350,7 @@ BYTE msAPI_CM_GetAudioStreamCount(MEMBER_SERVICETYPE bServiceType, WORD wPositio
           )
         {
             cAudioStreamCount++;
-//            printf("stAudInfo[%u].wAudPID=%u wAudType=%u \n",i,stAudInfo[i].wAudPID,stAudInfo[i].wAudType);
+            printf("nguyen: stAudInfo[%u].wAudPID=%u wAudType=%u \n",i,stAudInfo[i].wAudPID,stAudInfo[i].eSIAudType);
         }
         else
         {

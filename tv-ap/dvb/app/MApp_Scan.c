@@ -5776,7 +5776,7 @@ EN_RET MApp_DTV_Scan_Update_Mux( void )
 #endif
 
 /*****************************************************************************/
-#define NEW_SCAN_APP_DBG(y)     y
+#define NEW_SCAN_APP_DBG(y)     //y
 
 
 #if 1//ENABLE_T_C_COMBO

@@ -860,12 +860,6 @@ int main(void)
                 {
                      u32MainLoopTime_Last = u32MainLoopTime_Cur;
 
-                    if(ANDROID_STATUS() == 1){
-                        printf("input = 1\n");
-                    } else {
-                        printf("input = 0\n");
-                    }
-                     
                     //nguyen
                     if (bToogleLED == 0){
                         // LED_RED_Off();
@@ -922,7 +916,7 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 }
 
 //nguyen
-#define     NUM_OF_TIMES_KEY_VOLUME_PRESSED  10
+#define     NUM_OF_TIMES_KEY_VOLUME_PRESSED  5
 #define     MAX_COUNT  (10 * NUM_OF_TIMES_KEY_VOLUME_PRESSED)
 #define     DECREASE_STEP       5
 #define     SHOP_BACKLIGHT      250

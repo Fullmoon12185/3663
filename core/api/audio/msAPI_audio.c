@@ -2126,7 +2126,7 @@ static void SetAudioMute(AUDIOMUTETYPE eAudioMuteType, AUDIOMUTESOURCE_TYPE eAud
     }
     else
     {
-        //printf("-------------- Audio Un Mute\n");
+        printf("-------------- Audio Un Mute\n");
         // If need control Amp, it should be MUTE, not Power!
         //Audio_Amplifier_ON();
         //MApp_Audio_Set_AmpOnOff(AUDIO_AMP_ON);
