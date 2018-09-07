@@ -588,7 +588,7 @@
 #endif
 
 #if( ENABLE_DVBT )
-    #define MHEG5_ENABLE                DISABLE//ENABLE
+    #define MHEG5_ENABLE                ENABLE
 #endif
 
 #define CHINESE_SIMP_FONT_ENABLE        DISABLE

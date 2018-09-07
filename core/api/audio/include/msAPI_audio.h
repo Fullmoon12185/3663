@@ -639,7 +639,7 @@ U32 msAPI_Audio_Get_PathMuteStatus(void);
 #if(ENABLE_DEBUG_AU_LOAD_CODE)
     #define DEBUG_AU_LOAD_CODE(x)   do{ PRINT_CURRENT_LINE(); x; } while(0)
 #else
-    #define DEBUG_AU_LOAD_CODE(x)
+    #define DEBUG_AU_LOAD_CODE(x)   x
 #endif
 
 void msAPI_AUD_Set_CurDspSystem( AUDIO_DSP_SYSTEM eAudioDSPSystem );

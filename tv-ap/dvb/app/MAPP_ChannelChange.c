@@ -281,10 +281,10 @@ DTVPROGRAMID_M g_stCurS2ProggramId; //TP;
 
 #define CHANNELCHANGE_DBINFO(y)     y
 
-#define ENABLE_CH_CHANGE_TIMER_DEBUG    0
+#define ENABLE_CH_CHANGE_TIMER_DEBUG    1
 
-#define DEBUG_ENABLE_CHANNEL(x)     //x
-#define DEBUG_ENABLE_AV(x)          //x
+#define DEBUG_ENABLE_CHANNEL(x)     x
+#define DEBUG_ENABLE_AV(x)          x
 
 
 #if (ENABLE_DTMB_CHINA_APP || ENABLE_ATV_CHINA_APP || ENABLE_DVBC_PLUS_DTMB_CHINA_APP)
@@ -953,26 +953,38 @@ void MApp_ChannelChange_Set_Audio_Decoder_System(WORD wAudType )
 {
     /* set decoder system and reload firmware code */
     //MsOS_DelayTask(500);
-
-    DEBUG_AU_LOAD_CODE( printf("wAudType=%u\n", wAudType); );
-
+    msAPI_AUD_AdjustAudioFactor(E_ADJUST_AUDIOMUTE, E_AUDIO_MOMENT_MUTEON, E_AUDIOMUTESOURCE_ACTIVESOURCE);
+    DEBUG_AU_LOAD_CODE( printf("nguyen wAudType=%u\n", wAudType); );
+    printf("nguyen wAudType=%u\n", wAudType);
+     MApi_AUDIO_SetCommand(MSAPI_AUD_DVB_DECCMD_STOP);
     switch(wAudType)
     {
         case  E_AUDIOSTREAM_MPEG:
             MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
+            msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
+            MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+            MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);
+            
             break;
 
         case E_AUDIOSTREAM_AC3:
             MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_AC3);
+            msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_AC3);
             break;
 
         case E_AUDIOSTREAM_AC3P:
             MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_AC3P);
+            msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_AC3P);
             break;
 
         case E_AUDIOSTREAM_MPEG4:
         case E_AUDIOSTREAM_AAC:
+           
             MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_AAC);
+            msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_AACP);
+            MApi_AUDIO_SetAACInfo(Audio_AAC_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+            MApi_AUDIO_SetAACInfo(Audio_AAC_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);
+            
             break;
 
         case E_AUDIOSTREAM_MPEG_AD:
@@ -998,6 +1010,7 @@ void MApp_ChannelChange_Set_Audio_Decoder_System(WORD wAudType )
         default:
             break;
     }
+    
 
     if( wAudType == E_AUDIOSTREAM_AC3
      || wAudType == E_AUDIOSTREAM_AC3P
@@ -1018,12 +1031,16 @@ void MApp_ChannelChange_Set_Audio_Decoder_System(WORD wAudType )
     {
         MApi_AUDIO_SPDIF_SetMode(MSAPI_AUD_SPDIF_PCM);
     }
+    
+    //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);      //RF Mod
+    //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);    //LtRt
+    //MApi_AUDIO_SetAACInfo(Audio_AAC_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+    //MApi_AUDIO_SetAACInfo(Audio_AAC_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);
+        
 
-    MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);      //RF Mod
-    MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);    //LtRt
-
-
-    MApi_AUDIO_DTV_HDMI_CFG(FALSE);  // DTV mod set False
+    MApi_AUDIO_DTV_HDMI_CFG(FALSE);  // DTV mod set False  
+    MApi_AUDIO_SetCommand(MSAPI_AUD_DVB_DECCMD_PLAY);
+    msAPI_AUD_AdjustAudioFactor(E_ADJUST_AUDIOMUTE, E_AUDIO_MOMENT_MUTEOFF, E_AUDIOMUTESOURCE_ACTIVESOURCE);
 }
 
 /*********************************************************************************/
@@ -1295,6 +1312,7 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 
 // For Nordig 9.45
 #if ENABLE_DTV// NTV_FUNCTION_ENABLE
+#define DEBUG_AUDIO(x)  x
 void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* u8LRAudioMode, U8 bServiceType, WORD wCurrentPosition, EN_SI_LANGUAGE enSoundAudioLan, U8 u8Nocheck_AudType, BOOLEAN bCheckBroadcastMix )
 {
     AUD_INFO aAudioStreamInfo;
@@ -1305,6 +1323,8 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
 	U8 AudioMode;
 
     AudioLangNum = msAPI_CM_GetAudioStreamCount((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition);
+    DEBUG_AUDIO(printf("Nguyen MApp_ChannelChange_SearchAudioLangPriorityType3  \n AudioLangNum = %u \n", AudioLangNum););
+    
 	for(AudioMode=0; AudioMode<2; AudioMode++) //follow Nordig spec 6.5 audio prioritising:normal and supplementary audio
 	{
 
@@ -1313,22 +1333,36 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         for(i=0; i<AudioLangNum; i++)
         {
             msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+            printf("aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo = %d\n", aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo);
+            printf("aAudioStreamInfo.aISOLangInfo[0].bAudType = %d\n", aAudioStreamInfo.aISOLangInfo[0].bAudType);
+            printf("aAudioStreamInfo.aISOLangInfo[0].eSIAudType = %d\n", aAudioStreamInfo.eSIAudType);
+            printf("aAudioStreamInfo.aISOLangInfo[0].bIsValid = %d\n", aAudioStreamInfo.aISOLangInfo[0].bIsValid);
+            printf("aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD = %d\n", aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD);
+            printf("aAudioStreamInfo.aISOLangInfo[0].bISOLangIndex = %d\n", aAudioStreamInfo.aISOLangInfo[0].bISOLangIndex);
+
+            DEBUG_AUDIO(printf("MPEG4 i = %d, E_SI_AUDIOSTREAM_MPEG4 = %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_MPEG4, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
+             DEBUG_AUDIO(printf("aAudioStreamInfo.eProfileAndLevel = %d, E_CM_PROFILE_HE_AAC_LEVEL2 = %d\n", aAudioStreamInfo.eProfileAndLevel, E_CM_PROFILE_HE_AAC_LEVEL2););
 			if(!stGenSetting.g_SoundSetting.bEnableAD)
 			{
 				if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
             	{
+                    DEBUG_AUDIO(printf("1\n"););
                 	continue;
            	 	}
+                DEBUG_AUDIO(printf("2\n"););
 			}
 			else
 			{
 				if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == FALSE))
             	{
+                    DEBUG_AUDIO(printf("3\n"););
                 	continue;
             	}
+                DEBUG_AUDIO(printf("5\n"););
 			}
             if(bCheckBroadcastMix && aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == FALSE)
             {
+                DEBUG_AUDIO(printf("4\n"););
                 continue;
             }
 
@@ -1339,21 +1373,25 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
                 {
                     continue;
                 }
+                DEBUG_AUDIO(printf("6\n"););
                 if(aAudioStreamInfo.aISOLangInfo[0].bAudType != 0x00 && u8Nocheck_AudType != 1)
                 {
                     continue;
                 }
+                DEBUG_AUDIO(printf("8\n"););
             }
-
+            DEBUG_AUDIO(printf("9\n"););
             u8AudLangCodeIdx_ = aAudioStreamInfo.aISOLangInfo[0].bISOLangIndex;
             if(u8AudLangCodeIdx_ == enSoundAudioLan || enSoundAudioLan == SI_LANGUAGE_NONE)
             {
             #if 1//NTV_FUNCTION_ENABLE
                 //if(aAudioStreamInfo.u8ProfileAndLevel == HE_AAC_LEVEL2)
-                if( aAudioStreamInfo.eProfileAndLevel == E_CM_PROFILE_HE_AAC_LEVEL2 )
+                if(1)// aAudioStreamInfo.eProfileAndLevel == E_CM_PROFILE_HE_AAC_LEVEL2 )
                 {
+                    DEBUG_AUDIO(printf("10\n"););
                     *u8AudLangSelected = i;
                     *u8LRAudioMode = aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo;
+                     DEBUG_AUDIO(printf("u8AudLangSelected = %d, *u8LRAudioMode = %d\n", *u8AudLangSelected, *u8LRAudioMode););
                     bFindAudio = TRUE;
                     break;
                 }
@@ -1362,6 +1400,7 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
                 {
                     if(u8AudLangSel == 0xFF && u8LRAudMode == 0xFF)
                     {
+                        DEBUG_AUDIO(printf("a1\n"););
                         u8AudLangSel = i;
                         u8LRAudMode = aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo;
                     }
@@ -1369,12 +1408,15 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
 
             }
         }
+
         //[5]MPEG
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("MPEG\n"););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+                DEBUG_AUDIO(printf("MPEG i = %d, E_SI_AUDIOSTREAM_MPEG= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_MPEG, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
 				if(!stGenSetting.g_SoundSetting.bEnableAD)
 				{
 					if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
@@ -1413,6 +1455,8 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
                 {
                     *u8AudLangSelected = i;
                     *u8LRAudioMode = aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo;
+                     DEBUG_AUDIO(printf("u8AudLangSelected = %d, *u8LRAudioMode = %d\n", *u8AudLangSelected, *u8LRAudioMode););
+                    
                     bFindAudio = TRUE;
                     break;
                 }
@@ -1423,9 +1467,11 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
     //[2]AAC
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("AAC\n"););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+                DEBUG_AUDIO(printf("AAC i = %d, E_SI_AUDIOSTREAM_AAC= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_AAC, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
 				if(!stGenSetting.g_SoundSetting.bEnableAD)
 				{
 					if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
@@ -1492,9 +1538,11 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         //[3]AC3P
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("AC3P\n"););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+                DEBUG_AUDIO(printf("AC3P i = %d, E_SI_AUDIOSTREAM_AC3P= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_AC3P, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
 				if(!stGenSetting.g_SoundSetting.bEnableAD)
 				{
 					if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
@@ -1542,9 +1590,11 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         //[4]AC3
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("AC3\n"););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+                DEBUG_AUDIO(printf("AC3 i = %d, E_SI_AUDIOSTREAM_AC3= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_AC3, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
                 if(!stGenSetting.g_SoundSetting.bEnableAD)
                 {
                     if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
@@ -1586,9 +1636,11 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         //[1]MPEG4
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("mpeg4\n"););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+                DEBUG_AUDIO(printf("MPEG4 i = %d, E_SI_AUDIOSTREAM_MPEG4= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_MPEG4, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
 				if(!stGenSetting.g_SoundSetting.bEnableAD)
 				{
 					if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
@@ -1627,10 +1679,12 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
                 {
                 #if 1//NTV_FUNCTION_ENABLE
                     //if(aAudioStreamInfo.u8ProfileAndLevel==HE_AAC_LEVEL4 || aAudioStreamInfo.u8ProfileAndLevel==AAC_LEVEL4)
-                    if(aAudioStreamInfo.eProfileAndLevel==E_CM_PROFILE_HE_AAC_LEVEL4 || aAudioStreamInfo.eProfileAndLevel==E_CM_PROFILE_AAC_LEVEL4)
+                    if(1) //aAudioStreamInfo.eProfileAndLevel==E_CM_PROFILE_HE_AAC_LEVEL4 || aAudioStreamInfo.eProfileAndLevel==E_CM_PROFILE_AAC_LEVEL4)
                     {
+                        DEBUG_AUDIO(printf("mpeg4 E_CM_PROFILE_HE_AAC_LEVEL4\n"););
                         *u8AudLangSelected = i;
                         *u8LRAudioMode = aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo;
+                     DEBUG_AUDIO(printf("u8AudLangSelected = %d, *u8LRAudioMode = %d\n", *u8AudLangSelected, *u8LRAudioMode););
                         bFindAudio = TRUE;
                         break;
                     }
@@ -1650,9 +1704,11 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
     //[2]AAC
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("AAC\n"););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+                DEBUG_AUDIO(printf("AAC i = %d, E_SI_AUDIOSTREAM_AAC= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_AAC, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
 				if(!stGenSetting.g_SoundSetting.bEnableAD)
 				{
 					if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
@@ -1714,9 +1770,11 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         //[3]AC3P
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("AC3P\n"););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
+                DEBUG_AUDIO(printf("AC3P i = %d, E_SI_AUDIOSTREAM_AC3P= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_AC3P, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
 				if(!stGenSetting.g_SoundSetting.bEnableAD)
 				{
 					if((AudioMode==0)&&(aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD == TRUE))
@@ -1764,6 +1822,8 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         //[4]AC3
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("AC3\n"););
+            DEBUG_AUDIO(printf("AC3 i = %d, E_SI_AUDIOSTREAM_AC3P= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_AC3, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
@@ -1814,6 +1874,8 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
     //[5]MPEG
         if(bFindAudio == FALSE)
         {
+            DEBUG_AUDIO(printf("MPEG\n"););
+            DEBUG_AUDIO(printf("MPEG i = %d, E_SI_AUDIOSTREAM_MPEG= %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_MPEG, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
             for(i=0; i<AudioLangNum; i++)
             {
                 msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
@@ -1857,6 +1919,8 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
                     {
                         u8AudLangSel = i;
                         u8LRAudMode = aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo;
+                        
+                     DEBUG_AUDIO(printf("mpeg no pcm u8AudLangSelected = %d, *u8LRAudioMode = %d\n", *u8AudLangSelected, *u8LRAudioMode););
                     }
                 }
             }
@@ -1871,12 +1935,15 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         {
             *u8AudLangSelected = u8AudLangSel;
             *u8LRAudioMode = u8LRAudMode;
+            
+            DEBUG_AUDIO(printf("end u8AudLangSelected = %d, *u8LRAudioMode = %d\n", *u8AudLangSelected, *u8LRAudioMode););
             break;
         }
         else
         {
             *u8AudLangSelected = 0;
             *u8LRAudioMode = 0;
+             DEBUG_AUDIO(printf("end u8AudLangSelected = %d, *u8LRAudioMode = %d\n", *u8AudLangSelected, *u8LRAudioMode););
         }
     }
 	}
@@ -1893,6 +1960,7 @@ void MApp_ChannelChange_SearchAudioLangPriorityType(U8* u8AudLangSelected, U8* u
     U8 u8AudLangCodeIdx;
 
     AudioLangNum = msAPI_CM_GetAudioStreamCount((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition);
+    printf("nguyen AudioLangNum\n");
 
     for (k=0 ; k<5 ; k++)
     {
@@ -2812,7 +2880,7 @@ void MApp_Audio_SwitchtoADAudio(BOOL ADEnable)
     else if ( INVALID_PID != stAudioStreamInfo.wAudPID )
     {
         /* set audio PID & start filter */
-        //printf("Channel change, audio pid 0x%x, u8AudFid %bu\n",stAudioStreamInfo.wAudPID,MApp_Dmx_GetAudioFid());
+        printf("Channel change, audio pid 0x%x, u8AudFid %bu\n",stAudioStreamInfo.wAudPID,MApp_Dmx_GetAudioFid());
         //eDMXFLTSTA = msAPI_DMX_StartFilter( stAudioStreamInfo.wAudPID, MSAPI_DMX_FILTER_TYPE_AUDIO, MApp_Dmx_GetFid(EN_AUDIO_FID) );
         eDMXFLTSTA = msAPI_DMX_StartFilter( stAudioStreamInfo.wAudPID, MSAPI_DMX_FILTER_TYPE_AUDIO, MApp_Dmx_GetFid(EN_AUDIO_FID) );
         //printf("a Channel change, eDMXFLTSTA %bu, audio pid 0x%x, u8AudFid %bu\n",eDMXFLTSTA,msAPI_DMX_GetFilterPID(MApp_Dmx_GetAudioFid()),MApp_Dmx_GetAudioFid());
@@ -4471,6 +4539,9 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
         }
 
     #if MHEG5_ENABLE
+
+    //nguyen 
+    printf("nguyen MHEG5_ENABLE \n");
         if ( g_PIDfromMHEG5 )
         {
             AUDIOSTREAM_TYPE wAudType;
@@ -4538,7 +4609,7 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                     if ( INVALID_PID != stAudioStreamInfo.wAudPID )
                     {
                         /* set audio PID & start filter */
-                        //printf("Channel change, audio pid 0x%x, u8AudFid %bu\n",stAudioStreamInfo.wAudPID,MApp_Dmx_GetAudioFid());
+                        printf("nguyen Channel change, audio pid 0x%x, u8AudFid %bu\n",stAudioStreamInfo.wAudPID);
                         //eDMXFLTSTA = msAPI_DMX_StartFilter( stAudioStreamInfo.wAudPID, MSAPI_DMX_FILTER_TYPE_AUDIO, MApp_Dmx_GetFid(EN_AUDIO_FID) );
                         eDMXFLTSTA = MApp_Demux_Start_Filter_Audio( stAudioStreamInfo.wAudPID );
                         //printf("a Channel change, eDMXFLTSTA %bu, audio pid 0x%x, u8AudFid %bu\n",eDMXFLTSTA,msAPI_DMX_GetFilterPID(MApp_Dmx_GetAudioFid()),MApp_Dmx_GetAudioFid());
@@ -4586,6 +4657,7 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                             }
                           #endif
 
+                            printf("nguyen g_u8LRAudioMode = %d \n", g_u8LRAudioMode);
                             if (g_u8LRAudioMode == 0)
                             {
                                 MApi_AUDIO_SetCommAudioInfo(Audio_Comm_infoType_SoundMode, MSAPI_AUD_MODE_STEREO, 0);
@@ -4614,31 +4686,46 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                             // solved scramble->ATV no audio bug.
                             SI_AUDIOSTREAM_TYPE eSIAudStreamType = msAPI_CM_Get_SIAudStreamType_By_AudInfo(&stAudioStreamInfo);
                         #if 1
+                            printf("nguyen eSIAudStreamType = %d \n", eSIAudStreamType);
                             switch( eSIAudStreamType )
                             {
                                 case E_SI_AUDIOSTREAM_AC3:
                                 case E_SI_AUDIOSTREAM_AC3P:
                                 {
-                                    MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
-                                    MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);  // LtRt
+                                    //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+                                    //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);  // LtRt
                                     u32AC3CheckTimer = msAPI_Timer_GetTime0();
                                     bEnableAC3Check  = TRUE;
                                     u8AC3CheckTimes  = 10;
+                                    MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
+                                    msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
                                     //printf("set SPDIF_non-PCM\r\n");
+                                    printf("nguyen E_SI_AUDIOSTREAM_AC3P = %d \n", eSIAudStreamType);
                                 }
                                     break;
 
                                 case E_SI_AUDIOSTREAM_AAC:
                                 case E_SI_AUDIOSTREAM_MPEG4:
-                                    MApi_AUDIO_SetAACInfo(Audio_AAC_infoType_DrcMode, RF_MODE, 0);      //RF Mod
-                                    MApi_AUDIO_SetAACInfo(Audio_AAC_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);
+                                    MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_AAC);
+                                    msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_AACP);
+                                    MApi_AUDIO_SetAACInfo(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+                                    MApi_AUDIO_SetAACInfo(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);  // LtRt
+                                    
+                                    printf("nguyen E_SI_AUDIOSTREAM_MPEG4 = %d \n", eSIAudStreamType);
                                     break;
 
                                 case E_SI_AUDIOSTREAM_MPEG:
                                     // Do nothing
+                                    printf("nguyen E_SI_AUDIOSTREAM_MPEG = %d \n", eSIAudStreamType);
+                                    //MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
+                                    //msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
+                                    //MApi_AUDIO_SetAACInfo(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+                                    //MApi_AUDIO_SetAACInfo(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);  // LtRt
                                     break;
 
                                 default:
+                                    MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
+                                    msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
                                     printf("\nWarning: eSIAudStreamType=%u is invalid!\n", eSIAudStreamType);
                                     break;
                             }
@@ -4686,7 +4773,7 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                     // if ad audio exist
                     if (INVALID_PID != stAdAudioStreamInfo.wAudPID)
                     {
-                        //printf("Ad pid found\n");
+                        printf("Ad pid found\n");
                         /* Eris ad can not co-exist with AC3 */
                       #if 0
                         if ((stAudioStreamInfo.wAudType == E_AUDIOSTREAM_MPEG) &&
@@ -4696,14 +4783,16 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                         #if(ENABLE_DVB_AUDIO_DESC)
                             if (stGenSetting.g_SoundSetting.bEnableAD)
                             {
-                                //printf("Ad enabled\n");
+                                printf("nguyen Ad enabled\n");
 
                               #if (ENABLE_PIP)
                                 if( (MApp_Get_PIPMode() == EN_PIP_MODE_OFF) || UI_IS_AUDIO_SOURCE_IN(eWindow) )
                               #endif
                                 {
+                                    printf("nguyen Ad enabled 2\n");
                                     if (g_u8AdAudSelected != 0xFF)
                                     {
+                                        printf("nguyen Ad enabled 3\n");
                                         MApp_Audio_SetAdAudio(g_u8AdAudSelected);
                                         MApi_AUDIO_SetADOutputMode(AD_OUT_BOTH);
                                         //MApi_AUDIO_SetCommand(MSAPI_AUD_DVB2_DECCMD_PLAY);

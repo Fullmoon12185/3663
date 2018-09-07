@@ -477,7 +477,6 @@ BOOLEAN MApp_ZUI_ACT_ExecuteInstallGuideAction(U16 act)
         case EN_EXE_GOTO_AUTO_TUNING:
             if( MApp_ZUI_ACT_Get_InstallGuidePage() == PAGE_INSTALL_OSD_LANGUAGE )
             {
-               printf("Nguyuen PAGE_INSTALL_OSD_LANGUAGE \n");
                 MApp_ZUI_ACT_SetTuningCountryByOSDLanguage();
                 MApp_ZUI_CTL_Grid_SetIndex(HWND_INSTALL_MAIN_PAGE_GRID, MApp_ZUI_ACT_Install_GetTuningMenuCountryIndex, MApp_ZUI_ACT_Install_SetTuningMenuCountryIndex, 0, MApp_ZUI_ACT_Install_GetTuningCountryIndexMax());
                 MApp_ZUI_CTL_Grid_SetFnGetTextByIndex(HWND_INSTALL_MAIN_PAGE_GRID, MApp_ZUI_ACT_Install_GetCountryStringIDByIndex);
@@ -491,15 +490,13 @@ BOOLEAN MApp_ZUI_ACT_ExecuteInstallGuideAction(U16 act)
 				MApp_TopStateMachine_SetTopState(STATE_TOP_MENU);
 				_enTargetInstallState = STATE_INSTALL_INIT;
 			#else
-                printf("Nguyuen PAGE_INSTALL_TUNING_COUNTRY \n");
-				MApp_ZUI_ACT_Set_InstallGuidePage(PAGE_INSTALL_TUNING_COUNTRY);
+                MApp_ZUI_ACT_Set_InstallGuidePage(PAGE_INSTALL_TUNING_COUNTRY);
 				MApp_ZUI_API_InvalidateAllSuccessors(HWND_INSTALL_MAIN_PAGE);
                 MApp_ZUI_API_SetFocus(HWND_INSTALL_MAIN_PAGE_GRID);
 			#endif
             }
             else if( MApp_ZUI_ACT_Get_InstallGuidePage() == PAGE_INSTALL_TUNING_COUNTRY )
             {
-                printf("Nguyen PAGE_INSTALL_TUNING_COUNTRY  _eTempCountry %d\n", _eTempCountry);
                 stGenSetting.stMiscSetting.bRunInstallationGuide = FALSE;
                     #if  ENABLE_ISDBT_NO_DVB
                         //fixed first scan LCN error,show 3.32

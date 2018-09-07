@@ -6,7 +6,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -225,23 +225,39 @@ void msAPI_SI_Copy_SI_AudInfo_To_CM_AudInfo(SI_AUD_INFO* pstSI_AudInfo, AUD_INFO
     for( i = 0; i < u8Count; ++ i)
     {
         //DTVProgramData.stAudInfo[i].wAudType = msAPI_SI_ToCM_Audio_Type(pSIDTVProgramData->stAudInfo[i].wAudType);
-        pstCM_AudInfo[i].eSIAudType = (SI_AUDIOSTREAM_TYPE)pstSI_AudInfo[i].wAudType;
+        pstCM_AudInfo[i].eSIAudType = 1;//(SI_AUDIOSTREAM_TYPE)pstSI_AudInfo[i].wAudType;
 
         pstCM_AudInfo[i].wAudPID = pstSI_AudInfo[i].wAudPID;
 
-        //printf("%u PID=0x%X, Typ=%u\n", i, pstSI_AudInfo[i].wAudPID, pstSI_AudInfo[i].wAudType);
+       
+        //printf("DTVProgramData.bChannelName = %s\n", DTVProgramData.bChannelName);
+        
 
         pstCM_AudInfo[i].eProfileAndLevel = msAPI_SI_ToCM_ProfileAndLevel(pstSI_AudInfo[i].u8ProfileAndLevel);
-        //pstCM_AudInfo[i].u8Component_AAC_Type = pstSI_AudInfo[i].u8Component_AAC_Type;
+        printf("%u PID=0x%X, Typ=%u\n", i, pstSI_AudInfo[i].wAudPID, pstSI_AudInfo[i].wAudType);
+        //if(pstCM_AudInfo[i].wAudPID != 0x1fff && pstCM_AudInfo[i].eSIAudType <= 2)
+        { 
+            //pstCM_AudInfo[i].u8Component_AAC_Type = pstSI_AudInfo[i].u8Component_AAC_Type;
 
-        for(j=0; j<u8Aud_ISOLang_MinNum; ++ j )
-        {
-            pstCM_AudInfo[i].aISOLangInfo[j].bISOLangIndex = pstSI_AudInfo[i].aISOLangInfo[j].bISOLangIndex;
-            pstCM_AudInfo[i].aISOLangInfo[j].bISOLanguageInfo = msAPI_SI_ToCM_Audio_Mode(pstSI_AudInfo[i].aISOLangInfo[j].bISOLanguageInfo);
-            pstCM_AudInfo[i].aISOLangInfo[j].bAudType = pstSI_AudInfo[i].aISOLangInfo[j].bAudType;
-            pstCM_AudInfo[i].aISOLangInfo[j].bIsValid = pstSI_AudInfo[i].aISOLangInfo[j].bIsValid;
-            pstCM_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD = pstSI_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD;
-            pstCM_AudInfo[i].aISOLangInfo[j].bReserved = pstSI_AudInfo[i].aISOLangInfo[j].bReserved;
+            for(j=0; j<u8Aud_ISOLang_MinNum; ++ j )
+            {
+                pstCM_AudInfo[i].aISOLangInfo[j].bISOLangIndex = pstSI_AudInfo[i].aISOLangInfo[j].bISOLangIndex;
+                pstCM_AudInfo[i].aISOLangInfo[j].bISOLanguageInfo = msAPI_SI_ToCM_Audio_Mode(pstSI_AudInfo[i].aISOLangInfo[j].bISOLanguageInfo);
+                pstCM_AudInfo[i].aISOLangInfo[j].bAudType = pstSI_AudInfo[i].aISOLangInfo[j].bAudType;
+                pstCM_AudInfo[i].aISOLangInfo[j].bIsValid = pstSI_AudInfo[i].aISOLangInfo[j].bIsValid;
+                pstCM_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD = pstSI_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD;
+                pstCM_AudInfo[i].aISOLangInfo[j].bReserved = pstSI_AudInfo[i].aISOLangInfo[j].bReserved;
+
+                printf("pstCM_AudInfo[%d].eSIAudType = %d\n", i, pstCM_AudInfo[i].eSIAudType);
+                printf("stAudInfo[%d].aISOLangInfo[%d].bISOLangIndex = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bISOLangIndex);
+                printf("stAudInfo[%d].aISOLangInfo[%d].bISOLanguageInfo = %d\n", i, j, pstCM_AudInfo[i].aISOLangInfo[j].bISOLanguageInfo);
+                printf("stAudInfo[%d].aISOLangInfo[%d].bAudType = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bAudType);
+                printf("stAudInfo[%d].aISOLangInfo[%d].bIsValid = %d\n", i, j,   pstCM_AudInfo[i].aISOLangInfo[j].bIsValid);
+                printf("pstCM_AudInfo[%d].aISOLangInfo[%d].bBroadcastMixedAD = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD);
+                printf("pstCM_AudInfo[i].aISOLangInfo[j].bReserved = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bReserved);
+                
+            
+            }
         }
     }
 }

@@ -379,6 +379,7 @@ void MApp_IR_sendIROut(U8 remoteCode){
 }
 
 static U8 isKeyVolumePressed = 0;
+static U8 isKeyPressed = 0;
 U8 get_isKeyVolumePressed(void){
     if((u8KeyCode == KEY_VOLUME_PLUS || u8KeyCode == KEY_VOLUME_MINUS) && (stKeyStatus.keyrepeat == 0)){
         isKeyVolumePressed = 1;
@@ -393,6 +394,12 @@ U8 getKeyPressed(void){
 }
 U8 getIRKey(void){
     return stKeyStatus.keydata;
+}
+U8 is_key_pressed(void){
+    return isKeyPressed;
+}
+void clear_key_pressed(void){
+    isKeyPressed = 0;
 }
 
 //nguyen
@@ -1260,6 +1267,7 @@ static void MApp_CheckKeyStatus(void)
     
     if ( msAPI_GetKeyPad(&key, &KeyRepeatStatus)== MSRET_OK )
     {
+        isKeyPressed = 1;
         stKeyStatus.keytype = KEY_TYPE_KEYPAD;
         stKeyStatus.keydown = TRUE;
         stKeyStatus.keydata = key;
@@ -1278,6 +1286,7 @@ static void MApp_CheckKeyStatus(void)
     }
     else if ( msAPI_GetIRKey(&key, &KeyRepeatStatus) == MSRET_OK )
     {
+        isKeyPressed = 1;
         stKeyStatus.keytype = KEY_TYPE_IR;
 #if ENABLE_IR_BIN
         if(g_u16IRkeyMap[key])

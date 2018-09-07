@@ -295,8 +295,8 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 #else
 #define SCAN_ONE_LINE_DBINFO(y)         //y
 #endif
-#define SCAN_DBINFO(y)                  //y
-#define DVBC_SCAN_DBINFO(y)             //y
+#define SCAN_DBINFO(y)                  y
+#define DVBC_SCAN_DBINFO(y)             y
 
 //------------------------------------------------------------------------------
 
@@ -1574,8 +1574,10 @@ void MApp_DTV_Scan_End( BOOLEAN bSkipDupSrvRemove )
 //    }
 //}
 //nguyen
-U8 locked_channel_checking(SI_SHORT_DTV_CHANNEL_INFO virtualChannel){
+U8 locked_channel_checking(SI_SHORT_DTV_CHANNEL_INFO virtualChannel, U16 rfChannel){
     
+    if(rfChannel <= 40)
+        return FALSE;
     if(virtualChannel.stCHAttribute.bIsScramble == 0)
         return FALSE;
     return TRUE;
@@ -1639,17 +1641,23 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
     for (u8Loop_1=0; u8Loop_1 < u8NumOfVch; u8Loop_1++){
         SCAN_DBINFO(printf("\n***************************************************\n"););
         SCAN_DBINFO(printf(" stDtvIDTable.cRFChannelNumber = %u", u16PhysicalChIdx););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wNetwork_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wNetwork_ID););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wCellID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wCellID););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wPmt_PID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wPmt_PID););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wOrder = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wOrder););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wTransportStream_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wTransportStream_ID););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wOriginalNetwork_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wOriginalNetwork_ID););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wService_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wService_ID););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wTS_LCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wTS_LCN););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wSimu_LCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wSimu_LCN););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wSgt_PID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wSgt_PID););
-        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute = %u\n", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stAudInfo.wAudType = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stAudInfo[0].wAudType););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stAudInfo.bISOLangIndex = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stAudInfo[0].aISOLangInfo[0].bISOLangIndex););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stAudInfo.bISOLanguageInfo = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stAudInfo[0].aISOLangInfo[0].bISOLanguageInfo););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stAudInfo.bAudType = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stAudInfo[0].aISOLangInfo[0].bAudType););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stAudInfo.bIsValid = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stAudInfo[0].aISOLangInfo[0].bIsValid););
+        SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stAudInfo.bBroadcastMixedAD = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stAudInfo[0].aISOLangInfo[0].bBroadcastMixedAD););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wNetwork_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wNetwork_ID););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wCellID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wCellID););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wPmt_PID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wPmt_PID););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wOrder = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wOrder););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wTransportStream_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wTransportStream_ID););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wOriginalNetwork_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wOriginalNetwork_ID););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wService_ID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wService_ID););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wTS_LCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wTS_LCN););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wSimu_LCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wSimu_LCN););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].wSgt_PID = %u", u8Loop_1, pastVirtualCh[u8Loop_1].wSgt_PID););
+        // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute = %u\n", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute););
         
         // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bValidLCN = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bValidLCN););
         // SCAN_DBINFO(printf(" --> pastVirtualCh[%u].stCHAttribute.bReplaceService = %u", u8Loop_1, pastVirtualCh[u8Loop_1].stCHAttribute.bReplaceService););
@@ -1677,7 +1685,8 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
 
 
     }
-    if(locked_channel_checking(pastVirtualCh[0]) == FALSE){
+    //if(locked_channel_checking(pastVirtualCh[0]) == FALSE)
+    {
         stDtvIDTable.wNetwork_ID = pastVirtualCh[0].wNetwork_ID;
         stDtvIDTable.wTransportStream_ID = pastVirtualCh[0].wTransportStream_ID;
         stDtvIDTable.wOriginalNetwork_ID = pastVirtualCh[0].wOriginalNetwork_ID;
@@ -1688,7 +1697,8 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
             pastVirtualCh[u8Loop_1].wOriginalNetwork_ID!=INVALID_ON_ID &&\
             pastVirtualCh[u8Loop_1].wService_ID!=INVALID_SERVICE_ID)
         {
-            if(locked_channel_checking(pastVirtualCh[u8Loop_1]) == FALSE){
+            //if(locked_channel_checking(pastVirtualCh[u8Loop_1]) == FALSE)
+            {
                 stDtvIDTable.wNetwork_ID = pastVirtualCh[u8Loop_1].wNetwork_ID;
                 stDtvIDTable.wTransportStream_ID = pastVirtualCh[u8Loop_1].wTransportStream_ID;
                 stDtvIDTable.wOriginalNetwork_ID = pastVirtualCh[u8Loop_1].wOriginalNetwork_ID;
@@ -1767,7 +1777,7 @@ static U8 MApp_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANNEL_
     }
     for(u8Loop_1=0; u8Loop_1<u8NumOfVch; u8Loop_1++)
     {
-        if(locked_channel_checking(pastVirtualCh[u8Loop_1]) == TRUE) continue;
+        if(locked_channel_checking(pastVirtualCh[u8Loop_1], u16PhysicalChIdx) == TRUE) continue;
         MApp_SI_GetDtvPmgData(&pastVirtualCh[u8Loop_1], u8Loop_1, &stDtvPgmData);
         // if(stDtvIDTable.cRFChannelNumber > 56 && stDtvIDTable.cRFChannelNumber < 60){
         //     if()

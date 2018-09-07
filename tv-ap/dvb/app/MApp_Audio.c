@@ -1066,7 +1066,7 @@ void MApp_Audio_SearchAdAudio(void)
     bServiceType = msAPI_CM_GetCurrentServiceType();
     wCurrentPosition = msAPI_CM_GetCurrentPosition(bServiceType);
     AudioLangNum = msAPI_CM_GetAudioStreamCount(bServiceType, wCurrentPosition);
-
+    printf("AudioLangNum = 0x%02bx\n", AudioLangNum);
 
 #if ENABLE_PVR
     if (MApp_PVR_IsPlaybacking())
@@ -1102,12 +1102,15 @@ void MApp_Audio_SearchAdAudio(void)
             for (j = 0; j < MAX_AUD_ISOLANG_NUM; j++)
             {
                 printf("j = %d  bAudType = %d\n", j, aAudioStreamInfo.aISOLangInfo[j].bAudType);
+                printf("aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex = %d\n", aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex);
                 if (aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex == SI_LANGUAGE_NONE)
                 {
+                    printf("break aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex (%d)(%s)\n", __LINE__, __func__);
                     break;
                 }
                 if (aAudioStreamInfo.aISOLangInfo[j].bBroadcastMixedAD == TRUE)
                 {
+                    printf("break aAudioStreamInfo.aISOLangInfo[j].bBroadcastMixedAD  (%d)(%s)\n", __LINE__, __func__);
                     break;
                 }
 

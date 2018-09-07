@@ -5,15 +5,8 @@
         "if_demodulator.h": "c",
         "sysinit.h": "c",
         "zui_strings_enum.h": "c",
-        "panel.h": "c",
-        "mapp_usbdownload.h": "c",
-        "mapp_func_mainpage.h": "c",
-        "gpio_macro.h": "c",
-        "bd_mst127b_10alsa.h": "c",
-        "msir.h": "c",
-        "mapp_inputsource.h": "c",
-        "msd92lgsw1.h": "c",
-        "drvgpio.h": "c"
+        "msapi_audio.h": "c",
+        "msir.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false
 }

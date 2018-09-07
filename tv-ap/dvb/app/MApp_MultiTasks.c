@@ -3670,12 +3670,13 @@ static void _MApp_Service_Check( void )
 
             if (stServiceInfo.eVideoType != (U8)msAPI_CM_GetProgramVideoType(bServiceType, wCurrentPosition))
             {
+                printf("nguyen 123\n"); 
                 msAPI_CM_SetProgramVideoType(bServiceType,wCurrentPosition,stServiceInfo.eVideoType);
                 bNeedRestartChnChange = TRUE;
             }
             if (stServiceInfo.wPmtPid != msAPI_CM_GetPmtPID(bServiceType,wCurrentPosition))
             {
-                //printf("Service (%u) Change Pmt PID, old(%u):new(%u)\n",wCurServiceID,msAPI_CM_GetPmtPID(bServiceType,wCurrentPosition),stServiceInfo.wPmtPid);
+                printf("nguyen 456 Service (%u) Change Pmt PID, old(%u):new(%u)\n",wCurServiceID,msAPI_CM_GetPmtPID(bServiceType,wCurrentPosition),stServiceInfo.wPmtPid);
                 if(TRUE == msAPI_CM_UpdateProgram(bServiceType, wCurrentPosition, (U8*)&stServiceInfo.wPmtPid, E_DATA_PMT_PID))
                 {
                   #if ENABLE_FileIn_PMTMonitor
@@ -3686,7 +3687,7 @@ static void _MApp_Service_Check( void )
             }
             if (stServiceInfo.wVideo_PID != msAPI_CM_GetVideoPID(bServiceType,wCurrentPosition))
             {
-                //printf("Service (%u) Change Vid PID, old(%u):new(%u)\n",wCurServiceID,msAPI_CM_GetVideoPID(bServiceType,wCurrentPosition),stServiceInfo.wVideo_PID);
+                printf("nguyen 789 Service (%u) Change Vid PID, old(%u):new(%u)\n",wCurServiceID,msAPI_CM_GetVideoPID(bServiceType,wCurrentPosition),stServiceInfo.wVideo_PID);
                 if(TRUE == msAPI_CM_UpdateProgram(bServiceType, wCurrentPosition, (U8*)&stServiceInfo.wVideo_PID, E_DATA_VIDEO_PID))
                 {
                   #if ENABLE_FileIn_PMTMonitor
@@ -3697,7 +3698,7 @@ static void _MApp_Service_Check( void )
             }
             if (stServiceInfo.wPCRPid != msAPI_CM_GetPCR_PID(bServiceType,wCurrentPosition))
             {
-                //printf("Service (%u) Change PCR PID, old(%u):new(%u)\n",wCurServiceID,msAPI_CM_GetPCR_PID(bServiceType,wCurrentPosition),stServiceInfo.wPCRPid);
+                printf("nguyen 101112Service (%u) Change PCR PID, old(%u):new(%u)\n",wCurServiceID,msAPI_CM_GetPCR_PID(bServiceType,wCurrentPosition),stServiceInfo.wPCRPid);
                 if(TRUE == msAPI_CM_UpdateProgram(bServiceType, wCurrentPosition, (U8*)&stServiceInfo.wPCRPid, E_DATA_PCR_PID))
                 {
                   #if ENABLE_FileIn_PMTMonitor

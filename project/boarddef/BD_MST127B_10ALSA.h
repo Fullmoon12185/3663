@@ -485,7 +485,7 @@
 
 #if ENABLE_DVBT
     #define FRONTEND_DEMOD_DVBT_TYPE            EMBEDDED_DVBT_DEMOD
-    #define FRONTEND_DEMOD_T2_TYPE          EMBEDDED_DVBT2_DEMOD
+    #define FRONTEND_DEMOD_T2_TYPE              EMBEDDED_DVBT2_DEMOD
     #define TS_PARALLEL_DVBT_OUTPUT             1 // 0: Serial; 1: paralell
     #define DEMOD_DVBT_USE_UTOPIA               1
 #else

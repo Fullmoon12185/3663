@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -854,7 +854,7 @@ void msAPI_MHEG_AUD_ChangeAudPid(S32 s32AudioPID, WORD wAudType)
     msAPI_DMX_Stop(*MApp_Dmx_GetFid(EN_AUDIO_FID));
     msAPI_DMX_StartFilter(s32AudioPID, MSAPI_DMX_FILTER_TYPE_AUDIO, MApp_Dmx_GetFid(EN_AUDIO_FID));
     /* set decoder system and reload firmware code */
-    DEBUG_AU_LOAD_CODE( printf("wAudType=%u\n", wAudType ); );
+    DEBUG_AU_LOAD_CODE( printf("nguyen wAudType=%u\n", wAudType ); );
     MApi_AUDIO_SetSystem((En_DVB_decSystemType)wAudType);
     if( wAudType == E_AUDIOSTREAM_AC3 || wAudType == E_AUDIOSTREAM_AC3P)
     {

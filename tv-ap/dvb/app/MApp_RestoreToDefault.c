@@ -3440,9 +3440,9 @@ void MApp_DataBase_RestoreDefaultSystem(U16 u16KeepSetting)
     stGenSetting.g_SysSetting.fEnableHdmiDviAudioModeConfig = EN_HDMI_DVI_AUDIOMODE_AUTO;
   #endif
 
-    stGenSetting.g_SysSetting.SubtitleDefaultLanguage             = LANGUAGE_ENGLISH;
-    stGenSetting.g_SysSetting.SubtitleDefaultLanguage_2           = LANGUAGE_ENGLISH;
-    stGenSetting.g_SysSetting.Last_Select_HotKey_SubtitleLanguage = LANGUAGE_ENGLISH;
+    stGenSetting.g_SysSetting.SubtitleDefaultLanguage             = LANGUAGE_VIETNAM;
+    stGenSetting.g_SysSetting.SubtitleDefaultLanguage_2           = LANGUAGE_VIETNAM;
+    stGenSetting.g_SysSetting.Last_Select_HotKey_SubtitleLanguage = LANGUAGE_VIETNAM;
     stGenSetting.g_SysSetting.fHardOfHearing = 0;
 
   #if (ENABLE_TCON_BIN_IN_DB)
@@ -3769,7 +3769,7 @@ void MApp_DataBase_RestoreDefaultAudio(BOOL bSetDriver)
     stGenSetting.g_SoundSetting.Volume = DEFAULT_VOLUME_SETTING;
 
 #if(ENABLE_DVB_AUDIO_DESC) // set default AD value
-    stGenSetting.g_SoundSetting.bEnableAD = DISABLE;
+    stGenSetting.g_SoundSetting.bEnableAD = ENABLE;
 #endif
 
     stGenSetting.g_SoundSetting.ADVolume = DEFAULT_VOLUME_SETTING;

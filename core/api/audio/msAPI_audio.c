@@ -189,7 +189,7 @@ void MDrv_Sys_Get_BinInfo(BININFO *pBinInfo, BOOLEAN *pbResult);
 
 //========================================================================================
 
-#define DEBUG_AUDIO    //0xFF
+#define DEBUG_AUDIO    0xFF
 
 #ifdef DEBUG_AUDIO
     #define debugAudioPrint(a,b)    debugPrint(a,b)
@@ -197,9 +197,9 @@ void MDrv_Sys_Get_BinInfo(BININFO *pBinInfo, BOOLEAN *pbResult);
     #define debugAudioPrint(a,b)
 #endif
 
-#define AUD_DEBUG(msg) //msg
+#define AUD_DEBUG(msg) msg
 
-#define  AUDIO_API_TRACE(msg)    //msg     //This is used for audio API function Trace
+#define  AUDIO_API_TRACE(msg)    msg     //This is used for audio API function Trace
 
 
 //================================================================================

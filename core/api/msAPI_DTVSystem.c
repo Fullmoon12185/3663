@@ -4350,7 +4350,14 @@ BYTE msAPI_CM_GetAudioStreamCount(MEMBER_SERVICETYPE bServiceType, WORD wPositio
           )
         {
             cAudioStreamCount++;
-            printf("nguyen: stAudInfo[%u].wAudPID=%u wAudType=%u \n",i,stAudInfo[i].wAudPID,stAudInfo[i].eSIAudType);
+            printf("nguyen: stAudInfo[%u].wAudPID=%u eSIAudType=%u \t bISOLanguageInfo= %d\t bISOLangIndex= %d\t bBroadcastMixedAD= %d\t bAudType = %d\t bIsValid =%d\t\n", i,
+                                 stAudInfo[i].wAudPID,
+                                 stAudInfo[i].eSIAudType,
+                                 stAudInfo[i].aISOLangInfo[0].bISOLanguageInfo,
+                                 stAudInfo[i].aISOLangInfo[0].bISOLangIndex,
+                                 stAudInfo[i].aISOLangInfo[0].bBroadcastMixedAD,
+                                 stAudInfo[i].aISOLangInfo[0].bAudType,
+                                 stAudInfo[i].aISOLangInfo[0].bIsValid);
         }
         else
         {
@@ -5879,7 +5886,6 @@ BOOLEAN msAPI_CM_AddProgram(DTV_CHANNEL_INFO *pDTVProgramData, BOOLEAN *bDBFull,
         m_wPastServiceId = pDTVProgramData->wService_ID;
         m_wPastOriginalNetworkId = pMuxTable[pDTVProgramData->bIDIdex].wOriginalNetwork_ID;
         m_wPastTransportStreamId = pMuxTable[pDTVProgramData->bIDIdex].wTransportStream_ID;
-
         if(msAPI_CM_GetFirstPositionInPCN(E_SERVICETYPE_DTV, pMuxTable[pDTVProgramData->bIDIdex].cRFChannelNumber, &l_wPosition))
         {
             msAPI_CM_SetCurrentServiceType(E_SERVICETYPE_DTV);
@@ -5978,6 +5984,8 @@ BOOLEAN msAPI_CM_AddProgram(DTV_CHANNEL_INFO *pDTVProgramData, BOOLEAN *bDBFull,
 
     DEBUG_CM_ADD_PROG(printf(" bChannelName="););
     msAPI_DtvSys_PrintServiceName( pDTVProgramData->bChannelName, MAX_SERVICE_NAME );
+     DEBUG_CM_ADD_PROG(printf("pDTVProgramData->stAudInfo[0].eSIAudType...%d\n",pDTVProgramData->stAudInfo[0].eSIAudType););
+       
     DEBUG_CM_ADD_PROG(printf("\n"););
 
     if( FALSE == bIsValid)
@@ -25291,6 +25299,9 @@ void SET_Default_TW_DTV_CH(void) //yiling 0821 dtv channel setting
     {
         MApp_TopStateMachine_SetTopState(STATE_TOP_CHANNELCHANGE);
     }
+    //nguyen
+    printf("nguyen MApp_ChannelChange_EnableChannel");
+    //nguyen
     MApp_ChannelChange_EnableChannel(MAIN_WINDOW);
 
     //

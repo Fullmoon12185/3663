@@ -1531,8 +1531,11 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
 #endif
 
     U8 maxAudio = MAX_AUD_LANG_NUM > SI_MAX_AUD_LANG_NUM ? SI_MAX_AUD_LANG_NUM : MAX_AUD_LANG_NUM;
-
+    
 #if 1 // Use new API
+    printf("======================================================================================\n");
+    printf("======================================================================================\n");
+    printf("DTVProgramData.bChannelName = %s\n", DTVProgramData.bChannelName);
     msAPI_SI_Copy_SI_AudInfo_To_CM_AudInfo(pSIDTVProgramData->stAudInfo, DTVProgramData.stAudInfo, maxAudio);
 
 #else
@@ -1544,7 +1547,7 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
         //DTVProgramData.stAudInfo[i].wAudType = msAPI_SI_ToCM_Audio_Type(pSIDTVProgramData->stAudInfo[i].wAudType);
         DTVProgramData.stAudInfo[i].eSIAudType = (SI_AUDIOSTREAM_TYPE)pSIDTVProgramData->stAudInfo[i].wAudType;
 
-        //printf("\n[[In2_%x  out_%x",pDTVProgramData->stAudInfo[i].wAudType,DTVProgramData.stAudInfo[i].wAudType);
+        printf("\n[[In2_%x  out_%x",pDTVProgramData->stAudInfo[i].wAudType,DTVProgramData.stAudInfo[i].wAudType);
 
         DTVProgramData.stAudInfo[i].wAudPID = pSIDTVProgramData->stAudInfo[i].wAudPID;
 
@@ -1630,9 +1633,7 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
     printf("=> Service Name 2: ");
     msAPI_DtvSys_PrintServiceName(DTVProgramData.bChannelName, MAX_SERVICE_NAME);
     printf("\n");
-
 #else
-
     memcpy(DTVProgramData.bChannelName, pSIDTVProgramData->bChannelName, u8ServiceNameCopyMaxSize );
 #endif
 

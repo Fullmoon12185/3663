@@ -116,6 +116,7 @@
 #include "drvUartDebug.h"
 
 #include "msIR.h"
+#include "MApp_IR.h"
 #include "msKeypad.h"
 #include "drvISR.h"
 #include "SysInit.h"
@@ -196,6 +197,7 @@ void MDrv_ISR_Init(void)
 }
 extern MS_U32 gsystem_time_ms;
 MS_U32 upgrade_image_counter = 0;
+MS_U32 key_pressed_counter = 0;
 BOOLEAN bLedToggled = TRUE;
 //------------------------------------------------------------------------------------
 //extern void Timer_Setting_Register(void *ptCb);
@@ -235,9 +237,17 @@ static void TimerISR(void)
             } else {
                 bLedToggled = TRUE;
                 LED_GRN_Off();
-                LED_RED_On();
+                
             }
             upgrade_image_counter = 0;
+        }
+    } else if(is_key_pressed()) {
+        key_pressed_counter++;
+        LED_RED_On();
+        if(key_pressed_counter >= 300){
+            LED_RED_Off();
+            clear_key_pressed();
+            key_pressed_counter = 0;
         }
     }
 
