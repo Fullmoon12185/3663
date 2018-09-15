@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -931,12 +931,16 @@ void MApp_MVD_Set_PQModeInfo(VDEC_DispInfo* pstVDEC_DispInfo)
     stMS_PQ_Mode_Info.bInterlace = pstVDEC_DispInfo->u8Interlace;
     stMS_PQ_Mode_Info.u16input_hsize = pstVDEC_DispInfo->u16HorSize;
     stMS_PQ_Mode_Info.u16input_vsize = pstVDEC_DispInfo->u16VerSize;
+    //nguyen
+    stMS_PQ_Mode_Info.u16display_hsize = 1368; //pstVDEC_DispInfo->u16HorSize;
+    stMS_PQ_Mode_Info.u16display_vsize = 720; //pstVDEC_DispInfo->u16VerSize;
+    //nguyen
     stMS_PQ_Mode_Info.u16input_vfreq = pstVDEC_DispInfo->u32FrameRate/100;
     stMS_PQ_Mode_Info.bFBL = MApi_XC_IsCurrentFrameBufferLessMode();
     MDrv_PQ_Set_ModeInfo(PQ_MAIN_WINDOW, PQ_INPUT_SOURCE_DTV, &stMS_PQ_Mode_Info);
 
     MS_U16 u16PqSrcType = QM_InputSourceToIndex(PQ_MAIN_WINDOW, PQ_INPUT_SOURCE_DTV);
-    printf(" u16PQSrcType=%u(%s)\n", u16PqSrcType, MDrv_PQ_GetSrcTypeName_2(PQ_MAIN_WINDOW,u16PqSrcType) );
+    printf("nguyen u16PQSrcType=%u(%s)\n", u16PqSrcType, MDrv_PQ_GetSrcTypeName_2(PQ_MAIN_WINDOW,u16PqSrcType) );
 }
 
 //*************************************************************************

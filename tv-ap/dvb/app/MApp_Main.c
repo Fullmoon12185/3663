@@ -946,22 +946,22 @@ void HomeShop_FSM (void){
             if(countForHomeShop <= MAX_COUNT){
                 countForHomeShop ++;
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                // DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
+                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
                 countForHomeShopSaved = MApp_Load_UserDataForHomeShop();
                 
                 if(countForHomeShop != countForHomeShopSaved){
                     MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);
-                    printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
+                    // printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
                 } else {
                    MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));      
                 }
                 
             } else {
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-                DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                // DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
+                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
             }
             // DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
             // DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
@@ -971,9 +971,9 @@ void HomeShop_FSM (void){
         keytemp = getKeyPressed() - KEY_0;
         if(keytemp <= 9){
             fourKeyPressed = (fourKeyPressed<<4)|keytemp;
-            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-            DEBUG_HOME_SHOP(printf("\nFourKeyPressed 0x%x\n", fourKeyPressed););
-            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            // DEBUG_HOME_SHOP(printf("\nFourKeyPressed 0x%x\n", fourKeyPressed););
+            // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
             if(fourKeyPressed == 0x1349){
                 homeshop_state = SHOP_STATE;
                 countForHomeShop = 0;
@@ -1023,27 +1023,28 @@ void SendIROut_FSM(void){
                 MApp_IR_sendIROut(IRKEY_POWER);     
                 timeLastAndroid = timeCurrAndroid;   
             }
-        } else {
-            switch (sendirout_state){
-                case SEND_IR_OUT_INIT:
-                    temp_key = getIRKey();
-                    //printf("temp_key = %d \n", temp_key);
-                    if(temp_key != 0xFF)
-                        sendirout_state = SEND_IR_OUT_1;
-                break;
-                case SEND_IR_OUT_1:
-                    MApp_IR_sendIROut(temp_key);
-                    sendirout_state = SEND_IR_OUT_2;
-                break;
-                case SEND_IR_OUT_2:
-                    temp_key = getIRKey();
-                    if(temp_key == 0xFF)
-                        sendirout_state = SEND_IR_OUT_INIT;
-                break;
-                default:
-                break;
-            }
-        }
+        } 
+        // else {
+        //     switch (sendirout_state){
+        //         case SEND_IR_OUT_INIT:
+        //             temp_key = getIRKey();
+        //             //printf("temp_key = %d \n", temp_key);
+        //             if(temp_key != 0xFF)
+        //                 sendirout_state = SEND_IR_OUT_1;
+        //         break;
+        //         case SEND_IR_OUT_1:
+        //             //MApp_IR_sendIROut(temp_key);
+        //             sendirout_state = SEND_IR_OUT_2;
+        //         break;
+        //         case SEND_IR_OUT_2:
+        //             temp_key = getIRKey();
+        //             if(temp_key == 0xFF)
+        //                 sendirout_state = SEND_IR_OUT_INIT;
+        //         break;
+        //         default:
+        //         break;
+        //     }
+        // }
     } else {
         if(ANDROID_STATUS() == ANDROID_ACTIVE_MODE){
             timeCurrAndroid = MsOS_GetSystemTime();

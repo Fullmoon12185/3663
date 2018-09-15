@@ -225,7 +225,7 @@ void msAPI_SI_Copy_SI_AudInfo_To_CM_AudInfo(SI_AUD_INFO* pstSI_AudInfo, AUD_INFO
     for( i = 0; i < u8Count; ++ i)
     {
         //DTVProgramData.stAudInfo[i].wAudType = msAPI_SI_ToCM_Audio_Type(pSIDTVProgramData->stAudInfo[i].wAudType);
-        pstCM_AudInfo[i].eSIAudType = 1;//(SI_AUDIOSTREAM_TYPE)pstSI_AudInfo[i].wAudType;
+        pstCM_AudInfo[i].eSIAudType = (SI_AUDIOSTREAM_TYPE)1;//(SI_AUDIOSTREAM_TYPE)pstSI_AudInfo[i].wAudType;
 
         pstCM_AudInfo[i].wAudPID = pstSI_AudInfo[i].wAudPID;
 
@@ -247,15 +247,6 @@ void msAPI_SI_Copy_SI_AudInfo_To_CM_AudInfo(SI_AUD_INFO* pstSI_AudInfo, AUD_INFO
                 pstCM_AudInfo[i].aISOLangInfo[j].bIsValid = pstSI_AudInfo[i].aISOLangInfo[j].bIsValid;
                 pstCM_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD = pstSI_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD;
                 pstCM_AudInfo[i].aISOLangInfo[j].bReserved = pstSI_AudInfo[i].aISOLangInfo[j].bReserved;
-
-                printf("pstCM_AudInfo[%d].eSIAudType = %d\n", i, pstCM_AudInfo[i].eSIAudType);
-                printf("stAudInfo[%d].aISOLangInfo[%d].bISOLangIndex = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bISOLangIndex);
-                printf("stAudInfo[%d].aISOLangInfo[%d].bISOLanguageInfo = %d\n", i, j, pstCM_AudInfo[i].aISOLangInfo[j].bISOLanguageInfo);
-                printf("stAudInfo[%d].aISOLangInfo[%d].bAudType = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bAudType);
-                printf("stAudInfo[%d].aISOLangInfo[%d].bIsValid = %d\n", i, j,   pstCM_AudInfo[i].aISOLangInfo[j].bIsValid);
-                printf("pstCM_AudInfo[%d].aISOLangInfo[%d].bBroadcastMixedAD = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bBroadcastMixedAD);
-                printf("pstCM_AudInfo[i].aISOLangInfo[j].bReserved = %d\n", i, j,  pstCM_AudInfo[i].aISOLangInfo[j].bReserved);
-                
             
             }
         }

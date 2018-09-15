@@ -3457,7 +3457,7 @@ typedef enum
     E_AFIFO_1,
     E_AFIFO_2,
     E_AFIFO_MAX,
-} AUDIO_AFIFO_SOURCE;
+} AUDIO_AFIFO_SOURCE;       
 
 
 typedef struct

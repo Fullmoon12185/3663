@@ -344,7 +344,7 @@ pthread_mutex_t _PQ_MLoad_Mutex;
 #endif
 
 #ifndef PQ_OSD_BW_DISABLE_FOR_HD_PANEL
-#define PQ_OSD_BW_DISABLE_FOR_HD_PANEL      0
+#define PQ_OSD_BW_DISABLE_FOR_HD_PANEL      1
 #endif
 
 //******************************************************************************
@@ -2040,7 +2040,7 @@ void MDrv_PQ_Get_ModeInfo(PQ_WIN eWindow, MS_PQ_Mode_Info *pstPQModeInfo)
 
 void MDrv_PQ_Set_ModeInfo(PQ_WIN eWindow, PQ_INPUT_SOURCE_TYPE enInputSourceType, MS_PQ_Mode_Info *pstPQModeInfo)
 {
-    PQMODE_DBG( printf("PQ Set Mode Info: %s, Src=%x\n", (eWindow)?("SubWin"):("MainWin"), enInputSourceType); );
+    PQMODE_DBG( printf("nguyen PQ Set Mode Info: %s, Src=%x\n", (eWindow)?("SubWin"):("MainWin"), enInputSourceType); );
 
     memcpy(&_stMode_Info[eWindow], pstPQModeInfo, sizeof(MS_PQ_Mode_Info));
 
@@ -2190,7 +2190,7 @@ void MDrv_PQ_Set_ModeInfo(PQ_WIN eWindow, PQ_INPUT_SOURCE_TYPE enInputSourceType
     }
     else
     {
-        _u8ModeIndex[eWindow] = PQ_MD_Num;
+        _u8ModeIndex[eWindow] = PQ_MD_1280x720_50P;
     }
 
     if(QM_IsSourceYPbPr(enInputSourceType) || QM_IsSourceHDMI(enInputSourceType))
@@ -2213,8 +2213,11 @@ void MDrv_PQ_Set_ModeInfo(PQ_WIN eWindow, PQ_INPUT_SOURCE_TYPE enInputSourceType
             _gIsSrcHDMode[eWindow] = 0;
     }
 
-    PQINFO_DBG(
-        printf("PQ ModeInfo:%d input(%d, %d), disp(%d, %d), ModeIdx=%d, FBL=%u, Interlace=%u, InV=%u, OutV=%u, inVtt=%u\n",
+    //PQINFO_DBG(
+        
+               _stMode_Info[eWindow].u16display_hsize = 1280;
+               _stMode_Info[eWindow].u16display_vsize = 720;
+        printf("nguyen PQ ModeInfo:%d input(%d, %d), disp(%d, %d), ModeIdx=%d, FBL=%u, Interlace=%u, InV=%u, OutV=%u, inVtt=%u\n",
                eWindow,
                _stMode_Info[eWindow].u16input_hsize,
                _stMode_Info[eWindow].u16input_vsize,
@@ -2226,7 +2229,7 @@ void MDrv_PQ_Set_ModeInfo(PQ_WIN eWindow, PQ_INPUT_SOURCE_TYPE enInputSourceType
                _stMode_Info[eWindow].u16input_vfreq,
                _stMode_Info[eWindow].u16ouput_vfreq,
                _stMode_Info[eWindow].u16input_vtotal);
-    );
+    //);
 
 }
 
@@ -2283,7 +2286,7 @@ MS_U16 MDrv_PQ_Get_Test_Pattern_SrcType(void)
 
 void MDrv_PQ_DesideSrcType(PQ_WIN eWindow, PQ_INPUT_SOURCE_TYPE enInputSourceType)
 {
-    DEBUG_PQ_SRC_TYPE(printf("MDrv_PQ_DesideSrcType(srcType=%u)\n", enInputSourceType););
+    DEBUG_PQ_SRC_TYPE(printf("NGUYEN MDrv_PQ_DesideSrcType(srcType=%u)\n", enInputSourceType););
 
     _enInputSourceType[eWindow] = enInputSourceType;
     _u16PQSrcType[eWindow] = QM_InputSourceToIndex(eWindow, enInputSourceType);
@@ -4426,7 +4429,7 @@ PQ_DEINTERLACE_MODE MDrv_PQ_SetMemFormat(PQ_WIN eWindow, MS_BOOL bMemFmt422, MS_
 
 void MDrv_PQ_ReduceBW_ForOSD(PQ_WIN eWindow, MS_BOOL bOSD_On)
 {
-    //printf("MDrv_PQ_ReduceBW_ForOSD(Win=%u, bOSD_On=%u)\n", eWindow, bOSD_On);
+    printf("nguyen MDrv_PQ_ReduceBW_ForOSD(Win=%u, bOSD_On=%u)\n", eWindow, bOSD_On);
 #if PQ_GRULE_OSD_BW_ENABLE
     MS_U8 u8BitPerPixel = 0;
 {
@@ -4438,7 +4441,7 @@ void MDrv_PQ_ReduceBW_ForOSD(PQ_WIN eWindow, MS_BOOL bOSD_On)
     }
 #endif
 
-    //printf(" bFBL=%u, u16input_hsize=%u, u16input_vsize=%u, _gbMemfmt422=%u\n", _stMode_Info[eWindow].bFBL, _stMode_Info[eWindow].u16input_hsize, _stMode_Info[eWindow].u16input_vsize, _gbMemfmt422[eWindow]);
+    printf(" bFBL=%u, u16input_hsize=%u, u16input_vsize=%u, _gbMemfmt422=%u\n", _stMode_Info[eWindow].bFBL, _stMode_Info[eWindow].u16input_hsize, _stMode_Info[eWindow].u16input_vsize, _gbMemfmt422[eWindow]);
     if((_stMode_Info[eWindow].u16input_hsize >= 1280) && (_stMode_Info[eWindow].u16input_vsize >= 720))
     {
         PQBW_DBG(printf("[PQ_ReduceBW_ForOSD]:%u\n", bOSD_On));
@@ -4454,7 +4457,7 @@ void MDrv_PQ_ReduceBW_ForOSD(PQ_WIN eWindow, MS_BOOL bOSD_On)
 
         bSetFrameCount = TRUE;
 
-        //printf(" ==> u8BitPerPixel=%u\n", u8BitPerPixel );
+        printf(" ==> u8BitPerPixel=%u\n", u8BitPerPixel );
     }
 }
 #else

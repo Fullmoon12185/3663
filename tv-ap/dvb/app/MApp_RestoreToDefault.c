@@ -2064,7 +2064,7 @@ static T_MS_VIDEO code astDefaultVideoDataTbl[DATA_INPUT_SOURCE_NUM] =
         },
 
         MS_BLACK_LEVEL_HIGH,
-        EN_AspectRatio_Original
+        EN_AspectRatio_16X9
 
     },
 #endif

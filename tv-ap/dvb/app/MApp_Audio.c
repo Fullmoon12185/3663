@@ -1101,8 +1101,8 @@ void MApp_Audio_SearchAdAudio(void)
 
             for (j = 0; j < MAX_AUD_ISOLANG_NUM; j++)
             {
-                printf("j = %d  bAudType = %d\n", j, aAudioStreamInfo.aISOLangInfo[j].bAudType);
-                printf("aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex = %d\n", aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex);
+                //printf("j = %d  bAudType = %d\n", j, aAudioStreamInfo.aISOLangInfo[j].bAudType);
+                //printf("aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex = %d\n", aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex);
                 if (aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex == SI_LANGUAGE_NONE)
                 {
                     printf("break aAudioStreamInfo.aISOLangInfo[j].bISOLangIndex (%d)(%s)\n", __LINE__, __func__);

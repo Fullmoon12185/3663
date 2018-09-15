@@ -279,12 +279,12 @@ DTVPROGRAMID_M g_stCurS2ProggramId; //TP;
 /*                     Macro                    */
 /******************************************************************************/
 
-#define CHANNELCHANGE_DBINFO(y)     y
+#define CHANNELCHANGE_DBINFO(y)     //y
 
 #define ENABLE_CH_CHANGE_TIMER_DEBUG    1
 
-#define DEBUG_ENABLE_CHANNEL(x)     x
-#define DEBUG_ENABLE_AV(x)          x
+#define DEBUG_ENABLE_CHANNEL(x)     //x
+#define DEBUG_ENABLE_AV(x)          //x
 
 
 #if (ENABLE_DTMB_CHINA_APP || ENABLE_ATV_CHINA_APP || ENABLE_DVBC_PLUS_DTMB_CHINA_APP)
@@ -4657,7 +4657,7 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                             }
                           #endif
 
-                            printf("nguyen g_u8LRAudioMode = %d \n", g_u8LRAudioMode);
+                            
                             if (g_u8LRAudioMode == 0)
                             {
                                 MApi_AUDIO_SetCommAudioInfo(Audio_Comm_infoType_SoundMode, MSAPI_AUD_MODE_STEREO, 0);
@@ -4686,21 +4686,39 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                             // solved scramble->ATV no audio bug.
                             SI_AUDIOSTREAM_TYPE eSIAudStreamType = msAPI_CM_Get_SIAudStreamType_By_AudInfo(&stAudioStreamInfo);
                         #if 1
-                            printf("nguyen eSIAudStreamType = %d \n", eSIAudStreamType);
+                            //printf("eSIAudStreamType = %d \n", eSIAudStreamType);
+                            // AudioDecStatus_t * p_AudioDecStatus;
+                            // U8 temp_idx = 0;
+                            // for (temp_idx = 0; temp_idx < 3; temp_idx ++){
+                            //     MApi_AUDIO_GetDecodeSystem(temp_idx, p_AudioDecStatus);    
+                            //     printf("p_AudioDecStatus.bStart = %d\n", p_AudioDecStatus.bStart);
+                            //     printf("p_AudioDecStatus.eDSPId = %d\n", p_AudioDecStatus.eDSPId);
+                            //     printf("p_AudioDecStatus.eSourceType = %d\n", p_AudioDecStatus.eSourceType);
+                            //     printf("p_AudioDecStatus.eMMType = %d\n", p_AudioDecStatus.eMMType);
+                            //     printf("p_AudioDecStatus.eAudFormat = %d\n", p_AudioDecStatus.eAudFormat);
+                            //     printf("p_AudioDecStatus.bConnect = %d\n", p_AudioDecStatus.bConnect);
+                            //     printf("p_AudioDecStatus.bAVSyncOn = %d\n", p_AudioDecStatus.bAVSyncOn);
+                            //     printf("p_AudioDecStatus.bIsAD = %d\n", p_AudioDecStatus.bIsAD);
+                            //     printf("p_AudioDecStatus.eAfifoSource = %d\n", p_AudioDecStatus.eAfifoSource);
+                            //     printf("p_AudioDecStatus.eStcSource = %d\n", p_AudioDecStatus.eStcSource);
+                            //     printf("p_AudioDecStatus.eGroup = %d\n", p_AudioDecStatus.eGroup);
+
+                            // }
+                            
+
+
                             switch( eSIAudStreamType )
                             {
                                 case E_SI_AUDIOSTREAM_AC3:
                                 case E_SI_AUDIOSTREAM_AC3P:
                                 {
-                                    //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
-                                    //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);  // LtRt
+                                    MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+                                    MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);  // LtRt
                                     u32AC3CheckTimer = msAPI_Timer_GetTime0();
                                     bEnableAC3Check  = TRUE;
                                     u8AC3CheckTimes  = 10;
-                                    MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
-                                    msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
                                     //printf("set SPDIF_non-PCM\r\n");
-                                    printf("nguyen E_SI_AUDIOSTREAM_AC3P = %d \n", eSIAudStreamType);
+                                    //printf("nguyen E_SI_AUDIOSTREAM_AC3P = %d \n", eSIAudStreamType);
                                 }
                                     break;
 
@@ -4711,12 +4729,12 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                                     MApi_AUDIO_SetAACInfo(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
                                     MApi_AUDIO_SetAACInfo(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);  // LtRt
                                     
-                                    printf("nguyen E_SI_AUDIOSTREAM_MPEG4 = %d \n", eSIAudStreamType);
+                                   // printf("nguyen E_SI_AUDIOSTREAM_MPEG4 = %d \n", eSIAudStreamType);
                                     break;
 
                                 case E_SI_AUDIOSTREAM_MPEG:
                                     // Do nothing
-                                    printf("nguyen E_SI_AUDIOSTREAM_MPEG = %d \n", eSIAudStreamType);
+                                    //printf("nguyen E_SI_AUDIOSTREAM_MPEG = %d \n", eSIAudStreamType);
                                     //MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
                                     //msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
                                     //MApi_AUDIO_SetAACInfo(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
@@ -4724,8 +4742,6 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                                     break;
 
                                 default:
-                                    MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
-                                    msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
                                     printf("\nWarning: eSIAudStreamType=%u is invalid!\n", eSIAudStreamType);
                                     break;
                             }

@@ -236,6 +236,7 @@ typedef U16 TypCheckSum;
 //DVB Source information
 typedef enum
 {
+    UI_INPUT_SOURCE_ATV,
 //#if ENABLE_S2
     UI_INPUT_SOURCE_S2,
 //#endif
@@ -261,7 +262,7 @@ typedef enum
 //#endif
 
 
-    UI_INPUT_SOURCE_ATV,
+    
 
 
 #if (INPUT_SCART_VIDEO_COUNT >= 1)

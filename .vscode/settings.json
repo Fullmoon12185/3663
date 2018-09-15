@@ -8,5 +8,6 @@
         "msapi_audio.h": "c",
         "msir.h": "c"
     },
-    "C_Cpp.dimInactiveRegions": false
+    "C_Cpp.dimInactiveRegions": false,
+    "git.ignoreLimitWarning": true
 }
