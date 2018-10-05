@@ -1,0 +1,206 @@
+[Rule - PROJ_MIPS_MARLON_128M_DVBT_SZ_NPN]
+make loader
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make[1]: Nothing to be done for 'loader'.
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make setup
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[Rule - setup] PROJ_MIPS_MARLON_128M_DVBT_SZ_NPN
+Tool Chain = mips-sde-elf-gcc 
+GNU Awk 4.1.3, API: 1.1 (GNU MPFR 3.1.4, GNU MP 6.1.0)
+(LOADER)=.//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/loader_mips_MIPS_MARLON_128M_DVBT_SZ_NPN.ld
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make sboot
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[CC]  tv-ap/dvb/ui2/MApp_ZUI_ACTmenufunc.c
+[Rule - AP_ELF]
+[LD]  Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf
+[LD]  -lm -lc -L./core/lib/marlon -T.//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/loader_mips_MIPS_MARLON_128M_DVBT_SZ_NPN.ld
+   text	   data	    bss	    dec	    hex	filename
+3363068	 829844	 406840	4599752	 462fc8	Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf
+[BIN] Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.bin
+[SBOOT START]
+-e \x1b[31m
+HEAP_START= 0x0000000080e69c40                
+HEAP_END  = 0x0000000081180000                
+HEAP_SIZE = 3160 KB
+-e \x1b[0m
+[SBOOT] sboot
+make[2]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+/bin/rm -rf obj out inc/linux/autoconf.h inc/config.h out/boot1.inc ./boot1.inc
+make[2]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+cp ./boot/sboot/bin/BD_MST127B_10ALSA/sboot.bin ./boot/sboot/out/sboot.bin;
+make -C ./boot/sboot
+make[2]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+[32m
+---------------------------------------
+[GEN] out/chunk_header.bin
+OS_TYPE=nos_mips
+_SIZE_CHAKRA = 0x136093(1269907)
+_BEON_MEM_ADR = 0xA00000
+RAM_BASE = 0x20000000
+_RAM_START = 0x80A00180
+_RAM_END   = 0x80D37EC0
+_RAM_ENTRY = 0x80A00600
+BEON_START_OFFSET = 0x0
+
+ROM_START  = 0xBFC20080
+RAM_START  = 0xA0A00180
+RAM_END    = 0xA0B36213
+ROM_END    = 0xBFD56113
+RAM_ENTRY  = 0x80A00600
+../../scripts/util/hex2bin out/chunk_header.txt out/chunk_header.bin
+iDataCount=128
+[0m
+[BIN] out/all.bin
+make[2]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831/boot/sboot'
+[SBOOT - End]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make ap
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[SYM] Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.sym
+[Rule - ap]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make checkbinsize
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[Rule - checkbinsize - skip]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make merge
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+-e \x1b[33m
+[Rule - MERGE_BIN] => Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin
+AP_PACK__FILE_ALIGN=8
+BLOADER_PACK__FILE_ALIGN=65536
+BIN_FORMAT=COMPRESS7
+COMPRESS_FORMAT=1
+python scripts/BinIDPackFiles_Compress.py -BIGENDIAN -CRC16ENABLE -multiflash 8 8 0958336900 Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin ./project/image/bininfo/marlon/BinInfo.h 69632 .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP_C.bin 1 nos_mips
+bin_align=8
+file_align=8
+magic=0958336900
+dst_fn=Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin
+os_type=nos_mips
+doPack()
+magic = 0958336900
+data_size = 0x156113
+getFlashTable2()
+merge_bin_size = 0x156113
+.isp_info at 0x31FC
+.isp_info tbl1 end at 0x339C
+magic = 0958336900
+magic-2 = 0x958336900
+magic-5: 0x21F03
+ID
+0003
+156118
+./scripts/util/mscompress7 e 0 
+filename = ../../../core/bin/marlon/audio/aucode_adec_r2.binc
+len(d) before adding CRC = 0xbefcf
+len(d) after adding CRC = 0xbefd8
+0003 @ 156118  BEFD8 8 FB76 ../../../core/bin/marlon/audio/aucode_adec_r2.binc
+ID
+0011
+2150F0
+filename = ../../../core/bin/marlon/demux/fwTSP.bin
+len(d) before adding CRC = 0x54d5
+len(d) after adding CRC = 0x54d8
+0011 @ 2150F0   54D8 0 1BB4 ../../../core/bin/marlon/demux/fwTSP.bin
+ID
+0051
+21A5C8
+./scripts/util/mscompress7 e 0 
+filename = ../../../core/bin/marlon/cape/mheg5_LE.binc
+len(d) before adding CRC = 0x54c5a
+len(d) after adding CRC = 0x54c60
+0051 @ 21A5C8  54C60 8 5E81 ../../../core/bin/marlon/cape/mheg5_LE.binc
+ID
+01A0
+26F228
+./scripts/util/mscompress7 e 0 
+filename = ../../../tv-ap/dvb/ui2/font/test_bold.mvfc
+len(d) before adding CRC = 0x16e77
+len(d) after adding CRC = 0x16e80
+01A0 @ 26F228  16E80 8 3A3F ../../../tv-ap/dvb/ui2/font/test_bold.mvfc
+ID
+0300
+2860A8
+filename = ../../../tv-ap/dvb/ui2/logo/Mstar_OSD1_480p.jpg
+len(d) before adding CRC = 0xf056
+len(d) after adding CRC = 0xf060
+0300 @ 2860A8   F060 0 4150 ../../../tv-ap/dvb/ui2/logo/Mstar_OSD1_480p.jpg
+ID
+0701
+295108
+filename = ../../../tv-ap/dvb/ui2/logo/mp3.mp3
+len(d) before adding CRC = 0xd9b0
+len(d) after adding CRC = 0xd9b8
+0701 @ 295108   D9B8 0 198B ../../../tv-ap/dvb/ui2/logo/mp3.mp3
+ID
+0302
+2A2AC0
+filename = ../../../tv-ap/dvb/ui2/res1366x768x565/osdcomposer/osdbin/ZUI_bitmap_SW_LOAD.bin
+len(d) before adding CRC = 0x4c956
+len(d) after adding CRC = 0x4c960
+0302 @ 2A2AC0  4C960 0 685C ../../../tv-ap/dvb/ui2/res1366x768x565/osdcomposer/osdbin/ZUI_bitmap_SW_LOAD.bin
+ID
+0380
+2EF420
+./scripts/util/mscompress -c -u 0 -9 
+filename = ../../../tv-ap/dvb/ui2/res1366x768x565/osdcomposer/osdbin/ZUI_strings.binc
+len(d) before adding CRC = 0x1f9af
+len(d) after adding CRC = 0x1f9b8
+0380 @ 2EF420  1F9B8 4 9D27 ../../../tv-ap/dvb/ui2/res1366x768x565/osdcomposer/osdbin/ZUI_strings.binc
+ID
+00B0
+30EDD8
+filename = ../../../core/bin/marlon/vdec/fwVPU.bin
+len(d) before adding CRC = 0x6f090
+len(d) after adding CRC = 0x6f098
+00B0 @ 30EDD8  6F098 0 73F5 ../../../core/bin/marlon/vdec/fwVPU.bin
+ID
+00B3
+37DE70
+./scripts/util/mscompress7 e 0 
+filename = ../../../core/bin/marlon/vdec/fwVPU_VLC.binc
+len(d) before adding CRC = 0x1709d
+len(d) after adding CRC = 0x170a0
+00B3 @ 37DE70  170A0 8 B6B4 ../../../core/bin/marlon/vdec/fwVPU_VLC.binc
+ID
+0061
+394F10
+./scripts/util/mscompress7 e 0 
+filename = ../../../core/bin/marlon/cape/vdplayer.binc
+len(d) before adding CRC = 0x65d36
+len(d) after adding CRC = 0x65d40
+0061 @ 394F10  65D40 8 EB94 ../../../core/bin/marlon/cape/vdplayer.binc
+[35mBin_MIPS_MARLON_128M_DVBT_SZ_NPN/MERGE.bin:
+		 0x3FAC50 octets (4075.078125 KB / 3.979568 MB)[0m
+[35m.//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP_C.bin:
+		 0x136093 octets (1240.143555 KB / 1.211078 MB)[0m
+crc16  8303
+crc32 of AP 4EEC93D5
+[35mPACK: file_size: 0x3FAC54 octets (4075.082031 KB / 3.979572 MB)[0m
+
+[Rule - merge]
+[MERGE]
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+make debug_info
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+[Rule - debug_info]
+mips-sde-elf-nm -a -S --size-sort .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf > .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/ap_sym__sort_by_size.txt
+sort .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/ap_sym__sort_by_size.txt > .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/ap_sym__sort_by_addr.txt
+mips-sde-elf-readelf -a .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP.elf > .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/AP_elf.txt
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+-e \x1b[32;01m
+=== Merge finish ===
+Thứ sáu, 21 Tháng chín năm 2018 14:27:20 +07
+-e \x1b[0m
+make lint
+make[1]: Entering directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+_
+Binary file .//Bin_MIPS_MARLON_128M_DVBT_SZ_NPN/LINT.txt matches
+
+15 LINT Errors
+make[1]: Leaving directory '/home/npn/PANATV/USERs/Nguyen/3663/Chakra3_9b48564_20170831'
+-e \x1b[32;01m
+Thứ sáu, 21 Tháng chín năm 2018 14:28:29 +07
+-e \x1b[0m

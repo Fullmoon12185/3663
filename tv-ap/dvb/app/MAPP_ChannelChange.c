@@ -962,8 +962,8 @@ void MApp_ChannelChange_Set_Audio_Decoder_System(WORD wAudType )
         case  E_AUDIOSTREAM_MPEG:
             MApi_AUDIO_SetSystem(MSAPI_AUD_DVB_MPEG);
             msAPI_AUD_Set_CurDspSystem(E_AUDIO_DSP_MPEG);
-            MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
-            MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);
+            //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DrcMode, RF_MODE, 0);    //RF Mod
+            //MApi_AUDIO_SetAC3Info(Audio_AC3_infoType_DownmixMode, DOLBY_DOWNMIX_MODE_LTRT, 0);
             
             break;
 

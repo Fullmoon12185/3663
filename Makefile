@@ -779,15 +779,18 @@ sboot: $(AP_BIN)
 	@awk '{if($$1>=100) {print "HEAP_SIZE = "$$1" KB";rm "$(FILE_HK_CPU_HEAP_SIZE)";}else {print "Error:HEAP_SIZE("$$1"KB) is less than 100 KB";exit 1}}' $(FILE_HK_CPU_HEAP_SIZE)
 	@echo -e $(ANSI_COLOR_DEFAULT)	
 	@echo "[SBOOT] $@"
+	@echo "nguyen bin format $(BIN_FORMAT)"
     ifeq ($(BIN_FORMAT),COMPRESS)
 #		@$(shell $(LZSSDIR)/lzss.out C 14336 $(BINPATH)/$(AP_NAME).bin $(BINPATH)/$(AP_COMPRESS_NAME).bin;)
 		@$(shell $(MSCOMPDIR)/mscompress -c -u 14336 -9 $(BINPATH)/$(AP_NAME).bin > $(BINPATH)/$(AP_COMPRESS_NAME).bin;)
 		@$(shell cp $(BINPATH)/$(AP_COMPRESS_NAME).bin $(ROOT)/boot/sboot/bin/$(AP_NAME).bin; cp $(BINPATH)/$(AP_NAME).map $(ROOT)/boot/sboot/bin;)
     else
         ifeq ($(BIN_FORMAT),COMPRESS7)
+		@echo "nguyen $(shell $(MSCOMPDIR)/mscompress7 e 14336 $(BINPATH)/$(AP_NAME).bin $(BINPATH)/$(AP_COMPRESS_NAME).bin;)" 
 		@$(shell $(MSCOMPDIR)/mscompress7 e 14336 $(BINPATH)/$(AP_NAME).bin $(BINPATH)/$(AP_COMPRESS_NAME).bin;)
 		@$(shell cp $(BINPATH)/$(AP_COMPRESS_NAME).bin $(ROOT)/boot/sboot/bin/$(AP_NAME).bin; cp $(BINPATH)/$(AP_NAME).map $(ROOT)/boot/sboot/bin;)
         else
+		
 		@$(shell cp $(BINPATH)/$(AP_NAME).bin $(ROOT)/boot/sboot/bin; cp $(BINPATH)/$(AP_NAME).map $(ROOT)/boot/sboot/bin;)
         endif
     endif
@@ -999,10 +1002,14 @@ $(MERGE_BIN) : $(AP_BIN)
     else 
         ifneq ($(COMPRESS_FORMAT),)
           ifeq ($(BUILD_TARGET),MAIN_AP_SYSTEM)
+			@echo "Nguyen compress format"
+			@echo "cat $(BINPATH)_BLOADER/MERGE.bin $(ROOT)/boot/sboot/out/chunk_header.bin $(APC_BIN) > $@"
 		    @cat $(BINPATH)_BLOADER/MERGE.bin $(ROOT)/boot/sboot/out/chunk_header.bin $(APC_BIN) > $@
 		    @ls -lh $(BINPATH)_BLOADER/MERGE.bin $(BINPATH)/$(AP_COMPRESS_NAME).bin $(MERGE_BIN)
           endif
-	        $(BinIDPackFiles) -BIGENDIAN -CRC16ENABLE -multiflash $(AP_PACK__BIN_ALIGN) $(AP_PACK__FILE_ALIGN) 0958336900 $@ $(BIN_INFO) $(IMGINFO_OFFSET) $(APC_BIN) $(COMPRESS_FORMAT) $(OS_TYPE)
+		  @echo "123cat $(BINPATH)_BLOADER/MERGE.bin $(ROOT)/boot/sboot/out/chunk_header.bin $(APC_BIN) > $@"
+	        @echo "Nguyen 1234"
+			$(BinIDPackFiles) -BIGENDIAN -CRC16ENABLE -multiflash $(AP_PACK__BIN_ALIGN) $(AP_PACK__FILE_ALIGN) 0958336900 $@ $(BIN_INFO) $(IMGINFO_OFFSET) $(APC_BIN) $(COMPRESS_FORMAT) $(OS_TYPE)
         else # NO Compress
           ifeq ($(BUILD_TARGET),MAIN_AP_SYSTEM)
 	        @cat $(BINPATH)_BLOADER/MERGE.bin $(ROOT)/boot/sboot/out/chunk_header.bin $(AP_BIN) > $@

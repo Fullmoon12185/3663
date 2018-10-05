@@ -225,7 +225,7 @@ void msAPI_SI_Copy_SI_AudInfo_To_CM_AudInfo(SI_AUD_INFO* pstSI_AudInfo, AUD_INFO
     for( i = 0; i < u8Count; ++ i)
     {
         //DTVProgramData.stAudInfo[i].wAudType = msAPI_SI_ToCM_Audio_Type(pSIDTVProgramData->stAudInfo[i].wAudType);
-        pstCM_AudInfo[i].eSIAudType = (SI_AUDIOSTREAM_TYPE)1;//(SI_AUDIOSTREAM_TYPE)pstSI_AudInfo[i].wAudType;
+        pstCM_AudInfo[i].eSIAudType = (SI_AUDIOSTREAM_TYPE)pstSI_AudInfo[i].wAudType;
 
         pstCM_AudInfo[i].wAudPID = pstSI_AudInfo[i].wAudPID;
 

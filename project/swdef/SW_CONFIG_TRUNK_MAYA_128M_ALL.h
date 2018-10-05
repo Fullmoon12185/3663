@@ -223,10 +223,10 @@
   #if ENABLE_ISDBT
     #define ENABLE_PVR                  ENABLE
   #else
-    #define ENABLE_PVR                  DISABLE
+    #define ENABLE_PVR                  ENABLE
   #endif
 #else
-    #define ENABLE_PVR                  DISABLE
+    #define ENABLE_PVR                  ENABLE
 #endif
 
 //-------------------------------------------------------------------------------
