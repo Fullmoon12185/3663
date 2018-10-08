@@ -1588,44 +1588,57 @@ static void MApp_CEC_CheckRepeatKey(void)
 void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
 if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_ATV)
     {
-        if(stKeyStatus.keyrepeat) {
+        if(MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE){
+            if(stKeyStatus.keyrepeat) {
 
-        } else {
-            switch ( stKeyStatus.keydata ){
-                case IRKEY_VOLUME_PLUS:
-                case IRKEY_VOLUME_MINUS:
-                // case IRKEY_UP ://               = 0x59,
-                case IRKEY_POWER://             = 0x5F,
-                // case IRKEY_EXIT://              = 0x10,
-                // //case IRKEY_MENU              = 0x13,
-                case IRKEY_DOWN://              = 0x51,
-                case IRKEY_LEFT://              = 0x56,
-                case IRKEY_SELECT://            = 0x55,
-                case IRKEY_RIGHT://             = 0x14,
+            } else {
+                switch ( stKeyStatus.keydata ){
+                    case IRKEY_VOLUME_PLUS:
+                    case IRKEY_VOLUME_MINUS:
+                    case IRKEY_UP ://               = 0x59,
+                    case IRKEY_POWER://             = 0x5F,
+                    // case IRKEY_EXIT://              = 0x10,
+                    // //case IRKEY_MENU              = 0x13,
+                    case IRKEY_DOWN://              = 0x51,
+                    case IRKEY_LEFT://              = 0x56,
+                    case IRKEY_SELECT://            = 0x55,
+                    case IRKEY_RIGHT://             = 0x14,
 
-                // case IRKEY_NUM_0://             = 0x44,
-                // case IRKEY_NUM_1://             = 0x53,
-                // case IRKEY_NUM_2://             = 0x50,
-                // case IRKEY_NUM_3://             = 0x12,
-                // case IRKEY_NUM_4://             = 0x4F,
-                // case IRKEY_NUM_5://             = 0x4C,
-                // case IRKEY_NUM_6://             = 0x0E,
-                // case IRKEY_NUM_7://             = 0x4B,
-                // case IRKEY_NUM_8://             = 0x48,
-                // case IRKEY_NUM_9://             = 0x0A,
+                    // case IRKEY_NUM_0://             = 0x44,
+                    // case IRKEY_NUM_1://             = 0x53,
+                    // case IRKEY_NUM_2://             = 0x50,
+                    // case IRKEY_NUM_3://             = 0x12,
+                    // case IRKEY_NUM_4://             = 0x4F,
+                    // case IRKEY_NUM_5://             = 0x4C,
+                    // case IRKEY_NUM_6://             = 0x0E,
+                    // case IRKEY_NUM_7://             = 0x4B,
+                    // case IRKEY_NUM_8://             = 0x48,
+                    // case IRKEY_NUM_9://             = 0x0A,
 
-                case IRKEY_MUTE://              = 0x1C,
-                // case IRKEY_FREEZE://            = 0x57,
-                case IRKEY_INPUT_SOURCE:
-                break;
-                default:
+                    case IRKEY_MUTE://              = 0x1C,
+                    // case IRKEY_FREEZE://            = 0x57,
+                    case IRKEY_INPUT_SOURCE:
                     MApp_IR_sendIROut(stKeyStatus.keydata);
-                    stKeyStatus.keydown   = FALSE;
-                    stKeyStatus.keydata   = KEY_NULL;
-                    //stKeyStatus.keyrepeat = FALSE;
-                break;
+                    break;
+                    default:
+                        MApp_IR_sendIROut(stKeyStatus.keydata);
+                        stKeyStatus.keydown   = FALSE;
+                        stKeyStatus.keydata   = KEY_NULL;
+                        //stKeyStatus.keyrepeat = FALSE;
+                    break;
+                }        
             }        
+        } else {
+            switch (stKeyStatus.keydata){
+                case IRKEY_MENU:
+                    MApp_IR_sendIROut(stKeyStatus.keydata);
+                    stKeyStatus.keydata = IRKEY_EXIT;
+                    break;
+                default:
+                    break; 
+            }
         }
+        
         
     }
 }

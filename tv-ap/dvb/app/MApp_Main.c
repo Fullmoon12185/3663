@@ -859,7 +859,11 @@ int main(void)
                 if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 1000 )
                 {
                      u32MainLoopTime_Last = u32MainLoopTime_Cur;
-
+                    if(ANDROID_STATUS() == 0){
+                        printf("0\n");
+                    } else {
+                        printf("1\n");
+                    }
                     //nguyen
                     if (bToogleLED == 0){
                         // LED_RED_Off();
@@ -946,34 +950,34 @@ void HomeShop_FSM (void){
             if(countForHomeShop <= MAX_COUNT){
                 countForHomeShop ++;
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
-                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-                // DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
-                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
                 countForHomeShopSaved = MApp_Load_UserDataForHomeShop();
                 
                 if(countForHomeShop != countForHomeShopSaved){
                     MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);
-                    // printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
+                    printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
                 } else {
                    MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));      
                 }
                 
             } else {
-                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-                // DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
-                // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
             }
-            // DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
-            // DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
-            // DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
+            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
+            DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
+            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
             timeLast = timeCurr;
         }
         keytemp = getKeyPressed() - KEY_0;
         if(keytemp <= 9){
             fourKeyPressed = (fourKeyPressed<<4)|keytemp;
-            // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-            // DEBUG_HOME_SHOP(printf("\nFourKeyPressed 0x%x\n", fourKeyPressed););
-            // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            DEBUG_HOME_SHOP(printf("\nFourKeyPressed 0x%x\n", fourKeyPressed););
+            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
             if(fourKeyPressed == 0x1349){
                 homeshop_state = SHOP_STATE;
                 countForHomeShop = 0;
@@ -1007,8 +1011,8 @@ void HomeShop_FSM (void){
 }
 
 
-#define     ANDROID_STANDBY_MODE     0
-#define     ANDROID_ACTIVE_MODE      1
+#define     ANDROID_STANDBY_MODE     1
+#define     ANDROID_ACTIVE_MODE      0
 SendIROut_STATE sendirout_state = SEND_IR_OUT_INIT;
 SendIROut_STATE sendirhome_standby = SEND_IR_KEY_HOME;
 U8 temp_key = 0xff;
@@ -1019,7 +1023,7 @@ void SendIROut_FSM(void){
     if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2){
         if(ANDROID_STATUS() == ANDROID_STANDBY_MODE){
             timeCurrAndroid = MsOS_GetSystemTime();
-            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 1000 ){
+            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 3000 ){
                 MApp_IR_sendIROut(IRKEY_POWER);     
                 timeLastAndroid = timeCurrAndroid;   
             }
@@ -1048,7 +1052,7 @@ void SendIROut_FSM(void){
     } else {
         if(ANDROID_STATUS() == ANDROID_ACTIVE_MODE){
             timeCurrAndroid = MsOS_GetSystemTime();
-            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 2000 ){
+            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 3000 ){
                 switch(sendirhome_standby){
                     case SEND_IR_KEY_HOME:
                         MApp_IR_sendIROut(IRKEY_HOME);
