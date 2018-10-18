@@ -233,23 +233,27 @@ static void TimerISR(void)
             if(bLedToggled){
                 bLedToggled = FALSE;
                 LED_RED_Off();
-                LED_GRN_On();
             } else {
                 bLedToggled = TRUE;
-                LED_GRN_Off();
+                LED_RED_On();
                 
             }
             upgrade_image_counter = 0;
         }
     } else if(is_key_pressed()) {
-        key_pressed_counter++;
-        if(key_pressed_counter <= 400){
-            LED_RED_On();
-        } else if(key_pressed_counter <= 800){
-            LED_RED_Off();    
+        if (!isPowerKeyPressed()){
+            key_pressed_counter++;
+            if(key_pressed_counter <= 250){
+                LED_RED_On();
+            } else if(key_pressed_counter <= 500){
+                LED_RED_Off();    
+            } else {
+                clear_key_pressed();
+                key_pressed_counter = 0;
+            }
         } else {
-            clear_key_pressed();
-            key_pressed_counter = 0;
+            LED_RED_On(); 
+            clear_key_pressed();   
         }
     }
 

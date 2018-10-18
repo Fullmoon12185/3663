@@ -114,19 +114,19 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Channel_Info[] =
     // HWND_CHINFO_EXT_CH_NAME_TEXT
     {
         HWND_CHINFO_EXT_PANE, HWND_CHINFO_EXT_CH_NAME_TEXT,
-        { 169, 41, 184, 45 },
+        { 169, 41, 300, 45 },
     },
 
     // HWND_CHINFO_EXT_TOP_TIME_TEXT
     {
         HWND_CHINFO_EXT_PANE, HWND_CHINFO_EXT_TOP_TIME_TEXT,
-        { 562, 41, 93, 44 },
+        { 675, 41, 100, 44 },
     },
 
     // HWND_CHINFO_EXT_TOP_DATE_TEXT
     {
         HWND_CHINFO_EXT_PANE, HWND_CHINFO_EXT_TOP_DATE_TEXT,
-        { 357, 41, 190, 44 },
+        { 474, 41, 200, 44 },
     },
 
     // HWND_CHINFO_EXT_TIME_START_TEXT

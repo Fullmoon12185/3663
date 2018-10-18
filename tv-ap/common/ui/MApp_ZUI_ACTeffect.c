@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -122,6 +122,8 @@
 #include "MApp_ZUI_APIalphatables.h"
 #include "ZUI_exefunc.h"
 
+#include "drvGPIO.h"
+#include "BD_MST127B_10ALSA.h"
 
     #if ENABLE_PVR
         #include "MApp_PVR.h"
@@ -451,7 +453,7 @@ void MApp_ZUI_ACT_TransitionEffectBegin(ZUI_TRANSEFFMODE mode, ZUI_STATE target)
             return;
     }
 #endif
-
+    
     //printf("EffBegin\n");
     //printf("target=%bx\n",target);
     //printf("_eTransEffectMode=%bx\n",_eTransEffectMode);

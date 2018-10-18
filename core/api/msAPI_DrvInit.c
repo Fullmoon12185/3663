@@ -528,7 +528,6 @@ void msAPI_Power_PowerDown_EXEC(void)
     POWER_ON_OFF1_Off();
 #endif
 
-    LED_GRN_Off();
     LED_RED_On();
 
 #if ENABLE_CEC
@@ -590,7 +589,6 @@ void msAPI_PowerON_EXEC(void)
   #endif
 
     LED_RED_Off();
-    LED_GRN_On();
 
     MDrv_Power_SetMode(PM_MODE_ON);
 }

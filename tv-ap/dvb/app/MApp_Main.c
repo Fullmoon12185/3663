@@ -309,6 +309,7 @@ MS_BOOL MApp_PreInit_State(void)
     switch ( enPreInit_Sub_State )
     {
         case EN_PRE_INIT_INITIATION:
+            
             break;
 
         case EN_PRE_INIT_STAGE_AUTOTEST_INIT:

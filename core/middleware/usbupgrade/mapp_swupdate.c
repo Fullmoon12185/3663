@@ -677,10 +677,8 @@ static U8 _MApp_SwUpdate_CompareImage(EN_SW_UPDATE_MODE u8UpdateMode, U32 u32Src
             while(u32MainLoopTime_Cur1++ <= 20){
                 msAPI_Timer_Delayms(200);
                 LED_RED_Off();
-                LED_GRN_On();
                 msAPI_Timer_Delayms(200);
-                LED_RED_On();            
-                LED_GRN_Off();
+                LED_RED_On(); 
             }
         }
         else

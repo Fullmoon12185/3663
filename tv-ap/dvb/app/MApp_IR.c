@@ -405,6 +405,9 @@ U8 is_key_pressed(void){
 void clear_key_pressed(void){
     isKeyPressed = 0;
 }
+U8 isPowerKeyPressed(void){
+    return (u8KeyCode == KEY_POWER);
+}
 
 //nguyen
 //******************************************************************************
