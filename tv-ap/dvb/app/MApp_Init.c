@@ -581,13 +581,13 @@ void MApp_Init_UIVariable(void)
     #if ENABLE_ISDBT_NO_DVB
      eCountry = (EN_OSD_COUNTRY_SETTING)E_BRAZIL,                       ///< Brazil
    #else
-     eCountry = (EN_OSD_COUNTRY_SETTING)stGenSetting.stTvSetting.eCountry;
+     eCountry = OSD_COUNTRY_VIETNAM; //(EN_OSD_COUNTRY_SETTING)stGenSetting.stTvSetting.eCountry;
    #endif
  #else
     eCountry = OSD_COUNTRY_VIETNAM;
  #endif
     printf("nguyen eCountry: 0x%x\n", eCountry);
-    MApp_SetOSDCountrySetting(eCountry, FALSE);
+    MApp_SetOSDCountrySetting(eCountry, TRUE);
 
 #if(DVBC_CERTIFICATION_AUTOSCAN_ENABLE)
     MApp_SetOSDCertificationSetting(DEFAULT_TUNING_CERTIFICATION, TRUE);

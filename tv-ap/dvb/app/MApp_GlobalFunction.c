@@ -1531,8 +1531,16 @@ void MApp_SetSubtAndAudioByCountry(EN_OSD_COUNTRY_SETTING eOSDCountrySetting)
 {
     switch(eOSDCountrySetting)
     {
+        case OSD_COUNTRY_VIETNAM:
+        {
+            stGenSetting.g_SysSetting.SubtitleDefaultLanguage = LANGUAGE_VIETNAM;
+            stGenSetting.g_SysSetting.SubtitleDefaultLanguage_2= LANGUAGE_VIETNAM;
+            stGenSetting.g_SoundSetting.enSoundAudioLan1 = LANGUAGE_VIETNAM;
+            stGenSetting.g_SoundSetting.enSoundAudioLan2 = LANGUAGE_VIETNAM;
+        }
+        break;
         case OSD_COUNTRY_AUSTRALIA:
-         {
+        {
             stGenSetting.g_SysSetting.SubtitleDefaultLanguage = LANGUAGE_ENGLISH;
             stGenSetting.g_SysSetting.SubtitleDefaultLanguage_2= LANGUAGE_ENGLISH;
             stGenSetting.g_SoundSetting.enSoundAudioLan1 = LANGUAGE_ENGLISH;

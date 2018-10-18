@@ -437,7 +437,7 @@ ST_OSD_SELECTION_STRING_MAPPING_LIST _ZUI_TBLSEG stTimezoneList[] =
     {TIMEZONE_AZORES, en_str_TimeZone_Text_G89},
     {TIMEZONE_INDONESIA_WEST, en_str_TimeZone_Text_G98},
     {TIMEZONE_SINGAPORE, en_str_TimeZone_Text_G99},
-    {TIMEZONE_VIETNAM, en_str_TimeZone_Text_G99},
+    {TIMEZONE_VIETNAM, en_str_TimeZone_Text_G98},
     {TIMEZONE_KENYA, en_str_TimeZone_Text_G80},
 #if(ENABLE_COUNTRY_MYANMAR)
     {TIMEZONE_MYANMAR, en_str_TimeZone_Text_G96},
