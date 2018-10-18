@@ -286,6 +286,7 @@ U8 g_u8IR_HEADER_CODE1 =0;
 
 
 //nguyen
+#ifdef IR_MODE_ENABLE
 #define  PULSE_562ms            1760
 #define  PULSE_0                0
 #define  PULSE_1                1
@@ -378,6 +379,8 @@ void MApp_IR_sendIROut(U8 remoteCode){
         send_code(USER_CODE, remoteCode);
     }
 }
+
+#endif 
 
 static U8 isKeyVolumePressed = 0;
 static U8 isKeyPressed = 0;
@@ -1268,11 +1271,13 @@ static void MApp_CheckKeyStatus(void)
     
     if ( msAPI_GetKeyPad(&key, &KeyRepeatStatus)== MSRET_OK )
     {
-        isKeyPressed = 1;
+        
         stKeyStatus.keytype = KEY_TYPE_KEYPAD;
         stKeyStatus.keydown = TRUE;
         stKeyStatus.keydata = key;
         stKeyStatus.keyrepeat = KeyRepeatStatus;
+        isKeyPressed = 1;    
+        
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_KEYPAD, key, KeyRepeatStatus);
 
@@ -1287,7 +1292,7 @@ static void MApp_CheckKeyStatus(void)
     }
     else if ( msAPI_GetIRKey(&key, &KeyRepeatStatus) == MSRET_OK )
     {
-        isKeyPressed = 1;
+        
         stKeyStatus.keytype = KEY_TYPE_IR;
 #if ENABLE_IR_BIN
         if(g_u16IRkeyMap[key])
@@ -1300,6 +1305,7 @@ static void MApp_CheckKeyStatus(void)
         stKeyStatus.keydata = key;
 #endif
         stKeyStatus.keyrepeat = KeyRepeatStatus;
+        isKeyPressed = 1;    
         
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_IR, key, KeyRepeatStatus);
@@ -1585,6 +1591,7 @@ static void MApp_CEC_CheckRepeatKey(void)
 #define PRESS_RELEASE_TIMEOUT 150 // ms
 #endif
 //nguyen
+#ifdef IR_MODE_ENABLE
 void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
 if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_ATV)
     {
@@ -1642,6 +1649,7 @@ if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_G
         
     }
 }
+#endif
 //nguyen
 void MApp_ProcessUserInput(void)
 {
@@ -1660,7 +1668,9 @@ void MApp_ProcessUserInput(void)
 #endif
 
     MApp_CheckKeyStatus();
-    MApp_ProcessUserInput_FOR_NOT_DTV_ATV();
+    #ifdef IR_MODE_ENABLE
+        MApp_ProcessUserInput_FOR_NOT_DTV_ATV();
+    #endif
 #if(ENABLE_CEC)
   #if(CEC_VERSION_USING == CEC_NEW_VERSION)
     if(bIsUserCtrlPressed== TRUE) //if user pressed, send a UserControlRelease msg

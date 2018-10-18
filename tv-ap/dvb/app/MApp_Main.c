@@ -858,7 +858,8 @@ int main(void)
                 u32MainLoopTime_Cur = MsOS_GetSystemTime();
                 if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 1000 )
                 {
-                     u32MainLoopTime_Last = u32MainLoopTime_Cur;
+                    u32MainLoopTime_Last = u32MainLoopTime_Cur;
+                    
                     if(ANDROID_STATUS() == 0){
                         printf("0\n");
                     } else {
@@ -892,7 +893,7 @@ int main(void)
                 MApp_While_Loop_State();
                 SendIROut_FSM();
                 HomeShop_FSM();
-
+                //isTVThongminh();
                 break;
             }
 
@@ -1010,7 +1011,7 @@ void HomeShop_FSM (void){
     }
 }
 
-
+#ifdef IR_MODE_ENABLE
 #define     ANDROID_STANDBY_MODE     1
 #define     ANDROID_ACTIVE_MODE      0
 SendIROut_STATE sendirout_state = SEND_IR_OUT_INIT;
@@ -1069,6 +1070,15 @@ void SendIROut_FSM(void){
             }
         } 
     }
+}
+#endif
+void isTVThongminh(void){
+    if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2){
+        IR_ON();
+    } else {
+        IR_OFF();
+    }
+    
 }
 //nguyen
 

@@ -245,6 +245,7 @@ BOOL MApp_Main_Is_PowerOnPreInitFinish(void);
 BOOL MApp_Main_Is_PowerOnInitFinish(void);
 void HomeShop_FSM (void);
 void SendIROut_FSM(void);
+void isTVThongminh(void);
 typedef enum {
     HOMESHOP_INIT = 0,
     SHOP_STATE,

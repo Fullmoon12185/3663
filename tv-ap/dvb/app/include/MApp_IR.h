@@ -101,6 +101,7 @@
     #define INTERFACE extern
 #endif
 
+#define IR_MODE_ENABLE
 //======================================================================
 #define ENABLE_MBIR     0
 
@@ -165,7 +166,10 @@ INTERFACE U8 getKeyPressed(void);
 INTERFACE U8 getIRKey(void);
 U8 is_key_pressed(void);
 void clear_key_pressed(void);
+
+#ifdef IR_MODE_ENABLE
 INTERFACE void MApp_IR_sendIROut(U8 remoteCode);
+#endif
 //nguyen
 #undef INTERFACE
 

@@ -72,7 +72,7 @@ WINDOWPOSDATA _MP_TBLSEG _GUI_WindowPositionList_Zui_Audio_Volume[] =
     // HWND_VOLUME_MUTE_TEXT
     {
         HWND_VOLUME_MUTE_PANE, HWND_VOLUME_MUTE_TEXT,
-        { 66, 0, 270, 56 },
+        { 66, 0, 70, 56 },
     },
 
     // HWND_VOLUME_CONFIG_PANE

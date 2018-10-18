@@ -243,9 +243,11 @@ static void TimerISR(void)
         }
     } else if(is_key_pressed()) {
         key_pressed_counter++;
-        LED_RED_On();
-        if(key_pressed_counter >= 300){
-            LED_RED_Off();
+        if(key_pressed_counter <= 400){
+            LED_RED_On();
+        } else if(key_pressed_counter <= 800){
+            LED_RED_Off();    
+        } else {
             clear_key_pressed();
             key_pressed_counter = 0;
         }
