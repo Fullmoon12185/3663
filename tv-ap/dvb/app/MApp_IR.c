@@ -852,25 +852,26 @@ static void MApp_ParseKey(void)
 
             case IRKEY_VOLUME_PLUS:
                 // special case : when in input select mode, the KEYPAD LEFT/RIGHT is interpreted as VolUP/VolDOWN
-              #if 0//(IR_VOLUME_USE_AS_LEFTRIGHT==1)
+              #if (IR_VOLUME_USE_AS_LEFTRIGHT==1)
                 if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD)&&MApp_isKeypadUPLR())
                 {
-                    u8KeyCode = KEY_RIGHT;
+                    u8KeyCode = KEY_SELECT;
                 }
                 else
                 {
                     u8KeyCode = KEY_VOLUME_PLUS;
                 }
               #else
-                if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD) && (MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE))//ZUI_TODO: &&
-                {
-                    u8KeyCode = KEY_VOLUME_PLUS;
-                }
-                else if((stKeyStatus.keytype == KEY_TYPE_KEYPAD) && (MApp_ZUI_GetActiveOSD() == E_OSD_INPUT_SOURCE))//ZUI_TODO: &&
+                // if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD) && (MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE))//ZUI_TODO: &&
+                // {
+                //     u8KeyCode = KEY_VOLUME_PLUS;
+                // }
+                // else 
+                if((stKeyStatus.keytype == KEY_TYPE_KEYPAD) && (MApp_ZUI_GetActiveOSD() == E_OSD_INPUT_SOURCE))//ZUI_TODO: &&
                 {
                     u8KeyCode = KEY_SELECT;
                 }
-                else if((stKeyStatus.keytype == KEY_TYPE_KEYPAD) )//ZUI_TODO: &&
+                else if((stKeyStatus.keytype == KEY_TYPE_KEYPAD)  && (MApp_ZUI_GetActiveOSD() == E_OSD_MAIN_MENU) )//ZUI_TODO: &&
                     //ZUI_TODO: (enMenuFlowState != FS_WAIT_MENU))
                 {
                     u8KeyCode = KEY_RIGHT;
@@ -885,23 +886,23 @@ static void MApp_ParseKey(void)
             case IRKEY_VOLUME_MINUS:
                 // special case : when in input select mode, the KEYPAD LEFT/RIGHT is interpreted as VolUP/VolDOWN
                #if(IR_VOLUME_USE_AS_LEFTRIGHT==1)
-                   if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD)&&MApp_isKeypadUPLR() )
-                   {
+                if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD)&&MApp_isKeypadUPLR() )
+                {
                     u8KeyCode = KEY_LEFT;
-                    }
+                }
                 else
-                   {
-                    u8KeyCode = KEY_VOLUME_MINUS;
-                   }
-              #else
-                if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD) )//ZUI_TODO: &&
                 {
                     u8KeyCode = KEY_VOLUME_MINUS;
                 }
-             else if((stKeyStatus.keytype == KEY_TYPE_KEYPAD) )//ZUI_TODO: &&
+              #else
+                if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD)  && (MApp_ZUI_GetActiveOSD() == E_OSD_MAIN_MENU))//ZUI_TODO: &&
+                {
+                    u8KeyCode = KEY_LEFT;
+                }
+                else if((stKeyStatus.keytype == KEY_TYPE_KEYPAD) )//ZUI_TODO: &&
                     //ZUI_TODO: (g_u8MenuPageIndex==MENU_INPUT_SOURCE))
                 {
-                  u8KeyCode = KEY_SELECT;
+                  u8KeyCode = KEY_VOLUME_MINUS;
                 }
                 else if((stKeyStatus.keytype == KEY_TYPE_KEYPAD) )//ZUI_TODO: &&
                     //ZUI_TODO: (enMenuFlowState != FS_WAIT_MENU))
@@ -921,21 +922,23 @@ static void MApp_ParseKey(void)
                 break;
 
             case IRKEY_INPUT_SOURCE:
-                //if(stKeyStatus.keytype==KEY_TYPE_KEYPAD)
-                //{
+                if(stKeyStatus.keytype==KEY_TYPE_KEYPAD)
+                {
                     //if(MApp_isKeypadSourceKeyCanSelect() == TRUE)
                     //{
                     //    u8KeyCode = KEY_SELECT;
                     // }
                     if(MApp_ZUI_GetActiveOSD() == E_OSD_INPUT_SOURCE)
                         u8KeyCode = KEY_DOWN;
+                    //else if (MApp_ZUI_GetActiveOSD() == E_OSD_MAIN_MENU)
+                    //    u8KeyCode = KEY_SELECT;
                     else 
                         u8KeyCode = KEY_INPUT_SOURCE;    
-                //}
-                //else
-                //{
-                //    u8KeyCode = KEY_INPUT_SOURCE;
-                //}
+                }
+                else
+                {
+                    u8KeyCode = KEY_INPUT_SOURCE;
+                }
                 break;
 
             //case IRKEY_ADJUST:                  u8KeyCode = KEY_ADJUST;             break;

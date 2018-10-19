@@ -845,11 +845,11 @@
 #if (KEYPAD_TYPE_SEL == KEYPAD_TYPE_CUSTMOER)   // CUSTMOER keypad
 #define ADC_KEY_1_L0_FLAG               IRKEY_POWER
 #define ADC_KEY_1_L1_FLAG               IRKEY_INPUT_SOURCE
-#define ADC_KEY_1_L2_FLAG               IRKEY_CHANNEL_PLUS
-#define ADC_KEY_1_L3_FLAG               IRKEY_CHANNEL_MINUS
+#define ADC_KEY_1_L2_FLAG               IRKEY_MENU
+#define ADC_KEY_1_L3_FLAG               IRKEY_VOLUME_MINUS
 #define ADC_KEY_1_L4_FLAG               IRKEY_VOLUME_PLUS//RFU
-#define ADC_KEY_1_L5_FLAG               IRKEY_VOLUME_MINUS//RFU
-#define ADC_KEY_1_L6_FLAG               IRKEY_MENU//RFU
+#define ADC_KEY_1_L5_FLAG               IRKEY_CHANNEL_MINUS//RFU
+#define ADC_KEY_1_L6_FLAG               IRKEY_CHANNEL_PLUS//RFU
 #define ADC_KEY_1_L7_FLAG               IRKEY_SELECT//RFU
 
 #define ADC_KEY_2_L0_FLAG               IRKEY_POWER
