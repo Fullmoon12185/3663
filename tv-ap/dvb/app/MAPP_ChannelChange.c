@@ -955,8 +955,7 @@ void MApp_ChannelChange_Set_Audio_Decoder_System(WORD wAudType )
     //MsOS_DelayTask(500);
     msAPI_AUD_AdjustAudioFactor(E_ADJUST_AUDIOMUTE, E_AUDIO_MOMENT_MUTEON, E_AUDIOMUTESOURCE_ACTIVESOURCE);
     DEBUG_AU_LOAD_CODE( printf("nguyen wAudType=%u\n", wAudType); );
-    printf("nguyen wAudType=%u\n", wAudType);
-     MApi_AUDIO_SetCommand(MSAPI_AUD_DVB_DECCMD_STOP);
+    MApi_AUDIO_SetCommand(MSAPI_AUD_DVB_DECCMD_STOP);
     switch(wAudType)
     {
         case  E_AUDIOSTREAM_MPEG:
@@ -1312,7 +1311,7 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 
 // For Nordig 9.45
 #if ENABLE_DTV// NTV_FUNCTION_ENABLE
-#define DEBUG_AUDIO(x)  x
+#define DEBUG_AUDIO(x)  //x
 void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* u8LRAudioMode, U8 bServiceType, WORD wCurrentPosition, EN_SI_LANGUAGE enSoundAudioLan, U8 u8Nocheck_AudType, BOOLEAN bCheckBroadcastMix )
 {
     AUD_INFO aAudioStreamInfo;
@@ -1333,13 +1332,6 @@ void MApp_ChannelChange_SearchAudioLangPriorityType3(U8* u8AudLangSelected, U8* 
         for(i=0; i<AudioLangNum; i++)
         {
             msAPI_CM_GetAudioStreamInfo((MEMBER_SERVICETYPE)bServiceType, wCurrentPosition, &aAudioStreamInfo, i);
-            printf("aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo = %d\n", aAudioStreamInfo.aISOLangInfo[0].bISOLanguageInfo);
-            printf("aAudioStreamInfo.aISOLangInfo[0].bAudType = %d\n", aAudioStreamInfo.aISOLangInfo[0].bAudType);
-            printf("aAudioStreamInfo.aISOLangInfo[0].eSIAudType = %d\n", aAudioStreamInfo.eSIAudType);
-            printf("aAudioStreamInfo.aISOLangInfo[0].bIsValid = %d\n", aAudioStreamInfo.aISOLangInfo[0].bIsValid);
-            printf("aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD = %d\n", aAudioStreamInfo.aISOLangInfo[0].bBroadcastMixedAD);
-            printf("aAudioStreamInfo.aISOLangInfo[0].bISOLangIndex = %d\n", aAudioStreamInfo.aISOLangInfo[0].bISOLangIndex);
-
             DEBUG_AUDIO(printf("MPEG4 i = %d, E_SI_AUDIOSTREAM_MPEG4 = %d, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo) ) = %d\n", i, E_SI_AUDIOSTREAM_MPEG4, msAPI_CM_Get_SIAudStreamType_By_AudInfo( &(aAudioStreamInfo))););
              DEBUG_AUDIO(printf("aAudioStreamInfo.eProfileAndLevel = %d, E_CM_PROFILE_HE_AAC_LEVEL2 = %d\n", aAudioStreamInfo.eProfileAndLevel, E_CM_PROFILE_HE_AAC_LEVEL2););
 			if(!stGenSetting.g_SoundSetting.bEnableAD)
@@ -4540,8 +4532,7 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
 
     #if MHEG5_ENABLE
 
-    //nguyen 
-    printf("nguyen MHEG5_ENABLE \n");
+  
         if ( g_PIDfromMHEG5 )
         {
             AUDIOSTREAM_TYPE wAudType;
@@ -4609,7 +4600,7 @@ void MApp_ChannelChange_EnableChannel_2(SCALER_WIN eWindow)
                     if ( INVALID_PID != stAudioStreamInfo.wAudPID )
                     {
                         /* set audio PID & start filter */
-                        printf("nguyen Channel change, audio pid 0x%x, u8AudFid %bu\n",stAudioStreamInfo.wAudPID);
+                        //printf("nguyen Channel change, audio pid 0x%x, u8AudFid %bu\n",stAudioStreamInfo.wAudPID);
                         //eDMXFLTSTA = msAPI_DMX_StartFilter( stAudioStreamInfo.wAudPID, MSAPI_DMX_FILTER_TYPE_AUDIO, MApp_Dmx_GetFid(EN_AUDIO_FID) );
                         eDMXFLTSTA = MApp_Demux_Start_Filter_Audio( stAudioStreamInfo.wAudPID );
                         //printf("a Channel change, eDMXFLTSTA %bu, audio pid 0x%x, u8AudFid %bu\n",eDMXFLTSTA,msAPI_DMX_GetFilterPID(MApp_Dmx_GetAudioFid()),MApp_Dmx_GetAudioFid());

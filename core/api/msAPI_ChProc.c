@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -3156,10 +3156,10 @@ BOOLEAN msAPI_CHPROC_CM_GetAttributeOfOrdinal(MEMBER_SERVICETYPE bServiceType, W
     DEBUG_CH_PROC( printf("msAPI_CHPROC_CM_GetAttributeOfOrdinal(bServiceType=%u, wOrdinal=%u, eBoundary=%u, Attr=0x%X)\n", bServiceType, wOrdinal, eBoundary, eAttributeMember); );
     //DEBUG_CH_PROC( printf(" Dtv_C=%u, Radio_C=%u, Data_C=%u, ATV_C=%u\n", u16DtvProgCount, u16DtvProgCount_Audio, u16DtvProgCount_Data, msAPI_ATV_GetActiveProgramCount()); );
 
-    if( bServiceType != E_SERVICETYPE_UNITED_TV )
-    {
-        printf("msAPI_CHPROC_CM_GetAttributeOfOrdinal(bServiceType=%u, wOrdinal=%u, eBoundary=%u, Attr=0x%X)\n", bServiceType, wOrdinal, eBoundary, eAttributeMember);
-    }
+    // if( bServiceType != E_SERVICETYPE_UNITED_TV )
+    // {
+    //     //printf("msAPI_CHPROC_CM_GetAttributeOfOrdinal(bServiceType=%u, wOrdinal=%u, eBoundary=%u, Attr=0x%X)\n", bServiceType, wOrdinal, eBoundary, eAttributeMember);
+    // }
 
     switch(eAttributeMember)
     {

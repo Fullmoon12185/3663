@@ -292,43 +292,44 @@ U8 g_u8IR_HEADER_CODE1 =0;
 #define  PULSE_1                1
 #define  PULSE_START            2
 #define  PULSE_STOP             3
+#define  REPEAT_CODE            4
 #define  USER_CODE              0x5FA0
 
-void delay(U32 inTime)
-{
+#define  TIMER_FOR_FIRST_REPEAT_CODE    71
+#define  TIMER_FOR_REPEAT_CODE          170
 
+void delay(U32 inTime){
     msAPI_Timer_DelayUs(inTime * 562);
 }
 
-void send_one_pulse(U8 pulseType)
-{
+void send_one_pulse(U8 pulseType){
     //pulse normal high
     switch (pulseType)
     {
-    case 0: //1low, 1high
+    case PULSE_0: //1low, 1high
         IR_OFF();
         delay(1);
         IR_ON();
         delay(1);
         break;
-    case 1: //1low, 3 high
+    case PULSE_1: //1low, 3 high
         IR_OFF();
         delay(1);
         IR_ON();
         delay(3);
         break;
-    case 2: //Start pulse: 16 low, 8 high
+    case PULSE_START: //Start pulse: 16 low, 8 high
         IR_OFF();
         delay(16);
         IR_ON();
         delay(8);
         break;
-    case 3: //stop pulse: 1 low to  high
+    case PULSE_STOP: //stop pulse: 1 low to  high
         IR_OFF();
         delay(1);
         IR_ON();
         break;
-    case 4: // repeat pulse: 16low, 1high, 1low
+    case REPEAT_CODE: // repeat pulse: 16low, 1high, 1low
         IR_OFF();
         delay(16);
         IR_ON();
@@ -372,20 +373,275 @@ void send_code(U16 userCode, U8 remoteCode)
     }
     //stop code
     send_one_pulse(PULSE_STOP);
+    delay(TIMER_FOR_FIRST_REPEAT_CODE);
+    send_one_pulse(REPEAT_CODE);
 }
 
-void MApp_IR_sendIROut(U8 remoteCode){
-    if(remoteCode != 0xFF){
-        send_code(USER_CODE, remoteCode);
-    }
+// void MApp_IR_sendIROut(U8 remoteCode){
+//     if(remoteCode != 0xFF){
+//         send_code(USER_CODE, remoteCode);
+//     }
+// }
+////////////////////////////////////////////////////////////////////////////////////
+U8 sendEnable = 0;
+U8 repeatCodeEnable = 0;
+U32 remoteCodeReadyToSend = 0;
+
+enum Send_Remote_Code
+{
+    WAITING_FOR_SEND_ENABLE = 0,
+    SENDING_START_BIT_LOW,
+    SENDING_START_BIT_HIGH,
+    //START_SENDING_DATA,
+    SENDING_DATA,
+    BIT_ZERO_HIGH,
+    BIT_ONE_HIGH,
+    SENDING_REPEAT_CODE_0,
+    SENDING_REPEAT_CODE_1,
+    SENDING_REPEAT_CODE_11,
+    SENDING_REPEAT_CODE_12,
+    SENDING_REPEAT_CODE_13,
+    SENDING_REPEAT_CODE_131,
+    SENDING_REPEAT_CODE_14,
+    SENDING_REPEAT_CODE_15,
+    // SENDING_REPEAT_CODE_61,
+    // SENDING_REPEAT_CODE_71,
+    // SENDING_REPEAT_CODE_81,
+    // SENDING_REPEAT_CODE_91,
+    // SENDING_REPEAT_CODE_101,
+    // SENDING_REPEAT_CODE_111,
+    // SENDING_REPEAT_CODE_121,
+    // SENDING_REPEAT_CODE_131,
+    // SENDING_REPEAT_CODE_141,
+    // SENDING_REPEAT_CODE_151,
+    // SENDING_REPEAT_CODE_161,
+    // SENDING_REPEAT_CODE_171,
+    // SENDING_REPEAT_CODE_181,
+    // SENDING_REPEAT_CODE_191,
+    SENDING_REPEAT_CODE_2,
+    SENDING_REPEAT_CODE_3,
+    SENDING_STOP_BIT,
+    WAITING_TO_SEND_REPEAT_CODE,
+};
+
+enum Send_Remote_Code remoteCodeSendingState = WAITING_FOR_SEND_ENABLE;
+U8 countDelay = 0;
+U8 countBitSend = 0;
+U8 countRepeatCode = 0;
+
+#define START_PERIOD 16
+#define START_CODE_PERIOD 7
+#define REPEAT_PERIOD 4
+#define HIGH_LEVEL_PERIOD 3
+#define NUMBER_BIT_SENT 32
+
+#define REPEAT_CODE_TIME1   170
+#define REPEAT_CODE_TIME2   170
+#define USER_CODE_TV 0x5fa0
+void send_remote_code_to_device(void);
+
+U16 irCodeSentCounter = 0;
+
+U8 isCodeReadyToSend(void){
+    return (sendEnable || repeatCodeEnable);
 }
+void MApp_IR_out(void){
+    send_remote_code_to_device();
+}
+// static U32 curTime_KeyPressed = 0;
+// static U32 prevTime_KeyPressed = 0;
+U8 MApp_IR_sendIROut(U8 codeReceived)
+{
+  
+    // curTime_KeyPressed = MsOS_GetSystemTime();
+    // if( msAPI_Timer_DiffTime_2(prevTime_KeyPressed, curTime_KeyPressed) > 500 )
+    {
+        remoteCodeReadyToSend = 0;
+        remoteCodeReadyToSend = ((~codeReceived) & 0xff);
+        remoteCodeReadyToSend = remoteCodeReadyToSend << 8;
+        remoteCodeReadyToSend |= (codeReceived & 0xff);
+        remoteCodeReadyToSend = remoteCodeReadyToSend << 16;
+        remoteCodeReadyToSend |= (USER_CODE_TV & 0xffff);
+        sendEnable = 1;
+        // prevTime_KeyPressed = curTime_KeyPressed;
+    }
+    return 1;
+}
+
+void send_remote_code_to_device(void)
+{
+    countDelay++;
+	countRepeatCode++;
+
+    switch (remoteCodeSendingState)
+    {
+    case WAITING_FOR_SEND_ENABLE:
+        if (repeatCodeEnable)
+        {
+            // printf("Repeat code\n");
+            remoteCodeSendingState = SENDING_REPEAT_CODE_0;
+        }
+        else if (sendEnable)
+        {
+            // printf("normal code code\n");
+            IR_OFF();
+            countDelay = 0;
+            remoteCodeSendingState = SENDING_START_BIT_LOW;
+        } 
+        
+        break;
+    case SENDING_START_BIT_LOW:
+        IR_OFF();
+        if (countDelay >= START_PERIOD)
+        {
+            IR_ON();
+            countDelay = 0;
+            remoteCodeSendingState = SENDING_START_BIT_HIGH;
+        }
+        break;
+    case SENDING_START_BIT_HIGH:
+        IR_ON();
+        if (countDelay >= START_CODE_PERIOD)
+        {
+            countDelay = 0;
+            countBitSend = 0;
+            remoteCodeSendingState = SENDING_DATA;
+        }
+        break;
+    case SENDING_DATA:
+        countBitSend++;
+        IR_OFF();
+        if (countBitSend <= NUMBER_BIT_SENT)
+        {
+            if (remoteCodeReadyToSend & 0x0001)
+            {
+                remoteCodeSendingState = BIT_ONE_HIGH;
+                countDelay = 0;
+            }
+            else
+            {
+                remoteCodeSendingState = BIT_ZERO_HIGH;
+            }
+            remoteCodeReadyToSend = remoteCodeReadyToSend >> 1;
+        }
+        else
+        {
+            remoteCodeSendingState = SENDING_STOP_BIT;
+        }
+        break;
+    case BIT_ONE_HIGH:
+        IR_ON();
+        if (countDelay >= HIGH_LEVEL_PERIOD)
+        {
+            remoteCodeSendingState = SENDING_DATA;
+        }
+        break;
+    case BIT_ZERO_HIGH:
+        IR_ON();
+        remoteCodeSendingState = SENDING_DATA;
+        break;
+    case SENDING_STOP_BIT:
+        IR_ON();
+        remoteCodeSendingState = WAITING_TO_SEND_REPEAT_CODE;
+        countDelay = 0;
+        break;
+    case WAITING_TO_SEND_REPEAT_CODE:
+        if (countDelay >= 71)
+        {
+            IR_OFF();
+            remoteCodeSendingState = SENDING_REPEAT_CODE_11;
+            countDelay = 0;
+        }
+        break;
+    
+    case SENDING_REPEAT_CODE_11:
+        if (countDelay >= START_PERIOD)
+        {
+            IR_ON();
+            countDelay = 0;
+            remoteCodeSendingState = SENDING_REPEAT_CODE_12;
+        }
+        break;
+    case SENDING_REPEAT_CODE_12:
+        if (countDelay >= REPEAT_PERIOD)
+        {
+            IR_OFF();
+            remoteCodeSendingState = SENDING_REPEAT_CODE_131;
+        }
+        break;
+    case SENDING_REPEAT_CODE_131:
+        IR_ON();
+        remoteCodeSendingState = SENDING_REPEAT_CODE_13;
+        countRepeatCode = 0;
+        break;
+    case SENDING_REPEAT_CODE_13:
+		if(countRepeatCode >= REPEAT_CODE_TIME2){
+			IR_OFF();
+			remoteCodeSendingState = SENDING_REPEAT_CODE_14;
+			countDelay = 0;
+		}
+		break;
+    case SENDING_REPEAT_CODE_14:
+        if (countDelay >= START_PERIOD)
+        {
+            IR_ON();
+            countDelay = 0;
+            remoteCodeSendingState = SENDING_REPEAT_CODE_15;
+        }
+        break;
+    case SENDING_REPEAT_CODE_15:
+        if (countDelay >= REPEAT_PERIOD)
+        {
+            IR_OFF();
+            remoteCodeSendingState = SENDING_REPEAT_CODE_3;
+        }
+        break;
+
+
+
+    case SENDING_REPEAT_CODE_0:
+		if(countRepeatCode >= REPEAT_CODE_TIME2){
+			IR_OFF();
+			remoteCodeSendingState = SENDING_REPEAT_CODE_1;
+			countDelay = 0;
+		}
+
+		break;
+    case SENDING_REPEAT_CODE_1:
+        if (countDelay >= START_PERIOD)
+        {
+            IR_ON();
+            countDelay = 0;
+            remoteCodeSendingState = SENDING_REPEAT_CODE_2;
+        }
+        break;
+    case SENDING_REPEAT_CODE_2:
+        if (countDelay >= REPEAT_PERIOD)
+        {
+            IR_OFF();
+            remoteCodeSendingState = SENDING_REPEAT_CODE_3;
+        }
+        break;
+    
+    case SENDING_REPEAT_CODE_3:
+        sendEnable = 0;
+        repeatCodeEnable = 0;
+		countRepeatCode = 0;
+        remoteCodeSendingState = WAITING_FOR_SEND_ENABLE;
+        IR_ON();
+        break;
+    }
+    msAPI_Timer_DelayUs(562);
+}
+
 
 #endif 
 
 static U8 isKeyVolumePressed = 0;
+static U8 isKeyPressedForLED = 0;
 static U8 isKeyPressed = 0;
 U8 get_isKeyVolumePressed(void){
-    if((u8KeyCode == KEY_VOLUME_PLUS || u8KeyCode == KEY_VOLUME_MINUS) && (stKeyStatus.keyrepeat == 0)){
+    if((u8KeyCode == KEY_VOLUME_PLUS || u8KeyCode == KEY_VOLUME_MINUS) && (!MApp_KeyIsReapeatStatus())){
         isKeyVolumePressed = 1;
     } else {
         isKeyVolumePressed = 0; 
@@ -398,6 +654,12 @@ U8 getKeyPressed(void){
 }
 U8 getIRKey(void){
     return stKeyStatus.keydata;
+}
+U8 is_key_pressedForLED(void){
+    return isKeyPressedForLED;
+}
+void clear_key_pressedForLED(void){
+    isKeyPressedForLED = 0;
 }
 U8 is_key_pressed(void){
     return isKeyPressed;
@@ -1265,7 +1527,16 @@ U8 MApp_IrBin_GetKeyCode(U8 u8Key)
 }
 
 #endif
-
+// static U8 prevKey = KEY_NULL;
+// static U8 curKey = KEY_NULL;
+// U8 isRepeatCode(void){
+//     printf("Nguyen prevKey = %u, curKey = %u\n", prevKey, curKey);
+//     if(prevKey == curKey && curKey != KEY_NULL){
+//         repeatCodeEnable = 1;
+//         return TRUE;
+//     }
+//     return FALSE;
+// }
 static void MApp_CheckKeyStatus(void)
 {
     U8 key;
@@ -1273,7 +1544,6 @@ static void MApp_CheckKeyStatus(void)
   #if ENABLE_KEY_LOGGER
     U8 u8KeyType=0;
   #endif
-
     
     if ( msAPI_GetKeyPad(&key, &KeyRepeatStatus)== MSRET_OK )
     {
@@ -1282,7 +1552,8 @@ static void MApp_CheckKeyStatus(void)
         stKeyStatus.keydown = TRUE;
         stKeyStatus.keydata = key;
         stKeyStatus.keyrepeat = KeyRepeatStatus;
-        isKeyPressed = 1;    
+        isKeyPressed = 1;
+        isKeyPressedForLED = 1;    
         
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_KEYPAD, key, KeyRepeatStatus);
@@ -1298,7 +1569,6 @@ static void MApp_CheckKeyStatus(void)
     }
     else if ( msAPI_GetIRKey(&key, &KeyRepeatStatus) == MSRET_OK )
     {
-        
         stKeyStatus.keytype = KEY_TYPE_IR;
 #if ENABLE_IR_BIN
         if(g_u16IRkeyMap[key])
@@ -1312,6 +1582,7 @@ static void MApp_CheckKeyStatus(void)
 #endif
         stKeyStatus.keyrepeat = KeyRepeatStatus;
         isKeyPressed = 1;    
+        isKeyPressedForLED = 1;
         
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_IR, key, KeyRepeatStatus);
@@ -1322,7 +1593,11 @@ static void MApp_CheckKeyStatus(void)
             stKeyStatus.keydown = FALSE;
         }
       #endif
-        if(key != 0xff)  printf("Nguyen IR value = 0x%02bx, Repeat = %bu \n", key, KeyRepeatStatus);
+        // if(key != 0xff)  printf("Nguyen IR value = 0x%02bx, keydown = %bu, Repeat = %bu \n", key, stKeyStatus.keydown, KeyRepeatStatus);
+        if(key == IRKEY_POWER) {
+            extern void update_count_for_home_shop(void);    
+            update_count_for_home_shop();
+        }
     }
   #if ENABLE_KEY_LOGGER
     else if (MApp_KeyLogger_GetSimulatedKey(&key, &u8KeyType, &KeyRepeatStatus))
@@ -1349,6 +1624,7 @@ static void MApp_CheckKeyStatus(void)
         stKeyStatus.keydown   = FALSE;
         stKeyStatus.keydata   = KEY_NULL;
         stKeyStatus.keyrepeat = FALSE;
+        
     }
 
 
@@ -1598,55 +1874,78 @@ static void MApp_CEC_CheckRepeatKey(void)
 #endif
 //nguyen
 #ifdef IR_MODE_ENABLE
+static U8 isKeyPowerPressed = 0;
+U8 get_isKeyPowerPressed(void){
+    return isKeyPowerPressed;
+}
+
 void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
 if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_ATV)
     {
+        // if(stKeyStatus.keydata == IRKEY_TV){
+        //     UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_DVBT;
+        //     MApp_InputSource_SwitchSource( UI_INPUT_SOURCE_TYPE, MAIN_WINDOW );
+        // }
         if(MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE){
-            if(stKeyStatus.keyrepeat) {
+            {
+                repeatCodeEnable = isRepeatCode();
+                if(!isCodeReadyToSend())
+                {
+                    if(stKeyStatus.keydata != KEY_NULL && stKeyStatus.keytype == KEY_TYPE_IR){
+                        switch ( stKeyStatus.keydata ){
+                            case IRKEY_VOLUME_PLUS:
+                            case IRKEY_VOLUME_MINUS:
+                            case IRKEY_UP ://               = 0x59,
+                            
+                            // case IRKEY_EXIT://              = 0x10,
+                            // //case IRKEY_MENU              = 0x13,
+                            case IRKEY_DOWN://              = 0x51,
+                            case IRKEY_LEFT://              = 0x56,
+                            //case IRKEY_SELECT://            = 0x55,
+                            case IRKEY_RIGHT://             = 0x14,
 
-            } else {
-                switch ( stKeyStatus.keydata ){
-                    case IRKEY_VOLUME_PLUS:
-                    case IRKEY_VOLUME_MINUS:
-                    case IRKEY_UP ://               = 0x59,
-                    case IRKEY_POWER://             = 0x5F,
-                    // case IRKEY_EXIT://              = 0x10,
-                    // //case IRKEY_MENU              = 0x13,
-                    case IRKEY_DOWN://              = 0x51,
-                    case IRKEY_LEFT://              = 0x56,
-                    case IRKEY_SELECT://            = 0x55,
-                    case IRKEY_RIGHT://             = 0x14,
-
-                    // case IRKEY_NUM_0://             = 0x44,
-                    // case IRKEY_NUM_1://             = 0x53,
-                    // case IRKEY_NUM_2://             = 0x50,
-                    // case IRKEY_NUM_3://             = 0x12,
-                    // case IRKEY_NUM_4://             = 0x4F,
-                    // case IRKEY_NUM_5://             = 0x4C,
-                    // case IRKEY_NUM_6://             = 0x0E,
-                    // case IRKEY_NUM_7://             = 0x4B,
-                    // case IRKEY_NUM_8://             = 0x48,
-                    // case IRKEY_NUM_9://             = 0x0A,
-
-                    case IRKEY_MUTE://              = 0x1C,
-                    // case IRKEY_FREEZE://            = 0x57,
-                    case IRKEY_INPUT_SOURCE:
-                    MApp_IR_sendIROut(stKeyStatus.keydata);
-                    break;
-                    default:
-                        MApp_IR_sendIROut(stKeyStatus.keydata);
-                        stKeyStatus.keydown   = FALSE;
-                        stKeyStatus.keydata   = KEY_NULL;
-                        //stKeyStatus.keyrepeat = FALSE;
-                    break;
-                }        
-            }        
+                            // case IRKEY_NUM_0://             = 0x44,
+                            // case IRKEY_NUM_1://             = 0x53,
+                            // case IRKEY_NUM_2://             = 0x50,
+                            // case IRKEY_NUM_3://             = 0x12,
+                            // case IRKEY_NUM_4://             = 0x4F,
+                            // case IRKEY_NUM_5://             = 0x4C,
+                            // case IRKEY_NUM_6://             = 0x0E,
+                            // case IRKEY_NUM_7://             = 0x4B,
+                            // case IRKEY_NUM_8://             = 0x48,
+                            // case IRKEY_NUM_9://             = 0x0A,
+                            case IRKEY_MUTE:    //              = 0x1C,
+                            // case IRKEY_FREEZE://            = 0x57,
+                            case IRKEY_INPUT_SOURCE:
+                                MApp_IR_sendIROut(stKeyStatus.keydata);
+                            break;
+                            case IRKEY_POWER://             = 0x5F,
+                                MApp_IR_sendIROut(stKeyStatus.keydata);
+                                // msAPI_Timer_Delayms(3000);
+                                // stKeyStatus.keydown   = FALSE;
+                                // stKeyStatus.keydata   = KEY_NULL;
+                                // isKeyPowerPressed = 1;
+                                break;
+                            default:
+                                MApp_IR_sendIROut(stKeyStatus.keydata);
+                                stKeyStatus.keydown   = FALSE;
+                                stKeyStatus.keydata   = KEY_NULL;
+                                //stKeyStatus.keyrepeat = FALSE;
+                            break;
+                        }
+                    }        
+                }   
+            }     
         } else {
             switch (stKeyStatus.keydata){
                 case IRKEY_MENU:
                     MApp_IR_sendIROut(stKeyStatus.keydata);
                     stKeyStatus.keydata = IRKEY_EXIT;
                     break;
+                // case IRKEY_SMART:
+                //     UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_HDMI2;
+                //     MApp_InputSource_SwitchSource( UI_INPUT_SOURCE_TYPE, MAIN_WINDOW );
+                //     break;
                 default:
                     break; 
             }
@@ -1657,6 +1956,9 @@ if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_G
 }
 #endif
 //nguyen
+
+
+
 void MApp_ProcessUserInput(void)
 {
     //MHL

@@ -199,7 +199,9 @@ extern MS_U32 gsystem_time_ms;
 MS_U32 upgrade_image_counter = 0;
 MS_U32 key_pressed_counter = 0;
 BOOLEAN bLedToggled = TRUE;
+
 //------------------------------------------------------------------------------------
+
 //extern void Timer_Setting_Register(void *ptCb);
 extern void Timer_IRQ_Register(void *ptCb);
 
@@ -214,20 +216,8 @@ static void TimerISR(void)
     upgrade_image_counter++;
     msAPI_Timer_1ms_ISR();
     //nguyen
-    // if(Is_image_different() == 0){ //same
-    //     if(upgrade_image_counter >= 100){
-    //         if(bLedToggled){
-    //             bLedToggled = FALSE;
-    //             LED_RED_Off();
-    //             LED_GRN_On();
-    //         } else {
-    //             bLedToggled = TRUE;
-    //             LED_RED_On();            
-    //             LED_GRN_Off();
-    //         }        
-    //         upgrade_image_counter = 0;
-    //     }
-    // } else 
+    // increaseIRCodeSentCounter();
+
     if (Is_image_different() == 1) { //different
         if(upgrade_image_counter >= 1000){
             if(bLedToggled){
@@ -240,7 +230,7 @@ static void TimerISR(void)
             }
             upgrade_image_counter = 0;
         }
-    } else if(is_key_pressed()) {
+    } else if(is_key_pressedForLED()) {
         if (!isPowerKeyPressed()){
             key_pressed_counter++;
             if(key_pressed_counter <= 250){
@@ -248,12 +238,12 @@ static void TimerISR(void)
             } else if(key_pressed_counter <= 500){
                 LED_RED_Off();    
             } else {
-                clear_key_pressed();
+                clear_key_pressedForLED();
                 key_pressed_counter = 0;
             }
         } else {
             LED_RED_On(); 
-            clear_key_pressed();   
+            clear_key_pressedForLED();   
         }
     }
 

@@ -162,6 +162,7 @@
 
 #include "MApp_DMP_Main.h"
 #include "msAPI_Bootloader.h"
+#include "SW_Config.h"
 extern void MApp_InputSource_ChangeVideoSource( INPUT_SOURCE_TYPE_t enInputSourceType );
 
 BOOLEAN MDrv_UsbDeviceConnect(void);
@@ -346,7 +347,11 @@ void MApp_UsbDownload_Init(U8 u8PortNo, pZUIDrawCB ZUIDrawPercentage)
 #endif
 
     U8      u8FlashID = 0x0; // 0x0: flash ID0, 0x1: flash ID1
-    U8      pu8FileName[20] = "MERGE.BIN";
+    #if UBC_TV40
+        U8      pu8FileName[20] = "UBC_TV40.BIN";
+    #elif UBC_TV32
+        U8      pu8FileName[20] = "UBC_TV32.BIN";
+    #endif
     U32     u32FlashSize = 0;
 
 

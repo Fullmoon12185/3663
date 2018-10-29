@@ -295,8 +295,8 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 #else
 #define SCAN_ONE_LINE_DBINFO(y)         //y
 #endif
-#define SCAN_DBINFO(y)                  //y
-#define DVBC_SCAN_DBINFO(y)             //y
+#define SCAN_DBINFO(y)                  y
+#define DVBC_SCAN_DBINFO(y)             y
 
 //------------------------------------------------------------------------------
 
@@ -2093,7 +2093,7 @@ static U8 MApp_S2_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANN
             eResult = msAPI_SI_AddProgram(&stDtvIDTable, &stDtvPgmData,&bFull, FALSE);
             if(TRUE == eResult)
             {
-                printf("nguyen ENABLE_S2_FAST_SCAN u8ServiceType %d, add service id %x name %s\n", stDtvPgmData.stCHAttribute.bServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
+                //printf("nguyen ENABLE_S2_FAST_SCAN u8ServiceType %d, add service id %x name %s\n", stDtvPgmData.stCHAttribute.bServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
                
                 if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DTV)
                 {
@@ -2154,7 +2154,7 @@ static U8 MApp_S2_Scan_AddOneDTVPchVchs( U16 u16PhysicalChIdx,SI_SHORT_DTV_CHANN
 
             if(TRUE == eResult)
             {
-                printf("nguyen 5 u8ServiceType %d, add service id %x name %s\n", stDtvPgmData.stCHAttribute.bServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
+                //printf("nguyen 5 u8ServiceType %d, add service id %x name %s\n", stDtvPgmData.stCHAttribute.bServiceType, stDtvPgmData.wService_ID, stDtvPgmData.bChannelName);
                
                 if(stDtvPgmData.stCHAttribute.bServiceType == E_TYPE_DTV)
                 {
@@ -4114,7 +4114,8 @@ EN_RET MApp_DTV_Scan( void )
         #if ENABLE_DVB_T2
             if(SCAN_TYPE_MANUAL == g_enScanType)
             {
-                msAPI_CM_DVBT2_RemoveMux(u8RFCh,u8PlpIDList,_TotalPlpIDNum);
+                SCAN_DBINFO(printf("\nNguyen 5 msAPI_CM_DVBT2_RemoveMux\n"));
+                //msAPI_CM_DVBT2_RemoveMux(u8RFCh,u8PlpIDList,_TotalPlpIDNum);
             }
         #endif
 

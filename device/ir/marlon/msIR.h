@@ -194,7 +194,7 @@
 #endif
 
 //nguyen
-INTERFACE void msIR_sendIROut(void);
+U8 isRepeatCode(void);
 //nguyen
 
 INTERFACE void msIR_Clear_FIFO(void);

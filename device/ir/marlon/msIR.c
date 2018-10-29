@@ -127,6 +127,7 @@ static MS_S32 u32Mutex_IR;
 #define IR_NEC_INTERVAL     300
 
 static U8 u8RepeatCount = 0;
+static U8 tempRepeatCount = 0;
 static U32 gIRTimeCount = 0;
 static U8 u8IRTimerBlockstatus = 0;
 static U8 g_u8IRKey=0xFF;
@@ -1144,6 +1145,22 @@ static void msIR_DelayTime(U32 u32Delay)
         u32Dummy++;
     }
 }
+U8 isRepeatCode(void){
+    
+    // if(MsOS_Timer_DiffTimeFromNow(gIRTimeCount) >= 120){
+    //     u8RepeatCount = 0;
+    // }
+    if(u8RepeatCount - tempRepeatCount >= 1)
+    {
+        tempRepeatCount = u8RepeatCount;
+        return TRUE;
+    } 
+    else
+    {
+        return FALSE;
+    }  
+        
+}
 
 BOOLEAN msIR_GetIRKeyCodeISR(U8 *pkey, U8 *pu8flag)
 {
@@ -1165,6 +1182,7 @@ BOOLEAN msIR_GetIRKeyCodeISR(U8 *pkey, U8 *pu8flag)
             msIR_DelayTime(10);
             *pu8flag = 0;
             u8RepeatCount = 0;
+            tempRepeatCount = 0; 
             u8PrevIrKey = *pkey; //backup key first for RAW mode decoding
             u8IRTimerBlockstatus = 0;
             gIRTimeCount = MsOS_GetSystemTime();
@@ -1184,7 +1202,7 @@ BOOLEAN msIR_GetIRKeyCodeISR(U8 *pkey, U8 *pu8flag)
               #if (IR_MODE_SEL == IR_TYPE_FULLDECODE_MODE)
                 *pkey = msIR_ReadByte(IR_KEY);
                 *pu8flag = msIR_ReadByte(IR_RPT_FIFOEMPTY) & 0x1;
-                MDrv_WriteByte(IR_FIFO_READ_PULSE, MDrv_ReadByte(IR_FIFO_READ_PULSE)| 0x01);
+                 MDrv_WriteByte(IR_FIFO_READ_PULSE, MDrv_ReadByte(IR_FIFO_READ_PULSE)| 0x01);
                 //printf("# flag=%d,(PrevKey=%x, pkey=%x)\n",*pu8flag,u8PrevIrKey,*pkey);
                 if ( (*pu8flag == 1) && (u8PrevIrKey == *pkey))
               #else
@@ -1673,7 +1691,6 @@ static void MDrv_IR_SW_Isr(MHAL_SavedRegisters *pHalReg, U32 u32Data)
     U8 u8IRKey=0xFF;
     U8 u8IRRpt=0;
     BOOLEAN u8IRRes=MSRET_ERROR;
-
     u8IRRes = msIR_GetIRKeyCodeISR(&u8IRKey,&u8IRRpt);
     msIR_Clear_FIFO();
     msIR_Lock();

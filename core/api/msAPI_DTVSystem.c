@@ -4350,14 +4350,14 @@ BYTE msAPI_CM_GetAudioStreamCount(MEMBER_SERVICETYPE bServiceType, WORD wPositio
           )
         {
             cAudioStreamCount++;
-            printf("nguyen: stAudInfo[%u].wAudPID=%u eSIAudType=%u \t bISOLanguageInfo= %d\t bISOLangIndex= %d\t bBroadcastMixedAD= %d\t bAudType = %d\t bIsValid =%d\t\n", i,
-                                 stAudInfo[i].wAudPID,
-                                 stAudInfo[i].eSIAudType,
-                                 stAudInfo[i].aISOLangInfo[0].bISOLanguageInfo,
-                                 stAudInfo[i].aISOLangInfo[0].bISOLangIndex,
-                                 stAudInfo[i].aISOLangInfo[0].bBroadcastMixedAD,
-                                 stAudInfo[i].aISOLangInfo[0].bAudType,
-                                 stAudInfo[i].aISOLangInfo[0].bIsValid);
+            // printf("nguyen: stAudInfo[%u].wAudPID=%u eSIAudType=%u \t bISOLanguageInfo= %d\t bISOLangIndex= %d\t bBroadcastMixedAD= %d\t bAudType = %d\t bIsValid =%d\t\n", i,
+            //                      stAudInfo[i].wAudPID,
+            //                      stAudInfo[i].eSIAudType,
+            //                      stAudInfo[i].aISOLangInfo[0].bISOLanguageInfo,
+            //                      stAudInfo[i].aISOLangInfo[0].bISOLangIndex,
+            //                      stAudInfo[i].aISOLangInfo[0].bBroadcastMixedAD,
+            //                      stAudInfo[i].aISOLangInfo[0].bAudType,
+            //                      stAudInfo[i].aISOLangInfo[0].bIsValid);
         }
         else
         {
@@ -25300,7 +25300,7 @@ void SET_Default_TW_DTV_CH(void) //yiling 0821 dtv channel setting
         MApp_TopStateMachine_SetTopState(STATE_TOP_CHANNELCHANGE);
     }
     //nguyen
-    printf("nguyen MApp_ChannelChange_EnableChannel");
+    //printf("nguyen MApp_ChannelChange_EnableChannel");
     //nguyen
     MApp_ChannelChange_EnableChannel(MAIN_WINDOW);
 

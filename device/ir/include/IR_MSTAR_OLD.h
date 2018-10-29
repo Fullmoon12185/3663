@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -127,8 +127,8 @@
 #define IR_LOGI_1_TIME_UB  20
 #define IR_LOGI_1_TIME_LB  -20
 
-#define IR_CHANNEL_USE_AS_UPDOWN   0
-#define IR_VOLUME_USE_AS_LEFTRIGHT      0
+#define IR_CHANNEL_USE_AS_UPDOWN   1
+#define IR_VOLUME_USE_AS_LEFTRIGHT      1
 // IR Format define
 #define IRKEY_DUMY              0xFF
 #define IRDA_KEY_MAPPING_POWER  IRKEY_POWER

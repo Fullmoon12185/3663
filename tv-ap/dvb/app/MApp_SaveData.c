@@ -4113,11 +4113,11 @@ BOOL MApp_DB_Check(void)
     }
     else
     {
-        MApp_DB_PrintVar(0xFF);
+        MApp_DB_PrintVar(0);
     }
 
 
-    MApp_DB_PrintVar(0xFF);
+    MApp_DB_PrintVar(0);
     //while(10){}
 
     return TRUE;

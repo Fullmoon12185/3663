@@ -67,7 +67,7 @@ int g_JpgHeight;
 #define JPEGPROWIDTHMAX     1024
 #define JPEGPROHEIGHTMAX    768
 
-#define verJPD_DEBUG(x)     x
+#define verJPD_DEBUG(x)     //x
 
 #if defined(CHIP_T3) || defined(CHIP_T4) || defined(CHIP_T7) || defined(CHIP_JANUS) || defined(CHIP_U4)
 #define VERJPD_EVENT_ALL    (E_JPEG_EVENT_DEC_DONE | E_JPEG_EVENT_DEC_ERROR_MASK | E_JPEG_EVENT_DEC_MRB_DONE | E_JPEG_EVENT_DEC_MWB_FULL)

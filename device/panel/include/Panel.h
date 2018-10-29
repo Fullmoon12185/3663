@@ -100,6 +100,7 @@ extern "C" {
 
 #include "Board.h"
 #include "apiPNL.h"
+#include "SW_Config.h"
 
 #undef INTERFACE
 #define INTERFACE extern
@@ -292,9 +293,11 @@ typedef struct
 
 #else
 
-    //#define PANEL_DEFAULT_TYPE_SEL      PNL_FULLHD_CMO216_H1L01
-
-    #define PANEL_DEFAULT_TYPE_SEL      PNL_WXGA_AU20_T200XW02
+    #if UBC_TV40
+        #define PANEL_DEFAULT_TYPE_SEL      PNL_FULLHD_CMO216_H1L01
+    #elif UBC_TV32
+        #define PANEL_DEFAULT_TYPE_SEL      PNL_WXGA_AU20_T200XW02
+    #endif   
 
 #endif
 

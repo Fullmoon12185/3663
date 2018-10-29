@@ -243,6 +243,7 @@ typedef enum
 //==================================================
 BOOL MApp_Main_Is_PowerOnPreInitFinish(void);
 BOOL MApp_Main_Is_PowerOnInitFinish(void);
+void update_count_for_home_shop(void);  
 void HomeShop_FSM (void);
 void SendIROut_FSM(void);
 void isTVThongminh(void);

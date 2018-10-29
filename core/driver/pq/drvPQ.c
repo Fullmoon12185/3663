@@ -152,9 +152,9 @@
 #define PQIOCTL_DBG(x)  do { if( _u16PQDbgSwitch & PQ_DBG_IOCTL) x; } while(0);
 #define PQP2P_DBG(x)    do { if( _u16PQDbgSwitch & PQ_DBG_P2P) x; } while(0);
 #define PQCUSTOMER_DBG(x)  do { if( _u16PQDbgSwitch & PQ_DBG_CUSTOMER) x; } while(0);
-#define PQMODE_DBG(x)   x
+#define PQMODE_DBG(x)   //x
 
-#define DEBUG_PQ_SRC_TYPE(x)    x
+#define DEBUG_PQ_SRC_TYPE(x)    //x
 
 static MSIF_Version _drv_pq_version = {
     .DDI = { PQ_DRV_VERSION },
@@ -4429,7 +4429,7 @@ PQ_DEINTERLACE_MODE MDrv_PQ_SetMemFormat(PQ_WIN eWindow, MS_BOOL bMemFmt422, MS_
 
 void MDrv_PQ_ReduceBW_ForOSD(PQ_WIN eWindow, MS_BOOL bOSD_On)
 {
-    printf("nguyen MDrv_PQ_ReduceBW_ForOSD(Win=%u, bOSD_On=%u)\n", eWindow, bOSD_On);
+    //printf("nguyen MDrv_PQ_ReduceBW_ForOSD(Win=%u, bOSD_On=%u)\n", eWindow, bOSD_On);
 #if PQ_GRULE_OSD_BW_ENABLE
     MS_U8 u8BitPerPixel = 0;
 {

@@ -509,18 +509,18 @@ void MDrv_Power_Standby_CheckWakeupDevice(void)
 {
     DEBUG_PM_WAKE_UP( printf("1.stPowerGenSetting.wPM_WakeUpDevice=0x%X\n", stPowerGenSetting.wPM_WakeUpDevice); );
 
-    if( IsHDMIInUse() )
-    {
-        if (! MApi_XC_PCMonitor_SyncLoss(MAIN_WINDOW) ) // Has signal
-        {
-            stPowerGenSetting.wPM_WakeUpDevice &= ~PM_WAKEUP_BY_DVI;
-        }
-        else
-        {
-            stPowerGenSetting.wPM_WakeUpDevice |= PM_WAKEUP_BY_DVI;
-        }
-    }
-    else
+    // if( IsHDMIInUse() )
+    // {
+    //     if (! MApi_XC_PCMonitor_SyncLoss(MAIN_WINDOW) ) // Has signal
+    //     {
+    //         stPowerGenSetting.wPM_WakeUpDevice &= ~PM_WAKEUP_BY_DVI;
+    //     }
+    //     else
+    //     {
+    //         stPowerGenSetting.wPM_WakeUpDevice |= PM_WAKEUP_BY_DVI;
+    //     }
+    // }
+    // else
     {
          stPowerGenSetting.wPM_WakeUpDevice &= ~PM_WAKEUP_BY_DVI;
     }

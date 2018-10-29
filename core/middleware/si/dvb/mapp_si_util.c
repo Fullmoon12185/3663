@@ -234,7 +234,7 @@ void msAPI_SI_Copy_SI_AudInfo_To_CM_AudInfo(SI_AUD_INFO* pstSI_AudInfo, AUD_INFO
         
 
         pstCM_AudInfo[i].eProfileAndLevel = msAPI_SI_ToCM_ProfileAndLevel(pstSI_AudInfo[i].u8ProfileAndLevel);
-        printf("%u PID=0x%X, Typ=%u\n", i, pstSI_AudInfo[i].wAudPID, pstSI_AudInfo[i].wAudType);
+        //printf("%u PID=0x%X, Typ=%u\n", i, pstSI_AudInfo[i].wAudPID, pstSI_AudInfo[i].wAudType);
         //if(pstCM_AudInfo[i].wAudPID != 0x1fff && pstCM_AudInfo[i].eSIAudType <= 2)
         { 
             //pstCM_AudInfo[i].u8Component_AAC_Type = pstSI_AudInfo[i].u8Component_AAC_Type;

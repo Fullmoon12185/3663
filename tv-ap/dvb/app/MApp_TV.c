@@ -320,7 +320,7 @@ extern MEMBER_SERVICETYPE msAPI_CHPROC_ORD_Get_ServiceType(U16 u16Ordinal);
 // Macro
 //
 
-#define TV_DBINFO(y)                  y
+#define TV_DBINFO(y)                  //y
 #if (ENABLE_ATSC)
 #define SAVR_DBG(y)                  //y
 #endif

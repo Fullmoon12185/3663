@@ -169,6 +169,31 @@ extern BOOLEAN g_bAutobuildDebug;
 //------------------------------------------------------------------------------
 // Locals
 //------------------------------------------------------------------------------
+#define     NUM_OF_TIMES_KEY_VOLUME_PRESSED  5
+#define     MAX_COUNT           BACKLIGHT_LEVEL_4
+#define     DECREASE_STEP       5
+#define     BACKLIGHT_LEVEL_1   30
+#define     BACKLIGHT_LEVEL_2   (30 + BACKLIGHT_LEVEL_1)
+#define     BACKLIGHT_LEVEL_3   (30 + BACKLIGHT_LEVEL_2)
+#define     BACKLIGHT_LEVEL_4   (60 + BACKLIGHT_LEVEL_3)
+
+#define     SHOP_BACKLIGHT      220
+#define     HOME_BACKLIGHT_1    200
+#define     HOME_BACKLIGHT_2    170
+#define     HOME_BACKLIGHT_3    140
+#define     DEBUG_HOME_SHOP(x)  //x
+static U16 fourKeyPressed = 0;
+static U16 countForHomeShop = 0;
+static U16 countForHomeShopSaved = 0;
+U8 buff_count[2];
+U8 keytemp = 0;
+
+HomeShop_FSM_STATE homeshop_state = HOMESHOP_INIT;
+//static U32 timeLast = 0;
+//static U32 timeCurr = 0;
+
+
+
 
 #ifdef ENABLE_MINI_DUMP
 extern void   MiniDump_MountDrive(void);
@@ -224,7 +249,7 @@ MS_BOOL MApp_PowerOn_Stage_Debug(void)
 
 /***************************************************************************************/
 
-#define MAIN_FUNC_STATE_DBG(x)  x
+#define MAIN_FUNC_STATE_DBG(x)  //x
 //#define MAIN_FUNC_STATE_DBG(x)  do{ msDebug_ANSI_SetColorText_2(E_FONT_COLOR_BLACK,E_FONT_BACKGROUND_COLOR_PURPLE); x; msDebug_ANSI_AllAttrOffText(); } while(0)
 
 
@@ -746,6 +771,7 @@ int main(void)
 
     //nguyen
     U32 bToogleLED = 0;
+    homeshop_state = HOMESHOP_INIT;
     //U8 pwmValueBackLight = 0;
     //U32 bBacklight= false;
 
@@ -755,6 +781,7 @@ int main(void)
 
     enPreInit_Sub_State = EN_PRE_INIT_INITIATION;
     enWhileLoop_Sub_State = EN_WHILE_LOOP_INITIATION;
+
 
 
     while ( 1 )
@@ -861,11 +888,11 @@ int main(void)
                 {
                     u32MainLoopTime_Last = u32MainLoopTime_Cur;
                     
-                    if(ANDROID_STATUS() == 0){
-                        printf("0\n");
-                    } else {
-                        printf("1\n");
-                    }
+                    // if(ANDROID_STATUS() == 0){
+                    //     printf("0\n");
+                    // } else {
+                    //     printf("1\n");
+                    // }
                     //nguyen
                     if (bToogleLED == 0){
                         // LED_RED_Off();
@@ -890,11 +917,15 @@ int main(void)
                 }
                 
                 
+                if(isCodeReadyToSend()){
+                    MApp_IR_out();        
+                } else {
+                    MApp_While_Loop_State();
+                    SendIROut_FSM();
+                    HomeShop_FSM();
+                    //isTVThongminh();    
+                }
                 
-                MApp_While_Loop_State();
-                SendIROut_FSM();
-                HomeShop_FSM();
-                //isTVThongminh();
                 break;
             }
 
@@ -922,58 +953,36 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 }
 
 //nguyen
-#define     NUM_OF_TIMES_KEY_VOLUME_PRESSED  5
-#define     MAX_COUNT  (10 * NUM_OF_TIMES_KEY_VOLUME_PRESSED)
-#define     DECREASE_STEP       5
-#define     SHOP_BACKLIGHT      250
-#define     HOME_BACKLIGHT      200
-#define     DEBUG_HOME_SHOP(x)  x
-static U16 fourKeyPressed = 0;
-static U16 countForHomeShop = 0;
-static U16 countForHomeShopSaved = 0;
-U8 buff_count[2];
-U8 keytemp = 0;
 
-HomeShop_FSM_STATE homeshop_state = HOMESHOP_INIT;
-static U32 timeLast = 0;
-static U32 timeCurr = 0;
-U8 backLightCompute(U16 count){
-    U8 backLight = 0;
-    backLight = SHOP_BACKLIGHT - count/NUM_OF_TIMES_KEY_VOLUME_PRESSED;
-    if(backLight <= HOME_BACKLIGHT)
-        backLight = HOME_BACKLIGHT;
-    DEBUG_HOME_SHOP(printf("\nXXXXXXX backLight %u\n", backLight););
-    return backLight;
+
+void update_count_for_home_shop(void){
+    if(countForHomeShop < MAX_COUNT){
+        countForHomeShop ++;
+        MApp_Save_UserDataForHomeShop(countForHomeShop);
+        DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+        DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
+        DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+        countForHomeShopSaved = MApp_Load_UserDataForHomeShop();
+        
+        // if(countForHomeShop != countForHomeShopSaved){
+        //     MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);
+            printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
+        // } else {
+        //     MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_1);      
+        // }
+        
+    } else {
+        // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+        // DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
+        // DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+    }
+    DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
+    DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
+    DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
 }
 void HomeShop_FSM (void){
-    timeCurr = MsOS_GetSystemTime();
-    if(msAPI_Timer_DiffTime_2(timeLast, timeCurr) > 1000){ 
-        if(get_isKeyVolumePressed()){
-            if(countForHomeShop <= MAX_COUNT){
-                countForHomeShop ++;
-                MApp_Save_UserDataForHomeShop(countForHomeShop);
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-                countForHomeShopSaved = MApp_Load_UserDataForHomeShop();
-                
-                if(countForHomeShop != countForHomeShopSaved){
-                    MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);
-                    printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
-                } else {
-                   MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));      
-                }
-                
-            } else {
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-                DEBUG_HOME_SHOP(printf("\ncountForHomeShop %u > NUM_PRESS_TIME_BEFORE_GO_TO_HOME\n", countForHomeShop););
-                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
-            }
-            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
-            DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
-            DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
-            timeLast = timeCurr;
-        }
+    if(is_key_pressed()){ 
+        clear_key_pressed();
         keytemp = getKeyPressed() - KEY_0;
         if(keytemp <= 9){
             fourKeyPressed = (fourKeyPressed<<4)|keytemp;
@@ -984,32 +993,45 @@ void HomeShop_FSM (void){
                 homeshop_state = SHOP_STATE;
                 countForHomeShop = 0;
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
-                MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));
+                MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);
             }
         }
-        
-        switch(homeshop_state){
-            case HOMESHOP_INIT:
-                countForHomeShop = MApp_Load_UserDataForHomeShop();
-                if(countForHomeShop > MAX_COUNT){
-                    countForHomeShop = 0;    
-                    MApp_Save_UserDataForHomeShop(countForHomeShop);
-                } 
-                MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));  
-                homeshop_state = SHOP_STATE;
-            break;
-            case SHOP_STATE:
-                if(countForHomeShop >= MAX_COUNT){
-                    homeshop_state = HOME_STATE;  
-                    MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));   
-                }
-            break;
-            case HOME_STATE:
-            break;
-            default:
-            break;
-        }
+        DEBUG_HOME_SHOP(printf("\n******homeshop_state %u -- keytemp  = %u\n", homeshop_state, keytemp););
     }
+    switch(homeshop_state){
+        case HOMESHOP_INIT:
+            countForHomeShop = MApp_Load_UserDataForHomeShop();
+            if(countForHomeShop > MAX_COUNT){
+                countForHomeShop = 0;    
+                MApp_Save_UserDataForHomeShop(countForHomeShop);
+            } 
+            if(countForHomeShop <= BACKLIGHT_LEVEL_1){
+                MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);     
+                DEBUG_HOME_SHOP(printf("\nMApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);  0x%x\n", SHOP_BACKLIGHT););     
+            } else if (countForHomeShop <= BACKLIGHT_LEVEL_2){
+                MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_1);
+                DEBUG_HOME_SHOP(printf("\nMApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_1);  0x%x\n", HOME_BACKLIGHT_1);); 
+            }else if (countForHomeShop <= BACKLIGHT_LEVEL_3){
+                MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_2);
+                DEBUG_HOME_SHOP(printf("\nMApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_2);  0x%x\n", HOME_BACKLIGHT_2);); 
+            }else if (countForHomeShop <= BACKLIGHT_LEVEL_4){
+                MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_3);
+                DEBUG_HOME_SHOP(printf("\nMApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_3);  0x%x\n", HOME_BACKLIGHT_3);); 
+            }
+            homeshop_state = SHOP_STATE;
+        break;
+        case SHOP_STATE:
+            // if(countForHomeShop >= MAX_COUNT){
+            //     homeshop_state = HOME_STATE;  
+            //     MApi_PNL_BackLight_Adjust(backLightCompute(countForHomeShop));   
+            // }
+        break;
+        case HOME_STATE:
+        break;
+        default:
+        break;
+    }
+    
 }
 
 #ifdef IR_MODE_ENABLE
@@ -1025,6 +1047,9 @@ void SendIROut_FSM(void){
     if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2){
         if(ANDROID_STATUS() == ANDROID_STANDBY_MODE){
             timeCurrAndroid = MsOS_GetSystemTime();
+            // if(get_isKeyPowerPressed()){
+            //     timeLastAndroid = timeCurrAndroid + 3000;
+            // }
             if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 3000 ){
                 MApp_IR_sendIROut(IRKEY_POWER);     
                 timeLastAndroid = timeCurrAndroid;   

@@ -818,7 +818,14 @@
     #define ENABLE_HK_MP4   0
 #endif
 
-
+//nguyen
+#ifndef UBC_TV40
+    #define UBC_TV40        DISABLE//ENABLE
+#endif
+#ifndef UBC_TV32
+    #define UBC_TV32        ENABLE
+#endif
+//nguyen
 //=================================================================
 #include "sw_config_force_off_for_bloader.h"
 //******************************************************************************

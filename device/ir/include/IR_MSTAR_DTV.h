@@ -339,7 +339,8 @@ typedef enum _IrCommandType
 //     IRKEY_DTV               = 0x0D,
 //     IRKEY_TV                = 0x11,
 //     IRKEY_COMPONENT         = 0x1D,
-//     IRKEY_SV                = 0X17,
+       IRKEY_SMART             = 0x17,
+       IRKEY_TV                = 0x47,
 
 //     IRKEY_DASH              = IRKEY_DUMY-7,  // no use
 //     IRKEY_BACKWARD          = IRKEY_DUMY-8,  // no use
