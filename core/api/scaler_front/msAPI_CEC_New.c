@@ -148,7 +148,7 @@
 #define CEC_PORT4   0x40    //HDMI 4
 
 
-#define CEC_DEBUG                           FALSE
+#define CEC_DEBUG                           TRUE
 #if CEC_DEBUG
     #define CEC_ERROR_DEBUG(str, x)         printf(str, x)
     #define CEC_DPUTSTR(str)                printf(str)

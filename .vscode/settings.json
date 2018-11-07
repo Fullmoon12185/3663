@@ -6,7 +6,10 @@
         "sysinit.h": "c",
         "zui_strings_enum.h": "c",
         "msapi_audio.h": "c",
-        "msir.h": "c"
+        "msir.h": "c",
+        "mapp_restoretodefault.h": "c",
+        "sw_config.h": "c",
+        "msapi_timer.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false,
     "git.ignoreLimitWarning": true

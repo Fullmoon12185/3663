@@ -861,11 +861,11 @@ int main(void)
                 {
                     u32MainLoopTime_Last = u32MainLoopTime_Cur;
                     
-                    if(ANDROID_STATUS() == 0){
-                        printf("0\n");
-                    } else {
-                        printf("1\n");
-                    }
+                    // if(ANDROID_STATUS() == 0){
+                    //     printf("0\n");
+                    // } else {
+                    //     printf("1\n");
+                    // }
                     //nguyen
                     if (bToogleLED == 0){
                         // LED_RED_Off();
@@ -927,7 +927,7 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 #define     DECREASE_STEP       5
 #define     SHOP_BACKLIGHT      250
 #define     HOME_BACKLIGHT      200
-#define     DEBUG_HOME_SHOP(x)  x
+#define     DEBUG_HOME_SHOP(x)  //x
 static U16 fourKeyPressed = 0;
 static U16 countForHomeShop = 0;
 static U16 countForHomeShopSaved = 0;

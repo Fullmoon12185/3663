@@ -103,7 +103,7 @@
 
 
 
-#define DEBUG_DB_GEN(x)         //x
+#define DEBUG_DB_GEN(x)         x
 
 #define DEBUG_DB_GEN_LVL(lvl, x)     do { \
     if( s_stDB_GEN_InitData.u8DebugFlag >= lvl ) \
@@ -114,9 +114,9 @@
 
 
 
-#define DEBUG_DB_GEN_FLOW(x)    //x
+#define DEBUG_DB_GEN_FLOW(x)    x
 
-#define DEBUG_DB_GEN_WT(x)  //x
+#define DEBUG_DB_GEN_WT(x)  x
 
 #define DB_GEN_TODO()   printf("\nWarning: %s() todo\n", __FUNCTION__);
 
@@ -1020,6 +1020,7 @@ void msAPI_DB_GEN_Task(void)
             // Find empty unit ...
             DEBUG_DB_GEN( printf("  Find empty unit...\n"); );
             s_stDB_GEN_Info.u8FlashNextEmptyUnitIdx = _msAPI_DB_GEN_FindUnit(s_stDB_GEN_Info.u8FlashCurUnitIdx + 1, DB_GEN_UNIT_STATUS_EMPTY);
+            
             DEBUG_DB_GEN( printf("   Empty UnitIdx=%u\n", s_stDB_GEN_Info.u8FlashNextEmptyUnitIdx ); );
 
             if( DB_GEN_INVALID_UNIT_IDX == s_stDB_GEN_Info.u8FlashNextEmptyUnitIdx )

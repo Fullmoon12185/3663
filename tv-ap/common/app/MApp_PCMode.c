@@ -1576,7 +1576,7 @@ void _MApp_PCMode_ModeParse(INPUT_SOURCE_TYPE_t src,SCALER_WIN eWindow)
                     }
                 }
 
-                // Fix Mantis-0939712:  [SQC][Maya_084B][2nd_ATSC][D-Sub] ¨Ï¥ÎMSPG-925FS > Timing :1920x1080@60Hz >µe­±°¾²¾
+                // Fix Mantis-0939712:  [SQC][Maya_084B][2nd_ATSC][D-Sub] ï¿½Ï¥ï¿½MSPG-925FS > Timing :1920x1080@60Hz >ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 // 20150819: It should not change the result of ModeParse!!
                 // It will cause mode index wrong and auto position failed!
                 /*
@@ -1619,7 +1619,7 @@ void MApp_PCMode_Reset_StatusHandler(SCALER_WIN eWindow)
 
 #define PCMODE_TASK_CHECK()     //CHECK_MIU_PROTECT_LOG_AND_CLEAR()
 
-static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STATUS current_status , SCALER_WIN eWindow)
+static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STATUS current_status, SCALER_WIN eWindow)
 {
     U8 u8TurnOffDestination = FALSE;
   #if 0//(ENABLE_HDMI_4K_2K && SUPPORT_4K_TO_2K_CONVERT )
@@ -1627,7 +1627,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
   #endif
 
     PCMODE_TASK_CHECK();
-
+    //printf("Nguyen current status (%u) at %u E_XC_PCMONITOR_STABLE_SYNC = %u  previous_status[eWindow]=%u\n", current_status, MsOS_GetSystemTime(), E_XC_PCMONITOR_STABLE_SYNC, previous_status[eWindow]);
     // Stable -> unstable or no sync
     if (  previous_status[eWindow] == E_XC_PCMONITOR_STABLE_SYNC &&
           previous_status[eWindow] != current_status ) // unstable or no sync
@@ -1745,6 +1745,8 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
 
     #if (INPUT_HDMI_VIDEO_COUNT > 0)
         PCMODE_TASK_CHECK();
+         printf("nguyen 123 [PCMode] at %u src = %u\n", MsOS_GetSystemTime(), src);
+
         if(IsSrcTypeHDMI(src))
         {
             // Move to SetMode
@@ -1771,6 +1773,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
                 _MApp_PCMode_SetHdmiAvgMode(FALSE);
             }
         #endif
+            printf("nguyen ok [PCMode] at %u\n", MsOS_GetSystemTime());
             // check if HDMI or DVI
             MApi_XC_HDMI_CheckModeChanged(TRUE, eWindow);
 
@@ -1778,7 +1781,6 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
 
         }
     #endif
-
         PCMODE_TASK_CHECK();
 
         // Mode parse after timing stable.
@@ -1989,6 +1991,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
 
     if ( previous_status[eWindow] != current_status )
     {
+        printf("previous_status[eWindow]=%d  current_status = %d\n", previous_status[eWindow], current_status);
         previous_status[eWindow] = current_status;
     }
 
@@ -2499,7 +2502,7 @@ void MApp_PC_MainWin_Handler(INPUT_SOURCE_TYPE_t src, BOOLEAN bRealTimeMonitorOn
     XC_PCMONITOR_STATUS eXC_PCMONITOR_STATUS = MApi_XC_PCMonitor(src, MAIN_WINDOW);
 
     PCMODE_TASK_CHECK();
-
+    
     _MApp_PCMode_StatusHandler(src, eXC_PCMONITOR_STATUS, MAIN_WINDOW);
 
     PCMODE_TASK_CHECK();

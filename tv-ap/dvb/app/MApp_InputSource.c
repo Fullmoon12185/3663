@@ -320,7 +320,7 @@ extern void MApp_ZUI_ACT_DrawAisIcon(void);
 #define DEBUG_CHG_SRC_TIME2()    //printf("ChgSrc %u at %u\n", __LINE__, MsOS_GetSystemTime());
 
 #define SIGNAL_PATH_DBG(x)      //do { msDebug_ANSI_SetColorText(E_FONT_BACKGROUND_COLOR_RED); x; msDebug_ANSI_AllAttrOffText(); } while(0)
-#define INPUTSOURCE_DBG(y)      //y
+#define INPUTSOURCE_DBG(y)      y
 #define AIS_DETECT_DUTY         100//150 // ms
 
 #define DEBUG_CVBS_OUT(x)   //do { msDebug_ANSI_SetColorText(E_FONT_BACKGROUND_COLOR_RED); x; msDebug_ANSI_AllAttrOffText(); } while(0)//x
