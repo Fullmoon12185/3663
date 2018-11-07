@@ -169,19 +169,28 @@ extern BOOLEAN g_bAutobuildDebug;
 //------------------------------------------------------------------------------
 // Locals
 //------------------------------------------------------------------------------
-#define     NUM_OF_TIMES_KEY_VOLUME_PRESSED  5
-#define     MAX_COUNT           BACKLIGHT_LEVEL_4
-#define     DECREASE_STEP       5
+#define CURRENT_TESTING DISABLE  //DISABLE //ENABLE
+
 #define     BACKLIGHT_LEVEL_1   30
 #define     BACKLIGHT_LEVEL_2   (30 + BACKLIGHT_LEVEL_1)
-#define     BACKLIGHT_LEVEL_3   (30 + BACKLIGHT_LEVEL_2)
-#define     BACKLIGHT_LEVEL_4   (60 + BACKLIGHT_LEVEL_3)
+#define     BACKLIGHT_LEVEL_3   (60 + BACKLIGHT_LEVEL_2)
+#define     BACKLIGHT_LEVEL_4   (100 + BACKLIGHT_LEVEL_3) /*  5/11/2018 anh Luat thay doi 60 => 100  */
+#define     MAX_COUNT           BACKLIGHT_LEVEL_4
 
-#define     SHOP_BACKLIGHT      220
-#define     HOME_BACKLIGHT_1    200
-#define     HOME_BACKLIGHT_2    170
-#define     HOME_BACKLIGHT_3    140
+/*
+LED 300mA - Panel 32 inch JP
+100%    300mA   111     81V
+90%     270mA   103     80V
+80%     240mA   89      78V
+70%     210mA   82      77V
+60%     180mA   74      76V
+*/
+#define     SHOP_BACKLIGHT      111
+#define     HOME_BACKLIGHT_1    100
+#define     HOME_BACKLIGHT_2    89
+#define     HOME_BACKLIGHT_3    78
 #define     DEBUG_HOME_SHOP(x)  //x
+
 static U16 fourKeyPressed = 0;
 static U16 countForHomeShop = 0;
 static U16 countForHomeShopSaved = 0;
@@ -954,7 +963,6 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 
 //nguyen
 
-
 void update_count_for_home_shop(void){
     if(countForHomeShop < MAX_COUNT){
         countForHomeShop ++;
@@ -966,7 +974,7 @@ void update_count_for_home_shop(void){
         
         // if(countForHomeShop != countForHomeShopSaved){
         //     MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT);
-            printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved);
+            DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShopSaved %u\n", countForHomeShopSaved););
         // } else {
         //     MApi_PNL_BackLight_Adjust(HOME_BACKLIGHT_1);      
         // }
@@ -981,6 +989,36 @@ void update_count_for_home_shop(void){
     DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
 }
 void HomeShop_FSM (void){
+
+#if CURRENT_TESTING
+    
+    switch(homeshop_state){
+        case HOMESHOP_INIT:
+            fourKeyPressed = 1;
+            countForHomeShop = 50;
+            homeshop_state = SHOP_STATE;
+        break;
+        case SHOP_STATE:
+            if(getKeyPressed() == KEY_VOLUME_PLUS){
+                countForHomeShop++;
+                MApi_PNL_BackLight_Adjust(countForHomeShop);
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            }else if(getKeyPressed() == KEY_VOLUME_MINUS) {
+                countForHomeShop--;
+                MApi_PNL_BackLight_Adjust(countForHomeShop);
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+                DEBUG_HOME_SHOP(printf("\nXXXXXXX countForHomeShop %u\n", countForHomeShop););
+                DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            }
+            break;
+        case HOME_STATE:
+        break;
+        default:
+        break;
+    }
+#else
     if(is_key_pressed()){ 
         clear_key_pressed();
         keytemp = getKeyPressed() - KEY_0;
@@ -1031,6 +1069,7 @@ void HomeShop_FSM (void){
         default:
         break;
     }
+#endif
     
 }
 

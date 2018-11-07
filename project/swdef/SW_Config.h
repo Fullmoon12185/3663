@@ -823,7 +823,7 @@
     #define UBC_TV40        DISABLE//ENABLE
 #endif
 #ifndef UBC_TV32
-    #define UBC_TV32        ENABLE
+    #define UBC_TV32        ENABLE //DISABLE
 #endif
 //nguyen
 //=================================================================
