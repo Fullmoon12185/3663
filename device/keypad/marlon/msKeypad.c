@@ -503,6 +503,7 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
     for ( i = 0; i < (KEYPAD_ISR_STABLE_NUM); i++ )
     {
         msKeypad_Get_ADC_Channel(Channel,&Key_Value);
+        NGUYEN_DEBUG(printf("Key_Value = %u\n", Key_Value););
         for (j=0;j<u8CHLVLs[Channel];j++)
         {
             if (Key_Value < tADCKeyLevel[u8ChIdx][j])
@@ -619,7 +620,7 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
 }
 #else
 
-U8 pkey1, pkey2, pkey3;
+U8 pkey1, pkey2, pkey3, pkey4, pkey5;
 
 static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
 {
@@ -670,13 +671,15 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
         if(KEY_LV[i] >= KEYPAD_STABLE_NUM_MIN)
         {
             
+            //pkey5 = pkey4;
+            pkey4 = pkey3;
             pkey3 = pkey2;
             pkey2 = pkey1;
             pkey1 = *(Keymapping+i);
-            if(pkey3 == pkey1 && pkey2 == pkey1){
+            if(pkey3 == pkey1 && pkey2 == pkey1 && pkey4 == pkey1 && pkey1 != 0xff){
                 *pkey = pkey1;
                 PressKey = TRUE;
-                //printf("NGUYEN CH[%d]=%02X\n",Channel,*pkey);
+                printf("NGUYEN CH[%d]=%02X\n",Channel,*pkey);
                 if (PreviousCMD != *pkey)
                 {
                     PreviousCMD = *pkey;
@@ -865,7 +868,7 @@ BOOLEAN MDrv_Power_CheckPowerOnKeyPad(void)
         KeypadCount = 0;
     }
     KeypadCHValue = MDrv_ReadByte(REG_SAR_ADCOUT1);
-
+    NGUYEN_DEBUG(printf("KeypadCHValue = %u\n", KeypadCHValue););
     if(CheckWakeupKeyPad(ADC_KEY_1_L0_FLAG))
     {
         if (KeypadCHValue <= ADC_KEY_1_L0)

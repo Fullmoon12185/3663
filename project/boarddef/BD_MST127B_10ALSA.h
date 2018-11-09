@@ -221,6 +221,11 @@
 
 
 //------GPIO setting(default GPIO pin level)------------------------------------
+#define PIN_34_IS_GPIO      GPIO_IN       	//GPIO34 AV in
+#define PIN_43_IS_GPIO      GPIO_IN       	//GPIO34 AV in
+#define PIN_44_IS_GPIO      GPIO_IN       	//GPIO34 AV in
+
+
 #define PIN_63_IS_GPIO      GPIO_IN       	//GPIO44, Tuner_SDA
 #define PIN_64_IS_GPIO      GPIO_IN       	//GPIO45, Tuner_SCL
 
@@ -282,19 +287,19 @@
 #define RM_EEPROM_TYPE          	RM_TYPE_24C64//RM_TYPE_24C512
 #define DIGITAL_I2S_SELECT        	AUDIO_I2S_NONE
 
-#define INPUT_AV_VIDEO_COUNT      	1
+#define INPUT_AV_VIDEO_COUNT      	0
 #define INPUT_SV_VIDEO_COUNT       	0
 #define INPUT_YPBPR_VIDEO_COUNT    	0
 #ifdef ATSC_SYSTEM
 #define INPUT_SCART_VIDEO_COUNT   	0
 #else
-#define INPUT_SCART_VIDEO_COUNT    	0
+#define INPUT_SCART_VIDEO_COUNT    	1
 #endif
 #define INPUT_HDMI_VIDEO_COUNT     	3
 #ifdef ATSC_SYSTEM
 #define ENABLE_SCART_VIDEO         	0
 #else
-#define ENABLE_SCART_VIDEO        	0
+#define ENABLE_SCART_VIDEO        	1
 #endif
 
 #define CVBSOUT1_ALWAYS_OUTPUT_ATV  0
@@ -306,8 +311,8 @@
 #define INPUT_YPBPR2_MUX            INPUT_PORT_NONE_PORT
 #define INPUT_TV_YMUX               INPUT_PORT_YMUX_CVBS0
 #define INPUT_AV_YMUX               INPUT_PORT_CMUX_R2
-#define INPUT_AV2_YMUX              INPUT_PORT_NONE_PORT
-#define INPUT_AV3_YMUX              INPUT_PORT_NONE_PORT
+#define INPUT_AV2_YMUX              INPUT_PORT_CMUX_R1
+#define INPUT_AV3_YMUX              INPUT_PORT_CMUX_R0
 #define INPUT_SV_YMUX               INPUT_PORT_NONE_PORT
 #define INPUT_SV_CMUX               INPUT_PORT_NONE_PORT
 #define INPUT_SV2_YMUX              INPUT_PORT_NONE_PORT
@@ -343,11 +348,11 @@
 #define AUDIO_SOURCE_YPBPR          AUDIO_AUIN3_INPUT
 #define AUDIO_SOURCE_YPBPR2         AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_AV             AUDIO_AUIN3_INPUT
-#define AUDIO_SOURCE_AV2            AUDIO_NULL_INPUT
-#define AUDIO_SOURCE_AV3            AUDIO_NULL_INPUT
+#define AUDIO_SOURCE_AV2            AUDIO_AUIN3_INPUT
+#define AUDIO_SOURCE_AV3            AUDIO_AUIN3_INPUT
 #define AUDIO_SOURCE_SV             AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_SV2            AUDIO_NULL_INPUT
-#define AUDIO_SOURCE_SCART          AUDIO_AUIN2_INPUT
+#define AUDIO_SOURCE_SCART          AUDIO_AUIN3_INPUT
 #define AUDIO_SOURCE_SCART2         AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_HDMI           AUDIO_HDMI_INPUT
 #define AUDIO_SOURCE_HDMI2          AUDIO_HDMI_INPUT
@@ -395,8 +400,8 @@
 #define Switch_SV2()                _FUNC_NOT_USED()
 #define Switch_SCART()              _FUNC_NOT_USED()
 #define Switch_SCART2()             _FUNC_NOT_USED()
-#define Switch_DVI()                MApi_XC_DVI_SwitchSrc(INPUT_PORT_DVI0)
-#define Switch_DVI2()               MApi_XC_DVI_SwitchSrc(INPUT_PORT_DVI1)
+#define Switch_DVI()                _FUNC_NOT_USED()//MApi_XC_DVI_SwitchSrc(INPUT_PORT_DVI0)
+#define Switch_DVI2()               _FUNC_NOT_USED()//MApi_XC_DVI_SwitchSrc(INPUT_PORT_DVI1)
 #define Switch_DVI3()               _FUNC_NOT_USED()
 #define Switch_DVI4()               _FUNC_NOT_USED()
 #define Switch_DEFAULT()            _FUNC_NOT_USED()
@@ -824,14 +829,26 @@
 #define ADC_CH3_LEVELS                  4 //### must be <= ADC_KEY_LEVEL
 #define ADC_CH4_LEVELS                  4 //### must be <= ADC_KEY_LEVEL
 
-#define ADC_KEY_1_L0                    0x10//0x27
-#define ADC_KEY_1_L1                    0x4a//0x33
-#define ADC_KEY_1_L2                    0x61//0x51
-#define ADC_KEY_1_L3                    0x7b//0x6b
-#define ADC_KEY_1_L4                    0x9a//0x8a RFU
-#define ADC_KEY_1_L5                    0xC0//0xb0 RFU
-#define ADC_KEY_1_L6                    0xe9//0xd9 RFU
-#define ADC_KEY_1_L7                    0xFF//RFU
+#define     THANH_HAI_KEYBOARD          1
+#if defined THANH_HAI_KEYBOARD
+    #define ADC_KEY_1_L0                    0x10//0x27
+    #define ADC_KEY_1_L1                    0x4a//0x33
+    #define ADC_KEY_1_L2                    0x61//0x51
+    #define ADC_KEY_1_L3                    0x7b//0x6b
+    #define ADC_KEY_1_L4                    0x9a//0x8a RFU
+    #define ADC_KEY_1_L5                    0xc0//0xb0 RFU
+    #define ADC_KEY_1_L6                    0xe0//0xd9 RFU
+    #define ADC_KEY_1_L7                    0xFF//RFU
+#else
+    #define ADC_KEY_1_L0                    0x10//0x27
+    #define ADC_KEY_1_L1                    0x4a//0x33
+    #define ADC_KEY_1_L2                    0x61//0x51
+    #define ADC_KEY_1_L3                    0x7b//0x6b
+    #define ADC_KEY_1_L4                    0x9a//0x8a RFU
+    #define ADC_KEY_1_L5                    0xC0//0xb0 RFU
+    #define ADC_KEY_1_L6                    0xe9//0xd9 RFU
+    #define ADC_KEY_1_L7                    0xFF//RFU
+#endif
 
 #define ADC_KEY_2_L0                    0x00//0x27
 #define ADC_KEY_2_L1                    0x00//0x47
@@ -850,7 +867,7 @@
 #define ADC_KEY_1_L4_FLAG               IRKEY_VOLUME_PLUS//RFU
 #define ADC_KEY_1_L5_FLAG               IRKEY_CHANNEL_MINUS//RFU
 #define ADC_KEY_1_L6_FLAG               IRKEY_CHANNEL_PLUS//RFU
-#define ADC_KEY_1_L7_FLAG               IRKEY_SELECT//RFU
+#define ADC_KEY_1_L7_FLAG               IRKEY_DUMY//RFU
 
 #define ADC_KEY_2_L0_FLAG               IRKEY_POWER
 #define ADC_KEY_2_L1_FLAG               IRKEY_INPUT_SOURCE

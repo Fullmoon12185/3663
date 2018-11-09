@@ -258,14 +258,14 @@ void MApi_XC_HDMI_Set_ClkStatus(E_MUX_INPUTPORT enInputPortType, EnuHdmiClkStatu
 
 void MApi_XC_HDMI_Print_PortStatus(void)
 {
-    U8 u8PortIdx;
+    // U8 u8PortIdx;
 
-    printf("\nHDMI port status: --------------------------------------------\n");
-    for( u8PortIdx = 0; u8PortIdx < 4; u8PortIdx += 1 )
-    {
-        printf("%u Hpd=%u, Clk=%u\n", u8PortIdx, s_HDMI_aePortStatus[u8PortIdx].eHpdStatus, s_HDMI_aePortStatus[u8PortIdx].eClkStatus);
-    }
-    printf("----------------------------------------------------------------\n");
+    // printf("\nHDMI port status: --------------------------------------------\n");
+    // for( u8PortIdx = 0; u8PortIdx < 4; u8PortIdx += 1 )
+    // {
+    //     printf("%u Hpd=%u, Clk=%u\n", u8PortIdx, s_HDMI_aePortStatus[u8PortIdx].eHpdStatus, s_HDMI_aePortStatus[u8PortIdx].eClkStatus);
+    // }
+    // printf("----------------------------------------------------------------\n");
 }
 
 //******************************************************************************
@@ -1176,6 +1176,7 @@ void MApi_XC_HDMI_SetHotPlug(MS_BOOL bEnable, E_MUX_INPUTPORT enInputPortType)
        )
     {
         bInverse = FALSE;//!_stXC_HDMI_InitData.bHotPlugInverse;
+        DEBUG_HDMI_HOT_PLUG(printf("nguyen => call MDrv_HDMI_pullhpd\n"););
     }
     else
   #endif
@@ -1194,7 +1195,6 @@ void MApi_XC_HDMI_SetHotPlug(MS_BOOL bEnable, E_MUX_INPUTPORT enInputPortType)
         drv_HDCPRx_InitBySystem();
     }
 #endif
-
     MDrv_HDMI_pullhpd( bEnable, enInputPortType, bInverse);
 }
 

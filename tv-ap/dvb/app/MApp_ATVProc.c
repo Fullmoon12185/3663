@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -427,6 +427,7 @@ void MApp_ATVProc_AspectRatio_Task(void)
 
         //if(IsSrcTypeATV(SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW)))
         {
+            eVideoARCType = VIDEOSCREEN_FULL;
             stSystemInfo[MAIN_WINDOW].enAspectRatio = eVideoARCType;
             printf("Set stSystemInfo[MAIN_WINDOW].enAspectRatio=%u\n", stSystemInfo[MAIN_WINDOW].enAspectRatio);
             MApp_Scaler_SetWindow(NULL, NULL, NULL,

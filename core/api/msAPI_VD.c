@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -1767,8 +1767,11 @@ void msAPI_AVD_Scart_Monitor(void)
 
     if( bCurScartIsRGB == s_bOldScartIsRGB )
     {
-        if( s_u8ScartSrcRGBStableCount < 255 )
-            s_u8ScartSrcRGBStableCount += 1;
+        if( s_u8ScartSrcRGBStableCount < 255 ){
+            s_u8ScartSrcRGBStableCount += 1;        
+            //printf("Nguyen --- s_u8ScartSrcRGBStableCount: %u\n", s_u8ScartSrcRGBStableCount);
+        }
+            
 
         if( s_AVD_bScartSrcIsStable == FALSE )
         {
@@ -1802,7 +1805,10 @@ void msAPI_AVD_Scart_Monitor(void)
         s_AVD_bScartSrcIsStable = FALSE;
         s_AVD_bStableScartSrcType = E_SCART_SRC_TYPE_CVBS;
     }
-
+    //nguyen
+    s_AVD_bScartSrcIsStable = TRUE;
+    s_AVD_bStableScartSrcType = E_SCART_SRC_TYPE_CVBS;
+    //nguyen
     s_bOldScartIsRGB = bCurScartIsRGB;
 
 
@@ -2362,6 +2368,7 @@ static void msAPI_AVD_CheckAspectRatio(void)
 
 #if ENABLE_TTX
     eAspectRatioCode = msAPI_AVD_GetAspectRatioCodeOfWSS();
+    DEBUG_AVD( printf("Nguyen Old Cur ARCode\n"); );
 #else
     eAspectRatioCode = ARC_INVALID;
 #endif

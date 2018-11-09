@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -602,6 +602,7 @@ EN_RET MApp_DMP_Main(void)
             MApp_InputSource_RestoreSource();
             //UI_INPUT_SOURCE_TYPE = MApp_InputSource_GetRecordSource();
             //MApp_InputSource_ChangeInputSource();
+            NGUYEN_DEBUG(printf("nguyen DMP_STATE_GOTO_PREV_SRC\n"));
           #ifdef ATSC_SYSTEM
             MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
           #else

@@ -5556,6 +5556,7 @@ LPTSTR _MApp_ZUI_ACT_CombineTextAndOption(HWND hwnd)
                 #if (INPUT_HDMI_VIDEO_COUNT >= 1)
                     case UI_INPUT_SOURCE_HDMI:
                         u16OptionID = en_str_HDMI1;
+                        NGUYEN_DEBUG(printf("nguyen test en_str_HDMI1 567"););
                         break;
                 #endif
                 #if (INPUT_HDMI_VIDEO_COUNT >= 2)
@@ -7159,6 +7160,8 @@ LPTSTR MApp_ZUI_ACT_GetMenuItemDynamicText(HWND hwnd)
                         #if (INPUT_HDMI_VIDEO_COUNT>=1)
                         case UI_INPUT_SOURCE_HDMI:
                         u16TempID = en_str_HDMI1;
+                        printf("nguyen test en_str_HDMI1 98");
+                        
                         break;
                         #endif
                         #if (INPUT_HDMI_VIDEO_COUNT>=2)

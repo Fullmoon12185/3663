@@ -335,6 +335,7 @@ void msAPI_SetMHEG5_State(M5_MB_RETURN_STATE state)
         case MB_RETURN_MHEG5_SELECTED_QUIT_SEL:
             enMHEG5State = STATE_MHEG5_MENU_EXIT;
             msAPI_MHEG5_SetGoBackMHEG5(true);
+            NGUYEN_DEBUG(printf("nguyen MB_RETURN_MHEG5_SELECTED_QUIT_SEL\n"));
             u8KeyCode = KEY_SELECT;
             break;
         case MB_RETURN_MHEG5_SELECTED_QUIT_0:

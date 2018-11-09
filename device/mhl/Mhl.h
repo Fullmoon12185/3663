@@ -276,7 +276,7 @@
 //        Application New Function Switch       //
 //////////////////////////////////////////////////
 #define MHL_TV_DC_OFF_BEHAVIOR_TV_BACK_TO_NORMAL_ON                 1 //Let TV goes from DC off to normal on when mobile phone plug in
-#define MHL_INPUT_SOURCE_AUTO_SWITCH            1 //auto swtich input source when mobile plugin
+#define MHL_INPUT_SOURCE_AUTO_SWITCH            0 //auto swtich input source when mobile plugin
 
 
 void msAPI_MHL_Initialization(void);

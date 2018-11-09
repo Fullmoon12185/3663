@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -187,6 +187,7 @@ S32 MApp_ZUI_CTL_TextViewerWinProc(HWND hWnd, PMSG pMsg)
                                     for(i=1;i<=u16Temp;i++)
                                     {
                                         param->rect->top = s16TopTemp + ((i-1) * param->rect->height);
+                                        NGUYEN_DEBUG(printf("Nguyen MApp_ZUI_CTL_TextViewerWinProc"));
                                         dyna.pString = MApp_ZUI_ACT_GetDynamicText(hWnd);
                                         if(dyna.pString)
                                         {

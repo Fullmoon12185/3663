@@ -697,7 +697,7 @@
 #if (ENABLE_DTMB_CHINA_APP || ENABLE_ATV_CHINA_APP || ENABLE_SBTVD_BRAZIL_APP || ENABLE_DVBC_PLUS_DTMB_CHINA_APP)
     #define ENABLE_TTX                  DISABLE
 #else
-    #define ENABLE_TTX                  DISABLE//ENABLE
+    #define ENABLE_TTX                  DISABLE
 #endif
 
 #if ENABLE_TTX

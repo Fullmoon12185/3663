@@ -183,6 +183,7 @@ S32 MApp_ZUI_CTL_DynamicEpgPunctuatedTextWinProc(HWND hWnd, PMSG pMsg)
                         //if (style_list->component == CP_TEXT_OUT)
                         {
                             U16 u16TxtComponentIndex = _MApp_ZUI_API_FindFirstComponentIndex(hWnd, ds_type, CP_TEXT_OUT);
+                            NGUYEN_DEBUG(printf("Nguyen MApp_ZUI_CTL_DynamicEpgPunctuatedTextWinProc\n"));
                             LPTSTR pStr = MApp_ZUI_ACT_GetDynamicText(hWnd);
                             if (u16TxtComponentIndex != 0xFFFF && pStr)
                             {
@@ -262,6 +263,7 @@ S32 MApp_ZUI_CTL_EWS_SLIDE_SCROL_WINPROC(HWND hWnd, PMSG pMsg)
                 _MApp_ZUI_API_DefaultOnPaint(hWnd, param, FALSE);
                 {
                     U16 u16TxtComponentIndex = _MApp_ZUI_API_FindFirstComponentIndex(hWnd, ds_type, CP_TEXT_OUT);
+                    NGUYEN_DEBUG(printf("Nguyen _MApp_ZUI_API_DefaultOnPaint\n"));
                     LPTSTR pStr = MApp_ZUI_ACT_GetDynamicText(hWnd);
                     if (u16TxtComponentIndex != 0xFFFF && pStr)
                     {
@@ -358,6 +360,7 @@ S32 MApp_ZUI_CTL_EWSScrollTextWinProc(HWND hWnd, PMSG pMsg)
                         //if (style_list->component == CP_TEXT_OUT)
                         {
                             U16 u16TxtComponentIndex = _MApp_ZUI_API_FindFirstComponentIndex(hWnd, ds_type, CP_TEXT_OUT);
+                            NGUYEN_DEBUG(printf("Nguyen MApp_ZUI_CTL_EWSScrollTextWinProc\n"));
                             LPTSTR pStr = MApp_ZUI_ACT_GetDynamicText(hWnd);
                             if (u16TxtComponentIndex != 0xFFFF && pStr)
                             {
@@ -449,6 +452,7 @@ S32 MApp_ZUI_CTL_DynamicZoom2XPunctuatedTextWinProc(HWND hWnd, PMSG pMsg)
                         //if (style_list->component == CP_TEXT_OUT)
                         {
                             U16 u16TxtComponentIndex = _MApp_ZUI_API_FindFirstComponentIndex(hWnd, ds_type, CP_TEXT_OUT);
+                            NGUYEN_DEBUG(printf("Nguyen MApp_ZUI_CTL_DynamicZoom2XPunctuatedTextWinProc\n"));
                             LPTSTR pStr = MApp_ZUI_ACT_GetDynamicText(hWnd);
                             if (u16TxtComponentIndex != 0xFFFF && pStr)
                             {

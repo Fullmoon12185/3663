@@ -320,7 +320,7 @@ extern void MApp_ZUI_ACT_DrawAisIcon(void);
 #define DEBUG_CHG_SRC_TIME2()    //printf("ChgSrc %u at %u\n", __LINE__, MsOS_GetSystemTime());
 
 #define SIGNAL_PATH_DBG(x)      //do { msDebug_ANSI_SetColorText(E_FONT_BACKGROUND_COLOR_RED); x; msDebug_ANSI_AllAttrOffText(); } while(0)
-#define INPUTSOURCE_DBG(y)      //y
+#define INPUTSOURCE_DBG(y)      y
 #define AIS_DETECT_DUTY         100//150 // ms
 
 #define DEBUG_CVBS_OUT(x)   //do { msDebug_ANSI_SetColorText(E_FONT_BACKGROUND_COLOR_RED); x; msDebug_ANSI_AllAttrOffText(); } while(0)//x
@@ -4179,7 +4179,7 @@ void MApp_Scart_ChangeInputSourceToScart(INPUT_SOURCE_TYPE_t xcTargetScartSource
     MApp_TopStateMachine_SetTopState(STATE_TOP_DIGITALINPUTS);
 
     MApp_ChannelChange_VariableInit();
-
+    NGUYEN_DEBUG(printf("Nguyen stGenSetting.stMiscSetting.bRunInstallationGuide\n"));
     if (MApp_ZUI_GetActiveOSD()!=E_OSD_EMPTY) //ZUI:
     {
         MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_CLOSE_CURRENT_OSD);
@@ -4219,7 +4219,7 @@ void MApp_Scart_ChangeInputSourceFromScart(void)
     MApp_InputSource_ChangeInputSource(MAIN_WINDOW);
     MApp_ChannelChange_VariableInit();
     MApp_TopStateMachine_SetTopState(STATE_TOP_CHANNELCHANGE);
-
+    NGUYEN_DEBUG(printf("Nguyen UI_INPUT_SOURCE_ATV\n"));
     if( MApp_ZUI_GetActiveOSD() != E_OSD_EMPTY ) //ZUI:
     {
         MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_CLOSE_CURRENT_OSD);

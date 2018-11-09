@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -2075,6 +2075,7 @@ LPTSTR MApp_ZUI_ACT_GetChannelInfoDynamicText(HWND hwnd)
             else
           #endif
             {
+                
                 return MApp_ZUI_GetCurrentChName(
                   #if (ENABLE_PIP)
                     _MApp_ZUI_ACT_Channelinfo_PIP_Window_Query(MApp_Get_PIPMode(),MApp_ZUI_API_GetParent(hwnd))
@@ -3236,6 +3237,7 @@ LPTSTR MApp_ZUI_ACT_GetChannelInfoDynamicText(HWND hwnd)
 
         case HWND_CHINFO_PIP_SRC1_SOURCE_TYPE_TEXT:
         case HWND_CHINFO_POP_LEFT_SOURCE_TYPE_TEXT:
+            NGUYEN_DEBUG(printf("Nguyen HWND_CHINFO_POP_LEFT_SOURCE_TYPE_TEXT\n"));
             return MApp_ZUI_GetCurrentChName(
                 #if (ENABLE_PIP)
                 _MApp_ZUI_ACT_Channelinfo_PIP_Window_Query(MApp_Get_PIPMode(),MApp_ZUI_API_GetParent(hwnd))

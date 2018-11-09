@@ -1117,6 +1117,7 @@ static void MApp_ParseKey(void)
               #if (IR_VOLUME_USE_AS_LEFTRIGHT==1)
                 if ((stKeyStatus.keytype == KEY_TYPE_KEYPAD)&&MApp_isKeypadUPLR())
                 {
+                    
                     u8KeyCode = KEY_SELECT;
                 }
                 else
@@ -1131,6 +1132,7 @@ static void MApp_ParseKey(void)
                 // else 
                 if((stKeyStatus.keytype == KEY_TYPE_KEYPAD) && (MApp_ZUI_GetActiveOSD() == E_OSD_INPUT_SOURCE))//ZUI_TODO: &&
                 {
+                    NGUYEN_DEBUG(printf("nguyen KEY_TYPE_KEYPAD()\n"));
                     u8KeyCode = KEY_SELECT;
                 }
                 else if((stKeyStatus.keytype == KEY_TYPE_KEYPAD)  && (MApp_ZUI_GetActiveOSD() == E_OSD_MAIN_MENU) )//ZUI_TODO: &&
@@ -1552,8 +1554,7 @@ static void MApp_CheckKeyStatus(void)
         stKeyStatus.keydown = TRUE;
         stKeyStatus.keydata = key;
         stKeyStatus.keyrepeat = KeyRepeatStatus;
-        isKeyPressed = 1;
-        isKeyPressedForLED = 1;    
+            
         
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_KEYPAD, key, KeyRepeatStatus);
@@ -1565,7 +1566,11 @@ static void MApp_CheckKeyStatus(void)
             stKeyStatus.keydown = FALSE;
         }
       #endif
-        //if(key != 0xff) printf(" Nguyen SAR value = 0x%02x, Repeat = %u \n", key, KeyRepeatStatus);
+        if(key != 0xff){
+            isKeyPressed = 1;
+            isKeyPressedForLED = 1;
+            NGUYEN_DEBUG(printf(" Nguyen SAR value = 0x%02x, Repeat = %u \n", key, KeyRepeatStatus););
+        } 
     }
     else if ( msAPI_GetIRKey(&key, &KeyRepeatStatus) == MSRET_OK )
     {
@@ -1581,8 +1586,10 @@ static void MApp_CheckKeyStatus(void)
         stKeyStatus.keydata = key;
 #endif
         stKeyStatus.keyrepeat = KeyRepeatStatus;
-        isKeyPressed = 1;    
-        isKeyPressedForLED = 1;
+        if(key != 0xff){
+            isKeyPressed = 1;
+            isKeyPressedForLED = 1;
+        } 
         
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_IR, key, KeyRepeatStatus);

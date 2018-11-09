@@ -676,8 +676,8 @@
 #define KEYPAD_KEY_VALIDATION           3
 #define KEYPAD_REPEAT_KEY_CHECK         KEYPAD_KEY_VALIDATION + 2
 #define KEYPAD_REPEAT_KEY_CHECK_1       KEYPAD_KEY_VALIDATION + 3
-#define KEYPAD_STABLE_NUM               10
-#define KEYPAD_STABLE_NUM_MIN           9
+#define KEYPAD_STABLE_NUM               20
+#define KEYPAD_STABLE_NUM_MIN           19
 #define KEYPAD_REPEAT_PERIOD            2 // 6
 #define KEYPAD_REPEAT_PERIOD_1          KEYPAD_REPEAT_PERIOD/2
 

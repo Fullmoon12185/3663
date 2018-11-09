@@ -269,6 +269,7 @@ void MApp_UI_NotifySysEvent(EnuSysEvent enSysEvent, void* pPara)
             if( (MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_QUERY_IS_POWER_OFF_COUNTDOWN_MSG_BOX)) && (TS_TYPE_SLEEPTIMER_NOSIGNAL == enIndicateTimerSource) )
             {
                 MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_CLOSE_CURRENT_OSD);
+                 DEBUG_UI_NOTIFY( printf("nguyen MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_CLOSE_CURRENT_OSD);\n"); );
             }
             break;
 

@@ -596,6 +596,7 @@ BOOLEAN MApp_ZUI_ACT_Startup_ChannelInfo_OSD(void)
     else
 #endif
     {
+        ZUI_MSG(printf("Nguyen MApp_ZUI_ACT_StartupOSD(E_OSD_CHANNEL_INFO)\n"););
         MApp_ZUI_ACT_StartupOSD(E_OSD_CHANNEL_INFO);
         return TRUE;
     }
@@ -2259,6 +2260,7 @@ LPTSTR MApp_ZUI_ACT_GetDynamicText(HWND hwnd)
             return MApp_ZUI_ACT_GetAutoTuningDynamicText(hwnd);
 
         case E_OSD_CHANNEL_INFO:
+            NGUYEN_DEBUG(printf("nguyen E_OSD_CHANNEL_INFO\n"));
             return MApp_ZUI_ACT_GetChannelInfoDynamicText(hwnd);
 
 #if (ENABLE_ATSC)

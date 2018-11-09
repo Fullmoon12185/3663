@@ -252,6 +252,10 @@
 //------------------------------UNUSED MACROS-----------------------------------
 #define _FUNC_NOT_USED()            do {} while ( 0 )
 
+//nguyen
+#define     NGUYEN_DEBUG(x)         //x        
+//nguyen
+
 //------------------------------MS_BOARD_TYPE_SEL-------------------------------
 // Demo board made in Taiwan
 /*

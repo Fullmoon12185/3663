@@ -5549,7 +5549,7 @@ U8 MApi_XC_Sys_HdmiSrcToIdx(INPUT_SOURCE_TYPE_t enINPUT_SOURCE_TYPE)
 }
 
 
-#define HDMI_HDP_TASK_DBG(x)    //x
+#define HDMI_HDP_TASK_DBG(x)    x
 
 void MApi_XC_HPD_Task_PowerOnInit(void)
 {
@@ -5736,7 +5736,7 @@ void MApi_XC_HPD_Task(void)
 
         eCurHdmiPort = eHdmiPortMappingResult[u8HdmiIdx];
 
-        //HDMI_HDP_TASK_DBG(printf(" u8HdmiIdx=%u, curState=%u, eCurHdmiPort=%u\n", u8HdmiIdx, s_Hdmi_Hpd_aeCurState[u8HdmiIdx], eCurHdmiPort););
+        HDMI_HDP_TASK_DBG(printf(" u8HdmiIdx=%u, curState=%u, eCurHdmiPort=%u\n", u8HdmiIdx, s_Hdmi_Hpd_aeCurState[u8HdmiIdx], eCurHdmiPort););
 
         // Check if port valid
         if( eCurHdmiPort == INPUT_PORT_NONE_PORT )
@@ -5838,10 +5838,10 @@ void MApi_XC_HPD_Task(void)
             case E_HPD_STATE__SET_HPD_ENABLE_DELAY:
                 if( MsOS_Timer_DiffTimeFromNow(s_Hdmi_Hpd_au32DelayStartTime[u8HdmiIdx]) > HDMI_HPD_DELAY__CLK_HIGH_TO_HPD_HIGH)
                 {
-                    HDMI_HDP_TASK_DBG(printf("\n port(%u) (6) E_HPD_STATE__SET_HPD_ENABLE_DELAY at %u\n", eCurHdmiPort,MsOS_GetSystemTime()));
+                    HDMI_HDP_TASK_DBG(printf("\n port(%u) (6) E_HPD_STATE__SET_HPD_ENABLE_DELAY at %u\n", eCurHdmiPort, MsOS_GetSystemTime()));
 
                     MApi_XC_HDMI_SetHotPlug(TRUE, eCurHdmiPort); // Set HPD high
-
+                    
                     s_Hdmi_Hpd_aeCurState[u8HdmiIdx] = E_HPD_STATE__HPD_OK;
                     HDMI_HDP_TASK_DBG(printf(" port(%u) E_HPD_STATE__HPD_OK at %u\n", eCurHdmiPort, MsOS_GetSystemTime()));
 

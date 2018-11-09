@@ -3234,6 +3234,7 @@ void MApp_TV_ChannelChangeProc(MS_VIRTUAL_CHANNEL_NUM *pstVirtualChNum, EN_ANT_T
                 MApp_ChannelChange_EnableChannel( MAIN_WINDOW);
 
                 enChannelInfoPageType = TYPE_CHANNEL_BANNER;
+                NGUYEN_DEBUG(printf("nguyen MApp_TV_ChannelChangeProc\n"));
                 MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
                 enTVRetVal = EXIT_NULL;
             }
@@ -3257,6 +3258,7 @@ void MApp_TV_ChannelChangeProc(MS_VIRTUAL_CHANNEL_NUM *pstVirtualChNum, EN_ANT_T
                 MApp_ChannelChange_EnableChannel( MAIN_WINDOW);
 
                 enChannelInfoPageType = TYPE_CHANNEL_BANNER;
+                NGUYEN_DEBUG(printf("nguyen MApp_TV_ChannelChangeProc 2\n"));
                 MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
                 enTVRetVal = EXIT_NULL;
             }
@@ -3282,6 +3284,7 @@ void MApp_TV_ChannelChangeProc(MS_VIRTUAL_CHANNEL_NUM *pstVirtualChNum, EN_ANT_T
             MApp_ChannelChange_EnableChannel( MAIN_WINDOW);
 
             enChannelInfoPageType = TYPE_CHANNEL_BANNER;
+            NGUYEN_DEBUG(printf("nguyen MApp_TV_ChannelChangeProc 3\n"));
             MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
             enTVRetVal = EXIT_NULL;
         }
@@ -4924,6 +4927,7 @@ void MApp_TV_ProcessUserInput(void)
 
             if (IsATVInUse()) // Analog TV
             {
+                NGUYEN_DEBUG(printf("nguyen IsATVInUse()\n"));
                 u8KeyCode = KEY_SELECT;  // Show the brief info
             }
             else
@@ -4951,6 +4955,7 @@ void MApp_TV_ProcessUserInput(void)
             break;
 
         case KEY_SELECT:
+            NGUYEN_DEBUG(printf("nguyen KEY_SELECT 12345\n"));
             if (MApp_ZUI_GetActiveOSD() == E_OSD_TENKEY_NUMBER)
             {
             #if ENABLE_ATSC
@@ -5090,6 +5095,7 @@ void MApp_TV_ProcessUserInput(void)
                  }
                  #endif
                 }
+                NGUYEN_DEBUG(printf("nguyen KEY_SELECT\n"));
                 MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
                 MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_BRIEF_CH_INFO);
                 //MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_TV_BANNER);
@@ -5203,6 +5209,7 @@ void MApp_TV_ProcessUserInput(void)
             }
             else//non DTV/ATV sources
             {
+                NGUYEN_DEBUG(printf("nguyen EN_EXE_SHOW_SOURCE_BANNER 12345\n"));
                 MApp_ZUI_ACT_Startup_ChannelInfo_OSD();
                 //MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_BRIEF_CH_INFO);
                 MApp_ZUI_ACT_ExecuteWndAction(EN_EXE_SHOW_SOURCE_BANNER);
@@ -5732,6 +5739,8 @@ void MApp_TV_ProcessUserInput(void)
       #endif
       #if (INPUT_HDMI_VIDEO_COUNT > 0)
         case KEY_HDMI:
+            NGUYEN_DEBUG(printf("nguyen KEY_HDMI\n"));
+
             if (!IsSrcTypeHDMI(SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW)))
             {
                 #if (ENABLE_PIP)
@@ -5780,6 +5789,7 @@ void MApp_TV_ProcessUserInput(void)
       #endif
       #if (INPUT_SCART_VIDEO_COUNT > 0)
         case KEY_SCART:
+            NGUYEN_DEBUG(printf("nguyen KEY_SCART\n"));
             if (!IsSrcTypeScart(SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW)))
             {
                 #if (ENABLE_PIP)
@@ -5812,6 +5822,7 @@ void MApp_TV_ProcessUserInput(void)
       #endif
       #if (INPUT_AV_VIDEO_COUNT > 0)
         case KEY_AV:
+            NGUYEN_DEBUG(printf("nguyen KEY_AV\n"));
             if (!IsSrcTypeAV(SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW)))
             {
                 #if (ENABLE_PIP)

@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -2128,13 +2128,13 @@ static  FACTORY_MENU_ITEM _ZUI_TBLSEG _FactoryMenuItem[]=
 #define GET_FACTORYMENU_SHOWITEM(stuMenuItem)            GetFactoryMenuItemIndex(stuMenuItem)
 
 // ----------------------------------------------------------
-// ¹¦ÄÜËµÃ÷: »ñÈ¡¹¤³§²Ëµ¥ÏîµÄË÷Òý
-// ²ÎÊýËµÃ÷:
-//    stuMenuItem: ¹¤³§²Ëµ¥ÏîÄ¿FACTORY_MENU_ITEM
-// ·µ»ØËµÃ÷:
-//    ·µ»Ø²Ëµ¥Ïî´Ó0¿ªÊ¼µÄË÷ÒýÖµ
-// ¸½¼ÓËµÃ÷:
-//    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    stuMenuItem: ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ä¿FACTORY_MENU_ITEM
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    ï¿½ï¿½ï¿½Ø²Ëµï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 // ----------------------------------------------------------
 static U8 GetFactoryMenuItemIndex(FACTORY_MENU_ITEM stuMenuItem)
 {
@@ -2144,14 +2144,14 @@ static U8 GetFactoryMenuItemIndex(FACTORY_MENU_ITEM stuMenuItem)
 
     for (i = 0; i < COUNTOF(_FactoryMenuItem); i++)
     {
-        if (_FactoryMenuItem[i].u8ShowItem == 0) //    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+        if (_FactoryMenuItem[i].u8ShowItem == 0) //    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
             ucMenuIndex = 0;
         else
             ucMenuIndex ++;
 
-        // ÌØÊâÒ³ÃæÔÚ´Ë×÷ÌØÊâ´¦Àí
+        // ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½
         if(_FactoryMenuItem[i].eCurPage == EN_FACTORY_PAGE_SW_INFO_PAGE && _FactoryMenuItem[i].u8ShowItem == 1)
-            ucMenuIndex = 1; // EN_FACTORY_PAGE_SW_INFO_PAGEÒ³Ãæ: ´Ó1¿ªÊ¼µÄ£¬Ê×ÏîÔ­ÏÈÒÑ¾­ÓÐÏÔÊ¾ÄÚÈÝ.
+            ucMenuIndex = 1; // EN_FACTORY_PAGE_SW_INFO_PAGEÒ³ï¿½ï¿½: ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
 
         if (_FactoryMenuItem[i].eCurPage == stuMenuItem.eCurPage && _FactoryMenuItem[i].u8ShowItem == stuMenuItem.u8ShowItem)
         {
@@ -2161,27 +2161,27 @@ static U8 GetFactoryMenuItemIndex(FACTORY_MENU_ITEM stuMenuItem)
     }
 
     printf("--WARNING--: FACTORY_MENU_ITEM inexistence!\n");
-    return 0xFF; // ²»´æÔÚµÄÒ³Ãæ
+    return 0xFF; // ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò³ï¿½ï¿½
 }
 
 // ----------------------------------------------------------
-// ¹¦ÄÜËµÃ÷: »ñÈ¡_FactoryMenuItemÊý×éµÄu8ShowItemÖµ
-// ²ÎÊýËµÃ÷:
-//    enuCurPage: µ±Ç°Ò³Ãæ¶ÔÏóFACTORY_MENU_PAGE
-//    ucItemIndex: ²Ëµ¥Ïî´Ó0¿ªÊ¼µÄË÷Òý
-// ·µ»ØËµÃ÷:
-//    ·µ»Ø_FactoryMenuItemÊý×éµÄu8ShowItemÖµ
-// ¸½¼ÓËµÃ÷:
-//    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½È¡_FactoryMenuItemï¿½ï¿½ï¿½ï¿½ï¿½u8ShowItemÖµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    enuCurPage: ï¿½ï¿½Ç°Ò³ï¿½ï¿½ï¿½ï¿½ï¿½FACTORY_MENU_PAGE
+//    ucItemIndex: ï¿½Ëµï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    ï¿½ï¿½ï¿½ï¿½_FactoryMenuItemï¿½ï¿½ï¿½ï¿½ï¿½u8ShowItemÖµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 // ----------------------------------------------------------
 static U16 GetFactoryMenuItemu8ShowItem(FACTORY_MENU_PAGE enuCurPage, U8 ucItemIndex)
 {
     U8 i = 0;
     U8 ucMenuItemuIndex = 0;
 
-    // ÌØÊâÒ³ÃæÔÚ´Ë×÷ÌØÊâ´¦Àí
+    // ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½
     if(enuCurPage == EN_FACTORY_PAGE_SW_INFO_PAGE)
-        ucMenuItemuIndex = 1; // EN_FACTORY_PAGE_SW_INFO_PAGEÒ³Ãæ: ´Ó1¿ªÊ¼µÄ£¬Ê×ÏÈÓÐÏÔÊ¾ÄÚÈÝ.
+        ucMenuItemuIndex = 1; // EN_FACTORY_PAGE_SW_INFO_PAGEÒ³ï¿½ï¿½: ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
 
     for (i = 0; i < COUNTOF(_FactoryMenuItem); i++)
     {
@@ -2196,17 +2196,17 @@ static U16 GetFactoryMenuItemu8ShowItem(FACTORY_MENU_PAGE enuCurPage, U8 ucItemI
     }
 
     printf("--WARNING--: FACTORY_MENU_PAGE or ucItemIndex inexistence!\n");
-    return 0xFF; // ²»´æÔÚµÄÒ³Ãæ
+    return 0xFF; // ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò³ï¿½ï¿½
 }
 
 // ----------------------------------------------------------
-// ¹¦ÄÜËµÃ÷: »ñÈ¡¹¤³§²Ëµ¥±¾Ò³ÔÚÇ°Ò»Ò³²Ëµ¥µÄ²Ëµ¥ÏîµÄË÷Òý
-// ²ÎÊýËµÃ÷:
-//    enuCurPage: µ±Ç°Ò³Ãæ¶ÔÏóFACTORY_MENU_PAGE
-// ·µ»ØËµÃ÷:
-//    ·µ»Ø±¾Ò³ÃæÔÚÇ°Ò»Ò³ÃæµÄ²Ëµ¥Ïî´Ó0¿ªÊ¼µÄË÷ÒýÖµ
-// ¸½¼ÓËµÃ÷:
-//    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ç°Ò»Ò³ï¿½Ëµï¿½ï¿½Ä²Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    enuCurPage: ï¿½ï¿½Ç°Ò³ï¿½ï¿½ï¿½ï¿½ï¿½FACTORY_MENU_PAGE
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    ï¿½ï¿½ï¿½Ø±ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ç°Ò»Ò³ï¿½ï¿½Ä²Ëµï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 // ----------------------------------------------------------
 static U8 GetFactoryPreMenuItemIndex(FACTORY_MENU_PAGE enuCurPage)
 {
@@ -2216,14 +2216,14 @@ static U8 GetFactoryPreMenuItemIndex(FACTORY_MENU_PAGE enuCurPage)
 
     for (i = 0; i < COUNTOF(_FactoryMenuItem); i++)
     {
-        if (_FactoryMenuItem[i].u8ShowItem == 0) //    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+        if (_FactoryMenuItem[i].u8ShowItem == 0) //    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
             ucMenuIndex = 0;
         else
             ucMenuIndex ++;
 
-        // ÌØÊâÒ³ÃæÔÚ´Ë×÷ÌØÊâ´¦Àí
+        // ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½
         if(_FactoryMenuItem[i].eCurPage == EN_FACTORY_PAGE_SW_INFO_PAGE && _FactoryMenuItem[i].u8ShowItem == 1)
-            ucMenuIndex = 1; // EN_FACTORY_PAGE_SW_INFO_PAGEÒ³Ãæ: ´Ó1¿ªÊ¼µÄ£¬Ê×ÏîÔ­ÏÈÒÑ¾­ÓÐÏÔÊ¾ÄÚÈÝ.
+            ucMenuIndex = 1; // EN_FACTORY_PAGE_SW_INFO_PAGEÒ³ï¿½ï¿½: ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
 
         if (_FactoryMenuItem[i].eNextPage == enuCurPage)
         {
@@ -2233,7 +2233,7 @@ static U8 GetFactoryPreMenuItemIndex(FACTORY_MENU_PAGE enuCurPage)
     }
 
     printf("--WARNING--: ePrevPage inexistence!\n");
-    return 0xFF; // ²»´æÔÚÇ°Ò»Ò³Ãæ
+    return 0xFF; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ò»Ò³ï¿½ï¿½
 }
 #endif
 //modify for complie error
@@ -4455,6 +4455,8 @@ static U16 _MApp_ZUI_ACT_GetDataInputSourceStringID(E_DATA_INPUT_SOURCE src)
         #if (INPUT_HDMI_VIDEO_COUNT >= 2)
             case DATA_INPUT_SOURCE_HDMI:
                 u16TempID=en_str_HDMI1;
+                
+                    printf("nguyen test en_str_HDMI1 1111");
                 break;
 
             case DATA_INPUT_SOURCE_HDMI2:
@@ -6849,7 +6851,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteFactoryMenuAction(U16 act)
 
         case EN_EXE_FACTORY_MENU_PREV_PAGE:
            #if(LOG_FACTORYMENU_SHOWITEM)
-             {//  for ·µ»ØÉÏÒ»Ò³Ê±×ÜÊÇÑ¡ÖÐµÚÒ»ÏîµÄBug
+             {//  for ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ò³Ê±ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ðµï¿½Ò»ï¿½ï¿½ï¿½Bug
                 U8 u8Index = GetFactoryPreMenuItemIndex(_eFactoryMenuPage);
                 _MApp_ZUI_ACT_FactoryMenuPrevPage(_MApp_ZUI_ACT_FactoryMenuWindowMapToIndex(MApp_ZUI_API_GetFocus()));
                 _MApp_ZUI_ACT_FactoryMenuInitPage(_eFactoryMenuPage);

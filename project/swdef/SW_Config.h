@@ -820,10 +820,10 @@
 
 //nguyen
 #ifndef UBC_TV40
-    #define UBC_TV40        DISABLE//ENABLE
+    #define UBC_TV40        ENABLE
 #endif
 #ifndef UBC_TV32
-    #define UBC_TV32        ENABLE //DISABLE
+    #define UBC_TV32        DISABLE
 #endif
 //nguyen
 //=================================================================

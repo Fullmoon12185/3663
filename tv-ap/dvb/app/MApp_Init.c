@@ -2425,7 +2425,6 @@ void MApp_PreInit_HDMI_HPD_Init(void)
         MApi_XC_HPD_Do_EnterHDMI( MApp_InputSource_GetInputSourceType( eUI_INPUT_SOURCE) );
     }
   #endif
-
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 #endif
 }

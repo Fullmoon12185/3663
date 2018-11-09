@@ -680,8 +680,10 @@ LPTSTR MApp_ZUI_ACT_GetInputSourceDynamicText(HWND hwnd)
             U8 i;
         #endif
 
-            if(hwnd == HWND_SOURCE_INPUT_ITEM_HDMI1)
+            if(hwnd == HWND_SOURCE_INPUT_ITEM_HDMI1){
                 u16TempID = en_str_HDMI1;
+                NGUYEN_DEBUG(printf("nguyen test en_str_HDMI1 2222"););
+            }
             else if(hwnd == HWND_SOURCE_INPUT_ITEM_HDMI2)
                 u16TempID = en_str_HDMI2;
             else if(hwnd == HWND_SOURCE_INPUT_ITEM_HDMI3)

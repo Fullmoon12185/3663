@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -184,6 +184,7 @@ S32 MApp_ZUI_CTL_DynamicColorTextWinProc(HWND hWnd, PMSG pMsg)
 
                 _MApp_ZUI_API_DefaultOnPaint(hWnd, param, FALSE);
                 u16TxtComponentIndex = _MApp_ZUI_API_FindFirstComponentIndex(hWnd, ds_type, CP_TEXT_OUT);
+                NGUYEN_DEBUG(printf("Nguyen MSG_PAINT\n"));
                 pStr = MApp_ZUI_ACT_GetDynamicText(hWnd);
                 if (u16TxtComponentIndex != 0xFFFF && pStr)
                 {

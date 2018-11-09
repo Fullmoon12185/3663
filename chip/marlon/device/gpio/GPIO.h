@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -131,7 +131,7 @@
 #define SCART_16_9_LEVEL            70              //21
 #endif
 #ifndef SCART_4_3_LEVEL
-#define SCART_4_3_LEVEL             155             //45
+#define SCART_4_3_LEVEL             200             //45
 #endif
 #define SCART_DETECT_LEVEL          SCART_16_9_LEVEL
 #ifndef SCART_ID1_SAR_CHAN

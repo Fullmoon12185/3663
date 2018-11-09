@@ -298,6 +298,7 @@ MS_U8 msAPI_MHL_CbusRcpProcess (MS_U8 rcpCode)
             break;
        #endif
         case RCP_KEYID_SELECT:
+            NGUYEN_DEBUG(printf("nguyen RCP_KEYID_SELECT\n"));
             u8KeyCode = KEY_SELECT;
             break;
         case RCP_KEYID_UP:

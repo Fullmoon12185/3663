@@ -201,7 +201,7 @@
    )
     #define HDMI_HPD_INVERT_FLAG_SEPERATE   1
 #else
-    #define HDMI_HPD_INVERT_FLAG_SEPERATE   0
+    #define HDMI_HPD_INVERT_FLAG_SEPERATE   1
 #endif
 
 #if( (CHIP_FAMILY_TYPE == CHIP_FAMILY_EULER) )
