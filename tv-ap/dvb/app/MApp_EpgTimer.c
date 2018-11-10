@@ -84,7 +84,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -554,7 +554,7 @@ void _MApp_EpgTimer_RetrieveTimerList(void)
 
     // Load data from data base
     MApp_DB_Load_ManualEventSetting( (U8*)_pstEpgTimer, EPG_REAL_USE_DB_SIZE);
-
+    printf("Nguyen UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     //_MApp_EpgTimer_CloseXdataWindow(u32PrvAddress);
 }
 

@@ -2703,7 +2703,7 @@ void MApp_MultiTasks(void)
 #if (INPUT_SCART_VIDEO_COUNT > 0)
     if( !IsStorageInUse() )
     {
-        MApp_InputSource_ScartIOMonitor();
+        //MApp_InputSource_ScartIOMonitor();
         MT_CHECK_POINT();
     }
 #endif

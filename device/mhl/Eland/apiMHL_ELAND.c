@@ -309,7 +309,7 @@ MS_BOOL _mapi_mhl_CableDetect(void)
             mdrv_mhl_DriverControl(MHL_CABLE_PLUGGED);
 
             SET_MHL_CABLE_PLUGGED();
-            msg_mhl(printf("** MHL Cable plugged!!\r\n"));
+            msg_mhl(printf("** Nguyen MHL Cable plugged!!\r\n"));
         }
     }
     else
@@ -325,7 +325,7 @@ MS_BOOL _mapi_mhl_CableDetect(void)
 
             mdrv_mhl_DriverControl(MHL_CABLE_UNPLUGGED);
 
-            msg_mhl(printf("** MHL Cable unplugged~~\r\n"));
+            msg_mhl(printf("** Nguyen MHL Cable unplugged~~\r\n"));
         }
     }
 
@@ -336,6 +336,7 @@ MS_BOOL _mapi_mhl_CableDetect(void)
         mapi_mhl_CbusControl(MHL_CBUS_FLOATING_OFF);
 
         SET_MHL_PORT_ON_FLAG();
+        msg_mhl(printf("** Nguyen GET_MHL_PORT_ON_FLAG~~\r\n"));
     }
 
     return GET_MHL_CABLE_PLUGGED();
@@ -876,6 +877,7 @@ MS_U8 _mapi_mhl_CBusGetQueueIndex(MS_U8 ucIndex)
 void _mapi_mhl_CbusTimerHandler(MS_U32 usTimer)
 {
 #if(DMHL_TIMER_POLLING_INTERVAL)
+    msg_mhl(printf("**Nguyen MHL TOUT 0\n"));
     MS_U32 ustemp = (GET_MHL_TIMEOUT_TIMER() +GET_MHL_DEBOUNCE_TIMER()) %CBUS_TIMER_CONTROL_MASK;   // Departure time
 
     // Current time
@@ -887,13 +889,14 @@ void _mapi_mhl_CbusTimerHandler(MS_U32 usTimer)
     {
         // Reset Timer
         CLR_MHL_TIME_OUT_FLAG();
+         msg_mhl(printf("**Nguyen MHL TOUT 1\n"));
     }
 
     if(usTimer != GET_MHL_TIMEOUT_TIMER())
     {
         // Departure time minus current time
         ustemp = (ustemp +CBUS_TIMER_CONTROL_MASK -usTimer) %CBUS_TIMER_CONTROL_MASK;
-
+         msg_mhl(printf("**Nguyen MHL TOUT\n"));
         if(ustemp > (CBUS_TIMER_CONTROL_MASK /2))   // Current time larger than departure time
         {
             // CTS 6.3.6.4 verify DUT receives result timeout => couldn's send any MSC packet within 2sec
@@ -917,7 +920,7 @@ void _mapi_mhl_CbusTimerHandler(MS_U32 usTimer)
 
 #else
     usTimer = usTimer;
-
+    msg_mhl(printf("**Nguyen MHL TOUT 123\n"));
     if(GET_MHL_DEBOUNCE_TIMER() > 0)
     {
         DEC_MHL_DEBOUNCE_TIMER();
@@ -1470,6 +1473,7 @@ void mapi_mhl_handler(void)
 
     if(_mapi_mhl_CableDetect())
     {
+
         if(GET_MHL_CBUS_CONNECT())
         {
             _mapi_mhl_CbusIntCB();

@@ -222,7 +222,7 @@
 #define DEBUG_ASPECT_RATIO(x)           //x
 #define DEBUG_SCALER_FLOW(x)            //x
 #define DEBUG_SCALER_INPUT_TIMING(x)    //x
-#define DEBUG_OVERSCAN(x)               //x
+#define DEBUG_OVERSCAN(x)               x
 
 #define MENU_3D_DBG(x)                  //x
 #if 0
@@ -8171,6 +8171,7 @@ BOOL MApp_Scaler_Check_IfCanEnableOverScan(
     if( IsHDMIInUse() )
     {
     #if ((ENABLE_MHL == ENABLE) && (ENABLE_MHL_NO_OVERSCAN == ENABLE))
+        NGUYEN_MHL_DEBUG(printf("NGUYEN MHL Force OverScan Off\n"););
         if( msAPI_MHL_IsCbusConnected() && (UI_INPUT_SOURCE_TYPE == HDMI_PORT_FOR_MHL) )
         {
             printf(" MHL Force OverScan Off\n");

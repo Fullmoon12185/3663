@@ -1576,7 +1576,7 @@ void _MApp_PCMode_ModeParse(INPUT_SOURCE_TYPE_t src,SCALER_WIN eWindow)
                     }
                 }
 
-                // Fix Mantis-0939712:  [SQC][Maya_084B][2nd_ATSC][D-Sub] ¨Ï¥ÎMSPG-925FS > Timing :1920x1080@60Hz >µe­±°¾²¾
+                // Fix Mantis-0939712:  [SQC][Maya_084B][2nd_ATSC][D-Sub] ï¿½Ï¥ï¿½MSPG-925FS > Timing :1920x1080@60Hz >ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 // 20150819: It should not change the result of ModeParse!!
                 // It will cause mode index wrong and auto position failed!
                 /*
@@ -1633,7 +1633,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
           previous_status[eWindow] != current_status ) // unstable or no sync
     {
         // Disable all destination as soon as possiable.
-        printf("[PCMode] stable -> unstable or no sync(%u) at %u\n", current_status, MsOS_GetSystemTime());
+        printf("[PCMode] stable -> unstable or no sync(%u) at %u src = %u\n", current_status, MsOS_GetSystemTime(), src);
 
     #if(DEBUG_CHG_SRC_TIME)
         msDebug_PrintChgSrcTime("Sync unstable");
@@ -2498,8 +2498,9 @@ void MApp_PC_MainWin_Handler(INPUT_SOURCE_TYPE_t src, BOOLEAN bRealTimeMonitorOn
 
     XC_PCMONITOR_STATUS eXC_PCMONITOR_STATUS = MApi_XC_PCMonitor(src, MAIN_WINDOW);
 
-    PCMODE_TASK_CHECK();
 
+    PCMODE_TASK_CHECK();
+    
     _MApp_PCMode_StatusHandler(src, eXC_PCMONITOR_STATUS, MAIN_WINDOW);
 
     PCMODE_TASK_CHECK();

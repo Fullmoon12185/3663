@@ -336,11 +336,14 @@ MS_BOOL msAPI_MHL_SendRAPCmd(MS_U8 databuf)
 #elif (MHL_TYPE == MHL_TYPE_INTERNAL)
 BOOLEAN msAPI_MHL_IsCbusConnected(void)
 {
+    //NGUYEN_MHL_DEBUG(printf("nguyen 000\n"););
+    //mapi_mhl_CbusControl(MHL_FORCE_HDMI_BY_PASS);
     return mapi_mhl_CbusStatus();
 }
 
 void msAPI_MHL_MHLSupportPath(MS_U8 ucSelect)
 {
+    NGUYEN_MHL_DEBUG(printf("nguyen 01010101\n"););
     mapi_mhl_MHLSupportPath(ucSelect);
 }
 
@@ -367,10 +370,13 @@ void msAPI_MHL_Handler(MS_U8 ucCurrentPortType)
 #if MHL_INPUT_SOURCE_AUTO_SWITCH
         MS_U8 ucMHLInputSourcePort;
 #endif
-
+    
     if((ucCurrentPortType < UI_INPUT_SOURCE_HDMI) || (UI_INPUT_SOURCE_HDMI_END <= ucCurrentPortType))
     {
+        //NGUYEN_MHL_DEBUG(printf("nguyen 3232323\n ucCurrentPortType = %u UI_INPUT_SOURCE_HDMI = %u UI_INPUT_SOURCE_HDMI_END = %u\n", ucCurrentPortType, UI_INPUT_SOURCE_HDMI, UI_INPUT_SOURCE_HDMI_END););
+        //mapi_mhl_CbusControl(MHL_FORCE_HDMI_BY_PASS);
         mapi_mhl_CbusControl(MHL_CBUS_FORCE_CLEAR_HPD);
+        
     }
 
     //if(ucCurrentPortType == ucMHLPortType)
@@ -412,6 +418,8 @@ void msAPI_MHL_Handler(MS_U8 ucCurrentPortType)
 
 void msAPI_MHL_SourceChange(MS_U8 ucCurrentPortType)
 {
+    NGUYEN_MHL_DEBUG(printf("nguyen 5555\n ucCurrentPortType = %u UI_INPUT_SOURCE_HDMI = %u UI_INPUT_SOURCE_HDMI_END = %u\n", ucCurrentPortType, UI_INPUT_SOURCE_HDMI, UI_INPUT_SOURCE_HDMI_END););
+    
     if((ucCurrentPortType < UI_INPUT_SOURCE_HDMI) || (UI_INPUT_SOURCE_HDMI_END <= ucCurrentPortType))
     {
         mapi_mhl_CbusControl(MHL_CBUS_FORCE_CLEAR_HPD);
@@ -424,6 +432,8 @@ void msAPI_MHL_SourceChange(MS_U8 ucCurrentPortType)
 
 void msAPI_MHL_TV_DC_off(void)
 {
+    NGUYEN_MHL_DEBUG(printf("nguyen 111\n"););
+    
     mapi_mhl_PowerCtrl(E_MHL_POWER_STANDBY); //MSG1200 into power saving mode
 
 #if MHL_TV_DC_OFF_BEHAVIOR_TV_BACK_TO_NORMAL_ON
@@ -438,6 +448,7 @@ void msAPI_MHL_TV_DC_off(void)
 
 MS_BOOL msAPI_MHL_SendRCP_PressRelease_Cmd(MS_U8 u8RCPKey, MS_BOOL bIsRelease)
 {
+    NGUYEN_MHL_DEBUG(printf("nguyen 888\n"););
     return mapi_mhl_SendRCP_PressRelease_Cmd(u8RCPKey, bIsRelease);
 }
 
@@ -454,6 +465,7 @@ MS_BOOL msAPI_MHL_SendRAPCmd(MS_U8 databuf)
 
 MS_BOOL msAPI_MHL_CableDetect(void)
 {
+    NGUYEN_MHL_DEBUG(printf("nguyen 9898\n"););
     return mapi_mhl_CableDetect();
 }
 
@@ -515,6 +527,7 @@ void msAPI_MHL_Initialization(void)
 void msAPI_MHL_Handler(MS_U8 ucCurrentPortType)
 {
     if((ucCurrentPortType < UI_INPUT_SOURCE_HDMI) || (UI_INPUT_SOURCE_HDMI_END <= ucCurrentPortType))
+        NGUYEN_DEBUG(printf("nguyen ucCurrentPortType = %u UI_INPUT_SOURCE_HDMI = %u UI_INPUT_SOURCE_HDMI_END = %u\n", ucCurrentPortType, UI_INPUT_SOURCE_HDMI, UI_INPUT_SOURCE_HDMI_END););
         mapi_mhl_handler();
     }
 }

@@ -4171,7 +4171,7 @@ void MApp_Scart_ChangeInputSourceToScart(INPUT_SOURCE_TYPE_t xcTargetScartSource
     else
 #endif
     {
-        //printf("Scart-pin 8 detected, changed to scart1\n");
+        printf("Scart-pin 8 detected, changed to scart1\n");
         UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_SCART;
     }
 
@@ -4235,7 +4235,7 @@ void MApp_Scart_ChangeInputSourceFromScart(void)
 #if( CHIP_FAMILY_TYPE == CHIP_FAMILY_S7LD )
     #define SCART_PIN8_CONTROL_USE_LOPEZ_METHOD 1
 #else
-    #define SCART_PIN8_CONTROL_USE_LOPEZ_METHOD 1
+    #define SCART_PIN8_CONTROL_USE_LOPEZ_METHOD 0
 #endif
 
 #if( SCART_PIN8_CONTROL_USE_LOPEZ_METHOD )
@@ -4512,7 +4512,8 @@ void MApp_InputSource_ScartIOMonitor(void)
         case PIN8_SCART1_LH:
             if( SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW) != INPUT_SOURCE_SCART )
             {
-                printf("\r\n Change To Scart Source1 \n");
+                printf("SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW) = %u\n", SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW));
+                printf("\r\nNguyen  Change To Scart Source1 \n");
                 MApp_Scart_ChangeInputSourceToScart(INPUT_SOURCE_SCART);
             }
             break;

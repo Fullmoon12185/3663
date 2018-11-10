@@ -189,7 +189,7 @@ LED 300mA - Panel 32 inch JP
 #define     HOME_BACKLIGHT_1    100
 #define     HOME_BACKLIGHT_2    89
 #define     HOME_BACKLIGHT_3    78
-#define     DEBUG_HOME_SHOP(x)  //x
+#define     DEBUG_HOME_SHOP(x)  x
 
 static U16 fourKeyPressed = 0;
 static U16 countForHomeShop = 0;
@@ -258,7 +258,7 @@ MS_BOOL MApp_PowerOn_Stage_Debug(void)
 
 /***************************************************************************************/
 
-#define MAIN_FUNC_STATE_DBG(x)  //x
+#define MAIN_FUNC_STATE_DBG(x)  x
 //#define MAIN_FUNC_STATE_DBG(x)  do{ msDebug_ANSI_SetColorText_2(E_FONT_COLOR_BLACK,E_FONT_BACKGROUND_COLOR_PURPLE); x; msDebug_ANSI_AllAttrOffText(); } while(0)
 
 
@@ -316,7 +316,7 @@ void MApp_Bench_PowerOffLED(void)
 }
 #endif
 
-#define DEBUG_INIT_STATE_NAME(x) //x
+#define DEBUG_INIT_STATE_NAME(x) x
 
 MS_BOOL MApp_PreInit_State(void)
 {
@@ -339,7 +339,7 @@ MS_BOOL MApp_PreInit_State(void)
 #if(ENABLE_STACK_CHECK)
     CHECK_STACK();
 #endif
-
+    DEBUG_INIT_STATE_NAME(printf("Nguyen Nguyen UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE););
     switch ( enPreInit_Sub_State )
     {
         case EN_PRE_INIT_INITIATION:
@@ -354,6 +354,7 @@ MS_BOOL MApp_PreInit_State(void)
         case EN_PRE_INIT_STAGE_GLOBALVAR_INIT:
             DEBUG_INIT_STATE_NAME( printf(">> NPN --  MApp_PreInit_GlobalVariable_Init() \n"););
             MApp_PreInit_GlobalVariable_Init();
+            
             break;
 
         case EN_PRE_INIT_STAGE_POWERSETTING_INIT:
@@ -403,14 +404,20 @@ MS_BOOL MApp_PreInit_State(void)
         case EN_PRE_INIT_STAGE_DATABASE_INIT:
             DEBUG_INIT_STATE_NAME( printf("EN_PRE_INIT_STAGE_DATABASE_INIT\n"); );
             MApp_PreInit_DateBase_Init();
+            //default input source
+            //UI_INPUT_SOURCE_TYPE = 10; //(E_UI_INPUT_SOURCE)MApp_Load_Input_Source();
+            DEBUG_INIT_STATE_NAME(printf("Nguyen MApp_PreInit_DateBase_Init UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE););
             break;
 
         case EN_PRE_INIT_STAGE_ATVPROC_AUDIO_INIT:
         //Reduce power-on music playing time.
             PRINT_AUTOTEST_CHECKPT_TIME("start ATVProc_Init_Audio");
+            DEBUG_INIT_STATE_NAME(printf("Nguyen MApp_PreInit_ATVProc_Audio_Init UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE););
             MApp_PreInit_ATVProc_Audio_Init();
+            DEBUG_INIT_STATE_NAME(printf("Nguyen Nguyen UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE););
             PRINT_AUTOTEST_CHECKPT_TIME("start AUD_Setting");
             MApp_PreInit_Audio_Setting_Init();
+            DEBUG_INIT_STATE_NAME(printf("Nguyen MApp_PreInit_Audio_Setting_Init UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE););
             break;
 
     #if(ENABLE_ATSC_TTS)
@@ -987,6 +994,9 @@ void update_count_for_home_shop(void){
     DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
     DEBUG_HOME_SHOP(printf("\n******homeshop_state %u\n", homeshop_state););
     DEBUG_HOME_SHOP(printf("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"););
+    MApp_Save_Input_Source((U8)UI_INPUT_SOURCE_TYPE);
+    DEBUG_HOME_SHOP(printf("\n******UI_INPUT_SOURCE_TYPE %u\n", UI_INPUT_SOURCE_TYPE););
+
 }
 void HomeShop_FSM (void){
 

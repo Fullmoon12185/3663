@@ -420,7 +420,7 @@
 #define ENABLE_MHL                              ENABLE
 #define HDMI_PORT_FOR_MHL                       UI_INPUT_SOURCE_HDMI
 //------ HDMI RELATED ---------------------------------------------------------
-#define HDCP_HPD_INVERSE                ENABLE
+#define HDCP_HPD_INVERSE                DISABLE
 #define HDCP_HPD_2_INVERSE              1
 #define HDCP_HPD_3_INVERSE              1
 #define HDCP_HPD_4_INVERSE              1

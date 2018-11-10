@@ -1673,6 +1673,7 @@ void MApp_PreInit_GlobalVariable_Init(void)
     // Debug get key init
     UART_Clear();
 
+    
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }
 
@@ -1789,31 +1790,32 @@ void MApp_PreInit_DateBase_Init(void)
 
     // Check data base
     MApp_DB_Check();
-
+    printf("Nguyen 1 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     // Init flash write protect
     msAPI_Flash_Init();
+    printf("Nguyen 2 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     msAPI_Flash_Init_WriteProtect();
-
+    printf("Nguyen 3 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     // EEPROM restore or init global setting
 #if (EEPROM_DB_STORAGE!=EEPROM_SAVE_NONE)
     MApp_CheckEEPROM();
 #endif
-
+    printf("Nguyen 4 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     // Flash restore or init global setting
     // When the Flash is normal, please first read (UserData & Channel Data)
 #if (EEPROM_DB_STORAGE != EEPROM_SAVE_ALL)
     MApp_CheckFlash();
 #endif
-
+    printf("Nguyen 5 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     // Check and modify power on/off flag
     MApp_PreInit_CheckAndModifyPowerOnOffFlag();
-
+    printf("Nguyen 6 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
 #if ENABLE_SBTVD_DTV_SYSTEM
     g_bIsSbtvdAppEn = IS_SBTVD_APP_COUNRTY(stGenSetting.stTvSetting.eCountry);
 #endif
-
+    printf("Nguyen 7 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     msAPI_ATV_InitVariable(); // must after g_bIsSbtvdAppEn setup
-
+    printf("Nguyen 8 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }
 
@@ -2272,11 +2274,12 @@ void MApp_PreInit_UI_InputSource_Init(void)
         }
 
         UI_INPUT_SOURCE_TYPE = MApp_InputSrc_Get_PrevUiInputSrcType();
+        
     }
 #endif
 
     MApp_InputSrc_Set_PrevUiInputSrcType(UI_INPUT_SOURCE_TYPE);
-
+    printf("Nguyen UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
 
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }
@@ -2419,7 +2422,7 @@ void MApp_PreInit_HDMI_HPD_Init(void)
   #if(!SUPPORT_HDMI_IMM_SWITCH)
     // If first input-source is HDMI, Do HPD : Low --> High
     E_UI_INPUT_SOURCE eUI_INPUT_SOURCE = MApp_InputSrc_Get_UiInputSrcType();
-
+    printf("Nguyen eUI_INPUT_SOURCE = %u\n", eUI_INPUT_SOURCE);
     if( MApp_InputSrc_Is_UiInputSrcTypeHDMI(eUI_INPUT_SOURCE) )
     {
         MApi_XC_HPD_Do_EnterHDMI( MApp_InputSource_GetInputSourceType( eUI_INPUT_SOURCE) );
@@ -2822,6 +2825,7 @@ void MApp_PreInit_Source_Change_Init(void)
 #endif
 
     MApp_InputSource_SwitchSource(UI_INPUT_SOURCE_TYPE, MAIN_WINDOW);
+    printf("Nguyen MApp_InputSource_SwitchSource UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
 
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }

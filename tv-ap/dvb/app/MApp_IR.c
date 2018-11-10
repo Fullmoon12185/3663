@@ -1589,7 +1589,7 @@ static void MApp_CheckKeyStatus(void)
         if(key != 0xff){
             isKeyPressed = 1;
             isKeyPressedForLED = 1;
-        } 
+            } 
         
       #if ENABLE_KEY_LOGGER
         MApp_KeyLogger_Action_Save(KEY_TYPE_IR, key, KeyRepeatStatus);
@@ -2083,7 +2083,7 @@ void MApp_ProcessUserInput(void)
         {
                 if (msAPI_MHL_IRKeyProcess(u8KeyCode, FALSE))
                 {
-                  //  printf("[press] IRKey Diff Time = %d\n", DIFFERENCE(u32KeydownTime, msAPI_Timer_GetTime0()));
+                    printf("[press] IRKey Diff Time = %d\n", DIFFERENCE(u32KeydownTime, msAPI_Timer_GetTime0()));
                     u8PrePressedKey = u8KeyCode;
                     u8KeyCode = KEY_NULL;
                     u32KeydownTime = msAPI_Timer_GetTime0();
@@ -2412,6 +2412,7 @@ void MApp_ProcessUserInput(void)
       else if (((UI_INPUT_SOURCE_HDMI <= UI_INPUT_SOURCE_TYPE) && (UI_INPUT_SOURCE_TYPE < UI_INPUT_SOURCE_HDMI_END))
             && mapi_mhl_SendMSGCmdFlag()&&msAPI_MHL_IsCbusConnected())
       {
+          NGUYEN_MHL_DEBUG(printf("NGUYEN MHL\n"););
           if ((bIsPressed == TRUE)&&(DIFFERENCE(u32KeydownTime, msAPI_Timer_GetTime0()) > PRESS_RELEASE_TIMEOUT))
           {
               //printf("[Release]DIFFERENCE=%d, PRESS_RELEASE_TIMEOUT=%d\n", DIFFERENCE(u32KeydownTime, msAPI_Timer_GetTime0()), PRESS_RELEASE_TIMEOUT);

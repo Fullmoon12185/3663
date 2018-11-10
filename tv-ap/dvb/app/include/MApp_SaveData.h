@@ -378,13 +378,18 @@
 #endif
 
 //nguyen
-#define FMAP_USER_DATA_FOR_HOME_SHOP_SIZE          2
+#define FMAP_USER_DATA_FOR_HOME_SHOP_SIZE                2
 #define FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR          (RM_DTV_ATSC_CHDATA_END_ADDR)
-#define FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR           (FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR + FMAP_USER_DATA_FOR_HOME_SHOP_SIZE)     
+#define FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR            (FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR + FMAP_USER_DATA_FOR_HOME_SHOP_SIZE)     
+
+#define FMAP_INPUT_SOURCE_SIZE                                2
+#define FMAP_INPUT_SOURCE_START_ADDR                  (FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR)
+#define FMAP_INPUT_SOURCE_END_ADDR                    (FMAP_INPUT_SOURCE_START_ADDR + FMAP_INPUT_SOURCE_SIZE)     
+
 
 //nguyen
 //--------------------------------------------------------------------------------------------
-#define RM_DB_CH_END_ADDR                   (FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR) //(RM_DTV_ATSC_CHDATA_END_ADDR)
+#define RM_DB_CH_END_ADDR                   (FMAP_INPUT_SOURCE_END_ADDR) //(RM_DTV_ATSC_CHDATA_END_ADDR)
 
 #define RM_DB_CH_TOTAL_USAGE_REAL           (RM_DB_CH_END_ADDR - RM_DB_CH_START_ADDR)
 
@@ -736,6 +741,8 @@ void MApp_SaveData_RestoreToDefault(U8 u8SaveDataId);
 //nguyen
 void MApp_Save_UserDataForHomeShop(U16 countForHomeShop);
 U16 MApp_Load_UserDataForHomeShop(void);
+void MApp_Save_Input_Source(U8 inputSource);
+U8 MApp_Load_Input_Source(void);
 //nguyen
 //==============================================================
 

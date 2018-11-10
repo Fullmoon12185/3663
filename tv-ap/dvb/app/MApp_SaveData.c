@@ -1076,6 +1076,23 @@ U16 MApp_Load_UserDataForHomeShop(void) {
     DEBUG_SAVE_DATA(printf("MApp_Load_UserDataForHomeShop buff_count[0] = %u, buff_count[1] = %u\n", buff_count[0], buff_count[1]));
     return (buff_count[1] << 8) | buff_count[0];
 }
+
+void MApp_Save_Input_Source(U8 inputSource){
+    U8 buff_count[2];
+    buff_count[0] = inputSource;
+    buff_count[1] = inputSource;
+    MApp_WriteDatabase(FMAP_INPUT_SOURCE_START_ADDR, buff_count, FMAP_INPUT_SOURCE_SIZE);
+}
+U8 MApp_Load_Input_Source(void){
+    U8 buff_count[2];
+    MApp_ReadDatabase(FMAP_INPUT_SOURCE_START_ADDR, buff_count, FMAP_INPUT_SOURCE_SIZE);
+    if(buff_count[0] == buff_count[1]){
+        return buff_count[0];
+    } else {
+        return 10;
+    }
+    return buff_count[0];
+}
 //nguyen
 
 
@@ -2936,7 +2953,7 @@ void MApp_InitOverScanData(void)
     }
 }
 
-#define DEBUG_OVERSCAN(x) //x
+#define DEBUG_OVERSCAN(x) x
 void MApp_LoadOverScanData (void)
 {
     DEBUG_OVERSCAN( printf("MApp_LoadOverScanData()\n"); );
