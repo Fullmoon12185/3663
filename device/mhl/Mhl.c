@@ -343,8 +343,7 @@ BOOLEAN msAPI_MHL_IsCbusConnected(void)
 
 void msAPI_MHL_MHLSupportPath(MS_U8 ucSelect)
 {
-    NGUYEN_MHL_DEBUG(printf("nguyen 01010101\n"););
-    mapi_mhl_MHLSupportPath(ucSelect);
+   mapi_mhl_MHLSupportPath(ucSelect);
 }
 
 void msAPI_MHL_Initialization(void)
@@ -358,6 +357,7 @@ void msAPI_MHL_Initialization(void)
 
 #if(MHL_VBUS_OPTION_STATE > 0)
     mapi_mhl_VbusConfigSetting(MHL_VBUS_OPTION_STATE);
+    printf("\r\nMHL Init, MHL_TYPE = 0x%x\r\n", MHL_TYPE);
 #endif
 
 #if(MHL_READ_DEVICE_CAPABILITY) //patch timing problem
@@ -368,7 +368,7 @@ void msAPI_MHL_Initialization(void)
 void msAPI_MHL_Handler(MS_U8 ucCurrentPortType)
 {
 #if MHL_INPUT_SOURCE_AUTO_SWITCH
-        MS_U8 ucMHLInputSourcePort;
+        //MS_U8 ucMHLInputSourcePort;
 #endif
     
     if((ucCurrentPortType < UI_INPUT_SOURCE_HDMI) || (UI_INPUT_SOURCE_HDMI_END <= ucCurrentPortType))
@@ -385,16 +385,16 @@ void msAPI_MHL_Handler(MS_U8 ucCurrentPortType)
 
         _msAPI_MHL_ReadDeviceInformation();
     }
-
+    
 #if MHL_INPUT_SOURCE_AUTO_SWITCH
     // If in auto scan, return
     if( MApp_Is_InAutoScan_ATV() || MApp_Is_InAutoScan_DTV() )
         return;
 
-    if(mapi_mhl_AutoSwitchHandler(FALSE, &ucMHLInputSourcePort))
+    //(mapi_mhl_AutoSwitchHandler(FALSE, &ucMHLInputSourcePort))
     {
         //switch input source
-        UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_HDMI + (E_UI_INPUT_SOURCE)ucMHLInputSourcePort;
+        UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_HDMI3;// + (E_UI_INPUT_SOURCE)ucMHLInputSourcePort;
     #if (ENABLE_DMP)
         if(IsStorageInUse())
         {
@@ -418,8 +418,6 @@ void msAPI_MHL_Handler(MS_U8 ucCurrentPortType)
 
 void msAPI_MHL_SourceChange(MS_U8 ucCurrentPortType)
 {
-    NGUYEN_MHL_DEBUG(printf("nguyen 5555\n ucCurrentPortType = %u UI_INPUT_SOURCE_HDMI = %u UI_INPUT_SOURCE_HDMI_END = %u\n", ucCurrentPortType, UI_INPUT_SOURCE_HDMI, UI_INPUT_SOURCE_HDMI_END););
-    
     if((ucCurrentPortType < UI_INPUT_SOURCE_HDMI) || (UI_INPUT_SOURCE_HDMI_END <= ucCurrentPortType))
     {
         mapi_mhl_CbusControl(MHL_CBUS_FORCE_CLEAR_HPD);
@@ -431,9 +429,7 @@ void msAPI_MHL_SourceChange(MS_U8 ucCurrentPortType)
 }
 
 void msAPI_MHL_TV_DC_off(void)
-{
-    NGUYEN_MHL_DEBUG(printf("nguyen 111\n"););
-    
+{ 
     mapi_mhl_PowerCtrl(E_MHL_POWER_STANDBY); //MSG1200 into power saving mode
 
 #if MHL_TV_DC_OFF_BEHAVIOR_TV_BACK_TO_NORMAL_ON

@@ -286,6 +286,7 @@ MS_BOOL mapi_mhl_CableDetect(void)
 //**************************************************************************
 MS_BOOL mapi_mhl_CbusStatus(void)
 {
+    printf("CBUS_INDEX =%u\n", CBUS_INDEX);
     return GET_MHL_CBUS_CONNECT();
 }
 
@@ -302,6 +303,7 @@ MS_BOOL mapi_mhl_CbusStatus(void)
 //**************************************************************************
 MS_BOOL _mapi_mhl_CableDetect(void)
 {
+    msg_mhl(printf("** Nguyen M_mapi_mhl_CableDetect!!\r\n"));
     if(mdrv_mhl_CableDetect())
     {
         if(!GET_MHL_CABLE_PLUGGED())
@@ -812,21 +814,24 @@ void _mapi_mhl_CbusProcessMSCSubCmd(MS_U8 subcmd, MS_U8 subdata)
 MS_BOOL _mapi_mhl_CbusStatus(void)
 {
     MS_U16 status;
-
+    printf("Nguyen _mapi_mhl_CbusStatus\n");
     status = mdrv_mhl_CbusStatus();
 
     if(GET_MHL_CBUS_CONNECT() && ((status & 0x03) != 0x03))
     {
         SET_MHL_CBUS_STATE(CBUS_STATE_IDLE); // returm to idle state
+        msg_mhl(printf("**SET_MHL_CBUS_STATE(CBUS_STATE_IDLE); \n"));
     }
 
     if((status & 0x03) == 0x03)
     {
         SET_MHL_CBUS_CONNECT();
+        msg_mhl(printf("**SET_MHL_CBUS_CONNECT();\n"));
     }
     else
     {
         CLR_MHL_CBUS_CONNECT();
+        msg_mhl(printf("** CLR_MHL_CBUS_CONNECT();\n"));
     }
 
     return GET_MHL_CBUS_CONNECT();
@@ -1002,7 +1007,7 @@ void _mapi_mhl_CbusLinkCheck(void)
 void _mapi_mhl_CbusRxHandler(void)
 {
     MS_U8 uctemp = 0;
-
+    printf("Nguyen _mapi_mhl_CbusRRRRxHandler\n");
     if(GET_MHL_RECEIVE_MSC())
     {
         if(GET_MHL_TIME_OUT_FLAG())
@@ -1085,6 +1090,7 @@ void _mapi_mhl_CbusRxHandler(void)
 void _mapi_mhl_CbusTxHandler(void)
 {
     MS_U8 ucindex = 0;
+    printf("Nguyen _mapi_mhl_CbusTxHandler\n");
 
     switch(GET_MHL_CBUS_STATE())
     {
@@ -1194,7 +1200,7 @@ MS_BOOL _mapi_mhl_Cbus_SetHPDState(MS_BOOL bflag)
 {
     MS_BOOL bIndex;
     CbusReq_S req;
-
+    printf("Nguyen iueroiu\n");
     if(GET_MHL_HPD_SET_FLAG() == bflag)
     {
         return TRUE;
@@ -1473,12 +1479,13 @@ void mapi_mhl_handler(void)
 
     if(_mapi_mhl_CableDetect())
     {
-
+        msg_mhl(printf("**_mapi_mhl_CableDetect \n"));
         if(GET_MHL_CBUS_CONNECT())
         {
             _mapi_mhl_CbusIntCB();
             _mapi_mhl_CbusIntHandler();
             _mapi_mhl_CbusRxHandler();
+            msg_mhl(printf("**GET_MHL_CBUS_CONNECT \n"));
         }
 
         _mapi_mhl_CbusTimerHandler(ulTimer);
@@ -1486,6 +1493,7 @@ void mapi_mhl_handler(void)
         if(_mapi_mhl_CbusStatus())
         {
             _mapi_mhl_CbusTxHandler();
+            msg_mhl(printf("**_mapi_mhl_CbusStatus \n"));
         }
 
         _mapi_mhl_CbusConnectionCheck();

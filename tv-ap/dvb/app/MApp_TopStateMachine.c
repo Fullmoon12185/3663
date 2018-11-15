@@ -2196,6 +2196,7 @@ void MApp_TopStateMachine(void)
             TOP_STATE_TASK_CHECK_POINT();
             gU32MHLOSDTime = msAPI_Timer_GetTime0();
             bMHLOSDFlag=0;
+            //printf("abc\n");
         }
         else
         {
@@ -2204,6 +2205,7 @@ void MApp_TopStateMachine(void)
             if(bMHLOSDFlag==1)
             {
                 MApp_ZUI_MainTask();
+                printf("def\n");
             }
 
             TOP_STATE_TASK_CHECK_POINT();

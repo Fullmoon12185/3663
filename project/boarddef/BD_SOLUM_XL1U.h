@@ -1241,7 +1241,7 @@ PAD_PWM0        PWM : HSync
 PAD_PWM1        PWM : VSync
 PAD_PWM3        PWM : CS
 PAD_TCON2       SPI: MSPI1_SCK
-PAD_TCON3       SPI: MSPI1_SDI   ( ©øo¡©O¢´~¡þO output)
+PAD_TCON3       SPI: MSPI1_SDI   ( ï¿½ï¿½oï¿½ï¿½Oï¿½ï¿½~ï¿½ï¿½O output)
 */
 
 // VSync-Like <--> TCON5(98):  PWM3  (TS0_CLK)

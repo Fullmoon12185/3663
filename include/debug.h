@@ -270,7 +270,7 @@ void msFatal(unsigned int ErrCode);
   } while(0)
 
 
-#define DEBUG_INIT_FLOW(x)  //x
+#define DEBUG_INIT_FLOW(x)  x
 
 #define CHECK_POINT_FUNC()  msDebug_CheckPoint()//0
 

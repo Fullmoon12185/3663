@@ -2153,7 +2153,7 @@ void _MApi_XC_HDMI_PortMapping_Init(void)
         {
             eHdmiPortMappingResult[u8DummyIdx] = INPUT_PORT_NONE_PORT;
         }
-        //printf("\n\r*****eHdmiPortMappingResult[%d]=%x", u8DummyIdx, eHdmiPortMappingResult[u8DummyIdx]);
+        printf("\n\r*****eHdmiPortMappingResult[%d]=%x", u8DummyIdx, eHdmiPortMappingResult[u8DummyIdx]);
     }
 }
 
@@ -2167,7 +2167,7 @@ static void _MApi_XC_Sys_HDMI_Init(void)
     MS_U8 u8HdcpKey[HDCP_KEY_SIZE]={0};
 
 
-    //printf("_MApi_XC_Sys_HDMI_Init() at %u\n",  MsOS_GetSystemTime());
+    printf("_MApi_XC_Sys_HDMI_Init() at %u\n",  MsOS_GetSystemTime());
 
 
 #if (HDCP_KEY_TYPE==HDCP_KEY_IN_CODE)
@@ -2215,7 +2215,7 @@ static void _MApi_XC_Sys_HDMI_Init(void)
 #endif
 #endif
 
-    //printf(" Read HDCP finished at %u\n",  MsOS_GetSystemTime());
+    printf(" Read HDCP finished at %u\n",  MsOS_GetSystemTime());
 
     // start to init HDMI
     memset(&stXC_HDMI_InitData, 0, sizeof(XC_HDMI_InitData));
@@ -6247,7 +6247,7 @@ void MApi_XC_PrintSyncStatus(void)
 }
 
 #if( CONTROL_DNR_BUF_RULE_2015 )
-#define DEBUG_XC_FB(x)  x
+#define DEBUG_XC_FB(x)  //x
 void MApi_XC_SetupFrameBuffer(void)
 {
     INPUT_SOURCE_TYPE_t eInputSource = SYS_INPUT_SOURCE_TYPE(MAIN_WINDOW);

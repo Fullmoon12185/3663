@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -123,7 +123,7 @@
 #include "msIR.h"
 #include "drvWDT.h"
 #include "hal_misc.h"
-
+ #include "MApp_Audio.h"
 
 #ifdef ENABLE_MINI_DUMP
 #include "msAPI_MSDCtrl.h"
@@ -411,7 +411,7 @@ void start(void)
     MDrv_Pad_Init();
 
     mdrv_gpio_init();
-
+    MApp_Audio_Set_AmpMute(AUDIO_AMP_MUTE_ON);
     console_init();
 
     //printf(ANSI_COLOR_YELLOW);

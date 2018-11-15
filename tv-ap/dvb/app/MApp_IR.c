@@ -1604,6 +1604,7 @@ static void MApp_CheckKeyStatus(void)
         if(key == IRKEY_POWER) {
             extern void update_count_for_home_shop(void);    
             update_count_for_home_shop();
+            
         }
     }
   #if ENABLE_KEY_LOGGER
@@ -1898,7 +1899,7 @@ if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_G
                 repeatCodeEnable = isRepeatCode();
                 if(!isCodeReadyToSend())
                 {
-                    if(stKeyStatus.keydata != KEY_NULL && stKeyStatus.keytype == KEY_TYPE_IR){
+                    if(stKeyStatus.keydata != KEY_NULL && (stKeyStatus.keytype == KEY_TYPE_IR || stKeyStatus.keytype == KEY_TYPE_KEYPAD)){
                         switch ( stKeyStatus.keydata ){
                             case IRKEY_VOLUME_PLUS:
                             case IRKEY_VOLUME_MINUS:
@@ -1957,9 +1958,8 @@ if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_G
                     break; 
             }
         }
-        
-        
     }
+    
 }
 #endif
 //nguyen
@@ -2077,6 +2077,7 @@ void MApp_ProcessUserInput(void)
         && msAPI_MHL_IsCbusConnected()\
          )
         {
+            printf("nguyen nguyen 1111000099887\n");
         if(msAPI_CheckMHL_IRKeyValid(u8KeyCode))
         {
             if ((FALSE == stKeyStatus.keyrepeat)&&(u8PrePressedKey != u8KeyCode)&&(DIFFERENCE(u32KeydownTime, msAPI_Timer_GetTime0()) > 350))

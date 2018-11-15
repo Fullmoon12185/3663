@@ -179,10 +179,10 @@
 #define PADS_3DLR_MODE       Unknown_pad_mux
 #define PADS_TTL_MODE        Unknown_pad_mux
 #define PADS_USBVBUS_MODE    Unknown_pad_mux
-#define PADS_MHLCBUS_MODE    MHLCBUS_MODE(1)
-#define PADS_MHLVBUS_MODE    MHLVBUS_MODE(1)
+#define PADS_MHLCBUS_MODE    Unknown_pad_mux //MHLCBUS_MODE(1)
+#define PADS_MHLVBUS_MODE    Unknown_pad_mux //MHLVBUS_MODE(1)
 #define PADS_MHLDBG_MODE     Unknown_pad_mux
-#define PADS_MHLDET_MODE     MHLDET_MODE(1)
+#define PADS_MHLDET_MODE     Unknown_pad_mux //MHLDET_MODE(1)
 #define PADS_DDCDA_MODE      DDCDA_MODE(1)
 #define PADS_DDCDB_MODE      DDCDB_MODE(1)
 #define PADS_DDCDC_MODE      DDCDC_MODE(1)
@@ -221,6 +221,14 @@
 
 
 //------GPIO setting(default GPIO pin level)------------------------------------
+
+#define PIN_30_IS_GPIO       GPIO_OUT_LOW
+#define PIN_31_IS_GPIO       GPIO_OUT_LOW
+#define PIN_33_IS_GPIO       GPIO_OUT_LOW
+
+#define PIN_205_IS_GPIO      GPIO_OUT_HIGH       	//GPIO34 AV in
+
+
 #define PIN_34_IS_GPIO      GPIO_IN       	//GPIO34 AV in
 #define PIN_43_IS_GPIO      GPIO_IN       	//GPIO34 AV in
 #define PIN_44_IS_GPIO      GPIO_IN       	//GPIO34 AV in
@@ -236,7 +244,7 @@
 
 #define PIN_67_IS_GPIO      GPIO_OUT_HIGH
 
-#define PIN_159_IS_GPIO    GPIO_OUT_HIGH //GPIO18, AMP-MUTE(AMP-EN) (RT9116 Audio Amp Enable, L:Enable)  init: MUTE
+#define PIN_159_IS_GPIO    GPIO_OUT_LOW //GPIO18, AMP-MUTE(AMP-EN) (RT9116 Audio Amp Enable, L:Enable)  init: MUTE
 #define PIN_158_IS_GPIO    GPIO_OUT_HIGH//GPIO19, PANEL_ON_OFF (Panel Power Enable, L:On)
 #define PIN_160_IS_GPIO    GPIO_OUT_LOW//GPIO17, VBL_CTRL (Backlight Power Enable, H:On)
 
@@ -308,7 +316,7 @@
 #define INPUT_VGA_MUX               INPUT_PORT_ANALOG0
 #define INPUT_VGA_SYNC_MUX          INPUT_PORT_ANALOG0_SYNC //SYNC port of VGA. There is a case which data and sync use different port.
 #define INPUT_YPBPR_MUX             INPUT_PORT_ANALOG2
-#define INPUT_YPBPR2_MUX            INPUT_PORT_NONE_PORT
+#define INPUT_YPBPR2_MUX            INPUT_PORT_ANALOG2//INPUT_PORT_NONE_PORT
 #define INPUT_TV_YMUX               INPUT_PORT_YMUX_CVBS0
 #define INPUT_AV_YMUX               INPUT_PORT_CMUX_R2
 #define INPUT_AV2_YMUX              INPUT_PORT_CMUX_R1
@@ -342,14 +350,14 @@
 // Use ATSC code base audio path setting
 //============================================
 #define AUDIO_SOURCE_DTV            AUDIO_DSP1_DVB_INPUT
-#define AUDIO_SOURCE_DTV2           AUDIO_DSP2_DVB_INPUT
+#define AUDIO_SOURCE_DTV2           AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_ATV            AUDIO_DSP3_SIF_INPUT
 #define AUDIO_SOURCE_PC             AUDIO_AUIN3_INPUT       // no PC line_in, so connect to AV input
-#define AUDIO_SOURCE_YPBPR          AUDIO_AUIN3_INPUT
+#define AUDIO_SOURCE_YPBPR          AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_YPBPR2         AUDIO_NULL_INPUT
-#define AUDIO_SOURCE_AV             AUDIO_AUIN3_INPUT
-#define AUDIO_SOURCE_AV2            AUDIO_AUIN3_INPUT
-#define AUDIO_SOURCE_AV3            AUDIO_AUIN3_INPUT
+#define AUDIO_SOURCE_AV             AUDIO_NULL_INPUT
+#define AUDIO_SOURCE_AV2            AUDIO_NULL_INPUT
+#define AUDIO_SOURCE_AV3            AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_SV             AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_SV2            AUDIO_NULL_INPUT
 #define AUDIO_SOURCE_SCART          AUDIO_AUIN3_INPUT
@@ -414,7 +422,7 @@
 
 
 // HDMI switch Setting
-#define HDMI_SWITCH_SELECT  HDMI_SWITCH_NONE
+#define HDMI_SWITCH_SELECT                      HDMI_SWITCH_NONE
 
 //------MHL Setting-----------------------------------------------------------
 #define ENABLE_MHL                              ENABLE
@@ -744,7 +752,16 @@
 #define ANDROID_INIT()                  mdrv_gpio_set_input( PIN_71 )
 #define ANDROID_STATUS()                mdrv_gpio_get_level( PIN_71 )
 
+#define HDMI2_ON()                         mdrv_gpio_set_high( PIN_205 )
+#define HDMI2_OFF()                        mdrv_gpio_set_low( PIN_205 )
 
+
+#define b_ON()                         mdrv_gpio_set_high( PIN_30 )
+#define b_OFF()                        mdrv_gpio_set_low( PIN_30 )
+#define g_ON()                         mdrv_gpio_set_high( PIN_31 )
+#define g_OFF()                        mdrv_gpio_set_low( PIN_31 )
+#define r_ON()                         mdrv_gpio_set_high( PIN_33 )
+#define r_OFF()                        mdrv_gpio_set_low( PIN_33 )
 
 #define ST_DET_Read()                   0
 #define ANT_5V_MNT_Read()               0

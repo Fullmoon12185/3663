@@ -8,7 +8,9 @@
         "msapi_audio.h": "c",
         "msir.h": "c",
         "mapp_restoretodefault.h": "c",
-        "sw_config.h": "c"
+        "sw_config.h": "c",
+        "drvusb.h": "c",
+        "mapp_audio.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false,
     "git.ignoreLimitWarning": true

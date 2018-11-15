@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -1692,6 +1692,7 @@ BOOLEAN MApp_ZUI_ACT_HandleEpgKey_ATSC(VIRTUAL_KEY_CODE key)
         case VK_CHANNEL_PLUS:
         case VK_CHANNEL_MINUS:
             {
+                printf("Nguyen VK_CHANNEL_MINUS12121\n");
             #if 0// (NEW_VIRTUAL_CHANNEL_STRUCTURE == ENABLE)
                 MS_RF_CHANNEL_new pRf_Ch;
             #endif

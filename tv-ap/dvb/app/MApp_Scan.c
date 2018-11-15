@@ -1383,6 +1383,10 @@ U8 locked_channel_checking(SI_SHORT_DTV_CHANNEL_INFO virtualChannel, U16 rfChann
         return FALSE;
     if(virtualChannel.stCHAttribute.bIsScramble == 0)
         return FALSE;
+    if(virtualChannel.stCHAttribute.bServiceType == E_SERVICETYPE_DATA){
+        printf("Nguyen E_SERVICETYPE_DATA\n");
+        return FALSE;
+    }
     return TRUE;
 }
 //nguyen
@@ -5590,7 +5594,7 @@ EN_RET MApp_DTV_Scan_Update_Mux( void )
 #endif
 
 /*****************************************************************************/
-#define NEW_SCAN_APP_DBG(y)     //y
+#define NEW_SCAN_APP_DBG(y)     y
 
 
 #if 1//ENABLE_T_C_COMBO
@@ -5635,7 +5639,7 @@ BOOLEAN MApp_DVB_Scan( MS_TP_SETTING *pstTPSetting,BOOLEAN *ScanResult )
 
     *ScanResult = FE_NOT_LOCK;
 
-    //printf("\n MApp_DVB_Scan (%d) \n", enDVBScanState);
+    printf("\n MApp_DVB_Scan (%d) \n", enDVBScanState);
 
     switch( enDVBScanState )
     {
@@ -6400,7 +6404,7 @@ EN_SCAN_SWITCH_DEMOD MApp_DTV_Scan_T2_ScanCheckSignal(void)
     return _bScanT2;
 }
 
-#define DEBUG_DTV_SCAN_T2(x)    //x
+#define DEBUG_DTV_SCAN_T2(x)    x
 void MAPP_DTV_Scan_T2_DoScan_2(EN_SCAN_SWITCH_DEMOD bT2Demo,BOOLEAN bIsScanStatus)//bIsScanStatus :0(isn't scan status,ts pass through ci card) 1:(scan status,ts bypass ci card)
 {
     //DMX_FILTER_STATUS dmx_status;

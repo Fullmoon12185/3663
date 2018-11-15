@@ -1586,7 +1586,7 @@ void MApp_PreInit_Autotest_Init(void)
 void MApp_PreInit_GlobalVariable_Init(void)
 {
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_START());
-
+     
 #if (ENABLE_BOOTTIME)
     gU32CompressTotalStepTime = 0;
 #endif

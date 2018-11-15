@@ -648,11 +648,11 @@
 //******************************************************************************
 // ZUI option:
 #ifndef ENABLE_FACTORY_POWER_ON_MODE
-    #define ENABLE_FACTORY_POWER_ON_MODE    DISABLE
+    #define ENABLE_FACTORY_POWER_ON_MODE    ENABLE
 #endif
 
 #ifndef ENABLE_DESIGN_POWER_ON_MODE
-    #define ENABLE_DESIGN_POWER_ON_MODE     DISABLE
+    #define ENABLE_DESIGN_POWER_ON_MODE     ENABLE
 #endif
 
 #ifndef ENABLE_DESIGN_WHITE_BALANCE_TEST_PATTERN

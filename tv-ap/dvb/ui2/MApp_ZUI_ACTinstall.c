@@ -475,8 +475,10 @@ BOOLEAN MApp_ZUI_ACT_ExecuteInstallGuideAction(U16 act)
             return TRUE;
 
         case EN_EXE_GOTO_AUTO_TUNING:
+            printf("Nguyen EN_EXE_GOTO_AUTO_TUNING\n");
             if( MApp_ZUI_ACT_Get_InstallGuidePage() == PAGE_INSTALL_OSD_LANGUAGE )
             {
+                printf("Nguyen MApp_ZUI_ACT_Get_InstallGuidePage() == PAGE_INSTALL_OSD_LANGUAGE\n");
                 MApp_ZUI_ACT_SetTuningCountryByOSDLanguage();
                 MApp_ZUI_CTL_Grid_SetIndex(HWND_INSTALL_MAIN_PAGE_GRID, MApp_ZUI_ACT_Install_GetTuningMenuCountryIndex, MApp_ZUI_ACT_Install_SetTuningMenuCountryIndex, 0, MApp_ZUI_ACT_Install_GetTuningCountryIndexMax());
                 MApp_ZUI_CTL_Grid_SetFnGetTextByIndex(HWND_INSTALL_MAIN_PAGE_GRID, MApp_ZUI_ACT_Install_GetCountryStringIDByIndex);
@@ -497,6 +499,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteInstallGuideAction(U16 act)
             }
             else if( MApp_ZUI_ACT_Get_InstallGuidePage() == PAGE_INSTALL_TUNING_COUNTRY )
             {
+                printf("Nguyen MApp_ZUI_ACT_Get_InstallGuidePage() == PAGE_INSTALL_TUNING_COUNTRY\n");
                 stGenSetting.stMiscSetting.bRunInstallationGuide = FALSE;
                     #if  ENABLE_ISDBT_NO_DVB
                         //fixed first scan LCN error,show 3.32
@@ -554,9 +557,19 @@ BOOLEAN MApp_ZUI_ACT_ExecuteInstallGuideAction(U16 act)
                     MApp_Scaler_Setting_SetVDScale(EN_AspectRatio_16X9, MAIN_WINDOW);
                 }
 
-                stGenSetting.stScanMenuSetting.u8ScanType=SCAN_TYPE_AUTO;
+                stGenSetting.stScanMenuSetting.u8ScanType = SCAN_TYPE_AUTO;
 
                 MApp_ZUI_ACT_TransitionEffectBegin(EN_EFFMODE_CLOSE, E_ZUI_STATE_TERMINATE);
+                extern void msAPI_ATV_ResetAntennaChannelData(void);
+                extern void MApp_PreInit_Environment_Init(void);
+                extern void MApp_ATV_Scan_State_Init(void);
+                extern void MApp_Scan_State_Init(void);
+
+                msAPI_ATV_ResetAntennaChannelData();
+                msAPI_CM_ResetAllProgram();
+                //MApp_PreInit_Environment_Init();
+                MApp_ATV_Scan_State_Init();
+                MApp_Scan_State_Init();
                 _enTargetInstallState = STATE_INSTALL_GOTO_SCAN;
             }
             return TRUE;

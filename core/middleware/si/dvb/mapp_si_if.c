@@ -1670,7 +1670,11 @@ BOOLEAN msAPI_SI_AddProgram(SI_DTVPROGRAMID *stDtvIDTable, SI_DTV_CHANNEL_INFO *
         return msAPI_CM_AddS2Program(&DTVProgramData,bDBFull,bSkipCheck);
     else
 #endif
-        return msAPI_CM_AddProgram(&DTVProgramData,bDBFull,bSkipCheck);
+        printf("Nguyen msAPI_CM_AddProgram(&DTVProgramData,bDBFull,bSkipCheck);\n");
+        if(pSIDTVProgramData->stCHAttribute.bServiceType == E_SERVICETYPE_DTV)
+            return msAPI_CM_AddProgram(&DTVProgramData,bDBFull,bSkipCheck);
+        else 
+            return FALSE;
 }
 
 WORD msAPI_SI_CountProgram(MEMBER_SI_SERVICETYPE bServiceType, SI_COUNT_PROGRAM_OPTION eCountOption)

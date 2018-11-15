@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (MStar Confidential Information!¡L) by the recipient.
+// (MStar Confidential Information!ï¿½L) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -188,15 +188,15 @@ static U32  g_u32AFECCount;
 
 //==============================================================================
 
-#define DEBUG_API_TUNER_ATSC(x)     //x
-#define TUNER_API_DBG(y)            //y
+#define DEBUG_API_TUNER_ATSC(x)     x
+#define TUNER_API_DBG(y)            y
 
-#define DEBUG_API_TUNER_FREQ_ATSC(x)    //x
+#define DEBUG_API_TUNER_FREQ_ATSC(x)    x
 
-#define NEW_SCAN_API_DBG(y)    //y
-#define AFT_CHECK_API_DBG(y)   //y
+#define NEW_SCAN_API_DBG(y)    y
+#define AFT_CHECK_API_DBG(y)   y
 
-#define DEBUG_API_TUNER_DEMOD_ATSC(x)     //x
+#define DEBUG_API_TUNER_DEMOD_ATSC(x)     x
 
 
 #define GET_FREQ_OFFSET_NEW     1

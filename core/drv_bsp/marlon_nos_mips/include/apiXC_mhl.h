@@ -186,7 +186,7 @@ enum
     MSC_GET_SC1_ERRORCODE = 0x69, // Get Vendor-Specific command error code.
     MSC_GET_DDC_ERRORCODE = 0x6A, // Get DDC channel command error code.
     MSC_GET_MSC_ERRORCODE = 0x6B, // Get MSC command error code.
-    MSC_WRITE_BURST = 0x6C, // Write 1-16 bytes to responder’s scratchpad.
+    MSC_WRITE_BURST = 0x6C, // Write 1-16 bytes to responderï¿½s scratchpad.
     MSC_GET_SC3_ERRORCODE = 0x6D, // Get channel 3 command error code.
     MSC_EOF = 0x32, // End of Frame
 }; //MscCtrlPkt_T;
@@ -410,6 +410,8 @@ DLL_PUBLIC extern MHLInfo_S gMHLInfo;
 //-------------------------------------------------------------------------------------------------
 //  Macro define
 //-------------------------------------------------------------------------------------------------
+#define CBUS_INDEX                gMHLInfo.ucCbusIndex
+
 #define GET_MHL_CABLE_PLUGGED()     (MS_BOOL)((gMHLInfo.ucCbusIndex & CBUS_CABLE_PLUG_FLAG) ?TRUE :FALSE)
 #define SET_MHL_CABLE_PLUGGED()     (gMHLInfo.ucCbusIndex |= CBUS_CABLE_PLUG_FLAG)
 #define CLR_MHL_CABLE_PLUGGED()     (gMHLInfo.ucCbusIndex &= ~CBUS_CABLE_PLUG_FLAG)

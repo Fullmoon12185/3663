@@ -4722,6 +4722,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
 
         case EN_EXE_CHLIST_PAGE_DOWN:
         {
+            printf("Nguyen EN_EXE_CHLIST_PAGE_DOWN\n");
             u16Temp = MApp_ChanProc_GetCurProgIndex();
             MApp_ChannelChange_DisableChannel(TRUE, MAIN_WINDOW);
             if(bChannelListType == FALSE)//favorite list
@@ -4747,7 +4748,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
             MApp_ZUI_CTL_DynamicListRefreshContent(HWND_MENU_CHANNEL_LIST_ITEMS);
 
             u16Temp = MApp_ChanProc_GetCurProgIndex();
-            //printf("CurProgIndex = %d\n",u16Temp);
+            printf("CurProgIndex = %d\n",u16Temp);
 
             U8 u8ChannelListHwndListIdx = u16Temp % MAX_NUM_OF_SRV_ITEM;
 
@@ -4766,6 +4767,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
 
         case EN_EXE_CHLIST_PAGE_UP:
         {
+            printf("Nguyen EN_EXE_CHLIST_PAGE_UP\n");
             u16Temp = MApp_ChanProc_GetCurProgIndex();
             MApp_ChannelChange_DisableChannel(TRUE,MAIN_WINDOW);
             if(bChannelListType == FALSE)//favorite list
@@ -4790,11 +4792,17 @@ BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
 
             MApp_ZUI_CTL_DynamicListRefreshContent(HWND_MENU_CHANNEL_LIST_ITEMS);
             u16Temp = MApp_ChanProc_GetCurProgIndex();
+            printf("CurProgIndex = %d\n", u16Temp);
             U8 u8ChannelListHwndListIdx = u16Temp % MAX_NUM_OF_SRV_ITEM;
-            if(u8ChannelListHwndListIdx == 0)
-                MApp_ZUI_API_SetFocus(_MenuChannelListHwndList[MAX_NUM_OF_SRV_ITEM-1]);
-            else
-                MApp_ZUI_API_SetFocus(_MenuChannelListHwndList[(u8ChannelListHwndListIdx)-1]);
+            if(u8ChannelListHwndListIdx == 0){
+                printf("Nguyen MApp_ZUI_API_SetFocus(_MenuChannelListHwndList[MAX_NUM_OF_SRV_ITEM-1])\n");
+                MApp_ZUI_API_SetFocus(_MenuChannelListHwndList[MAX_NUM_OF_SRV_ITEM-1]);        
+            }
+            else{
+                printf("Nguyen MApp_ZUI_API_SetFocus(_MenuChannelListHwndList[(u8ChannelListHwndListIdx)-1]\n");
+                MApp_ZUI_API_SetFocus(_MenuChannelListHwndList[(u8ChannelListHwndListIdx)-1]);    
+            }
+                
 
             break;
         }

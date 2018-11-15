@@ -872,6 +872,7 @@ MS_BOOL mhal_mhl_CBusWrite(mhalCbusFifo_S *pdatabuf)
 //**************************************************************************
 MS_BOOL mhal_mhl_CableDetect(void)
 {
+
     return ((msReadWord(REG_PM_MHL_CBUS_00) & BIT(10)) ? TRUE : FALSE);
 }
 
@@ -981,6 +982,7 @@ void mhal_mhl_CbusIntCB(MS_U8 *rcstate, MS_U8 *rccmd, MS_U8 *rcdata, MS_U8 *rcle
 //**************************************************************************
 MS_U16 mhal_mhl_CbusStatus(void)
 {
+    
     return (msReadWord(REG_PM_MHL_CBUS_17));
 }
 
@@ -1222,12 +1224,12 @@ void mhal_mhl_SetHPD(MS_BOOL bflag)
     if(bflag) // HPD is high
     {
         msWriteWordMask(REG_PM_MHL_CBUS_20, BIT(3), BMASK(4:3)); // [4]: output val, [3]: oen
-        //msg_mhl(printf("**MHL_HPD is High"));
+        msg_mhl(printf("**MHL_HPD is High"));
     }
     else // hpd is low
     {
         msWriteWordMask(REG_PM_MHL_CBUS_20, 0, BMASK(4:3)); // [4]: output val, [3]: oen
-        //msg_mhl(printf("**MHL_HPD is Low"));
+        msg_mhl(printf("**MHL_HPD is Low"));
     }
 }
 
@@ -1254,7 +1256,7 @@ MS_U16 mhal_mhl_GetTMDSClk(void)
 void mhal_mhl_SetPsCtrl(MS_U8 u8Ctrl)
 {
     msWriteWordMask(REG_PM_MHL_CBUS_01, BIT(1), BIT(1));
-
+    msg_mhl(printf("**nguyen mhal_mhl_SetPsCtrl"));
     if(u8Ctrl == 0)
     {
         msWriteWordMask(REG_PM_MHL_CBUS_01, 0, BIT(0));

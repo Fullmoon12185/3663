@@ -131,7 +131,7 @@ extern "C"
 #define MHL_CBUS_TOTAL_QUEUE_NUM    ((MHL_CBUS_TX_QUEUE_NUM > 0)?(MHL_CBUS_TX_QUEUE_NUM +1):2)
 #define MHL_CBUS_RX_QUEUE_INDEX     (MHL_CBUS_TOTAL_QUEUE_NUM -1)
 
-#define DMHL_CTS_HDCP_PATCH    DISABLE// for CTS HDCP 2C-04
+#define DMHL_CTS_HDCP_PATCH    ENABLE// for CTS HDCP 2C-04
 #define DMHL_LG_PRADA_PATCH    ENABLE// for LG PRADA patch
 #define DMHL_IGNORE_USB_PULSE_PATCH    ENABLE // for ignore USB pulse patch
 #define DMHL_DE_UNSTABLE_PATCH    ENABLE
@@ -366,6 +366,7 @@ extern MHLInfo_S gMHLInfo;
 //-------------------------------------------------------------------------------------------------
 //  Macro define
 //-------------------------------------------------------------------------------------------------
+
 #define GET_MHL_CABLE_PLUGGED()     (MS_BOOL)((gMHLInfo.ucCbusIndex & CBUS_CABLE_PLUG_FLAG) ?TRUE :FALSE)
 #define SET_MHL_CABLE_PLUGGED()     (gMHLInfo.ucCbusIndex |= CBUS_CABLE_PLUG_FLAG)
 #define CLR_MHL_CABLE_PLUGGED()     (gMHLInfo.ucCbusIndex &= ~CBUS_CABLE_PLUG_FLAG)

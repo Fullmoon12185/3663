@@ -679,7 +679,7 @@ static BOOLEAN msKeypad_CH_GetKey(U8 Channel, U8 *pkey, U8* pflag)
             if(pkey3 == pkey1 && pkey2 == pkey1 && pkey4 == pkey1 && pkey1 != 0xff){
                 *pkey = pkey1;
                 PressKey = TRUE;
-                printf("NGUYEN CH[%d]=%02X\n",Channel,*pkey);
+                //printf("NGUYEN CH[%d]=%02X\n",Channel,*pkey);
                 if (PreviousCMD != *pkey)
                 {
                     PreviousCMD = *pkey;

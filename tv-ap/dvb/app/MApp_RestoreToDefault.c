@@ -3572,6 +3572,7 @@ void MApp_DataBase_RestoreDefault_TVSetting(void)
     stGenSetting.stTvSetting.u16CurDtvRadioOrder_DVBC = DEFAULT_CURRENT_ORDER_RADIO(E_DTV_DB_SEL_DVBC);
     stGenSetting.stTvSetting.eCurrentServiceType_DVBC = DEFAULT_CURRENT_SERVICETYPE;
 #endif
+    //MApp_DTV_Scan_Init();
 }
 
 void MApp_DataBase_RestoreDefaultADC(E_ADC_SET_INDEX eAdcIndex )
@@ -4042,7 +4043,7 @@ void MApp_DataBase_RestoreDefault_FactoryMiscSetting(void)
     G_FACTORY_SETTING.stFacMiscSetting.u8Test = 0;
 
 #if ENABLE_DESIGN_POWER_ON_MODE
-    G_FACTORY_SETTING.stFacMiscSetting.u8PowerOnMode = POWERON_MODE_ON ; // POWERON_MODE_SAVE;
+    G_FACTORY_SETTING.stFacMiscSetting.u8PowerOnMode = POWERON_MODE_OFF ; // POWERON_MODE_SAVE;
 #endif
 
 #if ENABLE_FACTORY_INPUT_SOURCE_FUNCTION
@@ -4142,7 +4143,7 @@ void MApp_DataBase_RestoreDefault_MiscSetting(void)
 {
     //printf("\e[31;1m >> %s \33[m \n", __FUNCTION__);
 
-    stGenSetting.stMiscSetting.bDCOnOff = EN_POWER_DC_ON;
+    stGenSetting.stMiscSetting.bDCOnOff = EN_POWER_DC_OFF;
 
 #if (ENABLE_EWS)
     stGenSetting.stMiscSetting.u8EWSLocationCode[0] = 0;
@@ -4154,7 +4155,7 @@ void MApp_DataBase_RestoreDefault_MiscSetting(void)
     MApp_SI_SetLocationCode(stGenSetting.stMiscSetting.u8EWSLocationCode);
 #endif
 #if (ENABLE_DTV)
-    stGenSetting.stMiscSetting.bRunInstallationGuide = TRUE;
+    stGenSetting.stMiscSetting.bRunInstallationGuide = FALSE;
 #else
     stGenSetting.stMiscSetting.bRunInstallationGuide = FALSE;
 #endif

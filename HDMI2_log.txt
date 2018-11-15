@@ -1,0 +1,138 @@
+<\r>
+<\n>******homeshop_state 1 -- keytemp  = 16<\r>
+<\n> bFBL=0, u16input_hsize=1280, u16input_vsize=720, _gbMemfmt422=1<\r>
+<\n> ==> u8BitPerPixel=24<\r>
+<\n><27>[31;1m [910]: msAPI_CEC_GetDeviceInfo <27>[m <\r>
+<\n> TSM: Use 45ms<\r>
+<\n>MApp_ZUI_ACT_ExecuteInputSourceAction(act=723)<\r>
+<\n>MApp_ZUI_ACT_ExecuteInputSourceAction(act=723)<\r>
+<\n>MApp_ZUI_ACT_ExecuteInputSourceAction(act=723)<\r>
+<\n><\r>
+<\n>******homeshop_state 1 -- keytemp  = 251<\r>
+<\n>[]st=2,at=9<\r>
+<\n>/focus=25<\r>
+<\n>MApp_ZUI_ACT_ExecuteInputSourceAction(act=717)<\r>
+<\n>EN_EXE_EFFECT_POPUP <\r>
+<\r>
+<\n><\r>
+<\n>******homeshop_state 1 -- keytemp  = 253<\r>
+<\n>[]st=2,at=9<\r>
+<\n>/focus=26<\r>
+<\n>MApp_ZUI_ACT_ExecuteInputSourceAction(act=510)<\r>
+<\n>_MApp_ZUI_ACT_InputSourceWindowMapToId(hwnd=26)<\r>
+<\n>Rtn normal src=11<\r>
+<\n>MApp_ZUI_ACT_InputSourceSwitch(source_type=11)<\r>
+<\n>MApp_InputSource_ChangeInputSource_2(win=0)<\r>
+<\n> UI_INPUT_SOURCE_TYPE=11(HDMI3)<\r>
+<\n> eCurINPUT_SOURCE_TYPE_t=24<\r>
+<\n>MApp_ChannelChange_DisableAV(win=0)<\r>
+<\n>---------- spkrMute ----------<\r>
+<\n><27>[30;43m >> MApp_InputSource_SwitchSource(11[HDMI3]) at 141899<\r>
+<\n> OldUiSrc=10(HDMI2), eOldInputSrc=24<\r>
+<\n> UI_INPUT_SOURCE_TYPE=11<\r>
+<\n> SYS_INPUT_SOURCE_TYPE(eWindow)=24<\r>
+<\n><27>[0m <\r>
+<\n>_MApp_ChangeSrc_Step_01_TurnOffFunction(UiSrcTyp=11, win=0)<\r>
+<\n>---------- spkrMute ----------<\r>
+<\n>_MApp_ChangeSrc_Step_02_DestroyPreSource(eOldUiInputSrc=10, eNewUiInputSrc=11, win=0)<\r>
+<\n>MApi_XC_HPD_Do_ExitHDMI(enINPUT_SOURCE_TYPE=24)<\r>
+<\n> MApi_XC_HPD_Task_Start(src=24,2) at 141932<\r>
+<\n> u8HdmiIdx=1, curState=1, eCurHdmiPort=81<\r>
+<\n><\r>
+<\n>port(81) (1) E_HPD_STATE__SET_HPD_DISABLE at 141940<\r>
+<\n><27>[32m<\r>
+<\n><\r>
+<\n>@@-- MApi_XC_HDMI_SetHotPlug (en=0, port=81) at 141945<\r>
+<\n><\r>
+<\n><27>[0m<27>[32m => call MDrv_HDMI_pullhpd( bEnable=0, enInputPortType=81, bInverse=1)<\r>
+<\n><27>[0m[ASSERT]MDrv_XC_ADC_SetInputSource: u8InputSourceCount(0) shouldn't happen !<\r>
+<\n>enUiInputSourceType  = 11<\r>
+<\n>Result enInputSourceType = 25<\r>
+<\n>[Set] _enSysInputSource[0] = 0x400<\r>
+<\n> eNewInputSrc=25<\r>
+<\n>_MApp_ChangeSrc_Step_03_SetupNewSource(Old=10,New=11,win=0)<\r>
+<\n>_MApp_ChangeSrc_Init_Tuner_Demod(11)<\r>
+<\n>MApp_PCMode_Reset()<\r>
+<\n>MApp_PCMODE_Reset_TimingMonitor()<\r>
+<\n>MApp_InputSource_SetInputSource(win=0)<\r>
+<\n><\r>
+<\r>
+<\n> enInputSourceType = 25 <\r>
+<\n>>> MDrv_DVI_Software_Reset(eInputPort=80, BIT5)<\r>
+<\n>MApi_XC_HPD_Do_EnterHDMI(enINPUT_SOURCE_TYPE=25) at 142059<\r>
+<\n> MApi_XC_HPD_Task_Start(src=25,1) at 142064<\r>
+<\n> u8HdmiIdx=1, curState=2, eCurHdmiPort=81<\r>
+<\n><\r>
+<\n> port(81) (2) E_HPD_STATE__SET_HPD_DISABLE_DELAY at 142071<\r>
+<\n><27>[32m<\r>
+<\n><\r>
+<\n>@@-- MApi_XC_HDMI_SetDVIClkPullLow (Port=81, PullLow=1,) at 142076<\r>
+<\n><\r>
+<\n><27>[0m u8HdmiIdx=2, curState=3, eCurHdmiPort=80<\r>
+<\n><\r>
+<\n>port(80) (3) E_HPD_STATE__RESET_HDMI at 142087<\r>
+<\n>MApi_XC_SetupFrameBuffer(src=25)<\r>
+<\n>=> XC-Main = SCALER_FB_NO_VDEC<\r>
+<\n>=> XC-Sub = XC-Main<\r>
+<\n> u32MainAddr=0x2571000, u32MainSize=0x1800000<\r>
+<\n>MApp_Scaler_EnableOverScan(bEnable=1)<\r>
+<\n>===== MApp_InputSource_SwitchSource end ===== <\r>
+<\n>MApp_ZUI_ACT_ExecuteInputSourceAction(act=279)<\r>
+<\n> u8HdmiIdx=2, curState=4, eCurHdmiPort=80<\r>
+<\n><\r>
+<\n>MApp_DB_GEN_Set_DataChanged(bDataChanged=1)<\r>
+<\n> bFBL=0, u16input_hsize=1280, u16input_vsize=720, _gbMemfmt422=1<\r>
+<\n> ==> u8BitPerPixel=24<\r>
+<\n> u8HdmiIdx=2, curState=4, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=4, eCurHdmiPort=80<\r>
+<\n><\r>
+<\n>port(80)  (4) E_HPD_STATE__HPD_DELAY at 142492<\r>
+<\n> bFBL=0, u16input_hsize=1280, u16input_vsize=720, _gbMemfmt422=1<\r>
+<\n> ==> u8BitPerPixel=24<\r>
+<\n> u8HdmiIdx=2, curState=5, eCurHdmiPort=80<\r>
+<\n><\r>
+<\n>port(80)  (5) E_HPD_STATE__SET_HPD_ENABLE at 142545<\r>
+<\n><27>[32m<\r>
+<\n><\r>
+<\n>@@-- MApi_XC_HDMI_SetDVIClkPullLow (Port=80, PullLow=0,) at 142550<\r>
+<\n><\r>
+<\n><27>[0mMApp_DB_GEN_Set_DataChanged(bDataChanged=0)<\r>
+<\n><\r>
+<\n>Trigger Write flash<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n>MApp_DB_GEN_Set_DataChanged(bDataChanged=1)<\r>
+<\n>MApp_DB_GEN_Set_DataChanged(bDataChanged=1)<\r>
+<\n>MApp_DB_GEN_Set_DataChanged(bDataChanged=0)<\r>
+<\n> DB_GEN: Write flash done~ => UnitIdx=1, wt=2003, use 23ms<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n> u8HdmiIdx=2, curState=6, eCurHdmiPort=80<\r>
+<\n><\r>
+<\n> port(80) (6) E_HPD_STATE__SET_HPD_ENABLE_DELAY at 142661<\r>
+<\n><27>[32m<\r>
+<\n><\r>
+<\n>@@-- MApi_XC_HDMI_SetHotPlug (en=1, port=80) at 142666<\r>
+<\n><\r>
+<\n><27>[0m<27>[32m => call MDrv_HDMI_pullhpd( bEnable=1, enInputPortType=80, bInverse=0)<\r>
+<\n><27>[0m port(80) E_HPD_STATE__HPD_OK at 142679<\r>
+<\n><\r>
+<\n> bFBL=0, u16input_hsize=1280, u16input_vsize=720, _gbMemfmt422=1<\r>
+<\n> ==> u8BitPerPixel=24<\r>
+<\n> bFBL=0, u16input_hsize=1280, u16input_vsize=720, _gbMemfmt422=1<\r>
+<\n> ==> u8BitPerPixel=24<\r>
+<\n><\r>
+<\n><\r>
+<\n><\r>
+<\n><\r>
+<\n><\r>
+<\n>

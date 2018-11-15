@@ -2953,7 +2953,7 @@ void MApp_InitOverScanData(void)
     }
 }
 
-#define DEBUG_OVERSCAN(x) x
+#define DEBUG_OVERSCAN(x) //x
 void MApp_LoadOverScanData (void)
 {
     DEBUG_OVERSCAN( printf("MApp_LoadOverScanData()\n"); );

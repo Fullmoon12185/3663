@@ -1420,7 +1420,7 @@ WORD msAPI_CM_GetNextProgramPosition(MEMBER_SERVICETYPE bServiceType, WORD wBase
         wDTVProgramCount = msAPI_DTV_GetProgramCount(E_SERVICETYPE_DTV, EXCLUDE_NOT_VISIBLE_AND_DELETED);
         wRadioProgramCount = msAPI_DTV_GetProgramCount(E_SERVICETYPE_RADIO, EXCLUDE_NOT_VISIBLE_AND_DELETED);
         wDataProgramCount = msAPI_DTV_GetProgramCount(E_SERVICETYPE_DATA, EXCLUDE_NOT_VISIBLE_AND_DELETED);
-        wProgramCount = wDTVProgramCount + wRadioProgramCount + wDataProgramCount;
+        wProgramCount = wDTVProgramCount;// + wRadioProgramCount + wDataProgramCount;
     }
     else
     {
@@ -1432,14 +1432,14 @@ WORD msAPI_CM_GetNextProgramPosition(MEMBER_SERVICETYPE bServiceType, WORD wBase
         {
             wPosition = wDTVProgramCount;
         }
-        else if(bServiceType == E_SERVICETYPE_RADIO && wBasePosition >= wRadioProgramCount)
-        {
-            wPosition = wRadioProgramCount;
-        }
-        else if(bServiceType == E_SERVICETYPE_DATA && wBasePosition >= wDataProgramCount)
-        {
-            wPosition = wDataProgramCount;
-        }
+        // else if(bServiceType == E_SERVICETYPE_RADIO && wBasePosition >= wRadioProgramCount)
+        // {
+        //     wPosition = wRadioProgramCount;
+        // }
+        // else if(bServiceType == E_SERVICETYPE_DATA && wBasePosition >= wDataProgramCount)
+        // {
+        //     wPosition = wDataProgramCount;
+        // }
         else
         {
             wPosition = wBasePosition;

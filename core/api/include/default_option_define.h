@@ -732,7 +732,7 @@
 
 
 #ifndef ENABLE_MHL_NO_OVERSCAN
-    #define ENABLE_MHL_NO_OVERSCAN  ENABLE
+    #define ENABLE_MHL_NO_OVERSCAN  DISABLE
 #endif
 
 //-------------------------------------------------------------------------

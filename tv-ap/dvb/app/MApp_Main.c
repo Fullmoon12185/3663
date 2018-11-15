@@ -169,7 +169,7 @@ extern BOOLEAN g_bAutobuildDebug;
 //------------------------------------------------------------------------------
 // Locals
 //------------------------------------------------------------------------------
-#define CURRENT_TESTING DISABLE  //DISABLE //ENABLE
+#define CURRENT_TESTING DISABLE //ENABLE
 
 #define     BACKLIGHT_LEVEL_1   30
 #define     BACKLIGHT_LEVEL_2   (30 + BACKLIGHT_LEVEL_1)
@@ -185,11 +185,18 @@ LED 300mA - Panel 32 inch JP
 70%     210mA   82      77V
 60%     180mA   74      76V
 */
-#define     SHOP_BACKLIGHT      111
-#define     HOME_BACKLIGHT_1    100
-#define     HOME_BACKLIGHT_2    89
-#define     HOME_BACKLIGHT_3    78
-#define     DEBUG_HOME_SHOP(x)  x
+#if UBC_TV40
+    #define     SHOP_BACKLIGHT      217
+    #define     HOME_BACKLIGHT_1    195
+    #define     HOME_BACKLIGHT_2    173
+    #define     HOME_BACKLIGHT_3    152
+#elif UBC_TV32
+    #define     SHOP_BACKLIGHT      111
+    #define     HOME_BACKLIGHT_1    100
+    #define     HOME_BACKLIGHT_2    89
+    #define     HOME_BACKLIGHT_3    78
+#endif
+#define     DEBUG_HOME_SHOP(x)  //x
 
 static U16 fourKeyPressed = 0;
 static U16 countForHomeShop = 0;
@@ -258,7 +265,7 @@ MS_BOOL MApp_PowerOn_Stage_Debug(void)
 
 /***************************************************************************************/
 
-#define MAIN_FUNC_STATE_DBG(x)  x
+#define MAIN_FUNC_STATE_DBG(x)  //x
 //#define MAIN_FUNC_STATE_DBG(x)  do{ msDebug_ANSI_SetColorText_2(E_FONT_COLOR_BLACK,E_FONT_BACKGROUND_COLOR_PURPLE); x; msDebug_ANSI_AllAttrOffText(); } while(0)
 
 
@@ -316,7 +323,7 @@ void MApp_Bench_PowerOffLED(void)
 }
 #endif
 
-#define DEBUG_INIT_STATE_NAME(x) x
+#define DEBUG_INIT_STATE_NAME(x) //x
 
 MS_BOOL MApp_PreInit_State(void)
 {
@@ -883,7 +890,7 @@ int main(void)
             #endif
 
                 printf("\n===== Enter main loop at %u\n", MsOS_GetSystemTime());
-                printf("\n===== Timestamp %s, %s\n",__DATE__, __TIME__);
+                //printf("\n===== Timestamp %s, %s\n",__DATE__, __TIME__);
                 MApp_PreInit_TurnOnPanel_();
               #ifdef BENCH_CODE_USAGE
                 MApp_Bench_AudioTest();
@@ -900,7 +907,7 @@ int main(void)
                 //MAIN_FUNC_STATE_DBG(printf(" %d: [EN_MSTAR_MAIN_FUNCTION_ENTERING_WHILE_LOOP] \n", __LINE__));
 
                 u32MainLoopTime_Cur = MsOS_GetSystemTime();
-                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 1000 )
+                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 3000 )
                 {
                     u32MainLoopTime_Last = u32MainLoopTime_Cur;
                     
@@ -914,17 +921,23 @@ int main(void)
                         // LED_RED_Off();
                         // LED_GRN_On(); 
                         //EX_ACTIVE_IC_ON();
-                        
+                        b_ON();
+                        r_ON();
+                        g_ON();
                         //MApp_PreInit_Logo_Init();
                         //MApi_PNL_En(TRUE);
                         //MApi_PNL_SetBackLight(ENABLE);
                         bToogleLED = 1;    
                     } else {
+                        b_OFF();
+                        g_OFF();
+                        r_OFF();
                         // LED_RED_On();
                         // LED_GRN_Off();
                         //EX_ACTIVE_IC_OFF();
                         //MApi_PNL_En(FALSE);
                         //MApi_PNL_SetBackLight(DISABLE);
+                        //HDMI2_OFF();
                         bToogleLED = 0;
                     }
                     

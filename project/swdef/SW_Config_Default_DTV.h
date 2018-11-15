@@ -119,7 +119,7 @@
 
 #ifndef NORDIG_FUNC
     #if(ENABLE_DVB)
-        #define NORDIG_FUNC ENABLE
+        #define NORDIG_FUNC DISABLE
     #else
         #define NORDIG_FUNC DISABLE
     #endif

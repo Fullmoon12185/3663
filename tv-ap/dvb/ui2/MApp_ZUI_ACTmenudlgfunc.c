@@ -264,7 +264,7 @@ static void MApp_ZUI_ACT_UserSettingReset(void)
       MApp_InputSource_ChangeInputSource(MAIN_WINDOW);
       MApp_ChannelChange_VariableInit();
 #if (ENABLE_DTV)
-      stGenSetting.stMiscSetting.bRunInstallationGuide =TRUE;
+      stGenSetting.stMiscSetting.bRunInstallationGuide = FALSE;
       if( stGenSetting.stMiscSetting.bRunInstallationGuide )
     {
         MApp_TopStateMachine_SetTopState(STATE_TOP_INSTALLGUIDE);

@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -3090,7 +3090,7 @@ void MDrv_Pad_Init( void )
 
         while (1)
         {
-            //printf("%x = %bx & %bx\n", u16Index, pPadConfig[0], pPadConfig[1]);
+            printf("%x = %bx & %bx\n", u16Index, pPadConfig[0], pPadConfig[1]);
             MDrv_PAD_WriteByteMask((U32)u16Index, pPadConfig[0], pPadConfig[1]);
             pPadConfig += 2;
 

@@ -1642,7 +1642,12 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
         PCMODE_TASK_CHECK();
 
         // Trigger to turn off window
-        MAPI_XC_MUX_TRIGGER_DEST_ON_OFF_EVENT(src,&u8TurnOffDestination);
+        //if(src != INPUT_SOURCE_HDMI3){
+            MAPI_XC_MUX_TRIGGER_DEST_ON_OFF_EVENT(src,&u8TurnOffDestination);
+        //} else {
+        //    MAPI_XC_MUX_TRIGGER_PATH_SYNC_EVENT(src,&u8TurnOffDestination);
+        //}
+        
 
         PCMODE_TASK_CHECK();
 
@@ -2500,7 +2505,9 @@ void MApp_PC_MainWin_Handler(INPUT_SOURCE_TYPE_t src, BOOLEAN bRealTimeMonitorOn
 
 
     PCMODE_TASK_CHECK();
-    
+    if(src == INPUT_SOURCE_HDMI3){
+        
+    }
     _MApp_PCMode_StatusHandler(src, eXC_PCMONITOR_STATUS, MAIN_WINDOW);
 
     PCMODE_TASK_CHECK();

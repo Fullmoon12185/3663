@@ -4778,11 +4778,17 @@ void MApp_TV_ProcessUserInput(void)
                     {
                         if (u8KeyCode ==KEY_CHANNEL_PLUS)
                         {
+                            printf("Nguyen wNewProgramPosition = msAPI_CM_GetNextProgramPosition(bServiceType, msAPI_CM_GetCurrentPosition(bServiceType), FALSE, E_ALL_LIST,&bNewServiceType)\n");
+
                             wNewProgramPosition = msAPI_CM_GetNextProgramPosition(bServiceType, msAPI_CM_GetCurrentPosition(bServiceType), FALSE, E_ALL_LIST,&bNewServiceType);
+                            //wNewProgramPosition = msAPI_CM_GetNextProgramPosition(bServiceType, msAPI_CM_GetCurrentPosition(bServiceType), FALSE, E_DTV_LIST,&bNewServiceType);
+
                         }
                         else
                         {
+                            printf("Nguyen wNewProgramPosition = msAPI_CM_GetNextProgramPosition(bServiceType, msAPI_CM_GetCurrentPosition(bServiceType), FALSE, E_ALL_LIST,&bNewServiceType)\n");
                             wNewProgramPosition = msAPI_CM_GetPrevProgramPosition(bServiceType, msAPI_CM_GetCurrentPosition(bServiceType), FALSE, E_ALL_LIST, &bNewServiceType);
+                            //wNewProgramPosition = msAPI_CM_GetPrevProgramPosition(bServiceType, msAPI_CM_GetCurrentPosition(bServiceType), FALSE, E_DTV_LIST, &bNewServiceType);
                         }
                     }
 

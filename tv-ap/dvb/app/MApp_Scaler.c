@@ -222,7 +222,7 @@
 #define DEBUG_ASPECT_RATIO(x)           //x
 #define DEBUG_SCALER_FLOW(x)            //x
 #define DEBUG_SCALER_INPUT_TIMING(x)    //x
-#define DEBUG_OVERSCAN(x)               x
+#define DEBUG_OVERSCAN(x)               //x
 
 #define MENU_3D_DBG(x)                  //x
 #if 0

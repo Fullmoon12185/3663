@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -145,7 +145,7 @@ typedef enum
 #define PM_MODE_STANBY          0x01
 #define PM_MODE_DEEPSLEEP       0x02
 
-#define PM_MODE_DEFAULT         0xFF
+#define PM_MODE_DEFAULT         PM_MODE_STANBY
 
 
 #if (PM_MODE_SELECT == PM_MODE_DEEPSLEEP)
@@ -300,12 +300,12 @@ enum
         PM_WAKEUP_BY_ESYNC          = (1 << 6),
         PM_WAKEUP_BY_RTC0           = (1 << 7),
         PM_WAKEUP_BY_RTC1           = (1 << 8),
-        PM_WAKEUP_BY_DVI            = (1 << 9), //same as PM_WAKEUP_BY_DVI0 in CPU_PM
-        PM_WAKEUP_BY_DVI2           = (1 << 10),
-        PM_WAKEUP_BY_CEC            = (1 << 11),
-        PM_WAKEUP_BY_AVLINK         = (1 << 12),
-        PM_WAKEUP_BY_MHL            = (1 << 13),
-        PM_WAKEUP_BY_WOL            = (1 << 14),
+        PM_WAKEUP_BY_DVI            = 0,//(1 << 9), //same as PM_WAKEUP_BY_DVI0 in CPU_PM
+        PM_WAKEUP_BY_DVI2           = 0, //(1 << 10),
+        PM_WAKEUP_BY_CEC            = 0, //(1 << 11),
+        PM_WAKEUP_BY_AVLINK         = 0, //(1 << 12),
+        PM_WAKEUP_BY_MHL            = 0,//(1 << 13),
+        PM_WAKEUP_BY_WOL            = 0,//(1 << 14),
 
         PM_WAKEUP_BY_PART            = PM_WAKEUP_BY_IR
                                      | PM_WAKEUP_BY_KEYPAD
