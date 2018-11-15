@@ -8331,7 +8331,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteMainMenuAction(U16 act)
                 #if ENABLE_DTV
                     HWND_MENU_LOCK_PAGE,
                 #endif
-                    HWND_MENU_APP_PAGE,
+                    //HWND_MENU_APP_PAGE,
                 };
 
                 HWND hwndFocus = MApp_ZUI_API_GetFocus();

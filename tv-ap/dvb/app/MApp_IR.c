@@ -1887,79 +1887,150 @@ U8 get_isKeyPowerPressed(void){
     return isKeyPowerPressed;
 }
 
-void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
-if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_ATV)
+U32 u32WaitTimeForNextKey = 0;
+U8  changeDTVFlag = 0;
+U8  numSteps = 0;
+U8  scriptIndex = 0;
+void DTVSourceChanged(void){
+    if (msAPI_Timer_DiffTime( msAPI_Timer_GetTime0(), u32WaitTimeForNextKey ) > 200LU)
     {
-        // if(stKeyStatus.keydata == IRKEY_TV){
-        //     UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_DVBT;
-        //     MApp_InputSource_SwitchSource( UI_INPUT_SOURCE_TYPE, MAIN_WINDOW );
-        // }
-        if(MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE){
-            {
-                repeatCodeEnable = isRepeatCode();
-                if(!isCodeReadyToSend())
-                {
-                    if(stKeyStatus.keydata != KEY_NULL && (stKeyStatus.keytype == KEY_TYPE_IR || stKeyStatus.keytype == KEY_TYPE_KEYPAD)){
-                        switch ( stKeyStatus.keydata ){
-                            case IRKEY_VOLUME_PLUS:
-                            case IRKEY_VOLUME_MINUS:
-                            case IRKEY_UP ://               = 0x59,
-                            
-                            // case IRKEY_EXIT://              = 0x10,
-                            // //case IRKEY_MENU              = 0x13,
-                            case IRKEY_DOWN://              = 0x51,
-                            case IRKEY_LEFT://              = 0x56,
-                            //case IRKEY_SELECT://            = 0x55,
-                            case IRKEY_RIGHT://             = 0x14,
-
-                            // case IRKEY_NUM_0://             = 0x44,
-                            // case IRKEY_NUM_1://             = 0x53,
-                            // case IRKEY_NUM_2://             = 0x50,
-                            // case IRKEY_NUM_3://             = 0x12,
-                            // case IRKEY_NUM_4://             = 0x4F,
-                            // case IRKEY_NUM_5://             = 0x4C,
-                            // case IRKEY_NUM_6://             = 0x0E,
-                            // case IRKEY_NUM_7://             = 0x4B,
-                            // case IRKEY_NUM_8://             = 0x48,
-                            // case IRKEY_NUM_9://             = 0x0A,
-                            case IRKEY_MUTE:    //              = 0x1C,
-                            // case IRKEY_FREEZE://            = 0x57,
-                            case IRKEY_INPUT_SOURCE:
-                                MApp_IR_sendIROut(stKeyStatus.keydata);
-                            break;
-                            case IRKEY_POWER://             = 0x5F,
-                                MApp_IR_sendIROut(stKeyStatus.keydata);
-                                // msAPI_Timer_Delayms(3000);
-                                // stKeyStatus.keydown   = FALSE;
-                                // stKeyStatus.keydata   = KEY_NULL;
-                                // isKeyPowerPressed = 1;
-                                break;
-                            default:
-                                MApp_IR_sendIROut(stKeyStatus.keydata);
-                                stKeyStatus.keydown   = FALSE;
-                                stKeyStatus.keydata   = KEY_NULL;
-                                //stKeyStatus.keyrepeat = FALSE;
-                            break;
-                        }
-                    }        
-                }   
-            }     
+        // printf("numStep = %u\n", numSteps);
+        // printf("changeDTVFlag = %u\n", changeDTVFlag);
+        // printf("scriptIndex = %u\n", scriptIndex);
+        u32WaitTimeForNextKey = msAPI_Timer_GetTime0();
+        if(scriptIndex == 0){
+            stKeyStatus.keydata = IRKEY_INPUT_SOURCE;
+            stKeyStatus.keydown = TRUE;
+        } else if(scriptIndex <= numSteps){
+            stKeyStatus.keydata = IRKEY_UP;
+            stKeyStatus.keydown = TRUE;
         } else {
-            switch (stKeyStatus.keydata){
-                case IRKEY_MENU:
-                    MApp_IR_sendIROut(stKeyStatus.keydata);
-                    stKeyStatus.keydata = IRKEY_EXIT;
-                    break;
-                // case IRKEY_SMART:
-                //     UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_HDMI2;
-                //     MApp_InputSource_SwitchSource( UI_INPUT_SOURCE_TYPE, MAIN_WINDOW );
-                //     break;
-                default:
-                    break; 
+            stKeyStatus.keydata = IRKEY_SELECT;
+            stKeyStatus.keydown = TRUE;
+            changeDTVFlag = 0;
+        }
+        scriptIndex ++;
+    }
+    else
+    {
+        stKeyStatus.keydata = KEY_NULL;
+        stKeyStatus.keydown = FALSE;
+    }    
+}
+void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
+
+    if(changeDTVFlag) {
+        DTVSourceChanged();
+    } else {
+        if(stKeyStatus.keydata == IRKEY_TV && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT){
+            changeDTVFlag = 1;
+            scriptIndex = 0;
+            
+            if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_ATV){
+                numSteps = 1;
+            }
+            else if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_SCART){
+                numSteps = 2;
+            }
+            else if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_RGB){
+                numSteps = 3;
+            }
+            else if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI){
+                numSteps = 4;
+            }
+            else if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2){
+                numSteps = 5;
+            }
+            else if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI3){
+                numSteps = 6;
+            }
+            // printf("numStep = %u\n", numSteps);
+            // printf("changeDTVFlag = %u\n", changeDTVFlag);
+            return;
+        }
+        if(stKeyStatus.keydata == IRKEY_SMART){
+            UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_HDMI2;// + (E_UI_INPUT_SOURCE)ucMHLInputSourcePort;
+            MApp_ZUI_ACT_ShutdownOSD();
+            MApp_ChannelChange_DisableChannel(TRUE,MAIN_WINDOW);
+            MApp_InputSource_SwitchSource( UI_INPUT_SOURCE_TYPE, MAIN_WINDOW );
+            stKeyStatus.keydown   = FALSE;
+            stKeyStatus.keydata   = KEY_NULL;
+            return;
+        }
+        
+        if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2) 
+        //|| MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_ATV)
+        {
+            // if(stKeyStatus.keydata == IRKEY_TV){
+            //     UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_DVBT;
+            //     MApp_InputSource_SwitchSource( UI_INPUT_SOURCE_TYPE, MAIN_WINDOW );
+            // }
+            if(MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE){
+                {
+                    repeatCodeEnable = isRepeatCode();
+                    if(!isCodeReadyToSend())
+                    {
+                        if(stKeyStatus.keydata != KEY_NULL && (stKeyStatus.keytype == KEY_TYPE_IR || stKeyStatus.keytype == KEY_TYPE_KEYPAD)){
+                            switch ( stKeyStatus.keydata ){
+                                case IRKEY_VOLUME_PLUS:
+                                case IRKEY_VOLUME_MINUS:
+                                case IRKEY_UP ://               = 0x59,
+                                
+                                // case IRKEY_EXIT://              = 0x10,
+                                // //case IRKEY_MENU              = 0x13,
+                                case IRKEY_DOWN://              = 0x51,
+                                case IRKEY_LEFT://              = 0x56,
+                                //case IRKEY_SELECT://            = 0x55,
+                                case IRKEY_RIGHT://             = 0x14,
+
+                                // case IRKEY_NUM_0://             = 0x44,
+                                // case IRKEY_NUM_1://             = 0x53,
+                                // case IRKEY_NUM_2://             = 0x50,
+                                // case IRKEY_NUM_3://             = 0x12,
+                                // case IRKEY_NUM_4://             = 0x4F,
+                                // case IRKEY_NUM_5://             = 0x4C,
+                                // case IRKEY_NUM_6://             = 0x0E,
+                                // case IRKEY_NUM_7://             = 0x4B,
+                                // case IRKEY_NUM_8://             = 0x48,
+                                // case IRKEY_NUM_9://             = 0x0A,
+                                case IRKEY_MUTE:    //              = 0x1C,
+                                // case IRKEY_FREEZE://            = 0x57,
+                                case IRKEY_INPUT_SOURCE:
+                                    MApp_IR_sendIROut(stKeyStatus.keydata);
+                                break;
+                                case IRKEY_POWER://             = 0x5F,
+                                    MApp_IR_sendIROut(stKeyStatus.keydata);
+                                    // msAPI_Timer_Delayms(3000);
+                                    // stKeyStatus.keydown   = FALSE;
+                                    // stKeyStatus.keydata   = KEY_NULL;
+                                    // isKeyPowerPressed = 1;
+                                    break;
+                                default:
+                                    MApp_IR_sendIROut(stKeyStatus.keydata);
+                                    stKeyStatus.keydown   = FALSE;
+                                    stKeyStatus.keydata   = KEY_NULL;
+                                    //stKeyStatus.keyrepeat = FALSE;
+                                break;
+                            }
+                        }        
+                    }   
+                }     
+            } else {
+                switch (stKeyStatus.keydata){
+                    case IRKEY_MENU:
+                        MApp_IR_sendIROut(stKeyStatus.keydata);
+                        stKeyStatus.keydata = IRKEY_EXIT;
+                        break;
+                    // case IRKEY_SMART:
+                    //     UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_HDMI2;
+                    //     MApp_InputSource_SwitchSource( UI_INPUT_SOURCE_TYPE, MAIN_WINDOW );
+                    //     break;
+                    default:
+                        break; 
+                }
             }
         }
     }
-    
 }
 #endif
 //nguyen

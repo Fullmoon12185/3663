@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -133,9 +133,9 @@ extern "C" {
 #endif
 #define FONT_SIMCHINESE  FONT_CHINESE
 
-#define MENU_TIME_OUT_MS 30000
+#define MENU_TIME_OUT_MS 10000 //30000
 #define CHLIST_TIME_OUT_MS 10000
-#define INSTALL_GUIDE_TIME_OUT_MS 180000   // 3 min
+#define INSTALL_GUIDE_TIME_OUT_MS 30000 //180000   // 3 min
 #define PROGRAM_EDIT_TIME_OUT_MS 10000
 #define AUDIO_LANGUAGE_TIME_OUT_MS 10000
 #define SUBTITLE_LANGUAGE_TIME_OUT_MS 3000
@@ -145,7 +145,7 @@ extern "C" {
 #define UART_DEBUG_TIME_OUT_MS 3000
 #define MESSAGE_BOX_TIME_OUT_MS 3000
 #define TENKEY_NUMBER_TIME_OUT_MS 3000
-#define EPG_TIME_OUT_MS 180000      //3 minutes
+#define EPG_TIME_OUT_MS     5000 //180000      //3 minutes
 #define CHANNEL_INFO_TIME_OUT_MS 5000
 #define CIMMI_TIME_OUT_MS  720000      //3 minutes
 #define PVR_TIME_OUT_MS     0//infinity if this time is too small OSD will close while format is not finished.
