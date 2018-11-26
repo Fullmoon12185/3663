@@ -263,8 +263,8 @@ extern void USB_Init_Configure(void);
 
 //******************************************************************************
 
-#define DRVINIT_DBG(x)              x
-#define POWERDOWN_EXEC_DBG(x)       x
+#define DRVINIT_DBG(x)              //x
+#define POWERDOWN_EXEC_DBG(x)       //x
 
 //******************************************************************************
 
@@ -582,7 +582,7 @@ void msAPI_Power_PowerDown_EXEC(void)
 /***************************************************************************************/
 void msAPI_PowerON_EXEC(void)
 {
-    //printf(">>npn --  msAPI_PowerON_EXEC() \n");
+    printf(">>npn --  msAPI_PowerON_EXEC() \n");
 
   #if ( POWER_CONTROL != ENABLE )
     POWER_ON_OFF1_On();
@@ -738,7 +738,7 @@ void msAPI_DrvInitStep1(void)
  #if ENABLE_MSTV_UART_DEBUG
     MDrv_UART_DebugInit();
  #else
-    MDrv_UART_Register_Empty_RecvHandler();
+    //MDrv_UART_Register_Empty_RecvHandler();
  #endif
 
  #if(ENABLE_UART2)

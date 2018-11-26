@@ -247,7 +247,7 @@ void msGPIO_Init()
     ANDROID_INIT();
     //msPWM_OutputEnable( (PWM1_ENABLE));// | PWM0_ENABLE | PWM2_ENABLE | PWM3_ENABLE) );
     //MApi_PNL_SetBackLight(BACKLITE_INIT_SETTING);
-    //MApi_PNL_SetBackLight(DISABLE);
+    MApi_PNL_SetBackLight(DISABLE);
     //CUS03 No Use
     //===============================
     Panel_VG_HL_CTL_ON();

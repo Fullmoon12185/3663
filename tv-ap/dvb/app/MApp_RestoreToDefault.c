@@ -247,7 +247,103 @@ static code stSoundModeSeting astDefaultSoundModeSeting[EN_SoundMode_Num] =
     #define SIMPLE_EQ_SETTING 0
 
     //bass,treble,u8120HZ,u8200HZ,u8500HZ,u8_1_dot_2_KHZ,u8_3KHZ,u8_7_dot_5_KHZ,u812KHZ,Usermode
+#if(TV32_INCH_LSC == 1)
+    //Standard,
+    {100,
+      100,
+      SOUND_MODE_STANDARD_BAND1,
+      SOUND_MODE_STANDARD_BAND2,
+      SOUND_MODE_STANDARD_BAND3,
+      SOUND_MODE_STANDARD_BAND4,
+      SOUND_MODE_STANDARD_BAND5,
+      SOUND_MODE_STANDARD_BAND6,
+      SOUND_MODE_STANDARD_BAND7,
+      FALSE, 0, AUD_MODE_LR
+    },
+    //Music
+    {100,
+      100,
+      #if (SIMPLE_EQ_SETTING == 0)
+      SOUND_MODE_MUSIC_BAND1,
+      SOUND_MODE_MUSIC_BAND2,
+      SOUND_MODE_MUSIC_BAND3,
+      SOUND_MODE_MUSIC_BAND4,
+      SOUND_MODE_MUSIC_BAND5,
+      SOUND_MODE_MUSIC_BAND6,
+      SOUND_MODE_MUSIC_BAND7,
+      FALSE, 0, AUD_MODE_LR
+      #else
+      SOUND_MODE_STANDARD_BAND1,
+      SOUND_MODE_STANDARD_BAND2,
+      SOUND_MODE_STANDARD_BAND3,
+      SOUND_MODE_STANDARD_BAND4,
+      SOUND_MODE_STANDARD_BAND5,
+      SOUND_MODE_STANDARD_BAND6,
+      SOUND_MODE_STANDARD_BAND7,
+      FALSE, 0, AUD_MODE_LR
+      #endif
+     },
+     //Move
+    {100,
+      100,
+      #if (SIMPLE_EQ_SETTING == 0)
+      SOUND_MODE_MOVIE_BAND1,
+      SOUND_MODE_MOVIE_BAND2,
+      SOUND_MODE_MOVIE_BAND3,
+      SOUND_MODE_MOVIE_BAND4,
+      SOUND_MODE_MOVIE_BAND5,
+      SOUND_MODE_MOVIE_BAND6,
+      SOUND_MODE_MOVIE_BAND7,
+      FALSE, 0, AUD_MODE_LR
+      #else
+      SOUND_MODE_STANDARD_BAND1,
+      SOUND_MODE_STANDARD_BAND2,
+      SOUND_MODE_STANDARD_BAND3,
+      SOUND_MODE_STANDARD_BAND4,
+      SOUND_MODE_STANDARD_BAND5,
+      SOUND_MODE_STANDARD_BAND6,
+      SOUND_MODE_STANDARD_BAND7,
+      FALSE, 0, AUD_MODE_LR
+      #endif
 
+    },
+    //Sports
+    {100,
+      100,
+      #if (SIMPLE_EQ_SETTING == 0)
+      SOUND_MODE_SPORTS_BAND1,
+      SOUND_MODE_SPORTS_BAND2,
+      SOUND_MODE_SPORTS_BAND3,
+      SOUND_MODE_SPORTS_BAND4,
+      SOUND_MODE_SPORTS_BAND5,
+      SOUND_MODE_SPORTS_BAND6,
+      SOUND_MODE_SPORTS_BAND7,
+      FALSE, 0, AUD_MODE_LR
+      #else
+      SOUND_MODE_STANDARD_BAND1,
+      SOUND_MODE_STANDARD_BAND2,
+      SOUND_MODE_STANDARD_BAND3,
+      SOUND_MODE_STANDARD_BAND4,
+      SOUND_MODE_STANDARD_BAND5,
+      SOUND_MODE_STANDARD_BAND6,
+      SOUND_MODE_STANDARD_BAND7,
+      FALSE, 0, AUD_MODE_LR
+      #endif
+      },
+      //User
+      {100,
+      100,
+      SOUND_MODE_STANDARD_BAND1,
+      SOUND_MODE_STANDARD_BAND2,
+      SOUND_MODE_STANDARD_BAND3,
+      SOUND_MODE_STANDARD_BAND4,
+      SOUND_MODE_STANDARD_BAND5,
+      SOUND_MODE_STANDARD_BAND6,
+      SOUND_MODE_STANDARD_BAND7,
+      FALSE, 0, AUD_MODE_LR
+      },
+
+#else
     //Standard,
     {50,
       50,
@@ -342,6 +438,7 @@ static code stSoundModeSeting astDefaultSoundModeSeting[EN_SoundMode_Num] =
       SOUND_MODE_STANDARD_BAND7,
       FALSE, 0, AUD_MODE_LR
       },
+#endif
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -3475,7 +3572,13 @@ void MApp_DataBase_RestoreDefaultSystem(U16 u16KeepSetting)
     stGenSetting.g_SysSetting.u8UsrLogoIdx = 0;
     stGenSetting.g_SysSetting.UsrPowerOnMusic = POWERON_MUSIC_DEFAULT;
 #endif
-    stGenSetting.g_SysSetting.g_MirrorEnable = FALSE;
+#if(UBC_TV32 == 1)
+    #if((TV32_INCH_LSC == 1) || (TV32_315_1A == 1))
+        stGenSetting.g_SysSetting.g_MirrorEnable = MirrorEnable;
+    #endif
+#else
+    stGenSetting.g_SysSetting.g_MirrorEnable = false;
+#endif
 
 #if ENABLE_OAD
     stGenSetting.g_SysSetting.bOADActiveStandbyMode = FALSE;
@@ -3773,7 +3876,7 @@ void MApp_DataBase_RestoreDefaultAudio(BOOL bSetDriver)
     stGenSetting.g_SoundSetting.bEnableAD = ENABLE;
 #endif
 
-    stGenSetting.g_SoundSetting.ADVolume = DEFAULT_VOLUME_SETTING;
+    stGenSetting.g_SoundSetting.ADVolume = 100;//DEFAULT_VOLUME_SETTING;
     stGenSetting.g_SoundSetting.ADMixSetting = DEFAULT_AD_MIX_SETTING;
     stGenSetting.g_SoundSetting.ADOutput = AD_SPEAKER;
     stGenSetting.g_SoundSetting.Balance = DEFAULT_BALANCE_SETTING;
@@ -4643,7 +4746,7 @@ void MApp_DataBase_RestoreDefault_DebugSetting(void)
 {
     printf("MApp_DataBase_RestoreDefault_DebugSetting()\n");
     stGenSetting.stDebugSetting.u8Flag1 = 0;
-    stGenSetting.stDebugSetting.u8Flag2 = 2;
+    stGenSetting.stDebugSetting.u8Flag2 = 0;
     stGenSetting.stDebugSetting.bKeyLoggerEnable = DISABLE;
 }
 

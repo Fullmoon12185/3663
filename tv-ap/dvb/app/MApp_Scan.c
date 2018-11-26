@@ -295,8 +295,8 @@ void MApp_ChannelChange_DisableChannel (BOOLEAN u8IfStopDsmcc, SCALER_WIN eWindo
 #else
 #define SCAN_ONE_LINE_DBINFO(y)         //y
 #endif
-#define SCAN_DBINFO(y)                  y
-#define DVBC_SCAN_DBINFO(y)             y
+#define SCAN_DBINFO(y)                  //y
+#define DVBC_SCAN_DBINFO(y)             //y
 
 //------------------------------------------------------------------------------
 
@@ -5594,7 +5594,7 @@ EN_RET MApp_DTV_Scan_Update_Mux( void )
 #endif
 
 /*****************************************************************************/
-#define NEW_SCAN_APP_DBG(y)     y
+#define NEW_SCAN_APP_DBG(y)     //y
 
 
 #if 1//ENABLE_T_C_COMBO
@@ -5639,7 +5639,7 @@ BOOLEAN MApp_DVB_Scan( MS_TP_SETTING *pstTPSetting,BOOLEAN *ScanResult )
 
     *ScanResult = FE_NOT_LOCK;
 
-    printf("\n MApp_DVB_Scan (%d) \n", enDVBScanState);
+    //printf("\n MApp_DVB_Scan (%d) \n", enDVBScanState);
 
     switch( enDVBScanState )
     {

@@ -286,18 +286,18 @@ void msApiPrintfHDMI_STATUSMode(E_XC_HDMI_Status eE_XC_HDMI_Status)
     {
         default:
         case E_HDMI_STATUS_UNKNOWN:
-            //MS_DEBUG_MSG(printf("\r\n Unknown Mode"));
-            printf(" Unknown Mode\n");
+            MS_DEBUG_MSG(printf("\r\n Unknown Mode"));
+            //printf(" Unknown Mode\n");
             break;
 
         case E_HDMI_STATUS_DVI:
-            //MS_DEBUG_MSG(printf("\r\n DVI Mode"));
-            printf(" DVI Mode\n");
+            MS_DEBUG_MSG(printf("\r\n DVI Mode"));
+            //printf(" DVI Mode\n");
             break;
 
         case E_HDMI_STATUS_HDMI:
-            //MS_DEBUG_MSG(printf("\r\n HDMI Mode"));
-            printf(" HDMI Mode\n");
+            MS_DEBUG_MSG(printf("\r\n HDMI Mode"));
+            //printf(" HDMI Mode\n");
             break;
     }
 }
@@ -1633,7 +1633,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
           previous_status[eWindow] != current_status ) // unstable or no sync
     {
         // Disable all destination as soon as possiable.
-        printf("[PCMode] stable -> unstable or no sync(%u) at %u src = %u\n", current_status, MsOS_GetSystemTime(), src);
+        //printf("[PCMode] stable -> unstable or no sync(%u) at %u src = %u\n", current_status, MsOS_GetSystemTime(), src);
 
     #if(DEBUG_CHG_SRC_TIME)
         msDebug_PrintChgSrcTime("Sync unstable");
@@ -1741,7 +1741,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
     else if( current_status == E_XC_PCMONITOR_STABLE_SYNC &&
              previous_status[eWindow] != current_status)
     {
-        printf("[PCMode] unstable or no sync -> stable at %u\n", MsOS_GetSystemTime());
+        //printf("[PCMode] unstable or no sync -> stable at %u\n", MsOS_GetSystemTime());
 
     #if(DEBUG_CHG_SRC_TIME)
         msDebug_PrintChgSrcTime("Sync stable");
@@ -1802,7 +1802,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
 
             if(_MApp_PCMode_SetMode(eWindow))
             {
-                printf("[PCMode] Set Mode ok at %u\n", MsOS_GetSystemTime());
+                //printf("[PCMode] Set Mode ok at %u\n", MsOS_GetSystemTime());
 
                 PCMODE_TASK_CHECK();
 
@@ -2002,7 +2002,7 @@ static void _MApp_PCMode_StatusHandler(INPUT_SOURCE_TYPE_t src, XC_PCMONITOR_STA
 
 void MApp_PCMode_Reset_TimingMonitor(SCALER_WIN eWindow)
 {
-    printf("MApp_PCMODE_Reset_TimingMonitor()\n");
+    //printf("MApp_PCMODE_Reset_TimingMonitor()\n");
 
     INPUT_SOURCE_TYPE_t eINPUT_SOURCE_TYPE = SYS_INPUT_SOURCE_TYPE(eWindow);
 

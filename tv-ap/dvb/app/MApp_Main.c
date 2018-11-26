@@ -169,7 +169,8 @@ extern BOOLEAN g_bAutobuildDebug;
 //------------------------------------------------------------------------------
 // Locals
 //------------------------------------------------------------------------------
-#define CURRENT_TESTING DISABLE //ENABLE
+#define CURRENT_TESTING ENABLE
+#define     DEBUG_HOME_SHOP(x)  x
 
 #define     BACKLIGHT_LEVEL_1   30
 #define     BACKLIGHT_LEVEL_2   (30 + BACKLIGHT_LEVEL_1)
@@ -185,18 +186,25 @@ LED 300mA - Panel 32 inch JP
 70%     210mA   82      77V
 60%     180mA   74      76V
 */
-#if UBC_TV40
+#if (UBC_TV40 == 1)
     #define     SHOP_BACKLIGHT      217
     #define     HOME_BACKLIGHT_1    195
     #define     HOME_BACKLIGHT_2    173
     #define     HOME_BACKLIGHT_3    152
-#elif UBC_TV32
-    #define     SHOP_BACKLIGHT      111
-    #define     HOME_BACKLIGHT_1    100
-    #define     HOME_BACKLIGHT_2    89
-    #define     HOME_BACKLIGHT_3    78
+#elif (UBC_TV32 == 1)
+    #if(TV32_INCH_LSC == 1)
+        #define     SHOP_BACKLIGHT      111  //300mA
+        #define     HOME_BACKLIGHT_1    100  //280mA
+        #define     HOME_BACKLIGHT_2    89   //
+        #define     HOME_BACKLIGHT_3    78
+    #elif(TV32_315_1A == 1) 
+        #define     SHOP_BACKLIGHT      130   //360mA
+        #define     HOME_BACKLIGHT_1    120   //330mA
+        #define     HOME_BACKLIGHT_2    110   //300mA
+        #define     HOME_BACKLIGHT_3    100   //280mA
+    #endif
 #endif
-#define     DEBUG_HOME_SHOP(x)  //x
+
 
 static U16 fourKeyPressed = 0;
 static U16 countForHomeShop = 0;
@@ -921,17 +929,17 @@ int main(void)
                         // LED_RED_Off();
                         // LED_GRN_On(); 
                         //EX_ACTIVE_IC_ON();
-                        b_ON();
-                        r_ON();
-                        g_ON();
+                        // b_ON();
+                        // r_ON();
+                        // g_ON();
                         //MApp_PreInit_Logo_Init();
                         //MApi_PNL_En(TRUE);
                         //MApi_PNL_SetBackLight(ENABLE);
                         bToogleLED = 1;    
                     } else {
-                        b_OFF();
-                        g_OFF();
-                        r_OFF();
+                        // b_OFF();
+                        // g_OFF();
+                        // r_OFF();
                         // LED_RED_On();
                         // LED_GRN_Off();
                         //EX_ACTIVE_IC_OFF();

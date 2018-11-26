@@ -347,7 +347,7 @@ static EN_TOP_STATE s_TSM_eLastTopState = (EN_TOP_STATE)0xFF;
 /*                                Function                                       */
 /********************************************************************************/
 
-#define ENABLE_DEBUG_TSM_TIME   1
+#define ENABLE_DEBUG_TSM_TIME   0
 
 #define TOP_STATE_TASK_CHECK_POINT()    //printf("<T %u>", __LINE__ );
 

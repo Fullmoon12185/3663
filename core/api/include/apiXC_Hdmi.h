@@ -110,9 +110,9 @@
 
 #define HDMI_POLLING_COUNTER   (30)    // 30 ms
 
-#define DEBUG_HDMI_HOT_PLUG(x)  x
+#define DEBUG_HDMI_HOT_PLUG(x)  //x
 
-#define DEBUG_HDMI_COLOR(x)     x
+#define DEBUG_HDMI_COLOR(x)     //x
 
 #define HDMI_COLOR_CHANGE_NO_MODE_CHANGE    1
 

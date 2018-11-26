@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -237,7 +237,7 @@ EN_POWER_ON_MODE msAPI_Power_QueryPowerOnMode(void)
 
     U16 u8PowerDownMode = MDrv_Read2Byte(PM_SLEEP_POWERON_FLAG);
 
-    //printf("u8PowerDownMode = %x \n", u8PowerDownMode);
+    printf("u8PowerDownMode = %x \n", u8PowerDownMode);
 
     if(u8PowerDownMode == MAKEWORD(POWERON_FLAG2, POWERON_FLAG1))
     {
@@ -256,7 +256,7 @@ EN_POWER_ON_MODE msAPI_Power_QueryPowerOnMode(void)
 
     U8 u8PowerDownMode = MDrv_ReadByte(PM_SLEEP_AC_DC_ON);
 
-    //printf("u8PowerDownMode = %x \n", u8PowerDownMode);
+    printf("nguyen u8PowerDownMode = %x \n", u8PowerDownMode);
 
     switch ( u8PowerDownMode )
     {
@@ -385,7 +385,8 @@ static U16 _msAPI_CEC_TranslateDevice(U16 u16Device)
         default:
             return 0xFFFF;
     }
-}
+
+}
 #endif
 
 U16 msAPI_Power_CheckWakeupDevice(void)

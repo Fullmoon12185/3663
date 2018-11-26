@@ -2723,6 +2723,7 @@ void MApp_InputSource_SwitchSource( E_UI_INPUT_SOURCE enUiInputSourceType,
 #if (MirrorEnable)
     if( (IsSrcTypeStorage(eOldInputSrc)||IsSrcTypeDTV(eOldInputSrc)) )
     {
+        
         MApp_MVOP_SetMirrorMode(DISABLE);
     }
 #endif

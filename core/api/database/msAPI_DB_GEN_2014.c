@@ -108,7 +108,7 @@
 #define DEBUG_DB_GEN_LVL(lvl, x)     do { \
     if( s_stDB_GEN_InitData.u8DebugFlag >= lvl ) \
     { \
-        x; \
+        /*x;*/ \
     } \
 } while(0)
 
@@ -1086,7 +1086,7 @@ void msAPI_DB_GEN_Task(void)
             DEBUG_DB_GEN_FLOW( printf("[GEN - WRITE_DATA]\n"););
             {
                 BOOL bWriteDone = TRUE;
-                U32 u32GenWriteTime = MsOS_GetSystemTime();
+                //U32 u32GenWriteTime = MsOS_GetSystemTime();
 
                 // write data to flash
                 if( FALSE == _msAPI_DB_GEN_WriteDataToFlash( s_stDB_GEN_Info.u8FlashCurUnitIdx,

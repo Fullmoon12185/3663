@@ -1505,7 +1505,7 @@ void MApp_PreInit_CheckAndModifyPowerOnOffFlag(void)
             {
                 printf("AC on\n");
 
-                //G_FACTORY_SETTING.stFacMiscSetting.u8PowerOnMode = POWERON_MODE_SAVE;
+                G_FACTORY_SETTING.stFacMiscSetting.u8PowerOnMode = POWERON_MODE_OFF;
 
         #if ENABLE_DESIGN_POWER_ON_MODE
                 if(G_FACTORY_SETTING.stFacMiscSetting.u8PowerOnMode == POWERON_MODE_ON)
@@ -1672,8 +1672,15 @@ void MApp_PreInit_GlobalVariable_Init(void)
 
     // Debug get key init
     UART_Clear();
-
-    
+    //nguyen mirror
+#if (UBC_TV32 == 1)
+    #if((TV32_INCH_LSC == 1) || (TV32_315_1A == 1))
+        stGenSetting.g_SysSetting.g_MirrorEnable = MirrorEnable;
+    #endif
+#else
+    stGenSetting.g_SysSetting.g_MirrorEnable = false;
+#endif
+    //stGenSetting.g_SoundSetting.ADVolume = 100;
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }
 
@@ -1790,32 +1797,28 @@ void MApp_PreInit_DateBase_Init(void)
 
     // Check data base
     MApp_DB_Check();
-    printf("Nguyen 1 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     // Init flash write protect
     msAPI_Flash_Init();
-    printf("Nguyen 2 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     msAPI_Flash_Init_WriteProtect();
-    printf("Nguyen 3 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     // EEPROM restore or init global setting
 #if (EEPROM_DB_STORAGE!=EEPROM_SAVE_NONE)
     MApp_CheckEEPROM();
 #endif
-    printf("Nguyen 4 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
     // Flash restore or init global setting
     // When the Flash is normal, please first read (UserData & Channel Data)
 #if (EEPROM_DB_STORAGE != EEPROM_SAVE_ALL)
     MApp_CheckFlash();
 #endif
-    printf("Nguyen 5 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
+    
     // Check and modify power on/off flag
     MApp_PreInit_CheckAndModifyPowerOnOffFlag();
-    printf("Nguyen 6 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
+    
 #if ENABLE_SBTVD_DTV_SYSTEM
     g_bIsSbtvdAppEn = IS_SBTVD_APP_COUNRTY(stGenSetting.stTvSetting.eCountry);
 #endif
-    printf("Nguyen 7 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
+    
     msAPI_ATV_InitVariable(); // must after g_bIsSbtvdAppEn setup
-    printf("Nguyen 8 UI_INPUT_SOURCE_TYPE = %u\n", UI_INPUT_SOURCE_TYPE);
+    
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());
 }
 

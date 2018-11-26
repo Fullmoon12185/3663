@@ -2167,7 +2167,7 @@ static void _MApi_XC_Sys_HDMI_Init(void)
     MS_U8 u8HdcpKey[HDCP_KEY_SIZE]={0};
 
 
-    printf("_MApi_XC_Sys_HDMI_Init() at %u\n",  MsOS_GetSystemTime());
+    //printf("_MApi_XC_Sys_HDMI_Init() at %u\n",  MsOS_GetSystemTime());
 
 
 #if (HDCP_KEY_TYPE==HDCP_KEY_IN_CODE)
@@ -5549,7 +5549,7 @@ U8 MApi_XC_Sys_HdmiSrcToIdx(INPUT_SOURCE_TYPE_t enINPUT_SOURCE_TYPE)
 }
 
 
-#define HDMI_HDP_TASK_DBG(x)    x
+#define HDMI_HDP_TASK_DBG(x)    //x
 
 void MApi_XC_HPD_Task_PowerOnInit(void)
 {
@@ -6614,7 +6614,7 @@ void MApi_XC_Sys_ResetDVIPort(INPUT_SOURCE_TYPE_t enINPUT_SOURCE_TYPE)
 
     if( u8port_count > 0 )
     {
-        printf(">> MDrv_DVI_Software_Reset(eInputPort=%u, BIT5)\n", eInputPort);
+        //printf(">> MDrv_DVI_Software_Reset(eInputPort=%u, BIT5)\n", eInputPort);
         MDrv_DVI_Software_Reset(eInputPort, BIT5);
     }
 

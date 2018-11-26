@@ -348,7 +348,7 @@ void msAPI_MHL_MHLSupportPath(MS_U8 ucSelect)
 
 void msAPI_MHL_Initialization(void)
 {
-    printf("\r\nMHL Init, MHL_TYPE = 0x%x\r\n", MHL_TYPE);
+    //printf("\r\nMHL Init, MHL_TYPE = 0x%x\r\n", MHL_TYPE);
 
     // MHL Init
     mapi_mhl_init(MStar_MHL_EDID, tMHL_DEVICE_CAPABILITY_TABLE);
@@ -357,7 +357,7 @@ void msAPI_MHL_Initialization(void)
 
 #if(MHL_VBUS_OPTION_STATE > 0)
     mapi_mhl_VbusConfigSetting(MHL_VBUS_OPTION_STATE);
-    printf("\r\nMHL Init, MHL_TYPE = 0x%x\r\n", MHL_TYPE);
+    //printf("\r\nMHL Init, MHL_TYPE = 0x%x\r\n", MHL_TYPE);
 #endif
 
 #if(MHL_READ_DEVICE_CAPABILITY) //patch timing problem

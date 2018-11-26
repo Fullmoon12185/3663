@@ -3481,7 +3481,7 @@ static REDRAW_TYPE _MApp_ZUI_ACT_FactoryMenuDecIncValue(U8 u8Item, BOOLEAN bInc)
 
               #if  MirrorEnable
                 case 8:
-                    stGenSetting.g_SysSetting.g_MirrorEnable = MApp_ZUI_ACT_DecIncValue_Cycle(bInc, stGenSetting.g_SysSetting.g_MirrorEnable, DISABLE, ENABLE, 1);
+                    stGenSetting.g_SysSetting.g_MirrorEnable = MirrorEnable;//MApp_ZUI_ACT_DecIncValue_Cycle(bInc, stGenSetting.g_SysSetting.g_MirrorEnable, DISABLE, ENABLE, 1);
                     MApp_SetDesignImageMirror();
                     return EN_REDRAW_ITEM;
               #endif

@@ -292,7 +292,7 @@ S32 MApp_ZUI_API_DispatchMessage (PMSG pMsg)
             if (!MApp_ZUI_ACT_HandleGlobalKey((VIRTUAL_KEY_CODE)pMsg->wParam))
             {
                 focus = GETWNDFOCUS();
-                printf("/focus=%bu\n", (U8)focus);
+                //printf("/focus=%bu\n", (U8)focus);
                 //printf("[dispmsg2]\n");
                 if(!(E_OSD_DMP == _eActiveOSD))
                 {

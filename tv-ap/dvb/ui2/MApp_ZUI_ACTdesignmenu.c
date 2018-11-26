@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -1772,13 +1772,13 @@ static  DESIGN_MENU_ITEM _ZUI_TBLSEG _DesignMenuItem[]=
 #define GET_DESIGNMENU_SHOWITEM(stuMenuItem)            GetDesignMenuItemIndex(stuMenuItem)
 
 // ----------------------------------------------------------
-// ¹¦ÄÜËµÃ÷: »ñÈ¡¹¤³§²Ëµ¥ÏîµÄË÷Òý
-// ²ÎÊýËµÃ÷:
-//    stuMenuItem: ¹¤³§²Ëµ¥ÏîÄ¿DESIGN_MENU_ITEM
-// ·µ»ØËµÃ÷:
-//    ·µ»Ø²Ëµ¥Ïî´Ó0¿ªÊ¼µÄË÷ÒýÖµ
-// ¸½¼ÓËµÃ÷:
-//    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    stuMenuItem: ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ä¿DESIGN_MENU_ITEM
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    ï¿½ï¿½ï¿½Ø²Ëµï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 // ----------------------------------------------------------
 static U8 GetDesignMenuItemIndex(DESIGN_MENU_ITEM stuMenuItem)
 {
@@ -1788,14 +1788,14 @@ static U8 GetDesignMenuItemIndex(DESIGN_MENU_ITEM stuMenuItem)
 
     for (i = 0; i < COUNTOF(_DesignMenuItem); i++)
     {
-        if (_DesignMenuItem[i].u8ShowItem == 0) //    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+        if (_DesignMenuItem[i].u8ShowItem == 0) //    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
             ucMenuIndex = 0;
         else
             ucMenuIndex ++;
 
-        // ÌØÊâÒ³ÃæÔÚ´Ë×÷ÌØÊâ´¦Àí
+        // ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½
         if(_DesignMenuItem[i].eCurPage == EN_DESIGN_PAGE_SW_INFO_PAGE && _DesignMenuItem[i].u8ShowItem == 1)
-            ucMenuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³Ãæ: ´Ó1¿ªÊ¼µÄ£¬Ê×ÏîÔ­ÏÈÒÑ¾­ÓÐÏÔÊ¾ÄÚÈÝ.
+            ucMenuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³ï¿½ï¿½: ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
 
         if (_DesignMenuItem[i].eCurPage == stuMenuItem.eCurPage && _DesignMenuItem[i].u8ShowItem == stuMenuItem.u8ShowItem)
         {
@@ -1805,27 +1805,27 @@ static U8 GetDesignMenuItemIndex(DESIGN_MENU_ITEM stuMenuItem)
     }
 
     printf("--WARNING--: DESIGN_MENU_ITEM inexistence!\n");
-    return 0xFF; // ²»´æÔÚµÄÒ³Ãæ
+    return 0xFF; // ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò³ï¿½ï¿½
 }
 
 // ----------------------------------------------------------
-// ¹¦ÄÜËµÃ÷: »ñÈ¡_DesignMenuItemÊý×éµÄu8ShowItemÖµ
-// ²ÎÊýËµÃ÷:
-//    enuCurPage: µ±Ç°Ò³Ãæ¶ÔÏóDESIGN_MENU_PAGE
-//    ucItemIndex: ²Ëµ¥Ïî´Ó0¿ªÊ¼µÄË÷Òý
-// ·µ»ØËµÃ÷:
-//    ·µ»Ø_DesignMenuItemÊý×éµÄu8ShowItemÖµ
-// ¸½¼ÓËµÃ÷:
-//    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½È¡_DesignMenuItemï¿½ï¿½ï¿½ï¿½ï¿½u8ShowItemÖµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    enuCurPage: ï¿½ï¿½Ç°Ò³ï¿½ï¿½ï¿½ï¿½ï¿½DESIGN_MENU_PAGE
+//    ucItemIndex: ï¿½Ëµï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    ï¿½ï¿½ï¿½ï¿½_DesignMenuItemï¿½ï¿½ï¿½ï¿½ï¿½u8ShowItemÖµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 // ----------------------------------------------------------
 static U16 GetDesignMenuItemu8ShowItem(DESIGN_MENU_PAGE enuCurPage, U8 ucItemIndex)
 {
     U8 i = 0;
     U8 ucMenuItemuIndex = 0;
 
-    // ÌØÊâÒ³ÃæÔÚ´Ë×÷ÌØÊâ´¦Àí
+    // ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½
     if(enuCurPage == EN_DESIGN_PAGE_SW_INFO_PAGE)
-        ucMenuItemuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³Ãæ: ´Ó1¿ªÊ¼µÄ£¬Ê×ÏÈÓÐÏÔÊ¾ÄÚÈÝ.
+        ucMenuItemuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³ï¿½ï¿½: ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
     for (i = 0; i < COUNTOF(_DesignMenuItem); i++)
     {
         if(_DesignMenuItem[i].eCurPage == enuCurPage)
@@ -1839,27 +1839,27 @@ static U16 GetDesignMenuItemu8ShowItem(DESIGN_MENU_PAGE enuCurPage, U8 ucItemInd
     }
 
     printf("--WARNING--: DESIGN_MENU_PAGE or ucItemIndex inexistence!\n");
-    return 0xFF; // ²»´æÔÚµÄÒ³Ãæ
+    return 0xFF; // ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò³ï¿½ï¿½
 }
 
 // ----------------------------------------------------------
-// ¹¦ÄÜËµÃ÷: »ñÈ¡_DesignMenuItemÊý×éµÄ16StringIDÖµ
-// ²ÎÊýËµÃ÷:
-//    enuCurPage: µ±Ç°Ò³Ãæ¶ÔÏóDESIGN_MENU_PAGE
-//    ucItemIndex: ²Ëµ¥Ïî´Ó0¿ªÊ¼µÄË÷Òý
-// ·µ»ØËµÃ÷:
-//    ·µ»Ø_DesignMenuItemÊý×éµÄ16StringIDÖµ
-// ¸½¼ÓËµÃ÷:
-//    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½È¡_DesignMenuItemï¿½ï¿½ï¿½ï¿½ï¿½16StringIDÖµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    enuCurPage: ï¿½ï¿½Ç°Ò³ï¿½ï¿½ï¿½ï¿½ï¿½DESIGN_MENU_PAGE
+//    ucItemIndex: ï¿½Ëµï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    ï¿½ï¿½ï¿½ï¿½_DesignMenuItemï¿½ï¿½ï¿½ï¿½ï¿½16StringIDÖµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 // ----------------------------------------------------------
 static U16 GetDesignMenuItemu16StringID(DESIGN_MENU_PAGE enuCurPage, U8 ucItemIndex)
 {
     U8 i = 0;
     U8 ucMenuItemuIndex = 0;
 
-    // ÌØÊâÒ³ÃæÔÚ´Ë×÷ÌØÊâ´¦Àí
+    // ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½
     if(enuCurPage == EN_DESIGN_PAGE_SW_INFO_PAGE)
-        ucMenuItemuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³Ãæ: ´Ó1¿ªÊ¼µÄ£¬Ê×ÏÈÓÐÏÔÊ¾ÄÚÈÝ.
+        ucMenuItemuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³ï¿½ï¿½: ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
     for (i = 0; i < COUNTOF(_DesignMenuItem); i++)
     {
         if(_DesignMenuItem[i].eCurPage == enuCurPage)
@@ -1873,17 +1873,17 @@ static U16 GetDesignMenuItemu16StringID(DESIGN_MENU_PAGE enuCurPage, U8 ucItemIn
     }
 
     printf("--WARNING--: DESIGN_MENU_PAGE or ucItemIndex inexistence!\n");
-    return 0xFF; // ²»´æÔÚµÄÒ³Ãæ
+    return 0xFF; // ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ò³ï¿½ï¿½
 }
 
 // ----------------------------------------------------------
-// ¹¦ÄÜËµÃ÷: »ñÈ¡¹¤³§²Ëµ¥±¾Ò³ÔÚÇ°Ò»Ò³²Ëµ¥µÄ²Ëµ¥ÏîµÄË÷Òý
-// ²ÎÊýËµÃ÷:
-//    enuCurPage: µ±Ç°Ò³Ãæ¶ÔÏóDESIGN_MENU_PAGE
-// ·µ»ØËµÃ÷:
-//    ·µ»Ø±¾Ò³ÃæÔÚÇ°Ò»Ò³ÃæµÄ²Ëµ¥Ïî´Ó0¿ªÊ¼µÄË÷ÒýÖµ
-// ¸½¼ÓËµÃ÷:
-//    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ç°Ò»Ò³ï¿½Ëµï¿½ï¿½Ä²Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    enuCurPage: ï¿½ï¿½Ç°Ò³ï¿½ï¿½ï¿½ï¿½ï¿½DESIGN_MENU_PAGE
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    ï¿½ï¿½ï¿½Ø±ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ç°Ò»Ò³ï¿½ï¿½Ä²Ëµï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+// ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+//    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 // ----------------------------------------------------------
 static U8 GetDesignPreMenuItemIndex(DESIGN_MENU_PAGE enuCurPage)
 {
@@ -1893,14 +1893,14 @@ static U8 GetDesignPreMenuItemIndex(DESIGN_MENU_PAGE enuCurPage)
 
     for (i = 0; i < COUNTOF(_DesignMenuItem); i++)
     {
-        if (_DesignMenuItem[i].u8ShowItem == 0) //    Ô¼¶¨: ¸÷Ò³µÄÊ×ÏîµÄË÷Òý¶¼Îª0
+        if (_DesignMenuItem[i].u8ShowItem == 0) //    Ô¼ï¿½ï¿½: ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
             ucMenuIndex = 0;
         else
             ucMenuIndex ++;
 
-        // ÌØÊâÒ³ÃæÔÚ´Ë×÷ÌØÊâ´¦Àí
+        // ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½
         if(_DesignMenuItem[i].eCurPage == EN_DESIGN_PAGE_SW_INFO_PAGE && _DesignMenuItem[i].u8ShowItem == 1)
-            ucMenuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³Ãæ: ´Ó1¿ªÊ¼µÄ£¬Ê×ÏîÔ­ÏÈÒÑ¾­ÓÐÏÔÊ¾ÄÚÈÝ.
+            ucMenuIndex = 1; // EN_DESIGN_PAGE_SW_INFO_PAGEÒ³ï¿½ï¿½: ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
 
         if (_DesignMenuItem[i].eNextPage == enuCurPage)
         {
@@ -1910,7 +1910,7 @@ static U8 GetDesignPreMenuItemIndex(DESIGN_MENU_PAGE enuCurPage)
     }
 
     printf("--WARNING--: ePrevPage inexistence!\n");
-    return 0xFF; // ²»´æÔÚÇ°Ò»Ò³Ãæ
+    return 0xFF; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ò»Ò³ï¿½ï¿½
 }
 #endif
 //modify for complie error
@@ -1943,7 +1943,7 @@ static U8 Get_AFEC_A0_A1_MapToIndex(U16 A0_A1_DATA)
 #endif
 static void _MApp_ZUI_ACT_DesignMenuInitPage(DESIGN_MENU_PAGE page)
 {
-    printf("===== [%s, %d, %s] =====\n", __FILE__, __LINE__, __FUNCTION__);
+    //printf("===== [%s, %d, %s] =====\n", __FILE__, __LINE__, __FUNCTION__);
     BOOLEAN bFirst = TRUE;
     U8 i;
   #if ENABLE_AUTO_DQS_Design
@@ -2974,7 +2974,7 @@ static REDRAW_TYPE _MApp_ZUI_ACT_DesignMenuDecIncValue(U8 u8Item, BOOLEAN bInc)
 
               #if  MirrorEnable
                 case 6:
-                    stGenSetting.g_SysSetting.g_MirrorEnable = MApp_ZUI_ACT_DecIncValue_Cycle(bInc, stGenSetting.g_SysSetting.g_MirrorEnable, DISABLE, ENABLE, 1);
+                    stGenSetting.g_SysSetting.g_MirrorEnable = MirrorEnable;//MApp_ZUI_ACT_DecIncValue_Cycle(bInc, stGenSetting.g_SysSetting.g_MirrorEnable, DISABLE, ENABLE, 1);
                         MApp_SetDesignImageMirror();
                     return EN_REDRAW_ITEM;
               #endif
@@ -4635,7 +4635,7 @@ static LPTSTR _MApp_ZUI_ACT_GetDesignMenuValueText(U8 u8Item)
         #endif
 #if  MirrorEnable
         case 6:
-            //    printf("\n  panelMirror:%d [%s,%s,%d]\n",stGenSetting.g_SysSetting.g_MirrorEnable,__FILE__,__FUNCTION__,__LINE__);
+            printf("\n  panelMirror:%d [%s,%s,%d]\n",stGenSetting.g_SysSetting.g_MirrorEnable,__FILE__,__FUNCTION__,__LINE__);
             if(stGenSetting.g_SysSetting.g_MirrorEnable)
             {
                 u16TempID=en_str_On;
@@ -5499,7 +5499,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteDesignMenuAction(U16 act)
 
         case EN_EXE_DESIGN_MENU_PREV_PAGE:
            #if(LOG_DESIGNMENU_SHOWITEM)
-             {//  for ·µ»ØÉÏÒ»Ò³Ê±×ÜÊÇÑ¡ÖÐµÚÒ»ÏîµÄBug
+             {//  for ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ò³Ê±ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ðµï¿½Ò»ï¿½ï¿½ï¿½Bug
                 U8 u8Index = GetDesignPreMenuItemIndex(_eDesignMenuPage);
                 _MApp_ZUI_ACT_DesignMenuPrevPage(_MApp_ZUI_ACT_DesignMenuWindowMapToIndex(MApp_ZUI_API_GetFocus()));
                 _MApp_ZUI_ACT_DesignMenuInitPage(_eDesignMenuPage);

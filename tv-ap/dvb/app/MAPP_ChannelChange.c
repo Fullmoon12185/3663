@@ -279,12 +279,12 @@ DTVPROGRAMID_M g_stCurS2ProggramId; //TP;
 /*                     Macro                    */
 /******************************************************************************/
 
-#define CHANNELCHANGE_DBINFO(y)     y
+#define CHANNELCHANGE_DBINFO(y)     //y
 
 #define ENABLE_CH_CHANGE_TIMER_DEBUG    1
 
-#define DEBUG_ENABLE_CHANNEL(x)     x
-#define DEBUG_ENABLE_AV(x)          x
+#define DEBUG_ENABLE_CHANNEL(x)     //x
+#define DEBUG_ENABLE_AV(x)          //x
 
 
 #if (ENABLE_DTMB_CHINA_APP || ENABLE_ATV_CHINA_APP || ENABLE_DVBC_PLUS_DTMB_CHINA_APP)

@@ -293,13 +293,13 @@ enum
     {
         PM_WAKEUP_BY_IR             = (1 << 0),
         PM_WAKEUP_BY_KEYPAD         = (1 << 1),
-        PM_WAKEUP_BY_GPIO0          = (1 << 2),
-        PM_WAKEUP_BY_GPIO1          = (1 << 3),
-        PM_WAKEUP_BY_UART           = (1 << 4),
-        PM_WAKEUP_BY_VGA            = (1 << 5), //same as PM_WAKEUP_BY_SYNC in CPU_PM
-        PM_WAKEUP_BY_ESYNC          = (1 << 6),
-        PM_WAKEUP_BY_RTC0           = (1 << 7),
-        PM_WAKEUP_BY_RTC1           = (1 << 8),
+        PM_WAKEUP_BY_GPIO0          = 0,//(1 << 2),
+        PM_WAKEUP_BY_GPIO1          = 0,//(1 << 3),
+        PM_WAKEUP_BY_UART           = 0, //(1 << 4),
+        PM_WAKEUP_BY_VGA            = 0, //(1 << 5), //same as PM_WAKEUP_BY_SYNC in CPU_PM
+        PM_WAKEUP_BY_ESYNC          = 0, //(1 << 6),
+        PM_WAKEUP_BY_RTC0           = 0, //(1 << 7),
+        PM_WAKEUP_BY_RTC1           = 0, //(1 << 8),
         PM_WAKEUP_BY_DVI            = 0,//(1 << 9), //same as PM_WAKEUP_BY_DVI0 in CPU_PM
         PM_WAKEUP_BY_DVI2           = 0, //(1 << 10),
         PM_WAKEUP_BY_CEC            = 0, //(1 << 11),

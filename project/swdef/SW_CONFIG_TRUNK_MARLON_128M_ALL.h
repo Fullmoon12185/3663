@@ -164,6 +164,19 @@
 */
 #include "SW_Config_Default_DTV_SYSTEM.h"
 
+
+//nguyen
+#ifndef UBC_TV40
+    #define UBC_TV40        0 //ENABLE
+#endif
+#ifndef UBC_TV32
+    #define UBC_TV32        1 // DISABLE
+
+    #define TV32_INCH_LSC   1
+    #define TV32_315_1A     0  
+#endif
+//nguyen
+
 //-------------------------------------------------------------------------------
 // DVB System
 //-------------------------------------------------------------------------------
@@ -297,8 +310,11 @@
 #define ENABLE_VOP_DUPLICATE            ENABLE   // DTV VOP duplicate for VE, MHEG5 and Subtitle use it
 
 // ---- Mirror ---------------------------------------------------------------------
-#define MirrorEnable                    ENABLE
-
+#if (TV32_INCH_LSC == 1)
+    #define MirrorEnable                    ENABLE
+#else 
+    #define MirrorEnable                    ENABLE
+#endif
 //----AUDIO----------------------------------------------------------------------
 #define S4_AUDIO_PATH_SETTING
 
@@ -883,7 +899,7 @@
 #define ENABLE_KOREA_APP                DISABLE
 
 //-----UART-----
-#define ENABLE_SELECT_UART              ENABLE
+#define ENABLE_SELECT_UART              DISABLE//ENABLE
 #define SELECT_UART_PORT                1           //0: OFF, 1: HK, 2:COPROC, 3: VDEC
 
 // If you want turn on this, you need

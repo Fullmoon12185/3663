@@ -1226,7 +1226,6 @@ BOOLEAN MApp_ZUI_ACT_ExecuteInputSourceAction(U16 act)
     #endif
 
         case EN_EXE_EFFECT_POPUP:
-            printf("EN_EXE_EFFECT_POPUP \r\n");
             switch(MApp_ZUI_API_GetFocus())
             {
                 default:

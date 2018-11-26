@@ -254,7 +254,7 @@
 
 //nguyen
 #define     NGUYEN_DEBUG(x)         //x        
-#define     NGUYEN_MHL_DEBUG(x)         x        
+#define     NGUYEN_MHL_DEBUG(x)        //x        
 //nguyen
 
 //------------------------------MS_BOARD_TYPE_SEL-------------------------------

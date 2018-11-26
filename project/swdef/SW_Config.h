@@ -531,7 +531,7 @@
 
 
 #ifndef ENABLE_MSTV_UART_DEBUG
-    #define ENABLE_MSTV_UART_DEBUG          1
+    #define ENABLE_MSTV_UART_DEBUG          0
 #endif
 
 #define ROBUST_TEST_ENABLE              0
@@ -818,14 +818,7 @@
     #define ENABLE_HK_MP4   0
 #endif
 
-//nguyen
-#ifndef UBC_TV40
-    #define UBC_TV40        1 //ENABLE
-#endif
-#ifndef UBC_TV32
-    #define UBC_TV32        0 // DISABLE
-#endif
-//nguyen
+
 //=================================================================
 #include "sw_config_force_off_for_bloader.h"
 //******************************************************************************

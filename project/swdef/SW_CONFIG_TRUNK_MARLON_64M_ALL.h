@@ -285,7 +285,7 @@
 #define ENABLE_VOP_DUPLICATE            ENABLE   // DTV VOP duplicate for VE, MHEG5 and Subtitle use it
 
 // ---- Mirror ---------------------------------------------------------------------
-#define MirrorEnable                    ENABLE
+#define MirrorEnable                    DISABLE //ENABLE
 
 //----AUDIO----------------------------------------------------------------------
 #define S4_AUDIO_PATH_SETTING
