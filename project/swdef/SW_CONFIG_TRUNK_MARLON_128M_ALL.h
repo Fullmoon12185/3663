@@ -172,8 +172,8 @@
 #ifndef UBC_TV32
     #define UBC_TV32        1 // DISABLE
 
-    #define TV32_INCH_LSC   1
-    #define TV32_315_1A     0  
+    #define TV32_INCH_LSC   0
+    #define TV32_315_1A     1  
 #endif
 //nguyen
 

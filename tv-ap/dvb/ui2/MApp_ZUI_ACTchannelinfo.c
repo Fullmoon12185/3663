@@ -1326,7 +1326,7 @@ static LPTSTR _MApp_ZUI_ACT_GetInputSourceResolution(SCALER_WIN eWindow)
             __MApp_UlongToString( ( U32 )u16F, str, MApp_GetNoOfDigit( u16F ) );
             str += MApp_ZUI_API_Strlen(str);
             *str++ = CHAR_H;
-            *str++ = CHAR_z;
+            *str++ = CHAR_H;
             *str = 0;
             return CHAR_BUFFER;
         }

@@ -745,7 +745,10 @@ BOOLEAN MApp_ZUI_ACT_StartupOSD2(U32 id)
             break;
 
         case E_OSD_AUDIO_VOLUME:
-            MApp_ZUI_ACT_AppShowAudioVolume();
+            //extern E_UI_INPUT_SOURCE MApp_InputSrc_Get_UiInputSrcType(void);
+            //if(UI_INPUT_SOURCE_TYPE != UI_INPUT_SOURCE_HDMI2){
+                MApp_ZUI_ACT_AppShowAudioVolume();
+            //}
             break;
 
         case E_OSD_INSTALL_GUIDE:

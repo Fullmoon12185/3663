@@ -1960,7 +1960,7 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
     }
     else {
         if(MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE){
-            if(stKeyStatus.keydata == IRKEY_TV && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT){
+            if(stKeyStatus.keydata == IRKEY_FREEZE && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT){
                 changeDTVFlag = 1;
                 scriptIndex = 0;
                 
@@ -2035,16 +2035,23 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
                     {
                         if(stKeyStatus.keydata != KEY_NULL && (stKeyStatus.keytype == KEY_TYPE_IR || stKeyStatus.keytype == KEY_TYPE_KEYPAD)){
                             switch ( stKeyStatus.keydata ){
-                                case IRKEY_VOLUME_PLUS:
-                                case IRKEY_VOLUME_MINUS:
-                                case IRKEY_UP ://               = 0x59,
+                                case IRKEY_INPUT_SOURCE:
+                                    //MApp_IR_sendIROut(stKeyStatus.keydata);
+                                break;
+                                //case IRKEY_VOLUME_PLUS:
+                                //case IRKEY_VOLUME_MINUS:
+                                case IRKEY_POWER://             = 0x5F,
+                                    MApp_IR_sendIROut(stKeyStatus.keydata);
+                                break;
                                 
-                                case IRKEY_EXIT://              = 0x10,
+                                //case IRKEY_UP ://               = 0x59,
+                                
+                                //case IRKEY_EXIT://              = 0x10,
                                 // //case IRKEY_MENU              = 0x13,
-                                case IRKEY_DOWN://              = 0x51,
-                                case IRKEY_LEFT://              = 0x56,
-                                case IRKEY_SELECT://            = 0x55,
-                                case IRKEY_RIGHT://             = 0x14,
+                                //case IRKEY_DOWN://              = 0x51,
+                                //case IRKEY_LEFT://              = 0x56,
+                                //case IRKEY_SELECT://            = 0x55,
+                                //case IRKEY_RIGHT://             = 0x14,
 
                                 // case IRKEY_NUM_0://             = 0x44,
                                 // case IRKEY_NUM_1://             = 0x53,
@@ -2058,21 +2065,13 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
                                 // case IRKEY_NUM_9://             = 0x0A,
                                 //case IRKEY_MUTE:    //              = 0x1C,
                                 // case IRKEY_FREEZE://            = 0x57,
-                                case IRKEY_INPUT_SOURCE:
-                                    //MApp_IR_sendIROut(stKeyStatus.keydata);
-                                break;
-                                case IRKEY_POWER://             = 0x5F,
-                                    MApp_IR_sendIROut(stKeyStatus.keydata);
-                                    // msAPI_Timer_Delayms(3000);
-                                    // stKeyStatus.keydown   = FALSE;
-                                    // stKeyStatus.keydata   = KEY_NULL;
-                                    // isKeyPowerPressed = 1;
-                                    break;
+                                
                                 default:
-                                    //MApp_IR_sendIROut(stKeyStatus.keydata);
+                                    MApp_IR_sendIROut(stKeyStatus.keydata);
+                                    //printf("stKeyStatus.keydata = %u\n", stKeyStatus.keydata);
                                     stKeyStatus.keydown   = FALSE;
                                     stKeyStatus.keydata   = KEY_NULL;
-                                    //stKeyStatus.keyrepeat = FALSE;
+                                    
                                 break;
                             }
                         }        

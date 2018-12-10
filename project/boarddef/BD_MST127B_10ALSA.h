@@ -846,8 +846,8 @@
 #define ADC_CH3_LEVELS                  4 //### must be <= ADC_KEY_LEVEL
 #define ADC_CH4_LEVELS                  4 //### must be <= ADC_KEY_LEVEL
 
-#define     THANH_HAI_KEYBOARD          1
-#if defined THANH_HAI_KEYBOARD
+#define     THANH_HAI_KEYBOARD          0
+#if(THANH_HAI_KEYBOARD == 1)
     #define ADC_KEY_1_L0                    0x10//0x27
     #define ADC_KEY_1_L1                    0x4a//0x33
     #define ADC_KEY_1_L2                    0x61//0x51
@@ -877,6 +877,24 @@
 #define ADC_KEY_2_L7                    0x00//RFU
 
 #if (KEYPAD_TYPE_SEL == KEYPAD_TYPE_CUSTMOER)   // CUSTMOER keypad
+#define ADC_KEY_1_L0_FLAG               IRKEY_POWER
+#define ADC_KEY_1_L1_FLAG               IRKEY_INPUT_SOURCE
+#define ADC_KEY_1_L2_FLAG               IRKEY_MENU
+#define ADC_KEY_1_L3_FLAG               IRKEY_VOLUME_MINUS
+#define ADC_KEY_1_L4_FLAG               IRKEY_VOLUME_PLUS//RFU
+#define ADC_KEY_1_L5_FLAG               IRKEY_CHANNEL_MINUS//RFU
+#define ADC_KEY_1_L6_FLAG               IRKEY_CHANNEL_PLUS//RFU
+#define ADC_KEY_1_L7_FLAG               IRKEY_DUMY//RFU
+
+#define ADC_KEY_2_L0_FLAG               IRKEY_POWER
+#define ADC_KEY_2_L1_FLAG               IRKEY_INPUT_SOURCE
+#define ADC_KEY_2_L2_FLAG               IRKEY_RIGHT
+#define ADC_KEY_2_L3_FLAG               IRKEY_DOWN
+#define ADC_KEY_2_L4_FLAG               IRKEY_DUMY//RFU
+#define ADC_KEY_2_L5_FLAG               IRKEY_DUMY//RFU
+#define ADC_KEY_2_L6_FLAG               IRKEY_DUMY//RFU
+#define ADC_KEY_2_L7_FLAG               IRKEY_DUMY//RFU
+#elif (KEYPAD_TYPE_SEL == KEYPAD_TYPE_THANH_HAI)
 #define ADC_KEY_1_L0_FLAG               IRKEY_POWER
 #define ADC_KEY_1_L1_FLAG               IRKEY_INPUT_SOURCE
 #define ADC_KEY_1_L2_FLAG               IRKEY_MENU

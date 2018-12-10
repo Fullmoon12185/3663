@@ -169,8 +169,8 @@ extern BOOLEAN g_bAutobuildDebug;
 //------------------------------------------------------------------------------
 // Locals
 //------------------------------------------------------------------------------
-#define CURRENT_TESTING ENABLE
-#define     DEBUG_HOME_SHOP(x)  x
+#define CURRENT_TESTING 0//ENABLE
+#define     DEBUG_HOME_SHOP(x)  //x
 
 #define     BACKLIGHT_LEVEL_1   30
 #define     BACKLIGHT_LEVEL_2   (30 + BACKLIGHT_LEVEL_1)
@@ -198,10 +198,10 @@ LED 300mA - Panel 32 inch JP
         #define     HOME_BACKLIGHT_2    89   //
         #define     HOME_BACKLIGHT_3    78
     #elif(TV32_315_1A == 1) 
-        #define     SHOP_BACKLIGHT      130   //360mA
-        #define     HOME_BACKLIGHT_1    120   //330mA
-        #define     HOME_BACKLIGHT_2    110   //300mA
-        #define     HOME_BACKLIGHT_3    100   //280mA
+        #define     SHOP_BACKLIGHT      220   //360mA
+        #define     HOME_BACKLIGHT_1    200   //330mA
+        #define     HOME_BACKLIGHT_2    180   //300mA
+        #define     HOME_BACKLIGHT_3    160   //280mA
     #endif
 #endif
 
