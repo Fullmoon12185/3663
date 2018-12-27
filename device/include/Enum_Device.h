@@ -538,6 +538,8 @@
 #define KEYPAD_TYPE_CUSTMOER    3   // Customer
 #define KEYPAD_TYPE_BOARDDEP    4   // none regular slow ADC keypad
 #define KEYPAD_TYPE_HISENSE     5
+#define KEYPAD_TYPE_THANH_HAI   6
+
 //------------------------------------------------------------------------------------
 //RM_EEPROM_TYPE
 //------------------------------------------------------------------------------------

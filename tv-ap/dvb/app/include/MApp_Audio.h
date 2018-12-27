@@ -113,40 +113,6 @@
 #define MAX_NUM_OF_VOL_LEVEL       100
 
 // equalizer
-#if(TV32_INCH_LSC == 1)
-     #define SOUND_MODE_STANDARD_BAND1   100
-     #define SOUND_MODE_STANDARD_BAND2   100
-     #define SOUND_MODE_STANDARD_BAND3   100
-     #define SOUND_MODE_STANDARD_BAND4   100
-     #define SOUND_MODE_STANDARD_BAND5   100
-     #define SOUND_MODE_STANDARD_BAND6   100
-     #define SOUND_MODE_STANDARD_BAND7   100
-
-     #define SOUND_MODE_MUSIC_BAND1      100
-     #define SOUND_MODE_MUSIC_BAND2      100
-     #define SOUND_MODE_MUSIC_BAND3      100
-     #define SOUND_MODE_MUSIC_BAND4      100
-     #define SOUND_MODE_MUSIC_BAND5      100
-     #define SOUND_MODE_MUSIC_BAND6      100
-     #define SOUND_MODE_MUSIC_BAND7      100
-
-     #define SOUND_MODE_MOVIE_BAND1      100
-     #define SOUND_MODE_MOVIE_BAND2      100
-     #define SOUND_MODE_MOVIE_BAND3      100
-     #define SOUND_MODE_MOVIE_BAND4      100
-     #define SOUND_MODE_MOVIE_BAND5      100
-     #define SOUND_MODE_MOVIE_BAND6      100
-     #define SOUND_MODE_MOVIE_BAND7      100
-
-     #define SOUND_MODE_SPORTS_BAND1     100
-     #define SOUND_MODE_SPORTS_BAND2     100
-     #define SOUND_MODE_SPORTS_BAND3     100
-     #define SOUND_MODE_SPORTS_BAND4     100
-     #define SOUND_MODE_SPORTS_BAND5     100
-     #define SOUND_MODE_SPORTS_BAND6     100
-     #define SOUND_MODE_SPORTS_BAND7     100
-
-#else
      #define SOUND_MODE_STANDARD_BAND1   50
      #define SOUND_MODE_STANDARD_BAND2   50
      #define SOUND_MODE_STANDARD_BAND3   50
@@ -179,7 +145,6 @@
      #define SOUND_MODE_SPORTS_BAND6     50
      #define SOUND_MODE_SPORTS_BAND7     45
 
-#endif
 INTERFACE BOOLEAN bEnableAC3Check;
 INTERFACE U32 u32AC3CheckTimer;
 INTERFACE U8  u8AC3CheckTimes;

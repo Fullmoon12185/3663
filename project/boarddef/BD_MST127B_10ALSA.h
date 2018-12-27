@@ -578,7 +578,7 @@
 
 //------IR & Key Setting--------------------------------------------------------
 #define IR_TYPE_SEL                     IR_TYPE_MSTAR_DTV   // IR_TYPE_MSTAR_DTV // IR_TYPE_CUS03_DTV // IR_TYPE_NEW
-#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
+#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_THANH_HAI//KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
 #define POWER_KEY_SEL                   POWER_KEY_PAD_INT
 
 //------Power Setting-----------------------------------------------------------
@@ -879,11 +879,11 @@
 #if (KEYPAD_TYPE_SEL == KEYPAD_TYPE_CUSTMOER)   // CUSTMOER keypad
 #define ADC_KEY_1_L0_FLAG               IRKEY_POWER
 #define ADC_KEY_1_L1_FLAG               IRKEY_INPUT_SOURCE
-#define ADC_KEY_1_L2_FLAG               IRKEY_MENU
-#define ADC_KEY_1_L3_FLAG               IRKEY_VOLUME_MINUS
+#define ADC_KEY_1_L2_FLAG               IRKEY_CHANNEL_PLUS
+#define ADC_KEY_1_L3_FLAG               IRKEY_CHANNEL_MINUS
 #define ADC_KEY_1_L4_FLAG               IRKEY_VOLUME_PLUS//RFU
-#define ADC_KEY_1_L5_FLAG               IRKEY_CHANNEL_MINUS//RFU
-#define ADC_KEY_1_L6_FLAG               IRKEY_CHANNEL_PLUS//RFU
+#define ADC_KEY_1_L5_FLAG               IRKEY_VOLUME_MINUS//RFU
+#define ADC_KEY_1_L6_FLAG               IRKEY_MENU//RFU
 #define ADC_KEY_1_L7_FLAG               IRKEY_DUMY//RFU
 
 #define ADC_KEY_2_L0_FLAG               IRKEY_POWER

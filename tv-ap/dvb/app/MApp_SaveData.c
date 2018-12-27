@@ -1407,7 +1407,7 @@ void MApp_SaveCIPlusSetting(void)
 #endif
 
 //=============================================================================================
-#define DEBUG_SAVE_DATA_ADC(x)  //x
+#define DEBUG_SAVE_DATA_ADC(x)  x
 
 #define SIZE_ADC_SETTING        (sizeof(MS_ADC_SETTING))
 
