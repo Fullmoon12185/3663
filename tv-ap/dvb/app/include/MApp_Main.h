@@ -259,7 +259,9 @@ typedef enum {
     SEND_IR_OUT_1,
     SEND_IR_OUT_2,
     SEND_IR_KEY_HOME,
+    SEND_IR_KEY_HOME_1,
     SEND_IR_KEY_STANDBY,
+    SEND_IR_KEY_STANDBY_1,
     SEND_IR_NONE,
 } SendIROut_STATE;
 

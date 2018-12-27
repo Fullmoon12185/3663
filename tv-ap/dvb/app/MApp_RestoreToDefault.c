@@ -188,7 +188,7 @@
 //*************************************************************************
 //              Local variables
 //*************************************************************************
-#define USE_CUS_DEFAULT_ADC FALSE
+#define USE_CUS_DEFAULT_ADC TRUE
 #if USE_CUS_DEFAULT_ADC
 static code APIXC_AdcGainOffsetSetting tADCSetting[ADC_SET_NUMS] =
 {
@@ -247,103 +247,6 @@ static code stSoundModeSeting astDefaultSoundModeSeting[EN_SoundMode_Num] =
     #define SIMPLE_EQ_SETTING 0
 
     //bass,treble,u8120HZ,u8200HZ,u8500HZ,u8_1_dot_2_KHZ,u8_3KHZ,u8_7_dot_5_KHZ,u812KHZ,Usermode
-#if(TV32_INCH_LSC == 1)
-    //Standard,
-    {100,
-      100,
-      SOUND_MODE_STANDARD_BAND1,
-      SOUND_MODE_STANDARD_BAND2,
-      SOUND_MODE_STANDARD_BAND3,
-      SOUND_MODE_STANDARD_BAND4,
-      SOUND_MODE_STANDARD_BAND5,
-      SOUND_MODE_STANDARD_BAND6,
-      SOUND_MODE_STANDARD_BAND7,
-      FALSE, 0, AUD_MODE_LR
-    },
-    //Music
-    {100,
-      100,
-      #if (SIMPLE_EQ_SETTING == 0)
-      SOUND_MODE_MUSIC_BAND1,
-      SOUND_MODE_MUSIC_BAND2,
-      SOUND_MODE_MUSIC_BAND3,
-      SOUND_MODE_MUSIC_BAND4,
-      SOUND_MODE_MUSIC_BAND5,
-      SOUND_MODE_MUSIC_BAND6,
-      SOUND_MODE_MUSIC_BAND7,
-      FALSE, 0, AUD_MODE_LR
-      #else
-      SOUND_MODE_STANDARD_BAND1,
-      SOUND_MODE_STANDARD_BAND2,
-      SOUND_MODE_STANDARD_BAND3,
-      SOUND_MODE_STANDARD_BAND4,
-      SOUND_MODE_STANDARD_BAND5,
-      SOUND_MODE_STANDARD_BAND6,
-      SOUND_MODE_STANDARD_BAND7,
-      FALSE, 0, AUD_MODE_LR
-      #endif
-     },
-     //Move
-    {100,
-      100,
-      #if (SIMPLE_EQ_SETTING == 0)
-      SOUND_MODE_MOVIE_BAND1,
-      SOUND_MODE_MOVIE_BAND2,
-      SOUND_MODE_MOVIE_BAND3,
-      SOUND_MODE_MOVIE_BAND4,
-      SOUND_MODE_MOVIE_BAND5,
-      SOUND_MODE_MOVIE_BAND6,
-      SOUND_MODE_MOVIE_BAND7,
-      FALSE, 0, AUD_MODE_LR
-      #else
-      SOUND_MODE_STANDARD_BAND1,
-      SOUND_MODE_STANDARD_BAND2,
-      SOUND_MODE_STANDARD_BAND3,
-      SOUND_MODE_STANDARD_BAND4,
-      SOUND_MODE_STANDARD_BAND5,
-      SOUND_MODE_STANDARD_BAND6,
-      SOUND_MODE_STANDARD_BAND7,
-      FALSE, 0, AUD_MODE_LR
-      #endif
-
-    },
-    //Sports
-    {100,
-      100,
-      #if (SIMPLE_EQ_SETTING == 0)
-      SOUND_MODE_SPORTS_BAND1,
-      SOUND_MODE_SPORTS_BAND2,
-      SOUND_MODE_SPORTS_BAND3,
-      SOUND_MODE_SPORTS_BAND4,
-      SOUND_MODE_SPORTS_BAND5,
-      SOUND_MODE_SPORTS_BAND6,
-      SOUND_MODE_SPORTS_BAND7,
-      FALSE, 0, AUD_MODE_LR
-      #else
-      SOUND_MODE_STANDARD_BAND1,
-      SOUND_MODE_STANDARD_BAND2,
-      SOUND_MODE_STANDARD_BAND3,
-      SOUND_MODE_STANDARD_BAND4,
-      SOUND_MODE_STANDARD_BAND5,
-      SOUND_MODE_STANDARD_BAND6,
-      SOUND_MODE_STANDARD_BAND7,
-      FALSE, 0, AUD_MODE_LR
-      #endif
-      },
-      //User
-      {100,
-      100,
-      SOUND_MODE_STANDARD_BAND1,
-      SOUND_MODE_STANDARD_BAND2,
-      SOUND_MODE_STANDARD_BAND3,
-      SOUND_MODE_STANDARD_BAND4,
-      SOUND_MODE_STANDARD_BAND5,
-      SOUND_MODE_STANDARD_BAND6,
-      SOUND_MODE_STANDARD_BAND7,
-      FALSE, 0, AUD_MODE_LR
-      },
-
-#else
     //Standard,
     {50,
       50,
@@ -438,7 +341,6 @@ static code stSoundModeSeting astDefaultSoundModeSeting[EN_SoundMode_Num] =
       SOUND_MODE_STANDARD_BAND7,
       FALSE, 0, AUD_MODE_LR
       },
-#endif
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -3678,7 +3580,7 @@ void MApp_DataBase_RestoreDefault_TVSetting(void)
     //MApp_DTV_Scan_Init();
 }
 
-void MApp_DataBase_RestoreDefaultADC(E_ADC_SET_INDEX eAdcIndex )
+void MApp_DataBase_RestoreDefaultADC(E_ADC_SET_INDEX eAdcIndex)
 {
 #if USE_CUS_DEFAULT_ADC
     if( eAdcIndex == ADC_SET_YPBPR_SD )
@@ -3704,18 +3606,21 @@ void MApp_DataBase_RestoreDefaultADC(E_ADC_SET_INDEX eAdcIndex )
     {
         // Get Ypbpr default setting
         MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_YPBPR,&Adc_GainOffset);
+        printf("Nguyen update adc MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_YPBPR,&Adc_GainOffset);\n");
     }
     else if(eAdcIndex == ADC_SET_SCART_RGB) // Scart-RGB
     {
         // Get RGB default setting
         MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_SCART,&Adc_GainOffset);
+        printf("Nguyen update adc MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_SCART,&Adc_GainOffset);\n");
     }
     else // VGA / Scart-RGB / Others
     {
         // Get RGB default setting
         MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_VGA,&Adc_GainOffset);
+        printf("Nguyen update adc MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_VGA,&Adc_GainOffset);\n");
     }
-
+    printf("Nguyen update adc\n");
     memcpy(&(G_ADC_SETTING[eAdcIndex].stAdcGainOffsetSetting) , &Adc_GainOffset , sizeof(APIXC_AdcGainOffsetSetting) );
 
 #endif
@@ -4188,7 +4093,7 @@ void MApp_DataBase_RestoreDefault_FactoryPnlSetting(void)
 
 void MApp_DataBase_RestoreDefaultFactorySetting(void)
 {
-    //printf("\e[31;1m [%d]: %s \33[m \n", __LINE__, __FUNCTION__);
+    printf("\e[31;1m [%d]: %s \33[m \n", __LINE__, __FUNCTION__);
 
     memset( &(G_FACTORY_SETTING), 0, sizeof(MS_FACTORY_SETTING) );
 
@@ -4550,7 +4455,8 @@ void MApp_DataBase_RestoreDefaultValue(U16 u16KeepSetting)
         //MApi_PNL_SetBackLight(ENABLE);
     }
 #endif
-
+    
+    MApp_DataBase_RestoreDefaultFactorySetting();
     MApp_DataBase_RestoreDefault_MiscSetting();
 
     MApp_DataBase_RestoreDefault_HDMISetting();
@@ -4637,7 +4543,7 @@ void MApp_DataBase_RestoreUserSettingDefault(U8 u8RestoreMask)
 
 void MApp_DataBase_RestoreFactoryDefault(U8 u8RestoreMask)
 {
-    //printf("\e[31;1m >> %s(0x%X) \33[m \n", __FUNCTION__, u8RestoreMask);
+    printf("\e[31;1m >> %s(0x%X) \33[m \n", __FUNCTION__, u8RestoreMask);
 
     if (u8RestoreMask&RESTORE_GENSETTING)
     {

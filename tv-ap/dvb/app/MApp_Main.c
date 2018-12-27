@@ -169,12 +169,12 @@ extern BOOLEAN g_bAutobuildDebug;
 //------------------------------------------------------------------------------
 // Locals
 //------------------------------------------------------------------------------
-#define CURRENT_TESTING 0//ENABLE
+#define CURRENT_TESTING 0 //ENABLE
 #define     DEBUG_HOME_SHOP(x)  //x
 
 #define     BACKLIGHT_LEVEL_1   30
 #define     BACKLIGHT_LEVEL_2   (30 + BACKLIGHT_LEVEL_1)
-#define     BACKLIGHT_LEVEL_3   (60 + BACKLIGHT_LEVEL_2)
+#define     BACKLIGHT_LEVEL_3   (30 + BACKLIGHT_LEVEL_2)
 #define     BACKLIGHT_LEVEL_4   (100 + BACKLIGHT_LEVEL_3) /*  5/11/2018 anh Luat thay doi 60 => 100  */
 #define     MAX_COUNT           BACKLIGHT_LEVEL_4
 
@@ -193,10 +193,17 @@ LED 300mA - Panel 32 inch JP
     #define     HOME_BACKLIGHT_3    152
 #elif (UBC_TV32 == 1)
     #if(TV32_INCH_LSC == 1)
-        #define     SHOP_BACKLIGHT      111  //300mA
-        #define     HOME_BACKLIGHT_1    100  //280mA
-        #define     HOME_BACKLIGHT_2    89   //
-        #define     HOME_BACKLIGHT_3    78
+        #if(TV32_LSC_300mA == 1)
+            #define     SHOP_BACKLIGHT      111  //300mA
+            #define     HOME_BACKLIGHT_1    100  //280mA
+            #define     HOME_BACKLIGHT_2    89   //
+            #define     HOME_BACKLIGHT_3    78
+        #elif(TV32_LSC_600mA == 1)
+            #define     SHOP_BACKLIGHT      155  //590mA
+            #define     HOME_BACKLIGHT_1    145  //550mA
+            #define     HOME_BACKLIGHT_2    135  //500mA  
+            #define     HOME_BACKLIGHT_3    125  //470mA  
+        #endif
     #elif(TV32_315_1A == 1) 
         #define     SHOP_BACKLIGHT      220   //360mA
         #define     HOME_BACKLIGHT_1    200   //330mA
@@ -899,6 +906,8 @@ int main(void)
 
                 printf("\n===== Enter main loop at %u\n", MsOS_GetSystemTime());
                 //printf("\n===== Timestamp %s, %s\n",__DATE__, __TIME__);
+                //MApp_InitGenSetting();
+                
                 MApp_PreInit_TurnOnPanel_();
               #ifdef BENCH_CODE_USAGE
                 MApp_Bench_AudioTest();
@@ -953,12 +962,17 @@ int main(void)
                     //printf("t=%u\n", u32MainLoopTime_Cur );
                 }
                 
+                #if( IR_MODE_ENABLE == 1)
+                    if(isCodeReadyToSend()){
+                        MApp_IR_out();        
+                    } else 
+                #endif    
+                    {
                 
-                if(isCodeReadyToSend()){
-                    MApp_IR_out();        
-                } else {
                     MApp_While_Loop_State();
+                #if( IR_MODE_ENABLE == 1)
                     SendIROut_FSM();
+                #endif
                     HomeShop_FSM();
                     //isTVThongminh();    
                 }
@@ -1104,7 +1118,7 @@ void HomeShop_FSM (void){
     
 }
 
-#ifdef IR_MODE_ENABLE
+#if( IR_MODE_ENABLE == 1)
 #define     ANDROID_STANDBY_MODE     1
 #define     ANDROID_ACTIVE_MODE      0
 SendIROut_STATE sendirout_state = SEND_IR_OUT_INIT;
@@ -1112,59 +1126,63 @@ SendIROut_STATE sendirhome_standby = SEND_IR_KEY_HOME;
 U8 temp_key = 0xff;
 static U32 timeLastAndroid = 0;
 static U32 timeCurrAndroid = 0;
-
+static U8 timeout_for_sending_powerkey = 0;
 void SendIROut_FSM(void){
     if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2){
         if(ANDROID_STATUS() == ANDROID_STANDBY_MODE){
             timeCurrAndroid = MsOS_GetSystemTime();
-            // if(get_isKeyPowerPressed()){
-            //     timeLastAndroid = timeCurrAndroid + 3000;
-            // }
-            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 3000 ){
-                MApp_IR_sendIROut(IRKEY_POWER);     
-                timeLastAndroid = timeCurrAndroid;   
-            }
+            if(timeout_for_sending_powerkey == 0){
+                if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 500){
+                    MApp_IR_sendIROut(IRKEY_POWER);     
+                    timeLastAndroid = timeCurrAndroid;   
+                    timeout_for_sending_powerkey = 1;
+                }
+            } else {
+                if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 5000){
+                    MApp_IR_sendIROut(IRKEY_POWER);     
+                    timeLastAndroid = timeCurrAndroid;   
+                }
+            }  
         } 
-        // else {
-        //     switch (sendirout_state){
-        //         case SEND_IR_OUT_INIT:
-        //             temp_key = getIRKey();
-        //             //printf("temp_key = %d \n", temp_key);
-        //             if(temp_key != 0xFF)
-        //                 sendirout_state = SEND_IR_OUT_1;
-        //         break;
-        //         case SEND_IR_OUT_1:
-        //             //MApp_IR_sendIROut(temp_key);
-        //             sendirout_state = SEND_IR_OUT_2;
-        //         break;
-        //         case SEND_IR_OUT_2:
-        //             temp_key = getIRKey();
-        //             if(temp_key == 0xFF)
-        //                 sendirout_state = SEND_IR_OUT_INIT;
-        //         break;
-        //         default:
-        //         break;
-        //     }
-        // }
+        sendirhome_standby = SEND_IR_KEY_HOME;
     } else {
         if(ANDROID_STATUS() == ANDROID_ACTIVE_MODE){
             timeCurrAndroid = MsOS_GetSystemTime();
-            if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 3000 ){
-                switch(sendirhome_standby){
-                    case SEND_IR_KEY_HOME:
+            switch(sendirhome_standby){
+                case SEND_IR_KEY_HOME:
+                    if(msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 200){
                         MApp_IR_sendIROut(IRKEY_HOME);
+                        sendirhome_standby = SEND_IR_KEY_HOME_1;
+                        timeLastAndroid = timeCurrAndroid;   
+                    }
+                break;
+                case SEND_IR_KEY_HOME_1:
+                    if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 500 ){
+                        MApp_IR_sendIROut(IRKEY_HOME);
+                        timeLastAndroid = timeCurrAndroid;   
                         sendirhome_standby = SEND_IR_KEY_STANDBY;
-                    break;
-                    case SEND_IR_KEY_STANDBY:
+                    }
+                break;
+                case SEND_IR_KEY_STANDBY:
+                    if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 1000 ){
                         MApp_IR_sendIROut(IRKEY_POWER);     
-                        sendirhome_standby = SEND_IR_KEY_HOME;
-                    break;
-                    default:
-                    break;
-                }
-                timeLastAndroid = timeCurrAndroid;   
+                        timeLastAndroid = timeCurrAndroid;   
+                        sendirhome_standby = SEND_IR_KEY_STANDBY_1;
+                    }
+                break;
+                case SEND_IR_KEY_STANDBY_1:
+                    if( msAPI_Timer_DiffTime_2(timeLastAndroid, timeCurrAndroid) > 5000 ){
+                        sendirhome_standby = SEND_IR_KEY_HOME;    
+                        timeLastAndroid = timeCurrAndroid;
+                    }
+                break;
+                default:
+                    sendirhome_standby = SEND_IR_KEY_HOME;
+                break;
             }
-        } 
+            timeout_for_sending_powerkey = 0;
+        }
+           
     }
 }
 #endif

@@ -286,7 +286,7 @@ U8 g_u8IR_HEADER_CODE1 =0;
 
 
 //nguyen
-#ifdef IR_MODE_ENABLE
+#if(IR_MODE_ENABLE == 1)
 #define  PULSE_562ms            1760
 #define  PULSE_0                0
 #define  PULSE_1                1
@@ -316,7 +316,7 @@ void send_one_pulse(U8 pulseType){
         IR_OFF();
         delay(1);
         IR_ON();
-        delay(3);
+        delay(3); 
         break;
     case PULSE_START: //Start pulse: 16 low, 8 high
         IR_OFF();
@@ -1881,7 +1881,7 @@ static void MApp_CEC_CheckRepeatKey(void)
 #define PRESS_RELEASE_TIMEOUT 150 // ms
 #endif
 //nguyen
-#ifdef IR_MODE_ENABLE
+#if(IR_MODE_ENABLE == 1)
 static U8 isKeyPowerPressed = 0;
 U8 get_isKeyPowerPressed(void){
     return isKeyPowerPressed;
@@ -1894,7 +1894,7 @@ U8  isHDMI3 = 0;
 U8  numSteps = 0;
 U8  scriptIndex = 0;
 void DTVSourceChanged(void){
-    if (msAPI_Timer_DiffTime( msAPI_Timer_GetTime0(), u32WaitTimeForNextKey ) > 200LU)
+    if (msAPI_Timer_DiffTime( msAPI_Timer_GetTime0(), u32WaitTimeForNextKey ) > 300LU)
     {
         // printf("numStep = %u\n", numSteps);
         // printf("changeDTVFlag = %u\n", changeDTVFlag);
@@ -1920,7 +1920,7 @@ void DTVSourceChanged(void){
     }    
 }
 void TVThongminhSourceChanged(void){
-    if (msAPI_Timer_DiffTime( msAPI_Timer_GetTime0(), u32WaitTimeForNextKey ) > 200LU)
+    if (msAPI_Timer_DiffTime( msAPI_Timer_GetTime0(), u32WaitTimeForNextKey ) > 300LU)
     {
         // printf("numStep = %u\n", numSteps);
         // printf("changeDTVFlag = %u\n", changeDTVFlag);
@@ -1960,7 +1960,7 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
     }
     else {
         if(MApp_ZUI_GetActiveOSD() != E_OSD_INPUT_SOURCE){
-            if(stKeyStatus.keydata == IRKEY_FREEZE && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT){
+            if(stKeyStatus.keydata == IRKEY_SMART && MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_DVBT){
                 changeDTVFlag = 1;
                 scriptIndex = 0;
                 
@@ -1986,7 +1986,7 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
                 // printf("changeDTVFlag = %u\n", changeDTVFlag);
                 return;
             }
-            if(stKeyStatus.keydata == IRKEY_SMART){
+            if(stKeyStatus.keydata == IRKEY_FREEZE){
                 if(MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_HDMI2){
                     // UI_INPUT_SOURCE_TYPE = UI_INPUT_SOURCE_HDMI2;// + (E_UI_INPUT_SOURCE)ucMHLInputSourcePort;
                     // MApp_ZUI_ACT_ShutdownOSD();
@@ -2017,7 +2017,9 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
                         isHDMI3 = 1;
                     }
                     return;        
-                }             
+                } else {
+                    stKeyStatus.keydata = IRKEY_HOME;
+                }            
             }
         }
         
@@ -2036,10 +2038,12 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
                         if(stKeyStatus.keydata != KEY_NULL && (stKeyStatus.keytype == KEY_TYPE_IR || stKeyStatus.keytype == KEY_TYPE_KEYPAD)){
                             switch ( stKeyStatus.keydata ){
                                 case IRKEY_INPUT_SOURCE:
+                                case IRKEY_MUTE:    //              = 0x1C,
                                     //MApp_IR_sendIROut(stKeyStatus.keydata);
                                 break;
                                 //case IRKEY_VOLUME_PLUS:
                                 //case IRKEY_VOLUME_MINUS:
+                                
                                 case IRKEY_POWER://             = 0x5F,
                                     MApp_IR_sendIROut(stKeyStatus.keydata);
                                 break;
@@ -2063,7 +2067,7 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
                                 // case IRKEY_NUM_7://             = 0x4B,
                                 // case IRKEY_NUM_8://             = 0x48,
                                 // case IRKEY_NUM_9://             = 0x0A,
-                                //case IRKEY_MUTE:    //              = 0x1C,
+                                
                                 // case IRKEY_FREEZE://            = 0x57,
                                 
                                 default:
@@ -2112,7 +2116,7 @@ void MApp_ProcessUserInput(void)
 #endif
 
     MApp_CheckKeyStatus();
-    #ifdef IR_MODE_ENABLE
+    #if(IR_MODE_ENABLE == 1)
         MApp_ProcessUserInput_FOR_NOT_DTV_ATV();
     #endif
 #if(ENABLE_CEC)

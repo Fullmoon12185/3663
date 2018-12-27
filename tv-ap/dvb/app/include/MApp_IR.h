@@ -101,7 +101,7 @@
     #define INTERFACE extern
 #endif
 
-#define IR_MODE_ENABLE
+
 //======================================================================
 #define ENABLE_MBIR     0
 

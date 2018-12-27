@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -112,11 +112,11 @@
 #define INIT_ADC_RGB_BLUE_GAIN            0x80
 
 //=====================================================
-#define INIT_ADC_YPBPR_RED_OFFSET       0x80
-#define INIT_ADC_YPBPR_GREEN_OFFSET     0x80
-#define INIT_ADC_YPBPR_BLUE_OFFSET      0x80
+#define INIT_ADC_YPBPR_RED_OFFSET       0xFF
+#define INIT_ADC_YPBPR_GREEN_OFFSET     0xFF
+#define INIT_ADC_YPBPR_BLUE_OFFSET      0xFF
 
-#define INIT_ADC_YPBPR_RED_GAIN_SD        83
+#define INIT_ADC_YPBPR_RED_GAIN_SD        255
 #define INIT_ADC_YPBPR_GREEN_GAIN_SD    70
 #define INIT_ADC_YPBPR_BLUE_GAIN_SD        82
 
