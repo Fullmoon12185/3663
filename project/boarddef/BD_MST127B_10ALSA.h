@@ -303,7 +303,7 @@
 #else
 #define INPUT_SCART_VIDEO_COUNT    	1
 #endif
-#define INPUT_HDMI_VIDEO_COUNT     	3
+#define INPUT_HDMI_VIDEO_COUNT     	2
 #ifdef ATSC_SYSTEM
 #define ENABLE_SCART_VIDEO         	0
 #else
@@ -333,13 +333,13 @@
 #define INPUT_SCART2_FB_MUX         INPUT_PORT_NONE_PORT
 
 #define INPUT_HDMI1_MUX             INPUT_PORT_DVI3
-#define INPUT_HDMI2_MUX             INPUT_PORT_DVI1
-#define INPUT_HDMI3_MUX             INPUT_PORT_DVI0
+#define INPUT_HDMI2_MUX             INPUT_PORT_DVI0
+#define INPUT_HDMI3_MUX             INPUT_PORT_DVI1
 
 /// for PWS path mapping
 #define PWS_INPUT_HDMI1_PATH        _HDMI1_
-#define PWS_INPUT_HDMI2_PATH        _HDMI3_
-#define PWS_INPUT_HDMI3_PATH        _HDMI4_
+#define PWS_INPUT_HDMI2_PATH        _HDMI4_
+#define PWS_INPUT_HDMI3_PATH        _HDMI3_
 
 #define SCART_ID_SEL                0x02   // HSYNC1
 #define SCART2_ID_SEL               0x04   // HSYNC2
@@ -578,7 +578,7 @@
 
 //------IR & Key Setting--------------------------------------------------------
 #define IR_TYPE_SEL                     IR_TYPE_MSTAR_DTV   // IR_TYPE_MSTAR_DTV // IR_TYPE_CUS03_DTV // IR_TYPE_NEW
-#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_THANH_HAI//KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
+#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
 #define POWER_KEY_SEL                   POWER_KEY_PAD_INT
 
 //------Power Setting-----------------------------------------------------------

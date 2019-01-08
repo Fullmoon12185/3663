@@ -142,7 +142,7 @@
 
 #include "MApp_GlobalVar.h"
 
-#define DEBUG_ACT_INPUT_SRC(x)  x
+#define DEBUG_ACT_INPUT_SRC(x)  //x
 
 /////////////////////////////////////////////////////////////////////
 extern BOOLEAN _MApp_ZUI_API_WindowProcOnIdle(void);
