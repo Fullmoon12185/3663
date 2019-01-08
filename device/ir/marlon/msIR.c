@@ -124,7 +124,7 @@ static MS_S32 u32Mutex_IR;
 #define msIR_DeInitLock()   OS_DELETE_MUTEX(u32Mutex_IR)
 #define msIR_Lock()         OS_OBTAIN_MUTEX(u32Mutex_IR, MSOS_WAIT_FOREVER)
 #define msIR_UnLock()       OS_RELEASE_MUTEX(u32Mutex_IR)
-#define IR_NEC_INTERVAL     300
+#define IR_NEC_INTERVAL     120
 
 static U8 u8RepeatCount = 0;
 static U8 tempRepeatCount = 0;

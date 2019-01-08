@@ -3607,13 +3607,11 @@ void MApp_DataBase_RestoreDefaultADC(E_ADC_SET_INDEX eAdcIndex)
     {
         // Get Ypbpr default setting
         MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_YPBPR,&Adc_GainOffset);
-        printf("Nguyen update adc MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_YPBPR,&Adc_GainOffset);\n");
     }
     else if(eAdcIndex == ADC_SET_SCART_RGB) // Scart-RGB
     {
         // Get RGB default setting
         MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_SCART,&Adc_GainOffset);
-        printf("Nguyen update adc MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_SCART,&Adc_GainOffset);\n");
     }
     else // VGA / Scart-RGB / Others
     {
