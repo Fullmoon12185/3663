@@ -92,7 +92,7 @@
 #define STANDARD_BACKLIGHT          80 // 100
 #define STANDARD_CONTRAST           50
 #define STANDARD_BRIGHTNESS         50//48
-#define STANDARD_SATURATION         50
+#define STANDARD_SATURATION         70
 #define STANDARD_SHARPNESS          50
 #define STANDARD_HUE                50
 #define STANDARD_COLOR_TEMP         MS_COLOR_TEMP_MEDIUM
@@ -198,8 +198,8 @@
 #define INIT_VIDEO_COLOR_TEMP_COOL_G            106//0x80
 #define INIT_VIDEO_COLOR_TEMP_COOL_B            128//0x80
 
-#define INIT_VIDEO_COLOR_TEMP_NORMAL_R          118//0x80
-#define INIT_VIDEO_COLOR_TEMP_NORMAL_G          109//0x80
+#define INIT_VIDEO_COLOR_TEMP_NORMAL_R          120//0x80
+#define INIT_VIDEO_COLOR_TEMP_NORMAL_G          118//0x80
 #define INIT_VIDEO_COLOR_TEMP_NORMAL_B          128//0x80
 
 #define INIT_VIDEO_COLOR_TEMP_WARM_R            0x80

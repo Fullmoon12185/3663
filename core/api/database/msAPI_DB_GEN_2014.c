@@ -403,7 +403,7 @@ U8 _msAPI_DB_GEN_FindUnit(U8 u8FromUnitIdx, U8 u8UnitStatus)
     {
         u8CurUnitStatus = _msAPI_DB_GEN_Get_UnitStatus(u8CurCheckIdx);
 
-        //printf(" [Check unit-%u = 0x%X] ", u8CurCheckIdx, u8CurUnitStatus);
+        printf(" [Check unit-%u = 0x%X] ", u8CurCheckIdx, u8CurUnitStatus);
 
         if( u8CurUnitStatus == u8UnitStatus )
         {

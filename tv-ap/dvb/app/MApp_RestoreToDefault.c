@@ -3583,6 +3583,7 @@ void MApp_DataBase_RestoreDefault_TVSetting(void)
 void MApp_DataBase_RestoreDefaultADC(E_ADC_SET_INDEX eAdcIndex)
 {
 #if USE_CUS_DEFAULT_ADC
+    printf("USE_CUS_DEFAULT_ADC update adc MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_YPBPR,&Adc_GainOffset);\n");
     if( eAdcIndex == ADC_SET_YPBPR_SD )
     {
         G_ADC_SETTING[ADC_SET_YPBPR_SD].stAdcGainOffsetSetting = tADCSetting[ADC_SET_YPBPR_SD];

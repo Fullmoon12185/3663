@@ -344,7 +344,7 @@ void MApp_ZUI_ProcessKey(U8 u8IRKey)
         VIRTUAL_KEY_CODE vk_code = _MApp_ZUI_ACT_MapToVirtualKeyCode(u8IRKey);
         if (vk_code != VK_NULL)
         {
-            printf("[]st=%bu,at=%bu\n", _eZUIState, _eActiveOSD);
+            //printf("[]st=%bu,at=%bu\n", _eZUIState, _eActiveOSD);
             //ZUI_MSG(printf("Nguyen KeyDown:%x\n", u8IRKey));
             MApp_ZUI_ACT_GetTenKeyNum(u8IRKey);
             MApp_ZUI_API_PostMessage(HWND_MAINFRAME, MSG_KEYDOWN, vk_code);

@@ -113,14 +113,14 @@
 #define IR_LOGI_01H_TIME        562     // us
 #define IR_LOGI_0_TIME          1250    // us
 #define IR_LOGI_1_TIME          2250    // us
-#define IR_TIMEOUT_CYC          140000  // us
+#define IR_TIMEOUT_CYC          110000  // us
 
 #define IR_HEADER_CODE_TIME_UB  20
 #define IR_HEADER_CODE_TIME_LB  -20
 #define IR_OFF_CODE_TIME_UB  20
 #define IR_OFF_CODE_TIME_LB  -20
-#define IR_OFF_CODE_RP_TIME_UB  100
-#define IR_OFF_CODE_RP_TIME_LB  -100
+#define IR_OFF_CODE_RP_TIME_UB  30
+#define IR_OFF_CODE_RP_TIME_LB  -30
 #define IR_LOGI_01H_TIME_UB  35
 #define IR_LOGI_01H_TIME_LB  -30
 #define IR_LOGI_0_TIME_UB  20

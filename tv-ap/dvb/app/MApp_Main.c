@@ -804,11 +804,11 @@ void MApp_While_Loop_State(void)
 
 int main(void)
 {
-    U32 u32MainLoopTime_Last = 0;
-    U32 u32MainLoopTime_Cur = 0;
+    // U32 u32MainLoopTime_Last = 0;
+    // U32 u32MainLoopTime_Cur = 0;
 
     //nguyen
-    U32 bToogleLED = 0;
+    // U32 bToogleLED = 0;
     homeshop_state = HOMESHOP_INIT;
     //U8 pwmValueBackLight = 0;
     //U32 bBacklight= false;
@@ -923,44 +923,44 @@ int main(void)
             {
                 //MAIN_FUNC_STATE_DBG(printf(" %d: [EN_MSTAR_MAIN_FUNCTION_ENTERING_WHILE_LOOP] \n", __LINE__));
 
-                u32MainLoopTime_Cur = MsOS_GetSystemTime();
-                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 3000 )
-                {
-                    u32MainLoopTime_Last = u32MainLoopTime_Cur;
+                // u32MainLoopTime_Cur = MsOS_GetSystemTime();
+                // if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 3000 )
+                // {
+                //     u32MainLoopTime_Last = u32MainLoopTime_Cur;
                     
-                    // if(ANDROID_STATUS() == 0){
-                    //     printf("0\n");
-                    // } else {
-                    //     printf("1\n");
-                    // }
-                    //nguyen
-                    if (bToogleLED == 0){
-                        // LED_RED_Off();
-                        // LED_GRN_On(); 
-                        //EX_ACTIVE_IC_ON();
-                        // b_ON();
-                        // r_ON();
-                        // g_ON();
-                        //MApp_PreInit_Logo_Init();
-                        //MApi_PNL_En(TRUE);
-                        //MApi_PNL_SetBackLight(ENABLE);
-                        bToogleLED = 1;    
-                    } else {
-                        // b_OFF();
-                        // g_OFF();
-                        // r_OFF();
-                        // LED_RED_On();
-                        // LED_GRN_Off();
-                        //EX_ACTIVE_IC_OFF();
-                        //MApi_PNL_En(FALSE);
-                        //MApi_PNL_SetBackLight(DISABLE);
-                        //HDMI2_OFF();
-                        bToogleLED = 0;
-                    }
+                //     // if(ANDROID_STATUS() == 0){
+                //     //     printf("0\n");
+                //     // } else {
+                //     //     printf("1\n");
+                //     // }
+                //     //nguyen
+                //     if (bToogleLED == 0){
+                //         // LED_RED_Off();
+                //         // LED_GRN_On(); 
+                //         //EX_ACTIVE_IC_ON();
+                //         // b_ON();
+                //         // r_ON();
+                //         // g_ON();
+                //         //MApp_PreInit_Logo_Init();
+                //         //MApi_PNL_En(TRUE);
+                //         //MApi_PNL_SetBackLight(ENABLE);
+                //         bToogleLED = 1;    
+                //     } else {
+                //         // b_OFF();
+                //         // g_OFF();
+                //         // r_OFF();
+                //         // LED_RED_On();
+                //         // LED_GRN_Off();
+                //         //EX_ACTIVE_IC_OFF();
+                //         //MApi_PNL_En(FALSE);
+                //         //MApi_PNL_SetBackLight(DISABLE);
+                //         //HDMI2_OFF();
+                //         bToogleLED = 0;
+                //     }
                     
                     
-                    //printf("t=%u\n", u32MainLoopTime_Cur );
-                }
+                //     //printf("t=%u\n", u32MainLoopTime_Cur );
+                // }
                 
                 
                 if(isCodeReadyToSend()){
