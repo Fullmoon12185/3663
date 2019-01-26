@@ -1676,9 +1676,11 @@ void MApp_PreInit_GlobalVariable_Init(void)
 #if (UBC_TV32 == 1)
     #if((TV32_INCH_LSC == 1) || (TV32_315_1A == 1))
         stGenSetting.g_SysSetting.g_MirrorEnable = MirrorEnable;
+    #else
+        stGenSetting.g_SysSetting.g_MirrorEnable = DISABLE;
     #endif
 #else
-    stGenSetting.g_SysSetting.g_MirrorEnable = false;
+    stGenSetting.g_SysSetting.g_MirrorEnable = DISABLE;
 #endif
     //stGenSetting.g_SoundSetting.ADVolume = 100;
     DEBUG_BOOT_TIME(DEBUG_FUNC_TIME_END());

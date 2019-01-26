@@ -209,6 +209,11 @@ LED 300mA - Panel 32 inch JP
         #define     HOME_BACKLIGHT_1    200   //330mA
         #define     HOME_BACKLIGHT_2    180   //300mA
         #define     HOME_BACKLIGHT_3    160   //280mA
+    #elif(TV32_PT315 == 1) 
+        #define     SHOP_BACKLIGHT      111  //300mA
+        #define     HOME_BACKLIGHT_1    100  //280mA
+        #define     HOME_BACKLIGHT_2    89   //
+        #define     HOME_BACKLIGHT_3    78
     #endif
 #endif
 
