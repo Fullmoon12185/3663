@@ -2023,7 +2023,7 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
             }
         }
         
-        if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2) 
+        if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2 ) 
         //|| MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_ATV)
         {
             // if(stKeyStatus.keydata == IRKEY_TV){
@@ -2116,7 +2116,7 @@ void MApp_ProcessUserInput(void)
 #endif
 
     MApp_CheckKeyStatus();
-    #ifdef IR_MODE_ENABLE
+    #if(SMART_TV == 1)
         MApp_ProcessUserInput_FOR_NOT_DTV_ATV();
     #endif
 #if(ENABLE_CEC)

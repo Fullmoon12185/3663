@@ -181,8 +181,12 @@
         #define TV32_PT315	    0
 #endif
 
-#define TV_T2_ONLY	    0
-#define SMART_TV	    1
+
+//for TV T2  and smart TV
+//#define TV_T2_ONLY	    1
+// SMART_TV = 0 : T2
+// SMART_TV = 1 : SMART_TV
+#define SMART_TV	    0
 //nguyen
 
 //-------------------------------------------------------------------------------
