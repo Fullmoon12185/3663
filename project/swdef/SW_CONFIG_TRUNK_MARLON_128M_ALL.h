@@ -172,12 +172,13 @@
 #ifndef UBC_TV32
     #define UBC_TV32        1 // DISABLE
 
-        #define TV32_INCH_LSC   0
+        #define TV32_INCH_LSC   1
             
-            #define TV32_LSC_300mA 1
-            #define TV32_LSC_600mA 0
+            #define TV32_LSC_300mA 0
+            #define TV32_LSC_CVT_600mA 1
 
-        #define TV32_315_1A     1  
+
+        #define TV32_315_1A     0  
         #define TV32_PT315	    0
 #endif
 
