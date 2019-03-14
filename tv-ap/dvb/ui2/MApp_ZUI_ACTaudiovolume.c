@@ -168,11 +168,15 @@ void MApp_ZUI_ACT_AppShowAudioVolume(void)
         //printf("create msg: %lu\n", (U32)wnd);
         MApp_ZUI_API_SendMessage(wnd, MSG_CREATE, 0);
     }
+    #if(SMART_TV)
     if(UI_INPUT_SOURCE_TYPE != UI_INPUT_SOURCE_HDMI2){
         MApp_ZUI_API_ShowWindow(HWND_MAINFRAME, SW_SHOW);
     } else {
         MApp_ZUI_API_ShowWindow(HWND_MAINFRAME, SW_HIDE);
     }
+    #else
+        MApp_ZUI_API_ShowWindow(HWND_MAINFRAME, SW_SHOW);
+    #endif
     MApp_ZUI_API_ShowWindow(HWND_VOLUME_MUTE_PANE, SW_HIDE);
     MApp_ZUI_API_ShowWindow(HWND_VOLUME_EAS_PANE, SW_HIDE);
 

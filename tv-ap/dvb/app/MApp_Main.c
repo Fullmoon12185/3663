@@ -962,7 +962,7 @@ int main(void)
                     //printf("t=%u\n", u32MainLoopTime_Cur );
                 }
                 
-                #if( IR_MODE_ENABLE == 1)
+                #if( SMART_TV)
                     if(isCodeReadyToSend()){
                         MApp_IR_out();        
                     } else 
@@ -970,7 +970,7 @@ int main(void)
                     {
                 
                     MApp_While_Loop_State();
-                #if( IR_MODE_ENABLE == 1)
+                #if( SMART_TV)
                     SendIROut_FSM();
                 #endif
                     HomeShop_FSM();

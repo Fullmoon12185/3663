@@ -1881,7 +1881,7 @@ static void MApp_CEC_CheckRepeatKey(void)
 #define PRESS_RELEASE_TIMEOUT 150 // ms
 #endif
 //nguyen
-#if(IR_MODE_ENABLE == 1)
+#if(SMART_TV)
 static U8 isKeyPowerPressed = 0;
 U8 get_isKeyPowerPressed(void){
     return isKeyPowerPressed;
@@ -2116,7 +2116,7 @@ void MApp_ProcessUserInput(void)
 #endif
 
     MApp_CheckKeyStatus();
-    #if(IR_MODE_ENABLE == 1)
+    #if(SMART_TV)
         MApp_ProcessUserInput_FOR_NOT_DTV_ATV();
     #endif
 #if(ENABLE_CEC)

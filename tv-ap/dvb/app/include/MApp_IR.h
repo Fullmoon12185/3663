@@ -169,7 +169,7 @@ void clear_key_pressedForLED(void);
 U8 is_key_pressed(void);
 void clear_key_pressed(void);
 U8 isPowerKeyPressed(void);
-#ifdef IR_MODE_ENABLE
+#ifdef SMART_TV
 INTERFACE U8 MApp_IR_sendIROut(U8 codeReceived);
 void MApp_IR_out(void);
 U8 isCodeReadyToSend(void);
