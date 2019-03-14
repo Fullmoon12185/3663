@@ -139,6 +139,7 @@
 #include "MApp_Main.h"
 #include "MApp_InputSource.h"
 
+
 #if ( ENABLE_CI_PLUS_V1_4 )
 #include "MApp_CIMMI.h"
 #endif  //ENABLE_CI_PLUS_V1_4
@@ -286,7 +287,7 @@ U8 g_u8IR_HEADER_CODE1 =0;
 
 
 //nguyen
-#ifdef IR_MODE_ENABLE
+#if(SMART_TV)
 #define  PULSE_562ms            1760
 #define  PULSE_0                0
 #define  PULSE_1                1
@@ -1881,7 +1882,7 @@ static void MApp_CEC_CheckRepeatKey(void)
 #define PRESS_RELEASE_TIMEOUT 150 // ms
 #endif
 //nguyen
-#ifdef IR_MODE_ENABLE
+#if(SMART_TV)
 static U8 isKeyPowerPressed = 0;
 U8 get_isKeyPowerPressed(void){
     return isKeyPowerPressed;
@@ -2023,7 +2024,7 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
             }
         }
         
-        if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2 ) 
+        if(MApp_InputSrc_Get_UiInputSrcType() == UI_INPUT_SOURCE_HDMI2) 
         //|| MApp_InputSrc_Get_UiInputSrcType() != UI_INPUT_SOURCE_ATV)
         {
             // if(stKeyStatus.keydata == IRKEY_TV){
@@ -2091,6 +2092,7 @@ void MApp_ProcessUserInput_FOR_NOT_DTV_ATV(void){
                         break; 
                 }
             }
+            
         }
     }
 }
@@ -2116,7 +2118,7 @@ void MApp_ProcessUserInput(void)
 #endif
 
     MApp_CheckKeyStatus();
-    #if(SMART_TV == 1)
+    #if(SMART_TV)
         MApp_ProcessUserInput_FOR_NOT_DTV_ATV();
     #endif
 #if(ENABLE_CEC)

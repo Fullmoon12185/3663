@@ -578,7 +578,7 @@
 
 //------IR & Key Setting--------------------------------------------------------
 #define IR_TYPE_SEL                     IR_TYPE_MSTAR_DTV   // IR_TYPE_MSTAR_DTV // IR_TYPE_CUS03_DTV // IR_TYPE_NEW
-#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_THANH_HAI//KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
+#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
 #define POWER_KEY_SEL                   POWER_KEY_PAD_INT
 
 //------Power Setting-----------------------------------------------------------

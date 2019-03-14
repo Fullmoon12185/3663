@@ -1643,8 +1643,8 @@ void MApp_Audio_AdjustMainVolume(BYTE VolumePercent)
 #if(ENABLE_SOUND_NONLINEAR_CURVE)
     VolumePercent = MApp_NonLinearCalculate(MApp_GetNonLinearCurve(NONLINEAR_CURVE_VOLUME),VolumePercent);
 #endif
-    //nguyen
-    if(SMART_TV == 1) {
+    // //nguyen
+    #if(SMART_TV) 
         if(UI_INPUT_SOURCE_TYPE == UI_INPUT_SOURCE_HDMI2){
             #if(UBC_TV32 == 1)
                 VolumePercent = 80;
@@ -1652,7 +1652,7 @@ void MApp_Audio_AdjustMainVolume(BYTE VolumePercent)
                 VolumePercent = 80;
             #endif
         }
-    }
+    #endif
     
     //nguyen
     value1 = (BYTE)((TvVolumeTable[VolumePercent]>>8)&0xFF);

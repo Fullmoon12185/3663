@@ -199,10 +199,10 @@ LED 300mA - Panel 32 inch JP
             #define     HOME_BACKLIGHT_2    89   //
             #define     HOME_BACKLIGHT_3    78
         #elif(TV32_LSC_CVT_600mA == 1)
-            #define     SHOP_BACKLIGHT      155  //590mA
-            #define     HOME_BACKLIGHT_1    145  //550mA
-            #define     HOME_BACKLIGHT_2    135  //500mA  
-            #define     HOME_BACKLIGHT_3    125  //470mA  
+            #define     SHOP_BACKLIGHT      217  //590mA
+            #define     HOME_BACKLIGHT_1    195  //550mA
+            #define     HOME_BACKLIGHT_2    173  //500mA  
+            #define     HOME_BACKLIGHT_3    152  //470mA  
         #endif
     #elif(TV32_315_1A == 1) 
         #define     SHOP_BACKLIGHT      220   //360mA
@@ -967,12 +967,16 @@ int main(void)
                 //     //printf("t=%u\n", u32MainLoopTime_Cur );
                 // }
                 
-                
+                #if(SMART_TV)
                 if(isCodeReadyToSend()){
                     MApp_IR_out();        
-                } else {
+                } else 
+                #endif
+                {
                     MApp_While_Loop_State();
+                #if(SMART_TV)
                     SendIROut_FSM();
+                #endif
                     HomeShop_FSM();
                     //isTVThongminh();    
                 }
@@ -1118,7 +1122,7 @@ void HomeShop_FSM (void){
     
 }
 
-#ifdef IR_MODE_ENABLE
+#if(SMART_TV == 1)
 #define     ANDROID_STANDBY_MODE     1
 #define     ANDROID_ACTIVE_MODE      0
 SendIROut_STATE sendirout_state = SEND_IR_OUT_INIT;
