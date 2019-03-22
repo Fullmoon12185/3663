@@ -1845,7 +1845,7 @@ static void msAPI_CEC_CheckActiveDevice(void)
           #endif
 
           #if (INPUT_HDMI_VIDEO_COUNT >= 2)
-           if (UI_INPUT_SOURCE_TYPE == UI_INPUT_SOURCE_HDMI2)
+           if ()
             {
                 u8HSB = 0x20;
             }

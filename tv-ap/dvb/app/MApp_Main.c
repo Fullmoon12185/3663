@@ -198,17 +198,27 @@ LED 300mA - Panel 32 inch JP
             #define     HOME_BACKLIGHT_1    100  //280mA
             #define     HOME_BACKLIGHT_2    89   //
             #define     HOME_BACKLIGHT_3    78
-        #elif(TV32_LSC_600mA == 1)
+        #elif(TV32_LSC_CVT_600mA == 1)
             #define     SHOP_BACKLIGHT      217  //590mA
             #define     HOME_BACKLIGHT_1    195  //550mA
             #define     HOME_BACKLIGHT_2    173  //500mA  
             #define     HOME_BACKLIGHT_3    152  //470mA  
         #endif
-    #elif(TV32_315_1A == 1) 
+    #elif(TV32_315_1A_600mA == 1) 
         #define     SHOP_BACKLIGHT      220   //360mA
         #define     HOME_BACKLIGHT_1    200   //330mA
         #define     HOME_BACKLIGHT_2    180   //300mA
         #define     HOME_BACKLIGHT_3    160   //280mA
+    #elif(TV32_315_1A_300mA == 1) 
+        #define     SHOP_BACKLIGHT      111   //360mA
+        #define     HOME_BACKLIGHT_1    100   //330mA
+        #define     HOME_BACKLIGHT_2    89   //300mA
+        #define     HOME_BACKLIGHT_3    78   //280mA
+    #elif(TV32_PT315 == 1) 
+        #define     SHOP_BACKLIGHT      111  //300mA
+        #define     HOME_BACKLIGHT_1    100  //280mA
+        #define     HOME_BACKLIGHT_2    89   //
+        #define     HOME_BACKLIGHT_3    78
     #endif
 #endif
 
@@ -804,11 +814,11 @@ void MApp_While_Loop_State(void)
 
 int main(void)
 {
-    U32 u32MainLoopTime_Last = 0;
-    U32 u32MainLoopTime_Cur = 0;
+    // U32 u32MainLoopTime_Last = 0;
+    // U32 u32MainLoopTime_Cur = 0;
 
     //nguyen
-    U32 bToogleLED = 0;
+    // U32 bToogleLED = 0;
     homeshop_state = HOMESHOP_INIT;
     //U8 pwmValueBackLight = 0;
     //U32 bBacklight= false;
@@ -923,54 +933,53 @@ int main(void)
             {
                 //MAIN_FUNC_STATE_DBG(printf(" %d: [EN_MSTAR_MAIN_FUNCTION_ENTERING_WHILE_LOOP] \n", __LINE__));
 
-                u32MainLoopTime_Cur = MsOS_GetSystemTime();
-                if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 3000 )
+                // u32MainLoopTime_Cur = MsOS_GetSystemTime();
+                // if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 3000 )
+                // {
+                //     u32MainLoopTime_Last = u32MainLoopTime_Cur;
+                    
+                //     // if(ANDROID_STATUS() == 0){
+                //     //     printf("0\n");
+                //     // } else {
+                //     //     printf("1\n");
+                //     // }
+                //     //nguyen
+                //     if (bToogleLED == 0){
+                //         // LED_RED_Off();
+                //         // LED_GRN_On(); 
+                //         //EX_ACTIVE_IC_ON();
+                //         // b_ON();
+                //         // r_ON();
+                //         // g_ON();
+                //         //MApp_PreInit_Logo_Init();
+                //         //MApi_PNL_En(TRUE);
+                //         //MApi_PNL_SetBackLight(ENABLE);
+                //         bToogleLED = 1;    
+                //     } else {
+                //         // b_OFF();
+                //         // g_OFF();
+                //         // r_OFF();
+                //         // LED_RED_On();
+                //         // LED_GRN_Off();
+                //         //EX_ACTIVE_IC_OFF();
+                //         //MApi_PNL_En(FALSE);
+                //         //MApi_PNL_SetBackLight(DISABLE);
+                //         //HDMI2_OFF();
+                //         bToogleLED = 0;
+                //     }
+                    
+                    
+                //     //printf("t=%u\n", u32MainLoopTime_Cur );
+                // }
+                
+                #if(SMART_TV)
+                if(isCodeReadyToSend()){
+                    MApp_IR_out();        
+                } else 
+                #endif
                 {
-                    u32MainLoopTime_Last = u32MainLoopTime_Cur;
-                    
-                    // if(ANDROID_STATUS() == 0){
-                    //     printf("0\n");
-                    // } else {
-                    //     printf("1\n");
-                    // }
-                    //nguyen
-                    if (bToogleLED == 0){
-                        // LED_RED_Off();
-                        // LED_GRN_On(); 
-                        //EX_ACTIVE_IC_ON();
-                        // b_ON();
-                        // r_ON();
-                        // g_ON();
-                        //MApp_PreInit_Logo_Init();
-                        //MApi_PNL_En(TRUE);
-                        //MApi_PNL_SetBackLight(ENABLE);
-                        bToogleLED = 1;    
-                    } else {
-                        // b_OFF();
-                        // g_OFF();
-                        // r_OFF();
-                        // LED_RED_On();
-                        // LED_GRN_Off();
-                        //EX_ACTIVE_IC_OFF();
-                        //MApi_PNL_En(FALSE);
-                        //MApi_PNL_SetBackLight(DISABLE);
-                        //HDMI2_OFF();
-                        bToogleLED = 0;
-                    }
-                    
-                    
-                    //printf("t=%u\n", u32MainLoopTime_Cur );
-                }
-                
-                #if( SMART_TV)
-                    if(isCodeReadyToSend()){
-                        MApp_IR_out();        
-                    } else 
-                #endif    
-                    {
-                
                     MApp_While_Loop_State();
-                #if( SMART_TV)
+                #if(SMART_TV)
                     SendIROut_FSM();
                 #endif
                     HomeShop_FSM();
@@ -1118,7 +1127,7 @@ void HomeShop_FSM (void){
     
 }
 
-#if( IR_MODE_ENABLE == 1)
+#if(SMART_TV == 1)
 #define     ANDROID_STANDBY_MODE     1
 #define     ANDROID_ACTIVE_MODE      0
 SendIROut_STATE sendirout_state = SEND_IR_OUT_INIT;

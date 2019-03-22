@@ -10,7 +10,12 @@
         "mapp_restoretodefault.h": "c",
         "sw_config.h": "c",
         "drvusb.h": "c",
-        "mapp_audio.h": "c"
+        "mapp_audio.h": "c",
+        "ir_mstar_dtv.h\u0000ar_dtv.h": "c",
+        "ir_mstar_dtv.h\u0000r_dtv.h": "c",
+        "ir_mstar_dtv.h\u0000star_dtv.h": "c",
+        "ir_mstar_dtv.h\u0000tar_dtv.h": "c",
+        "panel.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false,
     "git.ignoreLimitWarning": true

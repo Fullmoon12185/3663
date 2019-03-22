@@ -244,7 +244,7 @@
 
 
 // JPEG: Logo
-#define BIN_ID_JPEG_BOOT_LOGO_DVB   0x0300  //~50KB     //@..\..\..\tv-ap\dvb\ui2\logo\ubc.jpg
+#define BIN_ID_JPEG_BOOT_LOGO_DVB   0x0300  //~50KB     //@..\..\..\tv-ap\dvb\ui2\logo\sanco.jpg
 #define BIN_ID_MELODY_ON_DVB        0x0701  //~55KB     //@..\..\..\tv-ap\dvb\ui2\logo\mp31.mp3
 
 #if ENABLE_SOUNDTEST_MUSIC_LOOP
@@ -287,6 +287,8 @@
 #define BIN_ID_OSDCP_PALETTE                    0x0320  //~2KB    //@..\..\..\tv-ap\dvb\ui2\res960x540xI8\osdcomposer\osdbin\ZUI_palette.bin
 
 // String for 1366x768
+
+
 #define BIN_ID_OSDCP_TEXT_1366x768x565          0x0380  //~285KB   //@..\..\..\tv-ap\dvb\ui2\res1366x768x565\osdcomposer\osdbin\ZUIHDMI_strings.bin  -g
 #define BIN_ID_OSDCP_TEXT_960x540x565           0x0388  //~285KB   //@..\..\..\tv-ap\dvb\ui2\res960x540x565\osdcomposer\osdbin\ZUI_strings.bin  -g
 #define BIN_ID_OSDCP_TEXT_960x540xI8            0x0390  //~285KB   //@..\..\..\tv-ap\dvb\ui2\res960x540xI8\osdcomposer\osdbin\ZUI_strings.bin  -g

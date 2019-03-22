@@ -3475,7 +3475,7 @@ void MApp_DataBase_RestoreDefaultSystem(U16 u16KeepSetting)
     stGenSetting.g_SysSetting.UsrPowerOnMusic = POWERON_MUSIC_DEFAULT;
 #endif
 #if(UBC_TV32 == 1)
-    #if((TV32_INCH_LSC == 1) || (TV32_315_1A == 1))
+    #if((TV32_INCH_LSC == 1) || (TV32_315_1A_600mA == 1) || (TV32_315_1A_300mA == 1))
         stGenSetting.g_SysSetting.g_MirrorEnable = MirrorEnable;
     #endif
 #else
@@ -3583,6 +3583,7 @@ void MApp_DataBase_RestoreDefault_TVSetting(void)
 void MApp_DataBase_RestoreDefaultADC(E_ADC_SET_INDEX eAdcIndex)
 {
 #if USE_CUS_DEFAULT_ADC
+    printf("USE_CUS_DEFAULT_ADC update adc MApi_XC_ADC_GetDefaultGainOffset(INPUT_SOURCE_YPBPR,&Adc_GainOffset);\n");
     if( eAdcIndex == ADC_SET_YPBPR_SD )
     {
         G_ADC_SETTING[ADC_SET_YPBPR_SD].stAdcGainOffsetSetting = tADCSetting[ADC_SET_YPBPR_SD];

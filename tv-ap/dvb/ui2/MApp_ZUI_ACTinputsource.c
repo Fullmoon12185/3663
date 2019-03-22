@@ -950,7 +950,7 @@ BOOLEAN MApp_ZUI_ACT_HandleInputSourceKey(VIRTUAL_KEY_CODE key)
         printf("Nguyen key=%u => 0x%X\n", (key-VK_NUM_0), _u16LaunchKeys );
         switch (_u16LaunchKeys)
         {
-            case 0x2580:
+            case 0x1147:
                 MApp_ZUI_ACT_ExecuteInputSourceAction(EN_EXE_GOTO_FACTORY_MENU);
                 break;
             case 0x2588:

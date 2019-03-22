@@ -486,7 +486,108 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
     55, //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
     24, //LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
 };
-#elif(TV32_315_1A == 1)
+#elif(TV32_315_1A_300mA == 1 || TV32_315_1A_600mA == 1)
+ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
+{
+    {
+        "WXGA_AU20_T200XW02",//m_pPanelName
+        //////////////////////////////////////////////
+        // Panel output
+        //////////////////////////////////////////////
+        0,          //BOOL m_bPanelDither :1;           //PANEL_DITHER          // 8/6 bits panel
+        1, //LINK_LVDS,  //BOOL m_ePanelLinkType :2;         //PANEL_LINK
+
+        0,          //BOOL m_bPanelDualPort :1;         //PANEL_DUAL_PORT
+
+        0, //0^PANEL_CONNECTOR_SWAP_PORT,                    // shall swap if
+                                                        // (PANEL_SWAP_PORT XOR Board_Connect_Swap) is TRUE
+
+        0,          //BOOL m_bPanelSwapOdd_ML   :1;     //PANEL_SWAP_ODD_ML
+        0,          //BOOL m_bPanelSwapEven_ML  :1;     //PANEL_SWAP_EVEN_ML
+        0,          //BOOL m_bPanelSwapOdd_RB   :1;     //PANEL_SWAP_ODD_RB
+        0,          //BOOL m_bPanelSwapEven_RB  :1;     //PANEL_SWAP_EVEN_RB
+
+        0, //PANEL_SWAP_LVDS_POL,
+
+        0, //PANEL_SWAP_LVDS_CH,          //BOOL m_bPanelSwapLVDS_CH  :1;     //PANEL_SWAP_LVDS_CH
+        1, //PANEL_PDP_10BIT,          //BOOL m_bPanelPDP10BIT     :1;     //PANEL_PDP_10BIT
+        1,          //BOOL m_bPanelLVDS_TI_MODE :1;     //PANEL_LVDS_TI_MODE
+
+        0x00,       //BYTE m_ucPanelDCLKDelay;          //PANEL_DCLK_DELAY
+        0,          //BOOL m_bPanelInvDCLK  :1;         //PANEL_INV_DCLK
+        0,          //BOOL m_bPanelInvDE        :1;     //PANEL_INV_DE
+        0,          //BOOL m_bPanelInvHSync :1;         //PANEL_INV_HSYNC
+        0,          //BOOL m_bPanelInvVSync :1;         //PANEL_INV_VSYNC
+
+        ///////////////////////////////////////////////
+        // Output tmming setting
+        ///////////////////////////////////////////////
+        // driving current setting (0x00=4mA, 0x01=6mA, 0x02=8mA, 0x03=12mA)
+        0x01,       //BYTE m_ucPanelDCKLCurrent;        //PANEL_DCLK_CURRENT         // DCLK current
+        0x01,       //BYTE m_ucPanelDECurrent;          //PANEL_DE_CURRENT           // DE signal current
+        0x01,       //BYTE m_ucPanelODDDataCurrent;     //PANEL_ODD_DATA_CURRENT     // odd data current
+        0x01,       //BYTE m_ucPanelEvenDataCurrent;    //PANEL_EVEN_DATA_CURRENT    // even data current
+
+        20, //45,   //BYTE m_ucPanelOnTiming1;          //PANEL_ON_TIMING1          // time between panel & data while turn on power
+        600,        //BYTE m_ucPanelOnTiming2;          //PANEL_ON_TIMING2          // time between data & back light while turn on power
+        220,         //BYTE m_ucPanelOffTiming1;         //PANEL_OFF_TIMING1         // time between back light & data while turn off power
+        20, //20,   //BYTE m_ucPanelOffTiming2;         //PANEL_OFF_TIMING2         // time between data & panel while turn off power
+
+        20,         //BYTE m_ucPanelHSyncWidth;         //PANEL_HSYNC_WIDTH
+        40,         //BYTE m_ucPanelHSyncBackPorch;     //PANEL_HSYNC_BACK_PORCH
+
+        4,          //BYTE m_ucPanelVSyncWidth;         //PANEL_VSYNC_WIDTH
+        34,         //BYTE m_ucPanelBackPorch;          //PANEL_VSYNC_BACK_PORCH
+
+        20+40,      //WORD m_wPanelHStart;              //PANEL_HSTART             (PANEL_HSYNC_WIDTH + PANEL_HSYNC_BACK_PORCH)
+        4+34,       //WORD m_wPanelVStart;              //PANEL_VSTART             (PANEL_VSYNC_WIDTH + PANEL_VSYNC_BACK_PORCH)
+
+        1366,       //WORD m_wPanelWidth;               //PANEL_WIDTH
+        768,        //WORD m_wPanelHeight;              //PANEL_HEIGHT
+
+        1722ul,     //WORD m_wPanelMaxHTotal;           //PANEL_MAX_HTOTAL
+        1560ul,//1430,  //WORD m_wPanelHTotal;          //PANEL_HTOTAL
+        1414ul,     //WORD m_wPanelMinHTotal;           //PANEL_MIN_HTOTAL
+
+        822,        //WORD m_wPanelMaxVTotal;           //PANEL_MAX_VTOTAL
+        806ul,      //WORD m_wPanelVTotal;              //PANEL_VTOTAL 20060511 chris :for Frame Lock operation
+        789,        //WORD m_wPanelMinVTotal;           //PANEL_MIN_VTOTAL
+
+        88, //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
+        79, //DWORD m_dwPanelDCLK;              //PANEL_DCLK
+        60, //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
+
+        25,     //m_wSpreadSpectrumStep;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
+        192,     //m_wSpreadSpectrumSpan;        //Value for Spread_Spectrum_Control register(B7..3:Period,B2..0:Amplitude)
+
+        160,       //m_ucDimmingCtl
+        255,        //m_ucMaxPWMVal;
+        80,//63,        //m_ucMinPWMVal;
+
+        0,          //BOOL m_bPanelDeinterMode  :1;     //PANEL_DEINTER_MODE
+        1, //E_PNL_ASPECT_RATIO_WIDE,
+        //
+        //  Board related params.
+        //
+       0,//(LVDS_PN_SWAP_H<<8) | LVDS_PN_SWAP_L,            //MS_U16 m_u16LVDSTxSwapValue
+       2, //TI_8BIT_MODE,               //8bit ti bit mode
+       0, //OUTPUT_8BIT_MODE,          //10bit ti bit mode
+       0,          //   PANEL_SWAP_ODD_RG
+       0,          //   PANEL_SWAP_EVEN_RG
+       0,          //   PANEL_SWAP_ODD_GB
+       0,          //   PANEL_SWAP_EVEN_GB
+       0,          //   double clock
+       0x20ea0e,
+       0x167109,
+       2,//E_PNL_CHG_VTOTAL,
+       1,///<  PAFRC mixed with noise dither disable
+    },
+    88, //DWORD m_dwPanelMaxDCLK;           //PANEL_MAX_DCLK
+    79, //DWORD m_dwPanelDCLK;              //PANEL_DCLK
+    60, //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
+    24, //LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
+};
+#elif(TV32_PT315 == 1)
 ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
 {
     {

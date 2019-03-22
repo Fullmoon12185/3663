@@ -113,14 +113,14 @@
 #define IR_LOGI_01H_TIME        562     // us
 #define IR_LOGI_0_TIME          1250    // us
 #define IR_LOGI_1_TIME          2250    // us
-#define IR_TIMEOUT_CYC          140000  // us
+#define IR_TIMEOUT_CYC          110000  // us
 
 #define IR_HEADER_CODE_TIME_UB  20
 #define IR_HEADER_CODE_TIME_LB  -20
 #define IR_OFF_CODE_TIME_UB  20
 #define IR_OFF_CODE_TIME_LB  -20
-#define IR_OFF_CODE_RP_TIME_UB  100
-#define IR_OFF_CODE_RP_TIME_LB  -100
+#define IR_OFF_CODE_RP_TIME_UB  30
+#define IR_OFF_CODE_RP_TIME_LB  -30
 #define IR_LOGI_01H_TIME_UB  35
 #define IR_LOGI_01H_TIME_LB  -30
 #define IR_LOGI_0_TIME_UB  20
@@ -291,7 +291,11 @@ typedef enum _IrCommandType
 
     IRKEY_UP                = 0x59,
     IRKEY_POWER             = 0x5F,
+#if(REMOTE_TRANG_HL)
+    IRKEY_EXIT              = 0x57,
+#else
     IRKEY_EXIT              = 0x10,
+#endif
     IRKEY_MENU              = 0x13,
     IRKEY_DOWN              = 0x51,
     IRKEY_LEFT              = 0x56,
@@ -310,7 +314,11 @@ typedef enum _IrCommandType
     IRKEY_NUM_9             = 0x0A,
 
     IRKEY_MUTE              = 0x1C,
+#if(REMOTE_TRANG_HL)
+    IRKEY_FREEZE            = 0x10,
+#else
     IRKEY_FREEZE            = 0x57,
+#endif
 #if ENABLE_DMP
     IRKEY_PAGE_UP           = 0x03,
 #endif
