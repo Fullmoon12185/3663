@@ -167,10 +167,10 @@
 
 //nguyen
 #ifndef UBC_TV40
-    #define UBC_TV40        0 //ENABLE
+    #define UBC_TV40        1 //ENABLE
 #endif
 #ifndef UBC_TV32
-    #define UBC_TV32        1 // DISABLE
+    #define UBC_TV32        0 // DISABLE
 
         #define TV32_INCH_LSC   1
             
@@ -188,7 +188,10 @@
 // SMART_TV = 0 : T2
 // SMART_TV = 1 : SMART_TV
 #define SMART_TV	    0
+
+#define REMOTE_TRANG_HL	    1
 //nguyen
+
 
 //-------------------------------------------------------------------------------
 // DVB System

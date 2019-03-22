@@ -291,7 +291,11 @@ typedef enum _IrCommandType
 
     IRKEY_UP                = 0x59,
     IRKEY_POWER             = 0x5F,
+#if(REMOTE_TRANG_HL)
+    IRKEY_EXIT              = 0x57,
+#else
     IRKEY_EXIT              = 0x10,
+#endif
     IRKEY_MENU              = 0x13,
     IRKEY_DOWN              = 0x51,
     IRKEY_LEFT              = 0x56,
@@ -310,7 +314,11 @@ typedef enum _IrCommandType
     IRKEY_NUM_9             = 0x0A,
 
     IRKEY_MUTE              = 0x1C,
+#if(REMOTE_TRANG_HL)
+    IRKEY_FREEZE            = 0x10,
+#else
     IRKEY_FREEZE            = 0x57,
+#endif
 #if ENABLE_DMP
     IRKEY_PAGE_UP           = 0x03,
 #endif
