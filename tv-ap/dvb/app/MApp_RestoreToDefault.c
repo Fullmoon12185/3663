@@ -3475,7 +3475,7 @@ void MApp_DataBase_RestoreDefaultSystem(U16 u16KeepSetting)
     stGenSetting.g_SysSetting.UsrPowerOnMusic = POWERON_MUSIC_DEFAULT;
 #endif
 #if(UBC_TV32 == 1)
-    #if((TV32_INCH_LSC == 1) || (TV32_315_1A == 1))
+    #if((TV32_INCH_LSC == 1) || (TV32_315_1A_600mA == 1) || (TV32_315_1A_300mA == 1))
         stGenSetting.g_SysSetting.g_MirrorEnable = MirrorEnable;
     #endif
 #else

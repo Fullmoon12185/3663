@@ -486,7 +486,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
     55, //DWORD m_dwPanelMinDCLK;           //PANEL_MIN_DCLK
     24, //LINK_HS_LVDS,   //Which extern type exactly, only valid when m_ePanelLinkType==LINK_EXT, otherwise, don't care
 };
-#elif(TV32_315_1A == 1)
+#elif(TV32_315_1A_300mA == 1 || TV32_315_1A_600mA == 1)
 ST_PANEL_NEW_PANELTYPE stPanel_WXGA_AU20_T200XW02 =
 {
     {
