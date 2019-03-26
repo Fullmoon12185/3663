@@ -190,7 +190,7 @@
 // SMART_TV = 1 : SMART_TV
 #define SMART_TV	    0
 
-#define REMOTE_TRANG_HL	    1
+#define REMOTE_TRANG_HL	    0
 //nguyen
 
 
