@@ -1032,7 +1032,13 @@ static void MApp_ParseKey(void)
         //         break;
 
             case IRKEY_MUTE:                u8KeyCode = KEY_MUTE;               break;
-            case IRKEY_FREEZE:              u8KeyCode = KEY_FREEZE;             break;
+            case IRKEY_FREEZE:              
+                #if(SMART_TV == 0)    
+                    u8KeyCode = KEY_EXIT;
+                #else
+                    u8KeyCode = KEY_FREEZE;             
+                #endif
+                break;
             case IRKEY_INFO:                u8KeyCode = KEY_INFO;               break;
             case IRKEY_AUDIO:               u8KeyCode = KEY_AUDIO;              break;
             //case IRKEY_MTS:                 u8KeyCode = KEY_MTS;                break;
