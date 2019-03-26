@@ -244,7 +244,7 @@
 
 
 // JPEG: Logo
-#define BIN_ID_JPEG_BOOT_LOGO_DVB   0x0300  //~50KB     //@..\..\..\tv-ap\dvb\ui2\logo\ubc.jpg
+#define BIN_ID_JPEG_BOOT_LOGO_DVB   0x0300  //~50KB     //@..\..\..\tv-ap\dvb\ui2\logo\sanco.jpg
 #define BIN_ID_MELODY_ON_DVB        0x0701  //~55KB     //@..\..\..\tv-ap\dvb\ui2\logo\mp31.mp3
 
 #if ENABLE_SOUNDTEST_MUSIC_LOOP
