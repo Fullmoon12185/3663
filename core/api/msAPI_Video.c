@@ -1082,7 +1082,7 @@ BOOLEAN msAPI_VID_SetOutput(VDEC_DispInfo *pstVidStatus)
     msDebug_PrintChgSrcTime("Set MVOP Done" );
 #endif
 
-#if 0
+#if 1
     (printf("->u32FrameRate = %u\n", pstVidStatus->u32FrameRate));
     (printf("->u8Interlace = %x\n", pstVidStatus->u8Interlace));
     (printf("->u16HorSize = %u\n", pstVidStatus->u16HorSize));

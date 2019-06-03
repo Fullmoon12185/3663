@@ -15,7 +15,8 @@
         "ir_mstar_dtv.h\u0000r_dtv.h": "c",
         "ir_mstar_dtv.h\u0000star_dtv.h": "c",
         "ir_mstar_dtv.h\u0000tar_dtv.h": "c",
-        "panel.h": "c"
+        "panel.h": "c",
+        "mapp_mplayer.h": "c"
     },
     "C_Cpp.dimInactiveRegions": false,
     "git.ignoreLimitWarning": true
