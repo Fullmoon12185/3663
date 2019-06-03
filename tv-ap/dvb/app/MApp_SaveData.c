@@ -1091,7 +1091,85 @@ U8 MApp_Load_Input_Source(void){
     } else {
         return 10;
     }
-    return buff_count[0];
+}
+
+
+
+void MApp_Save_Dual_Port(U8 dualport){
+    U8 buff_count[2];
+    buff_count[0] = dualport;
+    buff_count[1] = dualport;
+    MApp_WriteDatabase(FMAP_DUAL_PORT_START_ADDR, buff_count, FMAP_DUAL_PORT_SIZE);
+}
+U8 MApp_Load_Dual_Port(void){
+    U8 buff_count[2];
+    MApp_ReadDatabase(FMAP_DUAL_PORT_START_ADDR, buff_count, FMAP_DUAL_PORT_SIZE);
+    if(buff_count[0] == buff_count[1]){
+        return buff_count[0];
+    } else {
+        return 0;
+    }
+}
+void MApp_Save_Vesa_Jeida(U8 vesa_jeida){
+    U8 buff_count[2];
+    buff_count[0] = vesa_jeida;
+    buff_count[1] = vesa_jeida;
+    MApp_WriteDatabase(FMAP_VESA_JEIDA_START_ADDR, buff_count, FMAP_VESA_JEIDA_SIZE);
+}
+U8 MApp_Load_Vesa_Jeida(void){
+    U8 buff_count[2];
+    MApp_ReadDatabase(FMAP_VESA_JEIDA_START_ADDR, buff_count, FMAP_VESA_JEIDA_SIZE);
+    if(buff_count[0] == buff_count[1]){
+        return buff_count[0];
+    } else {
+        return 0;
+    }
+}
+void MApp_Save_Ti_Bit_Mode(U8 tibitmode){
+    U8 buff_count[2];
+    buff_count[0] = tibitmode;
+    buff_count[1] = tibitmode;
+    MApp_WriteDatabase(FMAP_TI_BIT_MODE_START_ADDR, buff_count, FMAP_TI_BIT_MODE_SIZE);
+}
+U8 MApp_Load_Ti_Bit_Mode(void){
+    U8 buff_count[2];
+    MApp_ReadDatabase(FMAP_TI_BIT_MODE_START_ADDR, buff_count, FMAP_TI_BIT_MODE_SIZE);
+    if(buff_count[0] == buff_count[1]){
+        return buff_count[0];
+    } else {
+        return 0;
+    }
+}
+void MApp_Save_Output_Format_Bit_Mode(U8 outputformatbitmode){
+    U8 buff_count[2];
+    buff_count[0] = outputformatbitmode;
+    buff_count[1] = outputformatbitmode;
+    MApp_WriteDatabase(FMAP_OUTPUT_FORMAT_BIT_MODE_START_ADDR, buff_count, FMAP_OUTPUT_FORMAT_BIT_MODE_SIZE);
+}
+U8 MApp_Load_Output_Format_Bit_Mode(void){
+    U8 buff_count[2];
+    MApp_ReadDatabase(FMAP_OUTPUT_FORMAT_BIT_MODE_START_ADDR, buff_count, FMAP_OUTPUT_FORMAT_BIT_MODE_SIZE);
+    if(buff_count[0] == buff_count[1]){
+        return buff_count[0];
+    } else {
+        return 0;
+    }
+}
+
+void MApp_Save_Allow_Load_Panel_Data(U8 allowloadpanelldata){
+    U8 buff_count[2];
+    buff_count[0] = allowloadpanelldata;
+    buff_count[1] = allowloadpanelldata;
+    MApp_WriteDatabase(FMAP_ALLOW_LOAD_PANEL_DATA_START_ADDR, buff_count, FMAP_ALLOW_LOAD_PANEL_DATA_SIZE);
+}
+U8 MApp_Load_Allow_Load_Panel_Data(void){
+    U8 buff_count[2];
+    MApp_ReadDatabase(FMAP_ALLOW_LOAD_PANEL_DATA_START_ADDR, buff_count, FMAP_ALLOW_LOAD_PANEL_DATA_SIZE);
+    if(buff_count[0] == buff_count[1]){
+        return buff_count[0];
+    } else {
+        return 0;
+    }
 }
 //nguyen
 

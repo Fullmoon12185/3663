@@ -125,7 +125,7 @@
 #include "GPIO_macro.h"
 #include "MApp_SaveData.h"
 #include "MApp_ZUI_ACTmainpage.h"
-
+#include "MApp_GlobalFunction.h"
 #include "MApp_InputSource.h"
 #include "msIR.h"
 
@@ -170,7 +170,7 @@ extern BOOLEAN g_bAutobuildDebug;
 // Locals
 //------------------------------------------------------------------------------
 #define CURRENT_TESTING 0 //ENABLE
-#define     DEBUG_HOME_SHOP(x)  //x
+#define     DEBUG_HOME_SHOP(x)  x
 
 #define     BACKLIGHT_LEVEL_1   30
 #define     BACKLIGHT_LEVEL_2   (30 + BACKLIGHT_LEVEL_1)
@@ -224,8 +224,10 @@ LED 300mA - Panel 32 inch JP
 
 
 static U16 fourKeyPressed = 0;
+static U16 fourKeyPressedForPanel = 0;
 static U16 countForHomeShop = 0;
 static U16 countForHomeShopSaved = 0;
+
 U8 buff_count[2];
 U8 keytemp = 0;
 
@@ -233,8 +235,8 @@ HomeShop_FSM_STATE homeshop_state = HOMESHOP_INIT;
 //static U32 timeLast = 0;
 //static U32 timeCurr = 0;
 
-
-
+void MApp_Main_Update_Panel_Parameters(void);
+void MApp_Main_Get_Panel_Settings(void);
 
 #ifdef ENABLE_MINI_DUMP
 extern void   MiniDump_MountDrive(void);
@@ -474,6 +476,7 @@ MS_BOOL MApp_PreInit_State(void)
 
         case EN_PRE_INIT_STAGE_XC_HDMI_INIT:
             DEBUG_INIT_STATE_NAME( printf("EN_PRE_INIT_STAGE_XC_HDMI_INIT\n"); );
+            MApp_Main_Get_Panel_Settings();
             MApp_PreInit_XC_HDMI_Init();
             
             break;
@@ -931,47 +934,7 @@ int main(void)
 
             case EN_MSTAR_MAIN_FUNCTION_WHILE_LOOP:
             {
-                //MAIN_FUNC_STATE_DBG(printf(" %d: [EN_MSTAR_MAIN_FUNCTION_ENTERING_WHILE_LOOP] \n", __LINE__));
-
-                // u32MainLoopTime_Cur = MsOS_GetSystemTime();
-                // if( msAPI_Timer_DiffTime_2(u32MainLoopTime_Last, u32MainLoopTime_Cur) > 3000 )
-                // {
-                //     u32MainLoopTime_Last = u32MainLoopTime_Cur;
-                    
-                //     // if(ANDROID_STATUS() == 0){
-                //     //     printf("0\n");
-                //     // } else {
-                //     //     printf("1\n");
-                //     // }
-                //     //nguyen
-                //     if (bToogleLED == 0){
-                //         // LED_RED_Off();
-                //         // LED_GRN_On(); 
-                //         //EX_ACTIVE_IC_ON();
-                //         // b_ON();
-                //         // r_ON();
-                //         // g_ON();
-                //         //MApp_PreInit_Logo_Init();
-                //         //MApi_PNL_En(TRUE);
-                //         //MApi_PNL_SetBackLight(ENABLE);
-                //         bToogleLED = 1;    
-                //     } else {
-                //         // b_OFF();
-                //         // g_OFF();
-                //         // r_OFF();
-                //         // LED_RED_On();
-                //         // LED_GRN_Off();
-                //         //EX_ACTIVE_IC_OFF();
-                //         //MApi_PNL_En(FALSE);
-                //         //MApi_PNL_SetBackLight(DISABLE);
-                //         //HDMI2_OFF();
-                //         bToogleLED = 0;
-                //     }
-                    
-                    
-                //     //printf("t=%u\n", u32MainLoopTime_Cur );
-                // }
-                
+                              
                 #if(SMART_TV)
                 if(isCodeReadyToSend()){
                     MApp_IR_out();        
@@ -982,10 +945,8 @@ int main(void)
                 #if(SMART_TV)
                     SendIROut_FSM();
                 #endif
-                    HomeShop_FSM();
-                    //isTVThongminh();    
+                    HomeShop_FSM();  
                 }
-                
                 break;
             }
 
@@ -1013,7 +974,111 @@ BOOL MApp_Main_Is_PowerOnInitFinish(void)
 }
 
 //nguyen
+#define TOGGLE_DUAL_PORT                    0x1112
+#define TOGGLE_VESA_JEIDA                   0x1115
+#define SET_TI_BIT_MODE_10BIT               0x2210
+#define SET_TI_BIT_MODE_08BIT               0x2208
+#define SET_TI_BIT_MODE_06BIT               0x2206
+#define TI_10_BIT_MODE                      0
+#define TI_08_BIT_MODE                      2
+#define TI_06_BIT_MODE                      3
 
+#define SET_OUTPUT_FORMAT_BIT_MODE_10BIT    0x3310
+#define SET_OUTPUT_FORMAT_BIT_MODE_08BIT    0x3308
+#define SET_OUTPUT_FORMAT_BIT_MODE_06BIT    0x3306
+#define OUTPUT_FORMAT_10BIT                 0
+#define OUTPUT_FORMAT_08BIT                 2
+#define OUTPUT_FORMAT_06BIT                 1
+
+static U8 boolUpdate = 0;
+static U8 boolDualPort;
+static U8 boolVesaJeida;
+static U8 u8TiBitMode = 0;
+static U8 u8OutputFormatBitMode = 0;
+
+void MApp_Main_Get_Panel_Settings(void){
+    boolUpdate = MApp_Load_Allow_Load_Panel_Data();
+    if(boolUpdate != 0 || boolUpdate != 1){
+        MApp_Save_Allow_Load_Panel_Data(0);
+        boolUpdate = 0;
+    }
+    if(boolUpdate){
+        boolDualPort = MApp_Load_Dual_Port();
+        boolVesaJeida = MApp_Load_Vesa_Jeida();
+        u8TiBitMode = MApp_Load_Ti_Bit_Mode();
+        u8OutputFormatBitMode = MApp_Load_Output_Format_Bit_Mode();
+        MApi_XC_Set_Dual_Port(boolDualPort);
+        MApi_XC_Set_Vesa_Jeida(boolVesaJeida);
+        MApi_XC_Set_Ti_Bit_Mode(u8TiBitMode);
+        MApi_XC_Set_Output_Format_Bit_Mode(u8OutputFormatBitMode);
+    }
+}
+void MApp_Main_Update_Panel_Parameters(void){
+    U8 boolAlreadyUpdated = 0;
+    if(MApp_Is_InFactoryMode()){
+        if(fourKeyPressedForPanel != fourKeyPressed){
+            fourKeyPressedForPanel = fourKeyPressed;
+            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            DEBUG_HOME_SHOP(printf("\n fourKeyPressedForPanel 0x%x\n", fourKeyPressedForPanel););
+            DEBUG_HOME_SHOP(printf("\n*************************************************\n"););
+            if(fourKeyPressedForPanel == TOGGLE_DUAL_PORT){
+                if(boolDualPort) boolDualPort = 0;
+                else boolDualPort = 1;
+                MApp_Save_Dual_Port(boolDualPort);
+                boolAlreadyUpdated = 1;
+            } else if(fourKeyPressedForPanel == TOGGLE_VESA_JEIDA){
+                if(boolVesaJeida) boolVesaJeida = 0;
+                else boolVesaJeida = 1;
+                MApp_Save_Vesa_Jeida(boolVesaJeida);
+                boolAlreadyUpdated = 1;
+            } else if(fourKeyPressedForPanel == SET_TI_BIT_MODE_10BIT){
+                u8TiBitMode = TI_10_BIT_MODE;
+                MApp_Save_Ti_Bit_Mode(u8TiBitMode);
+                boolAlreadyUpdated = 1;
+            } else if(fourKeyPressedForPanel == SET_TI_BIT_MODE_08BIT){
+                u8TiBitMode = TI_08_BIT_MODE;    
+                MApp_Save_Ti_Bit_Mode(u8TiBitMode);
+                boolAlreadyUpdated = 1;
+            } else if(fourKeyPressedForPanel == SET_TI_BIT_MODE_06BIT){
+                u8TiBitMode = TI_06_BIT_MODE;    
+                MApp_Save_Ti_Bit_Mode(u8TiBitMode);
+                boolAlreadyUpdated = 1;
+            } else if(fourKeyPressedForPanel == SET_OUTPUT_FORMAT_BIT_MODE_10BIT){
+                u8OutputFormatBitMode = OUTPUT_FORMAT_10BIT;
+                MApp_Save_Output_Format_Bit_Mode(u8OutputFormatBitMode);
+                boolAlreadyUpdated = 1;
+            } else if(fourKeyPressedForPanel == SET_OUTPUT_FORMAT_BIT_MODE_08BIT){
+                u8OutputFormatBitMode = OUTPUT_FORMAT_08BIT;
+                MApp_Save_Output_Format_Bit_Mode(u8OutputFormatBitMode);
+                boolAlreadyUpdated = 1;
+            } else if(fourKeyPressedForPanel == SET_OUTPUT_FORMAT_BIT_MODE_06BIT){
+                u8OutputFormatBitMode = OUTPUT_FORMAT_06BIT;
+                MApp_Save_Output_Format_Bit_Mode(u8OutputFormatBitMode);    
+                boolAlreadyUpdated = 1;
+            }
+            if(boolAlreadyUpdated){
+                DEBUG_HOME_SHOP(printf("\n boolDualPort 0x%x\n", boolDualPort););
+                DEBUG_HOME_SHOP(printf("\n boolVesaJeida 0x%x\n", boolVesaJeida););
+                DEBUG_HOME_SHOP(printf("\n u8TiBitMode 0x%x\n", u8TiBitMode););
+                DEBUG_HOME_SHOP(printf("\n u8OutputFormatBitMode 0x%x\n", u8OutputFormatBitMode););
+
+                
+                MApp_Save_Allow_Load_Panel_Data(1);
+                MApi_XC_Set_Dual_Port(boolDualPort);
+                MApi_XC_Set_Vesa_Jeida(boolVesaJeida);
+                MApi_XC_Set_Ti_Bit_Mode(u8TiBitMode);
+                MApi_XC_Set_Output_Format_Bit_Mode(u8OutputFormatBitMode);
+                MApi_print_panel_info();
+                MApp_PreInit_XC_HDMI_Init();
+                //MApp_PreInit_Driver_Step2_Init();
+                MApp_PreInit_Panel_Init();
+                //MApp_PreInit_Display_Step2_Init();
+            }
+        }
+        
+    } 
+    
+}
 void update_count_for_home_shop(void){
     if(countForHomeShop < MAX_COUNT){
         countForHomeShop ++;
@@ -1087,6 +1152,7 @@ void HomeShop_FSM (void){
                 MApp_Save_UserDataForHomeShop(countForHomeShop);
                 MApi_PNL_BackLight_Adjust(SHOP_BACKLIGHT);
             }
+            MApp_Main_Update_Panel_Parameters();
         }
         DEBUG_HOME_SHOP(printf("\n******homeshop_state %u -- keytemp  = %u\n", homeshop_state, keytemp););
     }

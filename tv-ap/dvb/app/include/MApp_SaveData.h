@@ -382,14 +382,34 @@
 #define FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR          (RM_DTV_ATSC_CHDATA_END_ADDR)
 #define FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR            (FMAP_USER_DATA_FOR_HOME_SHOP_START_ADDR + FMAP_USER_DATA_FOR_HOME_SHOP_SIZE)     
 
-#define FMAP_INPUT_SOURCE_SIZE                                2
-#define FMAP_INPUT_SOURCE_START_ADDR                  (FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR)
-#define FMAP_INPUT_SOURCE_END_ADDR                    (FMAP_INPUT_SOURCE_START_ADDR + FMAP_INPUT_SOURCE_SIZE)     
+#define FMAP_INPUT_SOURCE_SIZE                           2
+#define FMAP_INPUT_SOURCE_START_ADDR                     (FMAP_USER_DATA_FOR_HOME_SHOP_END_ADDR)
+#define FMAP_INPUT_SOURCE_END_ADDR                       (FMAP_INPUT_SOURCE_START_ADDR + FMAP_INPUT_SOURCE_SIZE)     
 
+
+#define FMAP_DUAL_PORT_SIZE                              2
+#define FMAP_DUAL_PORT_START_ADDR                        (FMAP_INPUT_SOURCE_END_ADDR)
+#define FMAP_DUAL_PORT_END_ADDR                          (FMAP_DUAL_PORT_START_ADDR + FMAP_DUAL_PORT_SIZE)   
+
+#define FMAP_VESA_JEIDA_SIZE                             2
+#define FMAP_VESA_JEIDA_START_ADDR                       (FMAP_DUAL_PORT_END_ADDR)
+#define FMAP_VESA_JEIDA_END_ADDR                         (FMAP_VESA_JEIDA_START_ADDR + FMAP_VESA_JEIDA_SIZE)   
+
+#define FMAP_TI_BIT_MODE_SIZE                            2
+#define FMAP_TI_BIT_MODE_START_ADDR                      (FMAP_VESA_JEIDA_END_ADDR)
+#define FMAP_TI_BIT_MODE_END_ADDR                        (FMAP_TI_BIT_MODE_START_ADDR + FMAP_TI_BIT_MODE_SIZE)   
+
+#define FMAP_OUTPUT_FORMAT_BIT_MODE_SIZE                 2
+#define FMAP_OUTPUT_FORMAT_BIT_MODE_START_ADDR           (FMAP_TI_BIT_MODE_END_ADDR)
+#define FMAP_OUTPUT_FORMAT_BIT_MODE_END_ADDR             (FMAP_OUTPUT_FORMAT_BIT_MODE_START_ADDR + FMAP_OUTPUT_FORMAT_BIT_MODE_SIZE)   
+
+#define FMAP_ALLOW_LOAD_PANEL_DATA_SIZE                 2
+#define FMAP_ALLOW_LOAD_PANEL_DATA_START_ADDR           (FMAP_OUTPUT_FORMAT_BIT_MODE_END_ADDR)
+#define FMAP_ALLOW_LOAD_PANEL_DATA_END_ADDR             (FMAP_ALLOW_LOAD_PANEL_DATA_START_ADDR + FMAP_ALLOW_LOAD_PANEL_DATA_SIZE)   
 
 //nguyen
 //--------------------------------------------------------------------------------------------
-#define RM_DB_CH_END_ADDR                   (FMAP_INPUT_SOURCE_END_ADDR) //(RM_DTV_ATSC_CHDATA_END_ADDR)
+#define RM_DB_CH_END_ADDR                   (FMAP_ALLOW_LOAD_PANEL_DATA_END_ADDR) //(RM_DTV_ATSC_CHDATA_END_ADDR)
 
 #define RM_DB_CH_TOTAL_USAGE_REAL           (RM_DB_CH_END_ADDR - RM_DB_CH_START_ADDR)
 
@@ -743,6 +763,17 @@ void MApp_Save_UserDataForHomeShop(U16 countForHomeShop);
 U16 MApp_Load_UserDataForHomeShop(void);
 void MApp_Save_Input_Source(U8 inputSource);
 U8 MApp_Load_Input_Source(void);
+
+void MApp_Save_Dual_Port(U8 dualport);
+U8 MApp_Load_Dual_Port(void);
+void MApp_Save_Vesa_Jeida(U8 vesa_jeida);
+U8 MApp_Load_Vesa_Jeida(void);
+void MApp_Save_Ti_Bit_Mode(U8 tibitmode);
+U8 MApp_Load_Ti_Bit_Mode(void);
+void MApp_Save_Output_Format_Bit_Mode(U8 outputformatbitmode);
+U8 MApp_Load_Output_Format_Bit_Mode(void);
+void MApp_Save_Allow_Load_Panel_Data(U8 allowloadpanelldata);
+U8 MApp_Load_Allow_Load_Panel_Data(void);
 //nguyen
 //==============================================================
 

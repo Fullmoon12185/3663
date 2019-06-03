@@ -293,9 +293,9 @@ typedef struct
 
 #else
 
-    #if UBC_TV40
+    #if (UBC_TV40 == 1)
         #define PANEL_DEFAULT_TYPE_SEL      PNL_FULLHD_CMO216_H1L01
-    #elif UBC_TV32
+    #elif (UBC_TV32 == 1)
         #define PANEL_DEFAULT_TYPE_SEL      PNL_WXGA_AU20_T200XW02
     #endif   
 
@@ -712,8 +712,16 @@ INTERFACE U8 MApp_Get_PanelBin_TableNum(void);
 #ifdef __cplusplus
 }
 #endif
+void MApi_XC_Set_Dual_Port(U8 dualport);
+void MApi_XC_Set_Vesa_Jeida(U8 timode);
+void MApi_XC_Set_Ti_Bit_Mode(U8 tibitmode);
+void MApi_XC_Set_Output_Format_Bit_Mode(U8 outputformatbitmode);
 
-
+U8 MApi_XC_Get_Dual_Port(void);
+U8 MApi_XC_Get_Vesa_Jeida(void);
+U8 MApi_XC_Get_Ti_Bit_Mode(void);
+U8 MApi_XC_Get_Output_Format_Bit_Mode(void);
+void MApi_print_panel_info(void);
 
 //******************************************************************************
 

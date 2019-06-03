@@ -167,20 +167,19 @@
 
 //nguyen
 #ifndef UBC_TV40
-    #define UBC_TV40        0 //ENABLE
+    #define UBC_TV40        1 //ENABLE
 #endif
 #ifndef UBC_TV32
-    #define UBC_TV32        1 // DISABLE
+    #define UBC_TV32        0 // DISABLE
 
-        #define TV32_INCH_LSC   1
+        #define TV32_INCH_LSC   0
             
-            #define TV32_LSC_300mA 1
+            #define TV32_LSC_300mA 0
             #define TV32_LSC_CVT_600mA 0
-
 
         #define TV32_315_1A_600mA     0  
         #define TV32_315_1A_300mA     0 
-        #define TV32_PT315	            0
+        #define TV32_PT315	          0
 #endif
 
 
@@ -188,7 +187,7 @@
 //#define TV_T2_ONLY	    1
 // SMART_TV = 0 : T2
 // SMART_TV = 1 : SMART_TV
-#define SMART_TV	    1
+#define SMART_TV	    0
 
 #define REMOTE_TRANG_HL	    0
 //nguyen

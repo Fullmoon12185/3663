@@ -233,10 +233,18 @@ _GUI_WindowPositionList_Zui_Dmp
         { 452, 256, 456, 256 },
     },
 */
-#define PREIVEW_WND_DEFAULT_X                  (452+3)//458
-#define PREIVEW_WND_DEFAULT_Y                   (256+3)//259
-#define PREIVEW_WND_DEFAULT_WIDTH               (456-6)//451
-#define PREIVEW_WND_DEFAULT_HEIGHT             (256-6) //251
+#if (UBC_TV32 == 1)
+    #define PREIVEW_WND_DEFAULT_X                  (0+3)//458
+    #define PREIVEW_WND_DEFAULT_Y                   (0+3)//259
+    #define PREIVEW_WND_DEFAULT_WIDTH               (1360-6)//451
+    #define PREIVEW_WND_DEFAULT_HEIGHT             (768-6) //251
+#elif (UBC_TV40 == 1)
+    #define PREIVEW_WND_DEFAULT_X                  (0+3)//458
+    #define PREIVEW_WND_DEFAULT_Y                   (0+3)//259
+    #define PREIVEW_WND_DEFAULT_WIDTH               (1920-6)//451
+    #define PREIVEW_WND_DEFAULT_HEIGHT             (1080-6) //251
+#endif
+
 #else
 #define PREIVEW_WND_DEFAULT_X                   780
 #define PREIVEW_WND_DEFAULT_Y                   150

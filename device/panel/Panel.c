@@ -1205,7 +1205,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
         //
         //  Board related params.
         //
-       0,//(LVDS_PN_SWAP_H<<8) | LVDS_PN_SWAP_L,            //MS_U16 m_u16LVDSTxSwapValue
+       0, //(LVDS_PN_SWAP_H<<8) | LVDS_PN_SWAP_L,            //MS_U16 m_u16LVDSTxSwapValue
        2,//TI_10BIT_MODE,               //8bit ti bit mode
        0,//OUTPUT_10BIT_MODE,          //10bit ti bit mode
        0,          //   PANEL_SWAP_ODD_RG
@@ -6383,6 +6383,55 @@ PanelType * MApi_XC_GetPanelSpec(PANEL_RESOLUTION_TYPE enResolutionType)
     return &(stPanelIndexTbl[(MS_U8)enResolutionType]->stOldPanelTypeFromUtopia);
   #endif
 }
+
+//Nguyen
+void MApi_print_panel_info(void){
+    MApp_Print_ST_PANEL_NEW_PANELTYPE_Variable(stPanelIndexTbl[g_PNL_TypeSel]);
+}
+void MApi_XC_Set_Dual_Port(U8 dualport){
+    stPanelIndexTbl[g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelDualPort = dualport;
+}
+U8 MApi_XC_Get_Dual_Port(void){
+    return (U8)stPanelIndexTbl[g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelDualPort;
+}
+//timode = 0 Vesa
+//timode = 1 Jeida
+void MApi_XC_Set_Vesa_Jeida(U8 timode){
+    stPanelIndexTbl[g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelLVDS_TI_MODE = timode;
+}
+U8 MApi_XC_Get_Vesa_Jeida(void){
+    return (U8)stPanelIndexTbl[(MS_U8)g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelLVDS_TI_MODE;
+}
+//m_ucTiBitMode
+//typedef enum
+// {
+//     TI_10BIT_MODE = 0,
+//     TI_8BIT_MODE = 2,
+//     TI_6BIT_MODE = 3,
+// } APIPNL_TIBITMODE;
+
+void MApi_XC_Set_Ti_Bit_Mode(U8 tibitmode){
+    stPanelIndexTbl[(MS_U8)g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_ucTiBitMode = tibitmode;
+}
+U8 MApi_XC_Get_Ti_Bit_Mode(void){
+    return stPanelIndexTbl[(MS_U8)g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_ucTiBitMode;
+}
+
+/// Define panel output format bit mode
+// typedef enum
+// {
+//     OUTPUT_10BIT_MODE = 0,//default is 10bit, becasue 8bit panel can use 10bit config and 8bit config.
+//     OUTPUT_6BIT_MODE = 1, //but 10bit panel(like PDP panel) can only use 10bit config.
+//     OUTPUT_8BIT_MODE = 2, //and some PDA panel is 6bit.
+// } APIPNL_OUTPUTFORMAT_BITMODE;
+void MApi_XC_Set_Output_Format_Bit_Mode(U8 outputformatbitmode){
+    stPanelIndexTbl[(MS_U8)g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_ucOutputFormatBitMode = outputformatbitmode;
+}
+U8 MApi_XC_Get_Output_Format_Bit_Mode(void){
+    return (U8)stPanelIndexTbl[(MS_U8)g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_ucOutputFormatBitMode;
+}
+//Nguyen
+
 
 void MApi_XC_SetPanelExtType(PANEL_RESOLUTION_TYPE enResolutionType)
 {
