@@ -83,7 +83,7 @@
 // Unless otherwise stipulated in writing, any and all information contained
 // herein regardless in any format shall remain the sole proprietary of
 // MStar Semiconductor Inc. and be kept in strict confidence
-// (¡§MStar Confidential Information¡¨) by the recipient.
+// (ï¿½ï¿½MStar Confidential Informationï¿½ï¿½) by the recipient.
 // Any unauthorized act including without limitation unauthorized disclosure,
 // copying, use, reproduction, sale, distribution, modification, disassembling,
 // reverse engineering and compiling of the contents of MStar Confidential
@@ -3917,6 +3917,7 @@ BOOLEAN MApp_ZUI_ACT_HandleDmpKey(VIRTUAL_KEY_CODE key)
 
                 switch(MApp_MPlayer_QueryCurrentMediaType())
                 {
+                    DMP_DBG(printf("MApp_MPlayer_QueryCurrentMediaType type %u\n",MApp_MPlayer_QueryCurrentMediaType()););
                     case E_MPLAYER_TYPE_MUSIC:
                         {
                             if (MApp_ZUI_API_IsSuccessor(HWND_DMP_PLAYBACK_MUSICINFO_INFO_GROUP, MApp_ZUI_API_GetFocus()))
@@ -6198,6 +6199,7 @@ BOOLEAN MApp_ZUI_ACT_ExecuteDmpAction(U16 act)
         case EN_EXE_DMP_BGM_FILE_PAGE_PLAYBACK:
             {
                 {//EN_EXE_DMP_FILE_PAGE_PLAYBACK
+                    DMP_DBG(printf("EN_EXE_DMP_BGM_FILE_PAGE_PLAYBACK type %u\n",eMediaType););
                     m_u16PlayErrorNum = 0;
                     #if (ENABLE_DRM)
                     m_u16DRMErrorNum = 0;
@@ -6546,6 +6548,13 @@ BOOLEAN MApp_ZUI_ACT_ExecuteDmpAction(U16 act)
         case EN_EXE_DMP_FILE_PAGE_SEL:
             {
                 DMP_DBG(printf("EN_EXE_DMP_FILE_PAGE_SEL :\n"););
+                // MApp_ZUI_API_ShowWindow(HWND_DMP_ROOT_TRANSPARENT_BG, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_BG_GRADIENT_BOTTOM, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_SELECT_PAGE, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_GROUP, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_INFO_GROUP, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_TEXT, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_SUBMENU_GROUP, SW_HIDE);
                 U16 u16FileIdx = MApp_MPlayer_QueryCurrentFileIndex(E_MPLAYER_INDEX_CURRENT_DIRECTORY);
                 MPlayerFileInfo fileInfo;
 
@@ -6656,8 +6665,9 @@ BOOLEAN MApp_ZUI_ACT_ExecuteDmpAction(U16 act)
                     return TRUE;
                 }
 #endif
-
+                DMP_DBG(printf("EN_EXE_DMP_FILE_PAGE_PLAYBACK \n"););
                 MApp_ZUI_API_EnableWindow(HWND_DMP_PLAYBACK_INFOBAR_GROUP,TRUE);
+                
                 // check if there is files need to be played
                 // put some initial variable or initial call before mapp_mplayer_play
                 m_u16PlayErrorNum = 0;
@@ -6720,7 +6730,9 @@ BOOLEAN MApp_ZUI_ACT_ExecuteDmpAction(U16 act)
                     MApp_DMP_SetDmpFlag(DMP_FLAG_MEDIA_FILE_PLAYING);
 
                     enumMPlayerMediaType eMediaType = MApp_MPlayer_QueryCurrentMediaType();
-                    //MApp_MPlayer_SetRepeatMode(E_MPLAYER_REPEAT_NONE);
+                    //nguyen
+                    MApp_MPlayer_SetRepeatMode(E_MPLAYER_REPEAT_ALL);
+                    //nguyen
                     MApp_DMP_UiStateTransition(DMP_UI_STATE_LOADING);
                     DMP_DBG(printf("EN_EXE_DMP_FILE_PAGE_PLAYBACK type %u\n",eMediaType););
 
@@ -16343,8 +16355,16 @@ BOOLEAN MApp_UiMediaPlayer_Notify(enumMPlayerNotifyType eNotify, void *pInfo)
             DMP_DBG(printf("    - E_MPLAYER_NOTIFY_BEFORE_MOVIE_PREVIEW\n"));
             {
                 _stDmpPlayVar.stMovieInfo.bSubtitleOff = TRUE;
-                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_GROUP, SW_SHOW);
-                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_INFO_GROUP, SW_SHOW);
+                //MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_GROUP, SW_HIDE);
+                //MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_INFO_GROUP, SW_HIDE);
+
+                MApp_ZUI_API_ShowWindow(HWND_DMP_BG_GRADIENT_BOTTOM, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_SELECT_PAGE, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_GROUP, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_INFO_GROUP, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_TEXT, SW_HIDE);
+                MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_SUBMENU_GROUP, SW_HIDE);
+                
                 _MApp_ZUI_ACT_DMPMarqueeTextEnableAnimation(
                 HWND_DMP_FILE_PAGE_PREVIEW_FILENAME_STRING, TRUE);
                 //don't set timer to keep preview info
@@ -16378,9 +16398,9 @@ BOOLEAN MApp_UiMediaPlayer_Notify(enumMPlayerNotifyType eNotify, void *pInfo)
             #endif
         case E_MPLAYER_NOTIFY_END_OF_TEXT_PREVIEW:
             DMP_DBG(printf("    - E_MPLAYER_NOTIFY_END_OF_TEXT_PREVIEW\n"));
-            MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_GROUP, SW_SHOW);
-            MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_INFO_GROUP, SW_SHOW);
-            MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_TEXT, SW_SHOW);
+            MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_GROUP, SW_HIDE);
+            MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_INFO_GROUP, SW_HIDE);
+            MApp_ZUI_API_ShowWindow(HWND_DMP_FILE_PAGE_PREVIEW_TEXT, SW_HIDE);
             break;
         case E_MPLAYER_NOTIFY_MEDIA_PREDECODE_OK:
             DMP_DBG(printf("    - E_MPLAYER_NOTIFY_MEDIA_PREDECODE_OK\n"));

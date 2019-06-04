@@ -152,9 +152,9 @@
 #define PQIOCTL_DBG(x)  do { if( _u16PQDbgSwitch & PQ_DBG_IOCTL) x; } while(0);
 #define PQP2P_DBG(x)    do { if( _u16PQDbgSwitch & PQ_DBG_P2P) x; } while(0);
 #define PQCUSTOMER_DBG(x)  do { if( _u16PQDbgSwitch & PQ_DBG_CUSTOMER) x; } while(0);
-#define PQMODE_DBG(x)   //x
+#define PQMODE_DBG(x)   x
 
-#define DEBUG_PQ_SRC_TYPE(x)    //x
+#define DEBUG_PQ_SRC_TYPE(x)    x
 
 static MSIF_Version _drv_pq_version = {
     .DDI = { PQ_DRV_VERSION },
@@ -2041,7 +2041,7 @@ void MDrv_PQ_Get_ModeInfo(PQ_WIN eWindow, MS_PQ_Mode_Info *pstPQModeInfo)
 void MDrv_PQ_Set_ModeInfo(PQ_WIN eWindow, PQ_INPUT_SOURCE_TYPE enInputSourceType, MS_PQ_Mode_Info *pstPQModeInfo)
 {
     PQMODE_DBG( printf("nguyen PQ Set Mode Info: %s, Src=%x\n", (eWindow)?("SubWin"):("MainWin"), enInputSourceType); );
-
+    
     memcpy(&_stMode_Info[eWindow], pstPQModeInfo, sizeof(MS_PQ_Mode_Info));
 
     if(QM_IsSourceYPbPr(enInputSourceType))
@@ -2213,10 +2213,15 @@ void MDrv_PQ_Set_ModeInfo(PQ_WIN eWindow, PQ_INPUT_SOURCE_TYPE enInputSourceType
             _gIsSrcHDMode[eWindow] = 0;
     }
 
+
+    _u8ModeIndex[eWindow] = PQ_MD_1280x720_50P;
+    _stMode_Info[eWindow].u16display_hsize = 1280;
+    _stMode_Info[eWindow].u16display_vsize = 720;
+    _stMode_Info[eWindow].u16input_hsize = 1280;
+    _stMode_Info[eWindow].u16input_vsize = 720;
     //PQINFO_DBG(
-        
-               _stMode_Info[eWindow].u16display_hsize = 1280;
-               _stMode_Info[eWindow].u16display_vsize = 720;
+
+               
         printf("nguyen PQ ModeInfo:%d input(%d, %d), disp(%d, %d), ModeIdx=%d, FBL=%u, Interlace=%u, InV=%u, OutV=%u, inVtt=%u\n",
                eWindow,
                _stMode_Info[eWindow].u16input_hsize,
@@ -5260,12 +5265,12 @@ MS_BOOL MDrv_PQ_IOCTL(PQ_WIN eWindow, MS_U32 u32Flag, void *pBuf, MS_U32 u32BufS
                 ((PQ_HSD_SAMPLING_INFO *)pBuf)->bADVMode = bADVMode;
                 bret = TRUE;
 
-                //printf("ratio %lx, bADVmode=%d\n\n",((PQ_HSD_SAMPLING_INFO *)pBuf)->u32ratio, ((PQ_HSD_SAMPLING_INFO *)pBuf)->bADVMode);
+                printf("ratio %lx, bADVmode=%d\n\n",((PQ_HSD_SAMPLING_INFO *)pBuf)->u32ratio, ((PQ_HSD_SAMPLING_INFO *)pBuf)->bADVMode);
 
             }
             else
             {
-                //printf("Size is not correct, in=%ld, %d\n", u32BufSize, sizeof(PQ_HSD_SAMPLING_INFO));
+                printf("Size is not correct, in=%ld, %d\n", u32BufSize, sizeof(PQ_HSD_SAMPLING_INFO));
                 ((PQ_HSD_SAMPLING_INFO *)pBuf)->u32ratio = 0;
                 ((PQ_HSD_SAMPLING_INFO *)pBuf)->bADVMode = 0;
                 bret = FALSE;

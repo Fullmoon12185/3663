@@ -175,13 +175,12 @@
 
         #define TV32_INCH_LSC   1
             
-            #define TV32_LSC_300mA 1
-            #define TV32_LSC_CVT_600mA 0
-
+            #define TV32_LSC_300mA 0
+            #define TV32_LSC_CVT_600mA 1
 
         #define TV32_315_1A_600mA     0  
-        #define TV32_315_1A_300mA     0  
-        #define TV32_PT315	    0
+        #define TV32_315_1A_300mA     0 
+        #define TV32_PT315	          0
 #endif
 
 
