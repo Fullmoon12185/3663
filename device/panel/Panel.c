@@ -1107,7 +1107,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
 
         1,          //BOOL m_bPanelDualPort :1;         //PANEL_DUAL_PORT
 
-        0,//1^PANEL_CONNECTOR_SWAP_PORT,                    // shall swap if
+        1,//1^PANEL_CONNECTOR_SWAP_PORT,                    // shall swap if
                                                         // (PANEL_SWAP_PORT XOR Board_Connect_Swap) is TRUE
 
         0,          //BOOL m_bPanelSwapOdd_ML   :1;     //PANEL_SWAP_ODD_ML
@@ -1119,7 +1119,7 @@ ST_PANEL_NEW_PANELTYPE stPanel_FullHD_CMO216_H1L01=
 
         0,//PANEL_SWAP_LVDS_CH,          //BOOL m_bPanelSwapLVDS_CH  :1;     //PANEL_SWAP_LVDS_CH
         1, //PANEL_PDP_10BIT,          //BOOL m_bPanelPDP10BIT     :1;     //PANEL_PDP_10BIT
-        0,          //BOOL m_bPanelLVDS_TI_MODE :1;     //PANEL_LVDS_TI_MODE
+        1,          //BOOL m_bPanelLVDS_TI_MODE :1;     //PANEL_LVDS_TI_MODE
 
         0x00,       //BYTE m_ucPanelDCLKDelay;          //PANEL_DCLK_DELAY
         0,          //BOOL m_bPanelInvDCLK  :1;         //PANEL_INV_DCLK
@@ -6385,14 +6385,17 @@ PanelType * MApi_XC_GetPanelSpec(PANEL_RESOLUTION_TYPE enResolutionType)
 }
 
 //Nguyen
+void MApi_XC_Change_Panel_Type(void){
+    msAPI_Scaler_ChangePanelType(g_PNL_TypeSel,MAIN_WINDOW);
+}
 void MApi_print_panel_info(void){
     MApp_Print_ST_PANEL_NEW_PANELTYPE_Variable(stPanelIndexTbl[g_PNL_TypeSel]);
 }
-void MApi_XC_Set_Dual_Port(U8 dualport){
-    stPanelIndexTbl[g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelDualPort = dualport;
+void MApi_XC_Set_Swap_Port(U8 swapport){
+    stPanelIndexTbl[g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelSwapPort = swapport;
 }
-U8 MApi_XC_Get_Dual_Port(void){
-    return (U8)stPanelIndexTbl[g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelDualPort;
+U8 MApi_XC_Get_Swap_Port(void){
+    return (U8)stPanelIndexTbl[g_PNL_TypeSel]->stOldPanelTypeFromUtopia.m_bPanelSwapPort;
 }
 //timode = 0 Vesa
 //timode = 1 Jeida

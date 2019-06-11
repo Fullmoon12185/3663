@@ -578,7 +578,7 @@
 
 //------IR & Key Setting--------------------------------------------------------
 #define IR_TYPE_SEL                     IR_TYPE_MSTAR_DTV   // IR_TYPE_MSTAR_DTV // IR_TYPE_CUS03_DTV // IR_TYPE_NEW
-#define KEYPAD_TYPE_SEL                 KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
+#define KEYPAD_TYPE_SEL                KEYPAD_TYPE_THANH_HAI// KEYPAD_TYPE_CUSTMOER //KEYPAD_TYPE_THANH_HAI //KEYPAD_TYPE_ORIG    // KEYPAD_TYPE_DEMO
 #define POWER_KEY_SEL                   POWER_KEY_PAD_INT
 
 //------Power Setting-----------------------------------------------------------
@@ -960,7 +960,7 @@
 #endif
 #if (PADS_PWM1_MODE!=Unknown_pad_mux)
 #define PWM1_PERIOD                     0xff
-#define INIT_PWM1_DUTY                  0x7e
+#define INIT_PWM1_DUTY                  0x0
 #endif
 #if (PADS_PWM2_MODE!=Unknown_pad_mux)
 #define PWM2_PERIOD                     0xff

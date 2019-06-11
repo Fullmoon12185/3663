@@ -387,12 +387,12 @@
 #define FMAP_INPUT_SOURCE_END_ADDR                       (FMAP_INPUT_SOURCE_START_ADDR + FMAP_INPUT_SOURCE_SIZE)     
 
 
-#define FMAP_DUAL_PORT_SIZE                              2
-#define FMAP_DUAL_PORT_START_ADDR                        (FMAP_INPUT_SOURCE_END_ADDR)
-#define FMAP_DUAL_PORT_END_ADDR                          (FMAP_DUAL_PORT_START_ADDR + FMAP_DUAL_PORT_SIZE)   
+#define FMAP_SWAP_PORT_SIZE                              2
+#define FMAP_SWAP_PORT_START_ADDR                        (FMAP_INPUT_SOURCE_END_ADDR)
+#define FMAP_SWAP_PORT_END_ADDR                          (FMAP_SWAP_PORT_START_ADDR + FMAP_SWAP_PORT_SIZE)   
 
 #define FMAP_VESA_JEIDA_SIZE                             2
-#define FMAP_VESA_JEIDA_START_ADDR                       (FMAP_DUAL_PORT_END_ADDR)
+#define FMAP_VESA_JEIDA_START_ADDR                       (FMAP_SWAP_PORT_END_ADDR)
 #define FMAP_VESA_JEIDA_END_ADDR                         (FMAP_VESA_JEIDA_START_ADDR + FMAP_VESA_JEIDA_SIZE)   
 
 #define FMAP_TI_BIT_MODE_SIZE                            2
@@ -764,8 +764,8 @@ U16 MApp_Load_UserDataForHomeShop(void);
 void MApp_Save_Input_Source(U8 inputSource);
 U8 MApp_Load_Input_Source(void);
 
-void MApp_Save_Dual_Port(U8 dualport);
-U8 MApp_Load_Dual_Port(void);
+void MApp_Save_Swap_Port(U8 dualport);
+U8 MApp_Load_Swap_Port(void);
 void MApp_Save_Vesa_Jeida(U8 vesa_jeida);
 U8 MApp_Load_Vesa_Jeida(void);
 void MApp_Save_Ti_Bit_Mode(U8 tibitmode);

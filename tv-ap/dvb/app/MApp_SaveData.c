@@ -1095,15 +1095,15 @@ U8 MApp_Load_Input_Source(void){
 
 
 
-void MApp_Save_Dual_Port(U8 dualport){
+void MApp_Save_Swap_Port(U8 dualport){
     U8 buff_count[2];
     buff_count[0] = dualport;
     buff_count[1] = dualport;
-    MApp_WriteDatabase(FMAP_DUAL_PORT_START_ADDR, buff_count, FMAP_DUAL_PORT_SIZE);
+    MApp_WriteDatabase(FMAP_SWAP_PORT_START_ADDR, buff_count, FMAP_SWAP_PORT_SIZE);
 }
-U8 MApp_Load_Dual_Port(void){
+U8 MApp_Load_Swap_Port(void){
     U8 buff_count[2];
-    MApp_ReadDatabase(FMAP_DUAL_PORT_START_ADDR, buff_count, FMAP_DUAL_PORT_SIZE);
+    MApp_ReadDatabase(FMAP_SWAP_PORT_START_ADDR, buff_count, FMAP_SWAP_PORT_SIZE);
     if(buff_count[0] == buff_count[1]){
         return buff_count[0];
     } else {
